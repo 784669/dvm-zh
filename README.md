@@ -13,9 +13,9 @@
 DVM 是一款 Windows 上的视频管理软件：**不复制、不移动视频文件**，片子留在原来的位置，
 用缩略图、标签、系列、评分在 SQLite 里建立索引。外接硬盘和 NAS 上的几万个视频也能直接管理。
 
-![主界面](docs/images/main.png)
+![主界面](docs/images/main-zh.jpg)
 
-> 截图取自上游版本，界面文本在本分支中已全部汉化为简体中文。
+> 上游日文界面的截图保留在 `docs/images/main.png`（仅 [README.upstream.ja.md](README.upstream.ja.md) 引用）。
 
 - 缩略图网格（虚拟化，几万条也不卡）
 - 标签 / 标签组 / 系列 / 评分 / 智能文件夹 / 播放列表
@@ -38,6 +38,10 @@ DVM 是一款 Windows 上的视频管理软件：**不复制、不移动视频�
 
 旋转采用**改写容器 display matrix、不重新编码**的方式，几秒完成且不掉画质；代价是只对
 MP4 / MOV 一类容器有效，MKV、AVI、WMV 会直接提示「无法同步修改源文件」而不是硬转。
+
+| 显示（预览画质与缓存选项）| 字幕样式（应用内播放）|
+|---|---|
+| ![显示设置](docs/images/settings-zh.png) | ![字幕设置](docs/images/subtitles-zh.png) |
 
 ## 下载与安装
 

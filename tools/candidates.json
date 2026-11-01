@@ -1,0 +1,7487 @@
+[
+  {
+    "text": "C:\\動画",
+    "count": 17,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "動画 1.mp4",
+    "count": 11,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\アニメ",
+    "count": 7,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "(不明)",
+    "count": 7,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "エクスプローラーで表示できませんでした",
+    "count": 6,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx",
+      "src\\components\\player\\usePlayerMenu.ts",
+      "src\\components\\Sidebar.tsx",
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "C:\\動画\\a.mp4",
+    "count": 6,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "クリップボードにコピーできませんでした",
+    "count": 5,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx",
+      "src\\components\\MediaInfoSection.tsx",
+      "src\\components\\player\\usePlayerMenu.ts",
+      "src\\components\\Sidebar.tsx",
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "設定",
+    "count": 5,
+    "kana": false,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "動画 2.mp4",
+    "count": 5,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "旅行",
+    "count": 5,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\history.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "第 1 話",
+    "count": 5,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\history.rs",
+      "src-tauri\\src\\core\\videos.rs"
+    ]
+  },
+  {
+    "text": "あとで",
+    "count": 5,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\labels.rs",
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "パスをコピーしました",
+    "count": 4,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx",
+      "src\\components\\player\\usePlayerMenu.ts",
+      "src\\components\\Sidebar.tsx",
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "ファイルが見つかりません",
+    "count": 4,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx",
+      "src\\components\\MediaInfoSection.tsx",
+      "src-tauri\\src\\core\\metadata.rs",
+      "src-tauri\\src\\core\\videos.rs"
+    ]
+  },
+  {
+    "text": "未分類",
+    "count": 4,
+    "kana": false,
+    "files": [
+      "src\\components\\Inspector.tsx",
+      "src\\components\\Sidebar.tsx",
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "管理",
+    "count": 4,
+    "kana": false,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "旅行 2024.mp4",
+    "count": 4,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\アニメ\\2024\\c.mp4",
+    "count": 4,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "アニメ",
+    "count": 4,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs",
+      "src-tauri\\src\\core\\libraries.rs",
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "第 2 期",
+    "count": 4,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\labels.rs",
+      "src-tauri\\src\\core\\series.rs"
+    ]
+  },
+  {
+    "text": "動画.mp4",
+    "count": 4,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "名前が空です",
+    "count": 4,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs",
+      "src-tauri\\src\\core\\smart_folders.rs"
+    ]
+  },
+  {
+    "text": "ジャンル",
+    "count": 4,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs",
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "閉じる",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx",
+      "src\\components\\FileOpDialog.tsx",
+      "src\\components\\Toast.tsx"
+    ]
+  },
+  {
+    "text": "監視除外フォルダに登録",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src\\components\\ExcludeDialog.tsx",
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリを選んでください",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "閉じる (Esc)",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\MpvPlayerView.tsx",
+      "src\\components\\player\\SubtitleStylePanel.tsx",
+      "src\\components\\PlayerOverlay.tsx"
+    ]
+  },
+  {
+    "text": "C:\\動画\\アニメ\\b.mp4",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\アニメ\\2024",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "あ",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs",
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "第 1 期",
+    "count": 3,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\history.rs",
+      "src-tauri\\src\\core\\series.rs"
+    ]
+  },
+  {
+    "text": "ぜんぶ",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\labels.rs"
+    ]
+  },
+  {
+    "text": "持ち運び",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "プレイリストが見つかりません",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs",
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "週末に観る",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "お気に入り",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "カレー",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "未視聴",
+    "count": 3,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\smart_folders.rs",
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "タグ名が空です",
+    "count": 3,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "キャンセル",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx",
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "集計中…",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src\\components\\FilterBar.tsx",
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "新しいライブラリの名前",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリを置くフォルダを選ぶ",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリのフォルダを選ぶ",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${lib.name}」を一覧から外しますか?\\n\\n",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "フォルダとファイルは削除されません。\\n",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "${lib.root} はそのまま残るので、あとで「既存のライブラリを開く」から戻せます。",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "一覧から外す",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx",
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "この位置をサムネイルにしました",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\MpvPlayerView.tsx",
+      "src\\components\\PlayerOverlay.tsx"
+    ]
+  },
+  {
+    "text": "画像を保存しました: ${path}",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\MpvPlayerView.tsx",
+      "src\\components\\PlayerOverlay.tsx"
+    ]
+  },
+  {
+    "text": "字幕",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx",
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "動画を変換中…",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\PlayerOverlay.tsx",
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "キューが空です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "バックアップから復元",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "コピーしました",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "コピー",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "サムネイル再生成",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリ",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\SettingsModal.tsx",
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "「${sf.name}」の検索条件を読めませんでした",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "M3U8 プレイリスト",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "タグ名",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx",
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "名前を入力してください",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx",
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "動画 ID",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "プレイリスト名(完全一致。大文字小文字は区別しない)",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "タグ「{tag}」が見つかりません",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "id が必要です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "tag が必要です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "series が必要です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "dry_run (true/false) が必要です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "(ライブラリ全体)",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs",
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "そのライブラリは一覧にありません",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\libraries.rs",
+      "src-tauri\\src\\commands\\maintenance.rs"
+    ]
+  },
+  {
+    "text": "マイライブラリ",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs",
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "ドライブが未接続です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs",
+      "src-tauri\\src\\core\\videos.rs"
+    ]
+  },
+  {
+    "text": "移動先に同名のファイルがあります",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "C:\\空っぽ",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "メイリオ",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fonts.rs"
+    ]
+  },
+  {
+    "text": "MS Pゴシック",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fonts.rs"
+    ]
+  },
+  {
+    "text": "マンダロリアン S02E03.mp4",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "マンダロリアン S02E03_00-12-34.567",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "なまえ_00-00-00.000",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "あとで見返す",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "空文字は条件にしない",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs",
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "あ行",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\labels.rs"
+    ]
+  },
+  {
+    "text": "外付け",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "スキャン中...",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "同じ中身.mp4",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "本編",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\metadata.rs"
+    ]
+  },
+  {
+    "text": "オープニング",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\metadata.rs"
+    ]
+  },
+  {
+    "text": "同じ名前のプレイリストがすでにあります",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\100%_test",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "シリーズ名が空です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\series.rs"
+    ]
+  },
+  {
+    "text": "第 1 期(再)",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\series.rs"
+    ]
+  },
+  {
+    "text": "すべて",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\smart_folders.rs"
+    ]
+  },
+  {
+    "text": "見てない",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\smart_folders.rs"
+    ]
+  },
+  {
+    "text": "4K 以上",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "(個別登録)",
+    "count": 2,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "グループ名が空です",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "メディア",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "ファンタジー",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "ホラー",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "作画が良い回",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\videos.rs"
+    ]
+  },
+  {
+    "text": "第 1 話 出会い",
+    "count": 2,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\videos.rs"
+    ]
+  },
+  {
+    "text": "フォルダが ${dirs.length} 件あります。監視フォルダとして登録しますか?\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "はい = 監視フォルダにする(以後の追加も自動で取り込みます)\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "いいえ = 中の動画を個別登録する(このときの分だけ)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "フォルダの扱い",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "サイドバー",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "準備完了",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "詳細ペイン",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "AI パネル",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\App.tsx"
+    ]
+  },
+  {
+    "text": "${e.count.toLocaleString()} 件",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\AdvancedSearch.tsx"
+    ]
+  },
+  {
+    "text": "(ツールを実行しました)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\AiPanel.tsx"
+    ]
+  },
+  {
+    "text": "応答中はクリアできません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\AiPanel.tsx"
+    ]
+  },
+  {
+    "text": "会話をクリア",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\AiPanel.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリについて質問…",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\AiPanel.tsx"
+    ]
+  },
+  {
+    "text": "応答を止める",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\AiPanel.tsx"
+    ]
+  },
+  {
+    "text": "上へ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ColumnPicker.tsx"
+    ]
+  },
+  {
+    "text": "下へ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ColumnPicker.tsx"
+    ]
+  },
+  {
+    "text": "重複した ${plan?.removeCount.toLocaleString()} 件のファイルを Windows のごみ箱へ送ります。\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx"
+    ]
+  },
+  {
+    "text": "各グループで残す 1 本には手を付けません。\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx"
+    ]
+  },
+  {
+    "text": "ごみ箱から戻して再スキャンすれば元に戻せます。\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx"
+    ]
+  },
+  {
+    "text": "実行しますか?",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx"
+    ]
+  },
+  {
+    "text": "ファイルをごみ箱へ送る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリ全体が対象です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\DedupeDialog.tsx"
+    ]
+  },
+  {
+    "text": "登録中…",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\ExcludeDialog.tsx"
+    ]
+  },
+  {
+    "text": "${targets.folders.length} 個のフォルダー",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ExcludeOnDeleteDialog.tsx"
+    ]
+  },
+  {
+    "text": "そのフォルダーに今後入る動画も取り込まれなくなります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ExcludeOnDeleteDialog.tsx"
+    ]
+  },
+  {
+    "text": "選んでいない ${collateral.toLocaleString()} 件と、今後入る動画も取り込まれなくなります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ExcludeOnDeleteDialog.tsx"
+    ]
+  },
+  {
+    "text": "今後そのフォルダーに入る動画も取り込まれなくなります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ExcludeOnDeleteDialog.tsx"
+    ]
+  },
+  {
+    "text": "実行",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "移動先に同名あり",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "元が見つからない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "ドライブ未接続",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "変更なし",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "パスの再リンク",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "ファイルの移動",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "ファイル名の変更",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "ファイルをごみ箱へ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "データベースのパスだけを書き換えます。ファイルは移動しません。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "実際のファイルを移動します。取り消しはできません(逆向きの移動で戻せます)。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "実際のファイル名を変更します。取り消しはできません。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "ファイルをごみ箱へ送り、続けてライブラリ登録も削除します。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "ごみ箱から戻して再スキャンすれば表示は戻りますが、タグ・レーティング・視聴回数は復元されません。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "${failed.length} 件が失敗しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "${r.length} 件を処理しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "完了",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "失敗",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "実行中...",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "${actionable.length} 件を実行",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FileOpDialog.tsx"
+    ]
+  },
+  {
+    "text": "「${term.caption}」の条件をまとめて外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "名前を読み込み中、または削除された項目です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "この条件を外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "全 ",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "サブフォルダを含めるのをやめる(このフォルダ直下だけにする)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "サブフォルダの中の動画も一覧に含める",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "${filters.dirPath} の配下で、同じ内容の動画を 1 本だけ残す(ファイルは消しません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリ全体で、同じ内容の動画を 1 本だけ残す(ファイルは消しません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "絞り込みをすべて解除する(並び順はそのまま)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FilterBar.tsx"
+    ]
+  },
+  {
+    "text": "上のフォルダ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderCard.tsx"
+    ]
+  },
+  {
+    "text": "${entry.path}\\nダブルクリックで上のフォルダへ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderCard.tsx"
+    ]
+  },
+  {
+    "text": "配下 ${n.totalCount} 件",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FolderCard.tsx"
+    ]
+  },
+  {
+    "text": "${n.directCount} 件(配下 ${n.totalCount} 件)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FolderCard.tsx"
+    ]
+  },
+  {
+    "text": "${n.directCount} 件",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\FolderCard.tsx"
+    ]
+  },
+  {
+    "text": "サブフォルダを隠す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx"
+    ]
+  },
+  {
+    "text": "サブフォルダを表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx"
+    ]
+  },
+  {
+    "text": "監視フォルダの外にある動画(個別登録など)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx"
+    ]
+  },
+  {
+    "text": "監視除外フォルダに登録しました(${removed.toLocaleString()} 件を外しました。ファイルは残っています)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx"
+    ]
+  },
+  {
+    "text": "監視除外フォルダに登録しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\FolderTree.tsx"
+    ]
+  },
+  {
+    "text": "タグを付けた",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タグを外した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "シリーズに追加した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "シリーズから外した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "レーティングを変更した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タイトル・コメントを変更した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タグを作成した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タグ名を変更した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タグを削除した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "シリーズを削除した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タグの色を変更した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タグのグループを変更した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タググループを作成した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タググループ名を変更した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タググループを削除した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリから削除した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "ファイルをごみ箱へ送った",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "ファイルを移動した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "ファイル名を変更した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "パスを再リンクした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "操作を取り消した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "ドライブレターを再マップした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "移動を検出した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "バックアップを作成した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "復元を予約した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "サムネイルを再生成した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "孤児サムネイルを掃除した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダを作成した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダを更新した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダを削除した",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "「${p.tag}」を ${count('added')} 件に",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "「${p.tag}」を ${count('removed')} 件から",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "「${p.series}」に ${count('added')} 件",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "「${p.series}」から ${count('removed')} 件",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "★${p.rating} を ${count('before')} 件に",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "${count('items')} 件のパス",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "${count('videos')} 件",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "いつ何を観たかの記録",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "タグ・レーティング・ファイル操作の記録(取り消せるものもあります)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "この動画はライブラリにありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "集計と一覧の期間",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "${e.filename}(ダブルクリックで再生)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "取り消し済み",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\HistoryModal.tsx"
+    ]
+  },
+  {
+    "text": "再生キュー(選択して Q で追加)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "「${t.name}」を ${ids.length} 件に付ける",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "「${t.name}」を外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "${count}/${ids.length} 件に付いています(クリックで全部に付ける)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "詳細",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "${selection.length} 件選択中",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "選択解除 (Esc)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "(最終: ${single.lastViewedAt})",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "動画に付ける名前。空にするとファイル名に戻ります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "メモ(自由記入)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "★${n}(同じ星をもう一度クリックで解除)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "このタグを外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "タグを絞り込む",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "タグを追加して Enter",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "このシリーズから外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "シリーズに追加して Enter",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Inspector.tsx"
+    ]
+  },
+  {
+    "text": "ドライブに接続できません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリが見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリを読めません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx"
+    ]
+  },
+  {
+    "text": "${lib.root} に接続できません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\LibraryUnavailable.tsx"
+    ]
+  },
+  {
+    "text": "${col.label}では並べ替えできません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ListHeader.tsx"
+    ]
+  },
+  {
+    "text": "${col.label}で並べ替え",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ListHeader.tsx"
+    ]
+  },
+  {
+    "text": "表示する列を選ぶ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ListHeader.tsx"
+    ]
+  },
+  {
+    "text": "ドライブが接続されていません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\MediaInfoSection.tsx"
+    ]
+  },
+  {
+    "text": "メディア情報をコピーしました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\MediaInfoSection.tsx"
+    ]
+  },
+  {
+    "text": "メディア情報を隠す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\MediaInfoSection.tsx"
+    ]
+  },
+  {
+    "text": "ffprobe で調べて表示する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\MediaInfoSection.tsx"
+    ]
+  },
+  {
+    "text": "表示中の内容をテキストでコピー",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\MediaInfoSection.tsx"
+    ]
+  },
+  {
+    "text": "${label}の幅を変更(ダブルクリックで既定に戻す)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\PaneResizer.tsx"
+    ]
+  },
+  {
+    "text": "チャプター(${chapters.length})(Ctrl+← / Ctrl+→ で前後へ)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\ChapterList.tsx"
+    ]
+  },
+  {
+    "text": "mpv の初期化に失敗しました。WebView2 プレイヤーで再生します:",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\mpv.ts"
+    ]
+  },
+  {
+    "text": "mpv で再生を開始できません:",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\MpvPlayerView.tsx"
+    ]
+  },
+  {
+    "text": "mpv がファイルを再生できません。WebView2 プレイヤーへ切り替えます",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\MpvPlayerView.tsx"
+    ]
+  },
+  {
+    "text": "前の動画 (P)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "再生 (Space)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "一時停止 (Space)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "次の動画: ${queue.nextTitle} (N)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "次の動画 (N)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "キュー再生中は設定に関係なく、常に次の動画へ進みます",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "連続再生をオフにする (A)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "連続再生をオンにする(最後まで再生したら次の動画へ)(A)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "リピート再生をオフにする (R)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "リピート再生をオンにする(この動画を繰り返す)(R)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "再生キュー(並べ替え・削除)(Q)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "音声トラック",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "字幕の見た目(フォント・サイズ・色・縁取り)を変える",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "再生速度 (< >)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "ミュート (M)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "音量 (↑↓)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "この位置をサムネイルにする (T)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "このコマを画像として保存する (S)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "ウィンドウにフィットさせる (U)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "元のサイズ(等倍)で表示する — 小さい動画を拡大しない (U)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "フルスクリーン (F)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\PlayerControls.tsx"
+    ]
+  },
+  {
+    "text": "途中なら現在位置をミリ秒で返す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "尺の 90% 以上まで観たら 0(最後まで観た扱い)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "短い動画は 90% に届かなくても残り 30 秒未満なら 0",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "長尺では 90% ルールが先に効く",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "先頭付近はそのまま保存する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "尺が 0 なら 0 を返す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "開いてすぐ閉じたらカウントしない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "30 秒以上再生したらカウントする",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "短い動画は尺の 5% でカウントする",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "尺が不明なら 30 秒だけで判断する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "不正な値ではカウントしない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\types.test.ts"
+    ]
+  },
+  {
+    "text": "字幕プロパティを設定できません:",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\useMpvPlayer.ts"
+    ]
+  },
+  {
+    "text": "${skipped[0]} は見つからないため飛ばしました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\usePlayQueue.ts"
+    ]
+  },
+  {
+    "text": "${skipped.length} 件は見つからない / オフラインのため飛ばしました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\usePlayQueue.ts"
+    ]
+  },
+  {
+    "text": "次の動画が見つかりませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\player\\usePlayQueue.ts"
+    ]
+  },
+  {
+    "text": "変換の準備中…",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\PlayerOverlay.tsx"
+    ]
+  },
+  {
+    "text": "再生の準備中…",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\PlayerOverlay.tsx"
+    ]
+  },
+  {
+    "text": "${v.filename} は見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "プレイリストの名前",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "「${name}」はすでにあります。上書きしますか?",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "「${name}」に保存しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "「${queue.sourceName}」を上書きしました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "キュー",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "変更あり",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "保存リストから読み込んだキューではありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "保存した内容から変わっていません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "再生中の動画はそのまま続きます",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "ドラッグで並べ替え",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "キューから外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\queue\\QueuePanel.tsx"
+    ]
+  },
+  {
+    "text": "(ローカル LLM なら空欄のままで動きます)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\AiProviderFields.tsx"
+    ]
+  },
+  {
+    "text": "(空欄なら ${info.defaultModel})",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\AiProviderFields.tsx"
+    ]
+  },
+  {
+    "text": "モデル名を入力",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\AiProviderFields.tsx"
+    ]
+  },
+  {
+    "text": "「${b.fileName}」(${b.createdAt})から復元しますか?\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "現在のライブラリ(タグ・レーティング・視聴履歴を含む)はこのバックアップの内容で置き換わります。\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "動画ファイル自体には影響しません。\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "復元はアプリを再起動したときに適用されます。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "復元を予約しました。アプリを再起動すると適用されます。\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "現在のデータは ${safety} として保存しました。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "バックアップ中...",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "今すぐバックアップ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\DataSection.tsx"
+    ]
+  },
+  {
+    "text": "新しいライブラリ名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "監視除外フォルダを選ぶ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "${selected} の配下を、次のスキャンから取り込まないようにします。\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "今ライブラリに入っている配下の動画も外しますか?\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "「いいえ」を選ぶと一覧には残ったまま、今後増えなくなります。\\n\\n",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "どちらを選んでも動画ファイルは削除しません。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "${removed.toLocaleString()} 件をライブラリから外しました(ファイルは残っています)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "${path} を監視除外から外しますか?\\n\\n次のスキャンで該当する動画がライブラリに再登録されます。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "監視除外を解除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "開いているライブラリは外せません(別のライブラリに切り替えてから)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "フォルダとファイルは削除されません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "除外したあとも一覧に残っている登録数。除外したときに外さなかったぶんです",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\LibrarySection.tsx"
+    ]
+  },
+  {
+    "text": "その他のアプリ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "Claude Desktop の 設定 → 開発者 → 「構成を編集」で ${CLAUDE_DESKTOP_CONFIG} を開き、",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "上の内容を貼り付けて Claude Desktop を再起動してください。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "すでに mcpServers がある場合は \"dvm\": { ... } の部分だけをその中に足します",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "PowerShell かコマンドプロンプトに貼り付けて実行してください。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "そのあと claude mcp list で「dvm ... Connected」と出れば成功です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "${CODEX_CONFIG} を開いて末尾に貼り付けてください(ファイルが無ければ新しく作ります)。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "そのあと codex を起動し直すと使えるようになります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "${GEMINI_CLI_CONFIG} を開いて貼り付けてください(ファイルが無ければ新しく作ります)。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "そのあと gemini を起動し直し、/mcp で「dvm」が出れば成功です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "${VSCODE_MCP_CONFIG} を開いて貼り付けてください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "(コマンドパレットの「MCP: Open User Configuration」でも開けます)。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "VS Code だけ mcpServers ではなく servers 形式で、type の指定が要ります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "Cursor・Cline・Windsurf など、mcpServers 形式に対応した MCP クライアントで同じ設定が使えます。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "それぞれの設定ファイルに貼り付けてアプリを再起動してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "設定ファイルに既に中身がある場合、貼り付ける直前の行の末尾に , が要ります。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "これが抜けると JSON として壊れ、AI アプリが起動時にエラーになります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "設定ファイルに既に [mcp_servers.○○] がある場合は、上のセクションをそのまま末尾に足してください。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "既存のセクションの中に入れると別のサーバーの設定として読まれます",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "(現在:「${libraryName}」)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\settings\\McpSettings.tsx"
+    ]
+  },
+  {
+    "text": "外部プレイヤーの実行ファイルを選択",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\PlaybackSection.tsx"
+    ]
+  },
+  {
+    "text": "実行ファイル",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\PlaybackSection.tsx"
+    ]
+  },
+  {
+    "text": "例: C:\\\\Program Files\\\\mpv\\\\mpv.exe",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\settings\\PlaybackSection.tsx"
+    ]
+  },
+  {
+    "text": "生成に失敗したサムネイルだけを作り直しますか?",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "すべてのサムネイルを作り直しますか?件数が多いと時間がかかります。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "対象のサムネイルはありませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "不要なサムネイルはありませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "${r.removed} 件(${fmtSize(r.freedBytes)})を削除しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "孤児サムネイルの掃除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "コマの画像の保存先フォルダ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "ピクチャ\\\\DVM",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\settings\\ThumbnailSection.tsx"
+    ]
+  },
+  {
+    "text": "表示",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "再生",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "AI 連携",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "サムネイルとコマ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "データとバックアップ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "大きさを変更(ダブルクリックで既定に戻す)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SettingsModal.tsx"
+    ]
+  },
+  {
+    "text": "${label}を隠す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "${label}を表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "変更前のフォルダパスを入力してください\\n(このパスで始まる動画が対象になります)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "変更後のフォルダ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "そのパスで始まる動画はありませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダ「${sf.name}」を削除しますか?\\n(動画は消えません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダの削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${p.name}」は空です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${sf.name}」に一致する動画はありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "M3U8 へ書き出す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${p.name}」を書き出しました(${n} 件)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "M3U8 を読み込む",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${r.name}」を作成しました(${r.count} 件。${r.skipped} 行は見つからないため外しました)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${r.name}」を作成しました(${r.count} 件)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "プレイリスト「${p.name}」を削除しますか?\\n(動画自体は消えません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "プレイリストの削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "シリーズ「${s.name}」を削除しますか?\\n(動画自体は消えません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "シリーズの削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "監視フォルダを追加",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "動画ファイルを追加",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "動画",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${f.path}」を監視対象から外しますか?",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "監視フォルダの解除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "このフォルダ由来の動画 ${f.videoCount} 件をライブラリからも削除しますか?\\n(いいえ = 個別登録として残します。ファイル自体は消えません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "登録の扱い",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${lib.name}」に接続できません(${lib.root})",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${lib.name}」に切り替えます。アプリを再起動しますか?",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリの切り替え",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "新しい名前",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "「${sf.name}」の条件を、いまの絞り込みで置き換えますか?",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダの上書き",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "新しいプレイリスト名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "新しいシリーズ名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "${currentLib.root}\\nクリックでライブラリを切り替え",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "切り替え中...",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "ファイルが見つからない動画だけを表示(パスの再リンクか、ライブラリからの削除で整理できます)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "内容が同じ動画(サイズと先頭ハッシュが一致)だけを表示。同じものが隣り合って並びます",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダ・監視フォルダ・シリーズ・タグ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "フォルダの階層で絞り込む(そのフォルダ直下の動画だけを表示)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "タグ・シリーズを絞り込む",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "サイドバーの項目名で絞り込みます(動画そのものの検索は上の検索ボックス)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "${sf.name}(保存した検索条件を復元します)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "スマートフォルダを削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "プレイリスト",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "${p.name}(クリックで絞り込み。右クリックからキューに読み込めます)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "・${fmtTime(p.durationMs / 1000)}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "プレイリストを削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "M3U8 / M3U を読み込んで同じ名前のプレイリストを作ります(未登録の動画はライブラリにも登録されます)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "監視フォルダ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "${f.path}\\nクリックでこのフォルダ配下すべてを表示(サブフォルダ単位で絞るなら「フォルダー」タブ)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "監視対象から外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "シリーズ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "${s.name}(クリックで絞り込み。シリーズ内は登録順で表示)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "シリーズを削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "タグ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Sidebar.tsx"
+    ]
+  },
+  {
+    "text": "${hours} 時間",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "${Math.floor(hours / 24)} 日 ${hours % 24} 時間",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "${Math.round(ms / 60_000)} 分",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "${Math.round(ms / 3_600_000).toLocaleString()} 時間",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "件数",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "容量",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "時間",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "本",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "データがありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "${b.label}: ${parts.join(' / ')}${onPick ? '(クリックで絞り込む)' : ''}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "日",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "月",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "火",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "水",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "木",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "金",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "土",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "${DOW_LABELS[d]}曜 ${h} 時台: ${n.toLocaleString()} 回",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "レーティング",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "長さ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "解像度",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "向き",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "映像コーデック",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "拡張子",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "再生回数",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "ファイルの更新年",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "保存先",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "追加した月(直近 24 か月)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "月ごとの視聴回数(直近 24 か月)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "回",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "まだ視聴の記録がありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "曜日 × 時間帯の視聴回数",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\StatsModal.tsx"
+    ]
+  },
+  {
+    "text": "すべての字幕",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "ASS/SSA(アニメなど)にも効きます",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "文字の見た目",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "SRT など、自前の装飾を持たない字幕にだけ効きます",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "ASS/SSA 字幕",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "その他の色",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "不透明度",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "既定(sans-serif)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\SubtitleStyleEditor.tsx"
+    ]
+  },
+  {
+    "text": "タグ「${tag.name}」を削除しますか?\\n(${tag.videoCount} 件の動画から外れます。動画自体は消えません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "タグの削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "グループ「${group.name}」を削除しますか?\\n(${group.tagCount} 個のタグは未分類に移ります。動画に付いたタグはそのままです)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "グループの削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "色なし",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "グループ名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "新しいタグ名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "新しいグループ名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "${t.name}(クリックで絞り込み。グループの見出しへドラッグすると移動できます)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "タグを編集(名前・色・グループ・削除)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "(タグがまだありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "(クリックでこの中のタグが付いた動画をまとめて表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "。上下にドラッグで並べ替え)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "タグを表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "タグを隠す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "「${group.name}」にタグを追加",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "グループに属さないタグを追加",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "グループを編集(名前・並び順・削除)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "タグ名を入力して Enter",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "タグをまとめる軸を作る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "グループに属さないタグを作る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "グループ名を入力して Enter",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\TagTree.tsx"
+    ]
+  },
+  {
+    "text": "この検索条件に名前を付けて保存します",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "サイドバーを表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "サイドバーを隠す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "検索(空白区切りで AND)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "ファイル名・タイトルで検索(空白区切りで AND)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "詳細検索(${advCount} 件の条件)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "詳細検索",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "絞り込みを戻す (Alt+←)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "絞り込みを進める (Alt+→)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "今の検索条件をスマートフォルダとして保存",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "詳細リスト表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "サムネイル表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "詳細リスト表示に切り替え",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "サムネイル表示に切り替え",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "詳細ペインを常に表示",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "詳細ペインの固定を解除(選択中だけ表示に戻す)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "詳細ペインを常に表示する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "キー操作の一覧 (?)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\Toolbar.tsx"
+    ]
+  },
+  {
+    "text": "入りきらない操作",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\ToolbarOverflow.tsx"
+    ]
+  },
+  {
+    "text": " ・ ${video.width}×${video.height}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoCard.tsx"
+    ]
+  },
+  {
+    "text": "キューの上限は ${QUEUE_LIMIT} 件です(${videos.length} 件は入りません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "保存していないキュー(${s.queue.items.length} 件)を捨てて置き換えますか?",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "キューの置き換え",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "再生できる動画がありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "キューが上限の ${QUEUE_LIMIT} 件を超えるため追加しませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "すでにキューに入っています",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${added} 件を次に再生します",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${added} 件をキューに追加しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "先頭 ${idx.length} 件を選択しました(囲みの残りは入りません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${sel.length} 件をライブラリから削除しますか?\\n(登録とタグ情報が消えます。ファイル自体は削除されません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "ライブラリから削除",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${sel.length.toLocaleString()} 件を削除し、${paths.length.toLocaleString()} 件を監視除外に登録しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${sel.length} 件のパスをコピーしました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "新しいファイル名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "移動先フォルダ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${sel.length} 件のサムネイルを作り直しています",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "先頭 ${SELECT_ALL_LIMIT} 件を選択しました(全 ${total} 件)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "表示中の一覧",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "表示中の動画がありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${queueDrag.count} 件をキューに追加",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "${queueDrag.count} 件 — キューパネルへドロップ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src\\components\\VideoGrid.tsx"
+    ]
+  },
+  {
+    "text": "DVM(Demodemo Video Manager)— Windows 向け動画管理ソフト",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\Cargo.toml"
+    ]
+  },
+  {
+    "text": "DB を開けません ({}): {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "エラー: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画ライブラリを検索する。テキスト(ファイル名・タイトル・メモの部分一致。空白区切りで AND)、タグ名、シリーズ名、フォルダ、missing 状態、視聴状態、レーティング、尺、サイズ、拡張子、解像度、向き、コーデック、追加日・更新日で絞り込める。結果は JSON 配列で返る。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ファイル名・タイトルの部分一致検索。空白区切りで複数語すべてを含むものに絞る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true で text の検索対象にフルパスも含める",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true で text の検索対象にメモ(comment)も含める",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "このフォルダにある動画だけに絞る。絶対パスで指定する。既定はそのフォルダ直下だけ(サブフォルダを含めるなら dir_path_recursive)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true で dir_path をサブフォルダ込みで解釈する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "タグ名(完全一致)で絞る。同じグループのタグ同士は OR、グループをまたぐと AND になる(例: [\\\"ファンタジー\\\", \\\"SF\\\", \\\"アニメ\\\"] = (ファンタジー または SF) かつ アニメ)。グループは list_tags で確認できる",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "シリーズ名(完全一致)。指定時は登録順で返る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true でファイルが見つからない動画のみ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true でタグが 1 つも付いていない動画のみ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true で一度も再生していない動画のみ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true で内容が同一(サイズ+部分ハッシュが一致)の動画だけを返す。sort=dup と併せると同じものが隣り合う",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true で途中まで観て終わっていない動画のみ(アプリ内再生でのみ記録される)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "再生回数の下限",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "再生回数の上限。0 を指定すると未視聴のみ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "このレーティング以上の動画に絞る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true でレーティングを付けていない動画のみ。min_rating の 0 は「無条件」の意味なので、これとは別物",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "尺の下限(秒)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "尺の上限(秒)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ファイルサイズの下限(バイト)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ファイルサイズの上限(バイト)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "拡張子で絞る(例: [\\\"mp4\\\", \\\"mkv\\\"])。大文字・先頭のドットは無視される",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "横解像度の下限(ピクセル)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "縦解像度の下限(ピクセル)。1080 で FHD 以上",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "縦解像度の上限(ピクセル)。**その値未満**なので、720 で「720p 未満」になる",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "画面の向き。portrait = 縦長、landscape = 横長(正方形を含む)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "映像コーデックで絞る(例: [\\\"h264\\\", \\\"hevc\\\"])",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ライブラリ追加日の下限(YYYY-MM-DD。その日を含む)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ライブラリ追加日の上限(YYYY-MM-DD。その日を含む)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "過去 N 日以内に追加されたものだけ(相対指定。7 で直近 1 週間)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ファイル更新日の下限(YYYY-MM-DD。その日を含む)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ファイル更新日の上限(YYYY-MM-DD。その日を含む)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "過去 N 日以内に更新されたものだけ(相対指定)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "並び順(既定: added_desc)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "最大件数(既定 50、最大 1000)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画 1 件の詳細(メタデータ・タグ・シリーズ)を取得する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "全タグと各タグの動画数、所属グループを一覧する。グループは分類の軸(例:「ジャンル」「メディア種別」)で、検索では同じグループのタグ同士が OR になる",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "全シリーズと各シリーズの動画数を一覧する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "保存プレイリストを一覧する(動画数・合計再生時間ミリ秒つき)。プレイリストは「何をどの順で観るか」を手で並べたリストで、シリーズ(動画側の属性)とは別物",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "プレイリストの中身を保存された並び順で取得する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ライブラリ全体の統計を取得する。全体の数(動画数・合計サイズ・合計再生時間・タグ数・シリーズ数・missing 数・未視聴数・タグなし数・重複数)と、内訳(レーティング別・長さ別・解像度別・向き別・コーデック別・拡張子別・再生回数別・保存先別・追加月別・ファイル更新年別)。内訳の 1 項目はそれぞれ件数・合計サイズ・合計再生時間を持つ。さらに月ごとの視聴回数(v1.18 以降の記録)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "対象の動画 ID 一覧",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画にタグを付ける(タグが無ければ作成される)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画からタグを外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "タグ名(完全一致)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画をシリーズに追加する(シリーズが無ければ作成される。末尾に追加)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "シリーズ名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画をシリーズから外す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "シリーズ名(完全一致)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "新しいプレイリストを作る。video_ids は再生したい順に並べて渡す(重複した id は最初の 1 つだけが残る)。同じ名前のプレイリストがあるとエラーになる",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "プレイリスト名(大文字小文字を区別せず一意)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "既存のプレイリストの末尾に動画を追加する(すでに入っている動画は増えない)。プレイリストが無ければエラーになるので、先に create_playlist で作ること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画のレーティングを設定する(0 で解除)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画のタイトル・コメントを設定する(指定したフィールドだけ更新)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画の登録をライブラリから削除する。ファイル自体は削除しない(タグ・レーティング等のメタデータは失われる)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "同じ内容(サイズ + 先頭ハッシュが一致)の動画を 1 本だけ残し、残りを整理する。既定はライブラリの登録を外すだけでファイルは残す。必ず dry_run: true で対象と件数を確認してから dry_run: false で実行すること。scope を指定すると、そのフォルダ配下だけが対象になる(配下と外にまたがるグループは触らない)。タグ・レーティング・視聴履歴が付いた動画は優先して残す。サイズ 0 のファイルは対象外",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "対象フォルダの絶対パス。省略するとライブラリ全体",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true: 件数と内訳のプレビューのみ / false: 実際に実行する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true にすると重複したファイル本体を Windows のごみ箱へ送ってから登録を外す(完全削除ではない。ごみ箱から戻して再スキャンすれば復帰できる)。既定 false = 登録を外すだけでファイルは残す。ユーザーがファイルの削除まで明示的に求めたときだけ true にすること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "動画ファイル本体を Windows のごみ箱へ送る。必ず dry_run: true で実行内容(対象パス一覧)を確認し、ユーザーの意図と一致することを確かめてから dry_run: false で実行すること。実行後の登録は missing 状態で残る(ごみ箱から戻して再スキャンすれば復帰できる)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "true: 実行内容のプレビューのみ / false: 実際にごみ箱へ送る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "playlist(名前)が必要です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "プレイリスト「{name}」が見つかりません(一覧は list_playlists で確認できます)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "video_ids が必要です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "video_ids が空です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "書き込みは無効です。環境変数 DVM_ALLOW_WRITE=1 を付けて起動してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "シリーズ「{series_name}」が見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "id={id} の動画が見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "name が必要です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "プレイリスト「{}」を作成しました({count} 件)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "「{name}」に {} 件を追加しました(合計 {after} 件)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件にタグ「{tag}」を付けました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件からタグ「{tag}」を外しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件をシリーズ「{name}」に追加しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "シリーズ「{name}」が見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件をシリーズ「{name}」から外しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "rating が必要です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件のレーティングを {} にしました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "title か comment のどちらかが必要です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "id={id} の情報を更新しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件をライブラリから削除しました(ファイルは残っています)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "実行するには dry_run: false で再度呼び出してください。対象のファイルはごみ箱へ送られます(完全削除ではありません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "実行するには dry_run: false で再度呼び出してください。ファイルは削除されません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "解消できる重複はありませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件をごみ箱へ送り、ライブラリからも外しました(失敗 {} 件)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "{} 件をライブラリから外しました(ファイルは残っています)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "実行するには dry_run: false で再度呼び出してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\bin\\dvm-mcp.rs"
+    ]
+  },
+  {
+    "text": "ごみ箱",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\fileops.rs"
+    ]
+  },
+  {
+    "text": "不正な操作です: {other}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\fileops.rs"
+    ]
+  },
+  {
+    "text": "{} 件 (removed={}): {}",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\commands\\folders.rs"
+    ]
+  },
+  {
+    "text": "開いているライブラリは一覧から外せません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\libraries.rs"
+    ]
+  },
+  {
+    "text": "ウィンドウ位置の保存に失敗しました: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\libraries.rs"
+    ]
+  },
+  {
+    "text": "バックアップファイルが見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\maintenance.rs"
+    ]
+  },
+  {
+    "text": "不正な actor です: {other}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\mod.rs"
+    ]
+  },
+  {
+    "text": "不正な mode です: {mode}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\playback.rs"
+    ]
+  },
+  {
+    "text": "M3U8 に動画ファイルのパスがありませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\playlists.rs"
+    ]
+  },
+  {
+    "text": "M3U8 の動画を 1 件も登録できませんでした(ファイルが見つからないか、対応形式ではありません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\playlists.rs"
+    ]
+  },
+  {
+    "text": "インポート",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\playlists.rs"
+    ]
+  },
+  {
+    "text": "プレイリスト名の空きが見つかりませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\playlists.rs"
+    ]
+  },
+  {
+    "text": "元の動画ファイルが見つかりません: {path}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\videos.rs"
+    ]
+  },
+  {
+    "text": "動画のあるドライブに接続できません: {root}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\videos.rs"
+    ]
+  },
+  {
+    "text": "「プログラムから開く」を起動できません: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\videos.rs"
+    ]
+  },
+  {
+    "text": "プレイヤーを起動できません ({player}): {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\commands\\videos.rs"
+    ]
+  },
+  {
+    "text": "ヘッダ名が不正です: {k}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\ai_http.rs"
+    ]
+  },
+  {
+    "text": "ヘッダの値が不正です: {k}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\ai_http.rs"
+    ]
+  },
+  {
+    "text": "接続できませんでした: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\ai_http.rs"
+    ]
+  },
+  {
+    "text": "受信中に接続が切れました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\ai_http.rs"
+    ]
+  },
+  {
+    "text": "data: あ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\ai_http.rs"
+    ]
+  },
+  {
+    "text": "復元前の状態も退避しておくこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs"
+    ]
+  },
+  {
+    "text": "予約は消費すること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs"
+    ]
+  },
+  {
+    "text": "バックアップ時点の状態に戻ること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs"
+    ]
+  },
+  {
+    "text": "拒否したら予約を残さないこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs"
+    ]
+  },
+  {
+    "text": "古い auto は消す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs"
+    ]
+  },
+  {
+    "text": "manual は消さない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs"
+    ]
+  },
+  {
+    "text": "復元前の退避は消さない(取り違えたときの戻り先なので)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\backup.rs"
+    ]
+  },
+  {
+    "text": "N:\\写真",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "直前に push している",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "登録が古い 1 を残す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "N:\\\\a\\\\壊れ.mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "Q:\\\\b\\\\別物.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "スコープ外に同じ内容があるので触らない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "無関係なグループは数えない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "twitter2 は twitter の配下ではない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "INSERT INTO tags (id, name) VALUES (1, 'お気に入り')",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "タグが付いた 2 を残す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\dedupe.rs"
+    ]
+  },
+  {
+    "text": "N:\\Twitter全データ2",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "N:\\Twitter全データ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "除外パスが空です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "n:\\\\twitter全データ\\\\twitter-2020-04-24",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "N:\\\\Twitter全データ\\\\twitter-2020-04-24",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "N:/Twitter全データ/twitter-2020-04-24/data/a.mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "N:\\\\Twitter全データ\\\\twitter-2021-09-21\\\\a.mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "末尾の区切り違いで二重登録しない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "Foobar は Foo の配下ではない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\excludes.rs"
+    ]
+  },
+  {
+    "text": "変更前のフォルダを指定してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "変更後のフォルダを指定してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "{} が未接続です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "変更後の場所にファイルがありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "元のファイルが見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "移動先のフォルダがありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "移動先フォルダを指定してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "新しいファイル名を入力してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "ファイル名に \\ / : * ? ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "親フォルダを特定できません: {path}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "INSERT INTO videos (id, path, filename) VALUES (1, ?1, '動画 1.mp4')",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "INSERT INTO videos (id, path, filename) VALUES (2, ?1, '動画 2.mp4')",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "別\\名前.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "区切り文字は拒否する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "大文字小文字を区別せずに拾うこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "無関係なパスを巻き込まないこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fileops.rs"
+    ]
+  },
+  {
+    "text": "{path} がツリーに無い: {:?}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\アニメ\\2024\\d.mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "配下すべてを積み上げるはず",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "ルート以外は末尾セグメントだけを出す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\アニメ\\2024\\b.mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "入れ子の監視フォルダをルートにしてはいけない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "入れ子の監視フォルダの中身も配下として数える",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "監視フォルダの印は残す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "c:\\動画\\b.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "C:/動画/c.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "表記違いでノードを割ってはいけない: {tree:?}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "ドライブ直下には動画が無い",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "ルートでなければ末尾セグメントだけ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "N:\\BD\\作品A\\BDMV\\STREAM\\a.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "N:\\BD\\作品B\\BDMV\\STREAM\\b.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "通り道は直下 0 件",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "N:\\BD\\作品A",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "N:\\BD\\作品A\\BDMV\\STREAM",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\\"), r",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\映画\\d.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "映画",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "直下のサブフォルダだけを名前順で返す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "アニメ 直下は b.mp4 の 1 件",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "2024\\\\c.mp4 も配下として数える",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "c:/動画/アニメ/",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "100XX-test 側を巻き込んではいけない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\folders.rs"
+    ]
+  },
+  {
+    "text": "@MS ゴシック",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fonts.rs"
+    ]
+  },
+  {
+    "text": "  游ゴシック  ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fonts.rs"
+    ]
+  },
+  {
+    "text": "游ゴシック",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\fonts.rs"
+    ]
+  },
+  {
+    "text": "ffmpeg を起動できませんでした: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "コマを取り出せませんでした(再生位置が動画の終わりを超えているかもしれません)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "コマを取り出せませんでした: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "同じ名前の画像が多すぎます: {stem}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "保存先のドライブに接続できません: {root}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "保存先フォルダを作れません: {}({e})",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "なまえ...mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "なまえ .mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "接続できません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\frames.rs"
+    ]
+  },
+  {
+    "text": "取り消し済みです",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "ごみ箱から手動で戻してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "登録削除は元に戻せません(再スキャンで取り込み直せます)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "逆向きの移動・リネームを実行してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "この操作は取り消せません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "古い形式の記録のため取り消せません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "取り消せません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "{} 件からタグを外しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "{} 件にタグを戻しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "{} 件をシリーズから外しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "{} 件をシリーズに戻しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "{} 件のレーティングを戻しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "情報を元に戻しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "タグ名を戻しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "{} 件のパスを戻しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "取り消しに未対応の操作です: {other}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "元から付いていた 1 番のタグは残すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "動画ごとに違っていた元の値へ戻すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "並び順ごと戻すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "元が未設定だったのだから未設定に戻すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "メモは取り消しの対象外",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "UPDATE videos SET title = '新しい題名' WHERE id = 1",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "元の題名",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "古い形式",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "理由が伝わること: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "1 番を 2 回観た記録が畳まれてはいけない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "閉じていない視聴は不明のまま",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "動画側の表示用の値が JOIN されること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "視聴回数は行数",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "動画の本数は重複を畳む",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "60+120+30 秒。NULL は足さない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "watched_ms が不明な行を別に数える",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\history.rs"
+    ]
+  },
+  {
+    "text": "X:\\\\旅行\\\\a.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\labels.rs"
+    ]
+  },
+  {
+    "text": "X:\\\\旅行\\\\b.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\labels.rs"
+    ]
+  },
+  {
+    "text": "video_id の検索が索引を使っていない: {plan}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\labels.rs"
+    ]
+  },
+  {
+    "text": "既存ライブラリを {} へ移しました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "libraries\\マイライブラリ\\",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "既存ライブラリの移動を見送りました({e})。元の場所のまま使います",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "移行先が既にあります: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "{name} を移せません: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "そのフォルダには既に中身があります: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "そのライブラリは既に一覧にあります:「{}」",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "{drive} に接続できません。ドライブを繋いでから再試行してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "ライブラリが見つかりません: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "ライブラリのドライブレター変動を検出: {} -> {moved}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "ファイルが見つかりません: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "データベースを開けません: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "DVM のデータベースではないようです",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "{} に接続できません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "フォルダ名にできない名前です",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "library.db を移すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "サムネイルも一緒に運ぶ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "マーカーを置くこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "元の場所には残さない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "移せなければ元の場所のまま登録して起動を続ける",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "巻き戻して元の場所に残すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "設定の引き継ぎは移動の成否と無関係",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "初回は移せず元の場所のまま",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "行を増やさないこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "id は変えないこと(キャッシュの名前空間が変わる)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "元の場所の目印は片付けること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "手で選んだ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "移行由来でないものは動かさない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "2 回目で増やさない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "旧 library.db の値で上書きし返さない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "既定 + 外付けの 2 つのまま",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "マーカーの id を引き継ぐこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "名前も引き継ぐこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "ファイルは消さないこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "他のものを外しても current は動かさない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "消した行を指したままにしない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "placeholder に逃がす",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "app.db があれば現在のライブラリを指す",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": " アニメ ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "E:/仕事?",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "E__仕事_",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "末尾のドット...",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "末尾のドット",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "毎回まっさらにすること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\libraries.rs"
+    ]
+  },
+  {
+    "text": "サムネイル生成中 {n}/{total}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "移動なのに二重登録されている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "レーティングが引き継がれていない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "移動先の監視フォルダに付け替わっていない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "実在するコピーが移動扱いにされている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "旧.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "新.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "復帰したのに missing のまま",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "解除で所属が外れる前提が崩れている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "再登録したフォルダに所属が戻っていない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "個別登録で監視フォルダの所属が外れている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "子の動画.mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "深い方(A)に所属させるはず",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "直下の動画.mp4",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": "親フォルダ直下は親に所属",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\library.rs"
+    ]
+  },
+  {
+    "text": " は ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\第 1 話.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "第 1 話.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\第 2 話.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "第 2 話.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "2 話(修正版)",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "週末",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "#EXTM3U\\n#EXTINF:-1,2 話(修正版)\\nC:\\\\動画\\\\第 2 話.mp4\\n#EXTINF:754,第 1 話.mp4\\nC:\\\\動画\\\\第 1 話.mp4\\n",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "消えた id で空ファイルを書かない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "C:\\\\動画\\\\a.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "D:\\\\映像\\\\b.mkv",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\m3u8.rs"
+    ]
+  },
+  {
+    "text": "ドライブ({root})が接続されていません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\metadata.rs"
+    ]
+  },
+  {
+    "text": "テスト用 JSON が壊れている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\metadata.rs"
+    ]
+  },
+  {
+    "text": "D:\\\\動画\\\\おそ松さん 第01話.mkv",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\metadata.rs"
+    ]
+  },
+  {
+    "text": "C:\\\" や ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\offline.rs"
+    ]
+  },
+  {
+    "text": "動画がライブラリにありません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "元ファイルが見つかりません: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "キャッシュファイルを配置できません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "変換をキャンセルしました",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "変換に失敗しました: {err}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "ffmpeg を起動できません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "コンテナを変換中…",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "いちばん古いものから消すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "書きかけの .tmp はどのサブフォルダでも消すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "keep は上限を割っても残すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "登録に無いサブフォルダは丸ごと消すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "ルート直下の旧キャッシュも掃除すること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playback.rs"
+    ]
+  },
+  {
+    "text": "{base} のコピー",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "コピー名の空きが見つかりませんでした",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "C:\\\\動画\\\\{i}.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "重複あり",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "あとで観る",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "夜",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "夜 のコピー",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "夜 のコピー (2)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "掃除前",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\playlists.rs"
+    ]
+  },
+  {
+    "text": "rtrim(filename, <ドットを除いた文字集合>)",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:\\v\\旅行 2024.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:\\v\\旅行 2025.mkv",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "旅行 2025.mkv",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "D:\\backup\\旅行 2024.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:\\v\\料理.avi",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "料理.avi",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "カレーの作り方",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "画質",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "家族",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "料理",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "条件なしのときに WHERE を出してはいけない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "旅行 2024",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "旅行　2024",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "title も検索対象のはず",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "お気に入り かつ 料理 は該当なし",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "空のタグ指定で全件が消えてはいけない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "1080 と 2160 が残るはず",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "両端の日を含むはず",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "id 順のままならシャッフルできていない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "c:\\動画\\d.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:/動画/e.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\100%_test\\f.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "C:\\動画\\100XX-test\\g.mp4",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "孫(2024\\\\c.mp4)を含めてはいけない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "c:/動画/",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "{key} の SQL が実行できない: {:?}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "{key} で件数が変わってはいけない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "{key}: NULL の行は末尾に来るはず(実際 {got:?})",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "拡張子なしは降順では末尾",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "{key}: ページングで順序が崩れている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "{asc} と {desc} が逆順になっていない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "カレーの覚書",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "メモだけある",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "1GB 以上は a.mp4 だけ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "1000 だけ。未取得の 4 は入らない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "両端を含み、更新日が未取得の 4 は入らない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "メモ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\query.rs"
+    ]
+  },
+  {
+    "text": "同じ名前のシリーズがすでにあります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\series.rs"
+    ]
+  },
+  {
+    "text": "検索条件の形式が不正です: {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\smart_folders.rs"
+    ]
+  },
+  {
+    "text": "壊れた",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\smart_folders.rs"
+    ]
+  },
+  {
+    "text": "名前が空なら拒否する",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\smart_folders.rs"
+    ]
+  },
+  {
+    "text": "高評価",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\smart_folders.rs"
+    ]
+  },
+  {
+    "text": "[曜日 0=日〜6=土][0〜23 時]",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "未評価",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "480p 未満",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "5 分未満",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "5〜20 分",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "20〜60 分",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "60 分以上",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "縦長",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "横長",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "1 回",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "2〜4 回",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "5〜9 回",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "10 回以上",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": " 年",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "key={key} が無い",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "星 0〜5 の 6 本は常に埋まっていること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "hash が NULL の 1 件は重複に数えない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "0 件の星も本数ぶん返すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "レーティングの束にも容量が乗ること",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "短い順・不明は最後",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "拡張子なしは出さない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "正方形は横長側",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "回数の少ない順",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "古い順・不明は最後",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "視聴回数の内訳は容量・時間の軸を持たない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "火 22 時",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "水 10 時",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "水 23 時",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "木 1 時",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\core\\stats.rs"
+    ]
+  },
+  {
+    "text": "タグ「{name}」は既にあります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "色は #rrggbb 形式で指定してください",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "グループが見つかりません",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "グループ「{name}」は既にあります",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "未分類タグ",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\tags.rs"
+    ]
+  },
+  {
+    "text": "再生成させるため未生成に戻すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\thumbs.rs"
+    ]
+  },
+  {
+    "text": "元は未設定だったこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\videos.rs"
+    ]
+  },
+  {
+    "text": "触っていない項目は before に載せない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\core\\videos.rs"
+    ]
+  },
+  {
+    "text": "感情",
+    "count": 1,
+    "kana": false,
+    "files": [
+      "src-tauri\\src\\db.rs"
+    ]
+  },
+  {
+    "text": "operations_log への記録に失敗({action}): {e}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\db.rs"
+    ]
+  },
+  {
+    "text": "別コネクションからコミット済みの行が見えていない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\db.rs"
+    ]
+  },
+  {
+    "text": "読み取り専用のはずが書けてしまう",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\db.rs"
+    ]
+  },
+  {
+    "text": "ライブラリを開けません: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "バックアップから復元しました: {}",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "src-tauri/resources/LICENSE がルートの LICENSE と違う。コピーし直すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "src-tauri/resources/THIRD-PARTY-NOTICES.md がルートのものと違う。コピーし直すこと",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "tauri.conf.json が JSON として読めない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "tauri.conf.json の version が Cargo.toml とずれている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "package.json が JSON として読めない",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "package.json の version が Cargo.toml とずれている",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\src\\lib.rs"
+    ]
+  },
+  {
+    "text": "動画をコピーせずに整理する Windows 向け動画管理ソフト",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\tauri.conf.json"
+    ]
+  },
+  {
+    "text": "動画ファイルを元の場所に置いたまま、サムネイル・タグ・シリーズ・評価で整理します。外付け HDD や NAS の大量の動画をそのまま扱え、libmpv によるアプリ内再生と MCP / AI アシスタントからの操作に対応しています。",
+    "count": 1,
+    "kana": true,
+    "files": [
+      "src-tauri\\tauri.conf.json"
+    ]
+  }
+]

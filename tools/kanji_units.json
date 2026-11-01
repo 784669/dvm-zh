@@ -1,0 +1,465 @@
+{
+ "你是面向 Windows 的视频管理软件「DVM」的助手。帮助用户搜索、整理其视频媒体库（打标签、评分、系列管理）。\n\n指南:\n- 想向用户展示搜索结果时使用 apply_filter（网格会被筛选）。仅作为数据参考时使用 search_videos\n- 标签建议应依据文件名·标题推测内容，优先提议已有标签（list_tags）。新增标签需在用户同意后再进行\n- 标签有分组（分类轴）。不同轴的标签可以同时添加（例: 媒体类型「动画」与类型「奇幻」）。分组的创建·修改由用户负责，AI 不要执行\n- 写入操作（tag_videos / set_rating / add_to_series）仅在用户意图明确时才执行。若含糊请先提议并确认\n- 回答请用简洁的中文\n\n当前用户选中的视频:\n${selectionBlock}\n\n当前网格筛选条件: ${filters.length > 0 ? filters.join('、') : '(无)'}": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "此设置从下次生成的缩略图起生效。若要让现有缩略图也生效，\n          请按「全部重新生成」。\n          播放中按缩略图按钮（T 键），可将该位置单独设为缩略图。\n          手动指定的画面优先于封面图": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "让 Claude Desktop 等 AI 应用直接搜索·整理媒体库。\n        只需像「显示 20 个没有标签的视频」「给这个系列打分」这样对话即可。\n        即使未启动 DVM 也能工作": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "即使在监视文件夹内，此处添加的文件夹及其下级也不会被扫描导入。\n          可用于按代备份、临时导出目录等不想出现在媒体库中的位置。\n          删除视频时登记的单个文件行也会列在这里。": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "保持关闭时以只读方式打开数据库，AI 完全无法修改媒体库。\n            即使开启，将文件送入回收站的操作也一定会先显示对象列表供确认": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "标签、评分、系列、重新链接可以撤销。移动文件的操作\n        （送入回收站·移动·重命名）与删除注册无法撤销": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "只有 VS Code 用的是 servers 格式而非 mcpServers，且需要指定 type": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "该字幕带有制作者设定的样式。\n          除「缩放比例」「垂直位置」外都不会生效": [
+  "src\\components\\SubtitleStyleEditor.tsx"
+ ],
+ "画面方向。portrait = 竖长、landscape = 横向长(含正方形)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "筛选应用的网格显示(向用户展示结果)。省略的条件会被解除。全部省略则取消筛选。": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "播放中将光标移到进度条上时显示该位置的画面（较重视频出现卡顿时请关闭）": [
+  "src\\components\\settings\\PlaybackSection.tsx"
+ ],
+ "仅限未设置评分的视频。minRating 的 0 显示「无条件」故不同": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "${base}（其中 ${s.unknownCount} 次位置未知）": [
+  "src\\lib\\viewHistory.ts"
+ ],
+ "纵向分辨率下限。1080 为 FHD 以上，2160 为 4K 以上": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "纵向分辨率上限。**低于该值**，故 720 显示「720p 以下」": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "详细列表显示的列与隔行底色，请在列表视图下从列标题的齿轮中选择": [
+  "src\\components\\settings\\DisplaySection.tsx"
+ ],
+ "仅筛选此文件夹直接下级的视频(不含子文件夹)。以绝对路径指定": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "将移动实际文件。此操作无法撤销（可通过反向移动恢复）。": [
+  "src\\components\\FileOpDialog.tsx"
+ ],
+ "若视频内嵌封面图则用作缩略图（生成更快，画面也更准确）": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "提高不透明度会在文字后铺设色带(在明亮画面上更易阅读)": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "「${sf.name}」的条件替换为当前筛选条件吗？": [
+  "src\\components\\Sidebar.tsx"
+ ],
+ "若设置文件中已有内容，粘贴位置前一行末尾需要加逗号。": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "尺: 5分以下/5〜20分/20〜60分/60分以上": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "若不按此操作，被排除文件夹中的视频会一直留在列表里": [
+  "src\\components\\ExcludeDialog.tsx"
+ ],
+ "用符合条件的视频替换当前队列(最多前 500 个)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "「${term.caption}」的条件一并移除": [
+  "src\\components\\FilterBar.tsx"
+ ],
+ "${sel.length} 项缩略图正在重新生成": [
+  "src\\components\\VideoGrid.tsx"
+ ],
+ "文件更新日期下限(YYYY-MM-DD，含当天)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "文件更新日期上限(YYYY-MM-DD，含当天)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "在智能文件夹、AI 搜索、统计之间切换所改的条件": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "将丢失动画等作品中作者设置的颜色、位置、时间演出": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "${sf.name}（恢复已保存的搜索条件）": [
+  "src\\components\\Sidebar.tsx"
+ ],
+ "${n(max)} ${suffix} 以下": [
+  "src\\lib\\query.ts"
+ ],
+ "${n(min)} ${suffix} 以上": [
+  "src\\lib\\query.ts"
+ ],
+ "「显示 4 星以上、10 分钟以内的视频」": [
+  "src\\components\\AiPanel.tsx"
+ ],
+ "「${sf.name}」的搜索条件读取失败": [
+  "src\\components\\Sidebar.tsx"
+ ],
+ "详细搜索(${advCount} 项条件）": [
+  "src\\components\\Toolbar.tsx"
+ ],
+ "要重新生成全部缩略图吗？数量较多时会耗时。": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "标签·评分·文件操作的记录（部分可撤销）": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "用当前筛选条件${sf.name}」替换": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "解除详情面板固定（恢复为仅选中时显示）": [
+  "src\\components\\Toolbar.tsx"
+ ],
+ "更改字幕外观（字体·大小·颜色·描边）": [
+  "src\\components\\player\\PlayerControls.tsx"
+ ],
+ "★${n}（再次点击同一星级可取消）": [
+  "src\\components\\Inspector.tsx"
+ ],
+ "${a.minHeight}p 以上": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "★${a.minRating} 以上": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "${a.maxHeight}p 以下": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "将重命名实际文件。此操作无法撤销。": [
+  "src\\components\\FileOpDialog.tsx"
+ ],
+ "编辑标签（名称·颜色·分组·删除）": [
+  "src\\components\\TagTree.tsx"
+ ],
+ "MCP 联动(由外部 AI 操作)": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "数值越大越靠下。100 为默认位置": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "只删除注册信息。文件仍留在原位置": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "清除全部筛选条件（排序保持不变）": [
+  "src\\components\\FilterBar.tsx"
+ ],
+ "取消其他标签的筛选，仅保留此标签": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "仅删除已保存的条件(视频不删除)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "将当前搜索条件保存为智能文件夹": [
+  "src\\components\\Toolbar.tsx"
+ ],
+ "只重新生成失败的缩略图吗？": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "${m(max)} 分以下": [
+  "src\\lib\\query.ts"
+ ],
+ "${m(min)} 分以上": [
+  "src\\lib\\query.ts"
+ ],
+ "从刚选中的位置开始选择范围": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "为当前搜索条件命名并保存": [
+  "src\\components\\Toolbar.tsx"
+ ],
+ "仅限过去 N 日内更新的": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "设置视频评分(0 解除)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "最大项数(默认 20)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "目标位置存在同名文件": [
+  "src\\components\\FileOpDialog.tsx"
+ ],
+ "选择解除 (Esc)": [
+  "src\\components\\Inspector.tsx"
+ ],
+ "没有符合条件的缩略图": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "没有可操作的实体文件": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "恢复已保存的搜索条件": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "文件更新日期(降序)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "文件更新日期(升序)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "${min} 回以上": [
+  "src\\lib\\query.ts"
+ ],
+ "${max} 回以下": [
+  "src\\lib\\query.ts"
+ ],
+ "重新生成失败的部分": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "用当前搜索条件覆盖": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "将此位置设为缩略图": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "静音 ⇄ 取消静音": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "重新生成了缩略图": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "更新了智能文件夹": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "解除此群组的筛选": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "当前没有筛选条件": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "1080p 以下": [
+  "src\\lib\\query.ts"
+ ],
+ "1080p 以上": [
+  "src\\lib\\query.ts"
+ ],
+ "修改了标签颜色": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "取消监视文件夹": [
+  "src\\components\\Sidebar.tsx"
+ ],
+ "重新生成缩略图": [
+  "src\\components\\settings\\ThumbnailSection.tsx",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "再次选择则解除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "480p 以上": [
+  "src\\lib\\query.ts"
+ ],
+ "720p 以上": [
+  "src\\lib\\query.ts"
+ ],
+ "720p 以下": [
+  "src\\lib\\query.ts"
+ ],
+ "不指定播放次数": [
+  "src\\lib\\query.ts"
+ ],
+ "480p 以下": [
+  "src\\lib\\query.ts"
+ ],
+ "隔行加深背景": [
+  "src\\components\\ColumnPicker.tsx"
+ ],
+ "文件更新年份": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "放不下的操作": [
+  "src\\components\\ToolbarOverflow.tsx"
+ ],
+ "数据存储位置": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "取消监视排除": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "全部重新生成": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "打开保存位置": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "解除全部筛选": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "文件更新日期": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "60 分以上": [
+  "src\\lib\\query.ts"
+ ],
+ "★1 以上": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "★2 以上": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "★3 以上": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "★4 以上": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "移除此条件": [
+  "src\\components\\FilterBar.tsx"
+ ],
+ "撤销了操作": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "服务器位置": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "参照...": [
+  "src\\components\\settings\\PlaybackSection.tsx",
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "打开此条件": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "} 中更新": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "5 分以下": [
+  "src\\lib\\query.ts"
+ ],
+ "不指定大小": [
+  "src\\lib\\query.ts"
+ ],
+ "4K 以下": [
+  "src\\lib\\query.ts"
+ ],
+ "4K 以上": [
+  "src\\lib\\query.ts"
+ ],
+ "不指定时长": [
+  "src\\lib\\query.ts"
+ ],
+ "清空条件": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "停止回复": [
+  "src\\components\\AiPanel.tsx"
+ ],
+ "其他位置": [
+  "src\\components\\FolderTree.tsx"
+ ],
+ "保存位置": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "其他颜色": [
+  "src\\components\\SubtitleStyleEditor.tsx"
+ ],
+ "不透明度": [
+  "src\\components\\SubtitleStyleEditor.tsx"
+ ],
+ "文字外观": [
+  "src\\components\\SubtitleStyleEditor.tsx"
+ ],
+ "取消选择": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "解除筛选": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "色彩空间": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "任意位置": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "描边颜色": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "文字大小": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "阴影颜色": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "纵向位置": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "文字颜色": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "背景色带": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "保存条件": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "指定期间": [
+  "src\\lib\\viewHistory.ts"
+ ],
+ "未指定": [
+  "src\\components\\AdvancedSearch.tsx",
+  "src\\lib\\query.ts"
+ ],
+ "无颜色": [
+  "src\\components\\TagTree.tsx",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "色範囲": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "横向長": [
+  "src\\lib\\query.ts"
+ ],
+ "拡大率": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "更新": [
+  "src\\components\\AdvancedSearch.tsx",
+  "src\\lib\\filterChips.ts"
+ ],
+ "停止": [
+  "src\\components\\AiPanel.tsx"
+ ],
+ "取消": [
+  "src\\components\\DedupeDialog.tsx",
+  "src\\components\\DeleteDialog.tsx",
+  "src\\components\\ExcludeDialog.tsx",
+  "src\\components\\ExcludeOnDeleteDialog.tsx",
+  "src\\components\\FileOpDialog.tsx",
+  "src\\components\\TagTree.tsx"
+ ],
+ "操作": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "容量": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "解除": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "色域": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "粉色": [
+  "src\\lib\\tagColors.ts"
+ ],
+ "橙色": [
+  "src\\lib\\tagColors.ts"
+ ],
+ "色": [
+  "src\\components\\TagTree.tsx",
+  "src\\lib\\contextMenu.ts"
+ ]
+}

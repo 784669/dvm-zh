@@ -1,0 +1,388 @@
+{
+ "${info.full} 的画面。已转换为 SDR 显示(HDR パススルー: オフ)": [
+  "src\\lib\\hdrInfo.ts"
+ ],
+ "AI 助手では送信": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "AI 助手で改行": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "] = (ファンタジー 或 SF) 并且 动画)。群组は list_tags で確認できる": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "の配下全部": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "フル复制路径": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "上の文件夹ーへ": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "今の使用量(全部の媒体库の合計)": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "今の队列を捨てて、選んだ動画だけで再生を始めます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "今の队列を置き換えます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "他に筛选中の标签がありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "他の媒体库を打开": [
+  "src\\components\\LibraryUnavailable.tsx"
+ ],
+ "他の标签の筛选を外してこれだけにします": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "保存していない队列(${s.queue.items.length} 件)を捨てて、\\n${opts.label}を読み込みますか?": [
+  "src\\lib\\queueLoad.ts"
+ ],
+ "全标签と各标签の動画数、所属群组(groupName)を一覧する。群组は分類の軸(例:「ジャンル」「メディア種別」)で、検索では同じ群组の标签同士が OR になる": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "全系列と各系列の動画数を一覧する": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "全部畳む": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "内容が同一(大小と先頭ハッシュが一致)の動画だけ。sort=dup と併せると同じものが隣り合う": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "再生中でも排列・削除ができます": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "再生队列を打开 / 关闭": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "前 / 次の章节へ": [
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "动画などで制作者が付けた色・位置・タイミング演出は失われます": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "動画に标签を付ける(标签が無ければ作成される)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "動画の评分を設定する(0 で解除)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "動画を系列に追加する(系列が無ければ作成される)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "動画媒体库を検索して結果を JSON で返す(画面は変わらない)。結果を画面に表示したいときは apply_filter を使うこと。": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "動画文件は削除しません。": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "右点击した 1 件を表示します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "右点击した動画の文件夹ーで筛选ます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "右点击の「队列」からは「次に再生」も選べます": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "右点击メニュー": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "同じ内容の動画を 1 本だけ残します(文件は消しません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "基础 URL が未設定です。設定 > AI 連携 で入力してください": [
+  "src\\lib\\ai\\config.ts"
+ ],
+ "备份文件夹を打开": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "外す動画のある文件夹ー": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "大小(大きい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "大小(小さい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "媒体库からか、ごみ箱かをダイアログで選びます": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "媒体库から削除": [
+  "src\\components\\DeleteDialog.tsx"
+ ],
+ "媒体库から外す": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "媒体库を新規作成...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "媒体库文件夹を打开": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "媒体库追加日の上限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "媒体库追加日の下限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "字幕样式(アプリ内再生)": [
+  "src\\components\\settings\\SubtitleSection.tsx"
+ ],
+ "実体を触れる文件がありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "文件が找不到動画だけ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "文件が未找到": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "文件は削除しません。": [
+  "src\\components\\ExcludeDialog.tsx"
+ ],
+ "文件をごみ箱へ": [
+  "src\\components\\DeleteDialog.tsx"
+ ],
+ "文件をごみ箱へ送り、媒体库からも削除します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "文件作成日(古い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "文件作成日(新しい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "文件名・标题の部分一致。空白区切りで複数語全部を含むものに絞る": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "文件大小の上限(バイト)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "文件大小の下限(バイト)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "文件夹を選んで追加...": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "文件夹ーで絞り込んでいるときに使えます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "文件夹ー自体は削除されません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "文件更新日(古い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "文件更新日(新しい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "文件更新日の上限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "文件更新日の下限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "文件自体は削除されません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "既存の媒体库を打开...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "时长(短い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "时长(長い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "映像编解码器で絞る(例: [": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "未分類は排列られません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "条件に合う動画で今の队列を置き換えます(先頭 500 件まで)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "标签「${name}」が未找到": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "标签が 1 つも付いていない動画だけ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "标签がまだありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "标签なし": [
+  "src\\components\\Inspector.tsx",
+  "src\\components\\StatsModal.tsx",
+  "src\\lib\\filterChips.ts"
+ ],
+ "标签を削除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "标签を表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "标签を隠す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "标签名(完全一致)で絞る。同じ群组の标签同士は OR、群组をまたぐと AND になる(例: [": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "标签群组がまだありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "标题・メモ・标签・系列・AI 助手の入力欄": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "标题・メモ・标签名の変更": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "次のスキャンから配下を無視します(文件は消しません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "残る本数(1 群组 1 本)": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "比特率(低い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "比特率(高い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "画面の方向。portrait = 縦長、landscape = 横長(正方形を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "監視文件夹に追加": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "監視除外文件夹に登録": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "筛选から外す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "筛选なし": [
+  "src\\components\\FilterBar.tsx"
+ ],
+ "筛选に追加": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "筛选を 戻す / 進む": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "筛选を全部解除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "筛选を戻す": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "筛选を解除": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "筛选を進める": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "筛选を適用しました。該当 ${count} 件": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "筛选中は排列られません": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "筛选結果で今の队列を置き換えます(先頭 500 件まで)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "系列「${name}」が未找到": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "系列なし": [
+  "src\\components\\Inspector.tsx"
+ ],
+ "系列を削除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "系列内は登録順で並べます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "缩略图の大きさ": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "缩略图を作り直す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "缩略图キャッシュ": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "缩略图表示・详细列表表示のとき": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "群组に属さない标签を作成...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "群组を作成...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "群组を削除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "表示中の一覧を队列に読み込んで再生": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "表示中の没有视频": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "表示大小 等倍 ⇄ フィット": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "親文件夹ーごと除外して削除": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "评分(低い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "评分を付けていない動画だけ。minRating の 0 は「無条件」なので別物": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "連続再生・再生队列で開いたときだけ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "選んだ文件だけ除外して削除": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "選択を再生队列に追加": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "選択中の没有视频": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "開いているモーダル・メニューを关闭": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "队列に読み込んで再生": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "队列の上限は ${QUEUE_LIMIT} 件のため、先頭 ${QUEUE_LIMIT} 件だけを読み込みました": [
+  "src\\lib\\queueLoad.ts"
+ ],
+ "队列の末尾に足します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "队列の置き換え": [
+  "src\\lib\\queueLoad.ts"
+ ],
+ "除外せずに删除": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ]
+}

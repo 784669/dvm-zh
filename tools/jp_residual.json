@@ -1,0 +1,714 @@
+{
+ "src\\components\\DedupeDialog.tsx": [
+  {
+   "line": 78,
+   "kind": "jsx",
+   "text": "媒体库から外す"
+  },
+  {
+   "line": 82,
+   "kind": "jsx",
+   "text": "残る本数(1 群组 1 本)"
+  },
+  {
+   "line": 111,
+   "kind": "jsx",
+   "text": "外す動画のある文件夹ー"
+  }
+ ],
+ "src\\components\\DeleteDialog.tsx": [
+  {
+   "line": 28,
+   "kind": "jsx",
+   "text": "媒体库から削除"
+  },
+  {
+   "line": 38,
+   "kind": "jsx",
+   "text": "文件をごみ箱へ"
+  }
+ ],
+ "src\\components\\ExcludeDialog.tsx": [
+  {
+   "line": 41,
+   "kind": "jsx",
+   "text": "文件は削除しません。"
+  }
+ ],
+ "src\\components\\ExcludeOnDeleteDialog.tsx": [
+  {
+   "line": 74,
+   "kind": "jsx",
+   "text": "選んだ文件だけ除外して削除"
+  },
+  {
+   "line": 85,
+   "kind": "jsx",
+   "text": "親文件夹ーごと除外して削除"
+  },
+  {
+   "line": 100,
+   "kind": "jsx",
+   "text": "除外せずに删除"
+  }
+ ],
+ "src\\components\\FilterBar.tsx": [
+  {
+   "line": 128,
+   "kind": "jsx",
+   "text": "筛选なし"
+  }
+ ],
+ "src\\components\\Inspector.tsx": [
+  {
+   "line": 366,
+   "kind": "jsx",
+   "text": "标签なし"
+  },
+  {
+   "line": 423,
+   "kind": "jsx",
+   "text": "系列なし"
+  }
+ ],
+ "src\\components\\LibraryUnavailable.tsx": [
+  {
+   "line": 105,
+   "kind": "jsx",
+   "text": "他の媒体库を打开"
+  }
+ ],
+ "src\\components\\StatsModal.tsx": [
+  {
+   "line": 264,
+   "kind": "jsx",
+   "text": "标签なし"
+  }
+ ],
+ "src\\components\\settings\\DataSection.tsx": [
+  {
+   "line": 104,
+   "kind": "jsx",
+   "text": "缩略图キャッシュ"
+  },
+  {
+   "line": 116,
+   "kind": "jsx",
+   "text": "媒体库文件夹を打开"
+  },
+  {
+   "line": 126,
+   "kind": "jsx",
+   "text": "今の使用量(全部の媒体库の合計)"
+  },
+  {
+   "line": 160,
+   "kind": "jsx",
+   "text": "备份文件夹を打开"
+  }
+ ],
+ "src\\components\\settings\\LibrarySection.tsx": [
+  {
+   "line": 145,
+   "kind": "jsx",
+   "text": "動画文件は削除しません。"
+  },
+  {
+   "line": 167,
+   "kind": "jsx",
+   "text": "文件夹を選んで追加..."
+  }
+ ],
+ "src\\components\\settings\\SubtitleSection.tsx": [
+  {
+   "line": 19,
+   "kind": "jsx",
+   "text": "字幕样式(アプリ内再生)"
+  }
+ ],
+ "src\\lib\\aiTools.ts": [
+  {
+   "line": 45,
+   "kind": "str",
+   "text": "文件名・标题の部分一致。空白区切りで複数語全部を含むものに絞る"
+  },
+  {
+   "line": 48,
+   "kind": "str",
+   "text": "标签名(完全一致)で絞る。同じ群组の标签同士は OR、群组をまたぐと AND になる(例: ["
+  },
+  {
+   "line": 48,
+   "kind": "str",
+   "text": "] = (ファンタジー 或 SF) 并且 动画)。群组は list_tags で確認できる"
+  },
+  {
+   "line": 53,
+   "kind": "str",
+   "text": "评分を付けていない動画だけ。minRating の 0 は「無条件」なので別物"
+  },
+  {
+   "line": 57,
+   "kind": "str",
+   "text": "标签が 1 つも付いていない動画だけ"
+  },
+  {
+   "line": 62,
+   "kind": "str",
+   "text": "内容が同一(大小と先頭ハッシュが一致)の動画だけ。sort=dup と併せると同じものが隣り合う"
+  },
+  {
+   "line": 63,
+   "kind": "str",
+   "text": "文件大小の下限(バイト)"
+  },
+  {
+   "line": 64,
+   "kind": "str",
+   "text": "文件大小の上限(バイト)"
+  },
+  {
+   "line": 68,
+   "kind": "str",
+   "text": "画面の方向。portrait = 縦長、landscape = 横長(正方形を含む)"
+  },
+  {
+   "line": 69,
+   "kind": "str",
+   "text": "映像编解码器で絞る(例: ["
+  },
+  {
+   "line": 70,
+   "kind": "str",
+   "text": "媒体库追加日の下限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 71,
+   "kind": "str",
+   "text": "媒体库追加日の上限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 73,
+   "kind": "str",
+   "text": "文件更新日の下限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 74,
+   "kind": "str",
+   "text": "文件更新日の上限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 165,
+   "kind": "tmpl",
+   "text": "标签「${name}」が未找到"
+  },
+  {
+   "line": 173,
+   "kind": "tmpl",
+   "text": "系列「${name}」が未找到"
+  },
+  {
+   "line": 189,
+   "kind": "str",
+   "text": "動画媒体库を検索して結果を JSON で返す(画面は変わらない)。結果を画面に表示したいときは apply_filter を使うこと。"
+  },
+  {
+   "line": 220,
+   "kind": "str",
+   "text": "全标签と各标签の動画数、所属群组(groupName)を一覧する。群组は分類の軸(例:「ジャンル」「メディア種別」)で、検索では同じ群组の标签同士が OR になる"
+  },
+  {
+   "line": 227,
+   "kind": "str",
+   "text": "全系列と各系列の動画数を一覧する"
+  },
+  {
+   "line": 240,
+   "kind": "str",
+   "text": "文件が找不到動画だけ"
+  },
+  {
+   "line": 251,
+   "kind": "tmpl",
+   "text": "筛选を適用しました。該当 ${count} 件"
+  },
+  {
+   "line": 257,
+   "kind": "str",
+   "text": "動画に标签を付ける(标签が無ければ作成される)"
+  },
+  {
+   "line": 276,
+   "kind": "str",
+   "text": "動画の评分を設定する(0 で解除)"
+  },
+  {
+   "line": 295,
+   "kind": "str",
+   "text": "動画を系列に追加する(系列が無ければ作成される)"
+  }
+ ],
+ "src\\lib\\contextMenu.ts": [
+  {
+   "line": 64,
+   "kind": "str",
+   "text": "文件が未找到"
+  },
+  {
+   "line": 97,
+   "kind": "str",
+   "text": "队列の末尾に足します"
+  },
+  {
+   "line": 109,
+   "kind": "str",
+   "text": "今の队列を捨てて、選んだ動画だけで再生を始めます"
+  },
+  {
+   "line": 128,
+   "kind": "str",
+   "text": "実体を触れる文件がありません"
+  },
+  {
+   "line": 189,
+   "kind": "str",
+   "text": "右点击した 1 件を表示します"
+  },
+  {
+   "line": 197,
+   "kind": "str",
+   "text": "右点击した動画の文件夹ーで筛选ます"
+  },
+  {
+   "line": 201,
+   "kind": "str",
+   "text": "フル复制路径"
+  },
+  {
+   "line": 221,
+   "kind": "str",
+   "text": "缩略图を作り直す"
+  },
+  {
+   "line": 233,
+   "kind": "str",
+   "text": "文件自体は削除されません"
+  },
+  {
+   "line": 241,
+   "kind": "str",
+   "text": "文件をごみ箱へ送り、媒体库からも削除します"
+  },
+  {
+   "line": 310,
+   "kind": "str",
+   "text": "筛选から外す"
+  },
+  {
+   "line": 310,
+   "kind": "str",
+   "text": "筛选に追加"
+  },
+  {
+   "line": 323,
+   "kind": "str",
+   "text": "他に筛选中の标签がありません"
+  },
+  {
+   "line": 324,
+   "kind": "str",
+   "text": "他の标签の筛选を外してこれだけにします"
+  },
+  {
+   "line": 339,
+   "kind": "str",
+   "text": "标签群组がまだありません"
+  },
+  {
+   "line": 345,
+   "kind": "str",
+   "text": "标签を削除"
+  },
+  {
+   "line": 368,
+   "kind": "str",
+   "text": "标签がまだありません"
+  },
+  {
+   "line": 370,
+   "kind": "str",
+   "text": "未分類は排列られません"
+  },
+  {
+   "line": 383,
+   "kind": "str",
+   "text": "标签を表示"
+  },
+  {
+   "line": 383,
+   "kind": "str",
+   "text": "标签を隠す"
+  },
+  {
+   "line": 391,
+   "kind": "str",
+   "text": "群组に属さない标签を作成..."
+  },
+  {
+   "line": 394,
+   "kind": "str",
+   "text": "群组を作成..."
+  },
+  {
+   "line": 420,
+   "kind": "str",
+   "text": "群组を削除"
+  },
+  {
+   "line": 446,
+   "kind": "str",
+   "text": "全部畳む"
+  },
+  {
+   "line": 489,
+   "kind": "str",
+   "text": "文件夹ー自体は削除されません"
+  },
+  {
+   "line": 507,
+   "kind": "str",
+   "text": "筛选中は排列られません"
+  },
+  {
+   "line": 518,
+   "kind": "str",
+   "text": "队列に読み込んで再生"
+  },
+  {
+   "line": 520,
+   "kind": "str",
+   "text": "条件に合う動画で今の队列を置き換えます(先頭 500 件まで)"
+  },
+  {
+   "line": 572,
+   "kind": "str",
+   "text": "筛选中は排列られません"
+  },
+  {
+   "line": 576,
+   "kind": "str",
+   "text": "队列に読み込んで再生"
+  },
+  {
+   "line": 579,
+   "kind": "str",
+   "text": "今の队列を置き換えます"
+  },
+  {
+   "line": 583,
+   "kind": "str",
+   "text": "筛选を解除"
+  },
+  {
+   "line": 635,
+   "kind": "str",
+   "text": "筛选を解除"
+  },
+  {
+   "line": 638,
+   "kind": "str",
+   "text": "系列内は登録順で並べます"
+  },
+  {
+   "line": 645,
+   "kind": "str",
+   "text": "系列を削除"
+  },
+  {
+   "line": 694,
+   "kind": "str",
+   "text": "監視文件夹に追加"
+  },
+  {
+   "line": 706,
+   "kind": "str",
+   "text": "同じ内容の動画を 1 本だけ残します(文件は消しません)"
+  },
+  {
+   "line": 710,
+   "kind": "str",
+   "text": "監視除外文件夹に登録"
+  },
+  {
+   "line": 712,
+   "kind": "str",
+   "text": "次のスキャンから配下を無視します(文件は消しません)"
+  },
+  {
+   "line": 737,
+   "kind": "str",
+   "text": "媒体库を新規作成..."
+  },
+  {
+   "line": 738,
+   "kind": "str",
+   "text": "既存の媒体库を打开..."
+  },
+  {
+   "line": 765,
+   "kind": "str",
+   "text": "文件夹ーで絞り込んでいるときに使えます"
+  },
+  {
+   "line": 776,
+   "kind": "str",
+   "text": "表示中の没有视频"
+  },
+  {
+   "line": 783,
+   "kind": "str",
+   "text": "選択中の没有视频"
+  },
+  {
+   "line": 789,
+   "kind": "str",
+   "text": "表示中の一覧を队列に読み込んで再生"
+  },
+  {
+   "line": 793,
+   "kind": "str",
+   "text": "表示中の没有视频"
+  },
+  {
+   "line": 794,
+   "kind": "str",
+   "text": "筛选結果で今の队列を置き換えます(先頭 500 件まで)"
+  },
+  {
+   "line": 820,
+   "kind": "str",
+   "text": "上の文件夹ーへ"
+  },
+  {
+   "line": 837,
+   "kind": "str",
+   "text": "筛选を全部解除"
+  },
+  {
+   "line": 884,
+   "kind": "str",
+   "text": "フル复制路径"
+  }
+ ],
+ "src\\lib\\filterChips.ts": [
+  {
+   "line": 221,
+   "kind": "str",
+   "text": "の配下全部"
+  },
+  {
+   "line": 263,
+   "kind": "str",
+   "text": "标签なし"
+  }
+ ],
+ "src\\lib\\hdrInfo.ts": [
+  {
+   "line": 64,
+   "kind": "tmpl",
+   "text": "${info.full} 的画面。已转换为 SDR 显示(HDR パススルー: オフ)"
+  }
+ ],
+ "src\\lib\\listColumns.ts": [
+  {
+   "line": 338,
+   "kind": "str",
+   "text": "大小(小さい順)"
+  },
+  {
+   "line": 339,
+   "kind": "str",
+   "text": "大小(大きい順)"
+  },
+  {
+   "line": 340,
+   "kind": "str",
+   "text": "时长(短い順)"
+  },
+  {
+   "line": 341,
+   "kind": "str",
+   "text": "时长(長い順)"
+  },
+  {
+   "line": 342,
+   "kind": "str",
+   "text": "评分(低い順)"
+  },
+  {
+   "line": 358,
+   "kind": "str",
+   "text": "文件更新日(古い順)"
+  },
+  {
+   "line": 359,
+   "kind": "str",
+   "text": "文件更新日(新しい順)"
+  },
+  {
+   "line": 360,
+   "kind": "str",
+   "text": "文件作成日(古い順)"
+  },
+  {
+   "line": 361,
+   "kind": "str",
+   "text": "文件作成日(新しい順)"
+  },
+  {
+   "line": 364,
+   "kind": "str",
+   "text": "比特率(低い順)"
+  },
+  {
+   "line": 365,
+   "kind": "str",
+   "text": "比特率(高い順)"
+  }
+ ],
+ "src\\lib\\queueLoad.ts": [
+  {
+   "line": 31,
+   "kind": "tmpl",
+   "text": "保存していない队列(${s.queue.items.length} 件)を捨てて、\\n${opts.label}を読み込みますか?"
+  },
+  {
+   "line": 32,
+   "kind": "str",
+   "text": "队列の置き換え"
+  },
+  {
+   "line": 46,
+   "kind": "tmpl",
+   "text": "队列の上限は ${QUEUE_LIMIT} 件のため、先頭 ${QUEUE_LIMIT} 件だけを読み込みました"
+  }
+ ],
+ "src\\lib\\shortcuts.ts": [
+  {
+   "line": 91,
+   "kind": "str",
+   "text": "缩略图表示・详细列表表示のとき"
+  },
+  {
+   "line": 99,
+   "kind": "str",
+   "text": "選択を再生队列に追加"
+  },
+  {
+   "line": 99,
+   "kind": "str",
+   "text": "右点击の「队列」からは「次に再生」も選べます"
+  },
+  {
+   "line": 100,
+   "kind": "str",
+   "text": "媒体库からか、ごみ箱かをダイアログで選びます"
+  },
+  {
+   "line": 102,
+   "kind": "str",
+   "text": "筛选を 戻す / 進む"
+  },
+  {
+   "line": 113,
+   "kind": "str",
+   "text": "前 / 次の章节へ"
+  },
+  {
+   "line": 114,
+   "kind": "str",
+   "text": "前 / 次の章节へ"
+  },
+  {
+   "line": 119,
+   "kind": "str",
+   "text": "連続再生・再生队列で開いたときだけ"
+  },
+  {
+   "line": 120,
+   "kind": "str",
+   "text": "再生队列を打开 / 关闭"
+  },
+  {
+   "line": 120,
+   "kind": "str",
+   "text": "再生中でも排列・削除ができます"
+  },
+  {
+   "line": 123,
+   "kind": "str",
+   "text": "表示大小 等倍 ⇄ フィット"
+  },
+  {
+   "line": 131,
+   "kind": "str",
+   "text": "右点击メニュー"
+  },
+  {
+   "line": 144,
+   "kind": "str",
+   "text": "标题・メモ・标签・系列・AI 助手の入力欄"
+  },
+  {
+   "line": 146,
+   "kind": "str",
+   "text": "AI 助手では送信"
+  },
+  {
+   "line": 147,
+   "kind": "str",
+   "text": "AI 助手で改行"
+  },
+  {
+   "line": 148,
+   "kind": "str",
+   "text": "标题・メモ・标签名の変更"
+  },
+  {
+   "line": 179,
+   "kind": "str",
+   "text": "開いているモーダル・メニューを关闭"
+  }
+ ],
+ "src\\lib\\subtitleStyle.ts": [
+  {
+   "line": 161,
+   "kind": "str",
+   "text": "动画などで制作者が付けた色・位置・タイミング演出は失われます"
+  }
+ ],
+ "src\\lib\\toolbarItems.ts": [
+  {
+   "line": 77,
+   "kind": "str",
+   "text": "筛选を戻す"
+  },
+  {
+   "line": 78,
+   "kind": "str",
+   "text": "筛选を進める"
+  },
+  {
+   "line": 83,
+   "kind": "str",
+   "text": "缩略图の大きさ"
+  }
+ ],
+ "src\\lib\\ai\\config.ts": [
+  {
+   "line": 105,
+   "kind": "str",
+   "text": "基础 URL が未設定です。設定 > AI 連携 で入力してください"
+  }
+ ]
+}

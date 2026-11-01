@@ -1,0 +1,847 @@
+[
+ [
+  "src\\App.tsx",
+  260,
+  "`文件夹が ${dirs.length} 件あります。监视文件夹として登録しますか?\\n\\n` +"
+ ],
+ [
+  "src\\App.tsx",
+  261,
+  "'はい = 监视文件夹にする(以後の追加も自動で取り込みます)\\n' +"
+ ],
+ [
+  "src\\components\\AdvancedSearch.tsx",
+  339,
+  "相対指定を絶対日付より上に置く。**保存しても腐らない**のはこちらだけなので、"
+ ],
+ [
+  "src\\components\\AdvancedSearch.tsx",
+  340,
+  "智能文件夹に入れるならこちらを選んでほしい"
+ ],
+ [
+  "src\\components\\DedupeDialog.tsx",
+  41,
+  "`重複した ${plan?.removeCount.toLocaleString()} 件の文个 Windows の送入回收站送ります。\\n\\n` +"
+ ],
+ [
+  "src\\components\\DedupeDialog.tsx",
+  42,
+  "'各群组で残す 1 本には手を付けません。\\n' +"
+ ],
+ [
+  "src\\components\\DedupeDialog.tsx",
+  43,
+  "'ごみ箱から戻して重新扫描すれば元に戻せます。\\n\\n' +"
+ ],
+ [
+  "src\\components\\DedupeDialog.tsx",
+  140,
+  "削除先の選び方は Delete キーのダイアログ(DeleteDialog)と同じ作法にそろえる。"
+ ],
+ [
+  "src\\components\\DedupeDialog.tsx",
+  141,
+  "「何が起きるか」を選択肢の中に書いて、押す前に結果が分かるようにする"
+ ],
+ [
+  "src\\components\\ExcludeOnDeleteDialog.tsx",
+  87,
+  "{folderLabel} を監視除外に登録します。"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  138,
+  "箱ごと外す × は**見出しの隣**に置く。チップの右端に置くと"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  139,
+  "直前のチップの × と並んでどちらを消すのか分からなくなる"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  177,
+  "文件夹で絞っているときだけ出すトグル(v1.35)。ここに置くのは"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  178,
+  "「いま出ている一覧の範囲を変える」操作で、対象が目の前にあると分かるから"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  179,
+  "(ツールバーに置くと畳み込みの幅計算に条件付きの項目が混ざる)。"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  180,
+  "潜っても効き続けるので「この下ぜんぶを見ながら歩く」ができる"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  196,
+  "重複を見ているときだけ出す作業ボタン(v1.33)。ツールバーではなくここに置くのは、"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  197,
+  "「いま画面に出ている重複」が対象だと分かる場所だから。"
+ ],
+ [
+  "src\\components\\FilterBar.tsx",
+  198,
+  "文件夹で絞り込んでいれば、その文件夹配下だけが対象になる"
+ ],
+ [
+  "src\\components\\FolderCard.tsx",
+  28,
+  "if (entry.up) return `${entry.path}\\nダブル点击で上层文件夹へ`;"
+ ],
+ [
+  "src\\components\\FolderCard.tsx",
+  30,
+  "return `${n.path}\\nダブル点击で打开(直下 ${n.directCount} 件${"
+ ],
+ [
+  "src\\components\\FolderTree.tsx",
+  136,
+  "title={`${n.path}\\n点击でこの文件夹直下の ${n.directCount} 个筛选(もう一度で解除)${"
+ ],
+ [
+  "src\\components\\FolderTree.tsx",
+  137,
+  "n.totalCount !== n.directCount ? `\\n配下全部では ${n.totalCount} 件` : ''"
+ ],
+ [
+  "src\\components\\HistoryModal.tsx",
+  59,
+  "return entry.payload; // v1.9 より前の自由文字列"
+ ],
+ [
+  "src\\components\\HistoryModal.tsx",
+  64,
+  "return `「${p.tag}」を ${count('added')} 个`;"
+ ],
+ [
+  "src\\components\\HistoryModal.tsx",
+  66,
+  "return `「${p.tag}」を ${count('removed')} 个起`;"
+ ],
+ [
+  "src\\components\\HistoryModal.tsx",
+  68,
+  "return `「${p.series}」に ${count('added')} 件`;"
+ ],
+ [
+  "src\\components\\HistoryModal.tsx",
+  72,
+  "return `★${p.rating} を ${count('before')} 个`;"
+ ],
+ [
+  "src\\components\\HistoryModal.tsx",
+  237,
+  "期間の指定と、その期間の集計(v1.36)。期間を絞る動機は「どれだけ観たか」なので、"
+ ],
+ [
+  "src\\components\\HistoryModal.tsx",
+  238,
+  "数字が無いと半分しか答えられない。集計は一覧と同じ条个 Rust 側で共有している"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  208,
+  "? `「${t.name}」を ${ids.length} 个添加`"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  295,
+  "标题・メモ(v1.34)。入力欄から離れた時点で自動保存する。"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  296,
+  "複数選択では出さない — 同じ标题を何个も一斉に付ける操作に意味が無いため"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  301,
+  "标题・メモ"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  370,
+  "标签パレット(v1.19)。既存标签を群组別に並べ、点击で選択中の動画にまとめて付ける。"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  371,
+  "标签名を覚えていなくても押すだけで付けられるのが狙い。"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  372,
+  "标签が増えても縦に伸び続けないよう、高さ上限を付けて中だけスクロールさせている"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  443,
+  "展開すると縦に長くなるので一番下に置く(评分・标签の位置がずれない)。"
+ ],
+ [
+  "src\\components\\Inspector.tsx",
+  444,
+  "複数選択では出さない — ffprobe を選択数だけ起動することになるため"
+ ],
+ [
+  "src\\components\\LibraryUnavailable.tsx",
+  43,
+  "setBusy(false); // 戻ってくるのは開けなかったときだけ(トーストは call() が出す)"
+ ],
+ [
+  "src\\components\\LibraryUnavailable.tsx",
+  68,
+  "`「${lib.name}」を一覧から外しますか?\\n\\n`"
+ ],
+ [
+  "src\\components\\PlayerOverlay.tsx",
+  48,
+  "if (engine === 'pending') return null; // 初回のみ数百 ms"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  238,
+  "'変更前の文件夹パスを入力してください\\n(このパスで始まる動画が対象になります)',"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  253,
+  "const yes = await ask(`智能文件夹「${sf.name}」を削除しますか?\\n(動画は消えません)`, {"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  347,
+  "`播放列表「${p.name}」を削除しますか?\\n(動画自体は消えません)`,"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  361,
+  "`系列「${s.name}」を削除しますか?\\n(動画自体は消えません)`,"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  396,
+  "`この文件夹由来の動画 ${f.videoCount} 个媒体库からも削除しますか?\\n(いいえ = 個別登録として残します。文件自体は消えません)`,"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  660,
+  "v1.27。ここは v1.26 まで「DVM」の固定文字列だった。"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  661,
+  "切り替えの入口はここだけ(名前の変更と一覧からの削除は設定モーダルの担当)"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  666,
+  "title={currentLib ? `${currentLib.root}\\n点击で媒体库を切り替え` : 'DVM'}"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  787,
+  "保存播放列表(v1.40)。**智能文件夹の直後**に置く ——"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  788,
+  "智能文件夹 = 条件で選んだ集合、播放列表 = 手で選んだ集合で、"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  789,
+  "並べるなら隣同士が意味的に正しい。"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  790,
+  "点击は既存 2 つと揃えて「一覧を絞り込む」。队列への読み込みは右点击から。"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  792,
+  "機能に気づく入口が右键菜单と Q キーだけで、棚が空の人ほど見えなかった"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  822,
+  "先頭缩略图 + 2 行(v1.41、C-6)。队列行と同じ 44×25 の枠で、"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  824,
+  "缩略图を持つ動画が 1 本も無ければ枠の地色だけが見える"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  885,
+  "title={`${f.path}\\n点击でこの文件夹配下全部显示(サブ文件夹単位で絞るなら「文件夹」タブ)`}"
+ ],
+ [
+  "src\\components\\Sidebar.tsx",
+  945,
+  "ただし筛选中にヒットが無いなら消す(TagTree 側も全部 null を返す) */}"
+ ],
+ [
+  "src\\components\\StatsModal.tsx",
+  90,
+  "return `${b.label}: ${parts.join(' / ')}${onPick ? '(点击で絞り込む)' : ''}`;"
+ ],
+ [
+  "src\\components\\StatsModal.tsx",
+  432,
+  "ここから下は「媒体库の中身」ではなく「観かた」の統計(v1.37)。"
+ ],
+ [
+  "src\\components\\StatsModal.tsx",
+  433,
+  "view_history は v1.18 から貯めていて、v1.36 の期間集計に続いてここでも使う"
+ ],
+ [
+  "src\\components\\SubtitleStyleEditor.tsx",
+  61,
+  "定番色を先に並べる。<input type=\"color\"> は WebView2 のネイティブダイアログを"
+ ],
+ [
+  "src\\components\\SubtitleStyleEditor.tsx",
+  62,
+  "打开ので、全画面再生中に打开と画面の外に出る。日常の操作はここで完結させる"
+ ],
+ [
+  "src\\components\\SubtitleStyleEditor.tsx",
+  123,
+  "<select> ではなく <input list> にしてある —— 字体列挙に失敗しても"
+ ],
+ [
+  "src\\components\\SubtitleStyleEditor.tsx",
+  124,
+  "名前を直接打てば効くので、機能そのものが列挙の成否に依存しない"
+ ],
+ [
+  "src\\components\\TagTree.tsx",
+  49,
+  "`标签「${tag.name}」を削除しますか?\\n(${tag.videoCount} 件の動画から外れます。動画自体は消えません)`,"
+ ],
+ [
+  "src\\components\\TagTree.tsx",
+  64,
+  "`群组「${group.name}」を削除しますか?\\n(${group.tagCount} 个标签将移到未分类。動画に付いた标签はそのままです)`,"
+ ],
+ [
+  "src\\components\\TagTree.tsx",
+  320,
+  "if (!start || !drop) return; // 動かしていない = ただの点击"
+ ],
+ [
+  "src\\components\\TagTree.tsx",
+  698,
+  "ドラッグ中(群组から外す先が要る)も出しておく */}"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  149,
+  "侧边栏を畳むと幅を変える帯ごと消えるので、戻す手段はこのボタンだけ。"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  150,
+  "侧边栏側に置くと畳んだあとに押せなくなる。だから畳まない項目にしてある"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  183,
+  "畳まない。ポップオーバーを ≫ メニューの中から打开と、互いの"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  184,
+  "「外側点击で关闭」が食い合って開いた瞬間に关闭。"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  185,
+  "件数はアイコンの右上にバッジで重ねる(文字を並べる場所が無いため)"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  229,
+  "排序はグリッドとリストで共有の 1 つ。详细列表の列ヘッダで選べる並びは"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  230,
+  "26 種あり全部は並べられないので、ここは代表的なものだけを常設し、"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  231,
+  "列ヘッダで選ばれた並びは「今それが選ばれている間だけ」項目を足して見せる"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  232,
+  "(按系列顺序・重複まとめと同じ作法)"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  403,
+  "モーダルとポップオーバーは項目マップの外に置く。トリガーがバーにあっても"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  404,
+  "≫ の中にあっても、開いている間はレンダーされ続ける必要があるため"
+ ],
+ [
+  "src\\components\\Toolbar.tsx",
+  411,
+  "設定を開いたまま出したときに DOM 順で前に来る必要がある */}"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  71,
+  "一覧クエリでは缩略图の実在確認をしていない(I/O 削減)。"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  72,
+  "読めなかった img は onError で隠し、下の `.thumb` の地色を見せる。"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  75,
+  "スクロールするたび画面じゅうのカードで「…」が一瞬出ては消えて目障りだった。"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  76,
+  "地色のままでも「まだ出ていない」ことは分かる。"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  77,
+  "生成に失敗したものだけは地色と区別が付かないので警告アイコンを残す"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  122,
+  "标签行・系列行(v1.23)。設定が ON なら**中身が空でも必ず描く** —"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  123,
+  "付いている動画だけ背が高くなると、行単位で 1 つの高さしか持てない仮想化が破綻する"
+ ],
+ [
+  "src\\components\\VideoCard.tsx",
+  124,
+  "(高さは lib/grid.ts の CARD_CHIP_ROW_H と対)"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  570,
+  "if (!started) return; // 動かしていない = ただの点击。通常の選択に任せる"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  672,
+  "`${sel.length} 个从媒体库删除しますか?\\n(登録と标签情報が消えます。文件本身不会被删除)`,"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1034,
+  "筛选帯(v1.28)。标志メントの子はそのまま .main の直接の子として並ぶので、"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1035,
+  "ツールバーと一覧の間に入る。件数は useVideos のものを渡す(数え直さない)"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1062,
+  "1 行おきの濃淡(v1.25)。**縞のクラスはここ(ラッパ)に付け、塗るのは"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1063,
+  ".list-row 側**にする —— ここを塗ると左右 12px の padding まで届く"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1064,
+  "角無しの帯になり、選択・ホバーのハイライトと形が変わってしまう。"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1066,
+  ":nth-child は使えない(仮想化で DOM 上の順番 = 絶対行番号ではないので、"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1067,
+  "スクロールすると縞が反転して波打つ)。row.index は**画面上の通し行番号**"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1068,
+  "なので、先頭に文件夹行が混ざってもパリティがずれない"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1069,
+  "(動画側の index は folderRows を引いた値なのでこの用途には使えない)。"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1070,
+  "動画行・文件夹行・未取得プレースホルダの 3 種全部に props 追加なしで乗る。"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1149,
+  "投げ縄の帯(v1.42)。**仮想化容器の中**に内容座標で置く ——"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1150,
+  "当たり判定と同じ座標系になるので、`.grid-scroll` の padding-top や"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1151,
+  "sticky な列ヘッダのぶんを自分で足し引きしなくて済む。"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1152,
+  "位置は rAF が style に直接書く(毎フレーム React を通さないため)"
+ ],
+ [
+  "src\\components\\VideoGrid.tsx",
+  1179,
+  "仮想化の transform が position: fixed の基準になってしまうため */}"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  265,
+  "名前が分かっているなら出す(v1.40)。位置(`3 / 128`)だけでは"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  266,
+  "「あと何本あるか」は分かっても「次が何か」が分からない。"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  267,
+  "先読みが済んでいない・端にいるときは従来の文言に落ちる"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  275,
+  "連続再生の切替。設定 autoplay_next をその場で書き換える(engine 非依存なので"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  276,
+  "両エンジンで出す)。単発再生でも隠さない — ⏮⏭ は「今の队列に前後があるか」"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  277,
+  "という一時的な状態だから disabled にするが、こちらは永続設定なので"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  278,
+  "消えると設定の在り処が分からなくなる。"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  280,
+  "队列は設定に関係なく常に次へ進むので、押しても何も変わらないように見えていた。"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  281,
+  "アイコンは播放列表(ListVideo)。以前はループ記号を使っていて、"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  282,
+  "隣のリピートと見分けが付かなかった(v1.13)"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  300,
+  "リピート再生(v1.13)。1 本を繰り返すので Repeat1(ループに 1 が入った形)。"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  301,
+  "リピート中は EOF が来ないので連続再生は発動しない = 排他制御は要らない"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  319,
+  "位置表示。**队列モードではアイコンを添える**(v1.40) ——"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  320,
+  "数字だけだと「筛选結果の中の 3 / 12」なのか"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  321,
+  "「手で並べた队列の 3 / 12」なのかが読み取れない"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  330,
+  "HDR バッジ(v1.31)。時刻の隣に置く —— 「今流れているものの説明」で、"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  331,
+  "右側の操作ボタン群とは性質が違う。SDR の動画では何も出さない"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  336,
+  "色は**設定ではなく実際の出力**で決める(v1.31)。設定がオンでも"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  337,
+  "Windows 側が HDR モードでなければ mpv はトーンマップしており、"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  338,
+  "そこで青くすると「HDR で見えている」と嘘をつくことになる"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  348,
+  "再生队列(v1.40)。**再生中は `.app` ごと消える**ので、再生中に排列・削除を"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  349,
+  "するにはここから打开しかない(ChapterList と同じ制約・同じ作法)。"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  350,
+  "中身は右ペインの队列タブとまったく同じコンポーネント"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  371,
+  "章节（v1.29)。音声・字幕の選択と同じ「この動画の中身から選ぶもの」の"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  372,
+  "一角に置く。章节が 2 つ未満の文件では ChapterList 側が何も描かない"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  400,
+  "字幕样式(v1.24)。字幕トラックの select の隣に置く —"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  401,
+  "「字幕まわりの操作はこの一角にある」と一目で分かるようにするため"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  441,
+  "「将此位置设为缩略图」。上のバーに置くと关闭ボタンの誤爆が起きるので"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  442,
+  "こちら側に置いている(v1.11)"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  451,
+  "カメラは隣の「画像として保存」(v1.26)が使う。"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  452,
+  "こちらは一覧に出る絵を決める操作なので、缩略图一覧の形にしている"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  458,
+  "「将此帧保存为图片」(v1.26)。缩略图指定の隣に置いて"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  459,
+  "「この一角は絵まわり」と読めるようにしている。輪郭が全く違うアイコンなので"
+ ],
+ [
+  "src\\components\\player\\PlayerControls.tsx",
+  460,
+  "隣り合っていても取り違えない"
+ ],
+ [
+  "src\\components\\player\\usePlayQueue.ts",
+  171,
+  ": // 再生中の 1 个队列から外した状態。位置は無いが総数は出す"
+ ],
+ [
+  "src\\components\\queue\\QueuePanel.tsx",
+  77,
+  "if (!start || !drop) return; // 動かしていない = ただの点击"
+ ],
+ [
+  "src\\components\\queue\\QueuePanel.tsx",
+  233,
+  "缩略图(v1.40)。**ディスクキャッシュの jpg を読むだけ**なので"
+ ],
+ [
+  "src\\components\\queue\\QueuePanel.tsx",
+  234,
+  "原則 2 の内側(ChapterList の「コマは出さない」は、あちらが再生中の"
+ ],
+ [
+  "src\\components\\queue\\QueuePanel.tsx",
+  235,
+  "文个シークデコードする話なので当てはまらない)。"
+ ],
+ [
+  "src\\components\\queue\\QueuePanel.tsx",
+  237,
+  "`loading=\"lazy\"` が要点 —— このパネルは仮想化していないので、"
+ ],
+ [
+  "src\\components\\queue\\QueuePanel.tsx",
+  238,
+  "500 件ぶんの img を一度に読ませないためにこれで間引く。"
+ ],
+ [
+  "src\\components\\queue\\QueuePanel.tsx",
+  239,
+  "読めなかったものは onError で隠して地色を見せる(カードと同じ作法)"
+ ],
+ [
+  "src\\components\\settings\\AiProviderFields.tsx",
+  48,
+  "API キー{isCompat ? '（使用本地 LLM 时可留空）' : ''}"
+ ],
+ [
+  "src\\components\\settings\\AiProviderFields.tsx",
+  61,
+  "モデル{info.defaultModel ? `（留空则 ${info.defaultModel})` : ''}"
+ ],
+ [
+  "src\\components\\settings\\DataSection.tsx",
+  53,
+  "`「${b.fileName}」(${b.createdAt})から復元しますか?\\n\\n` +"
+ ],
+ [
+  "src\\components\\settings\\DataSection.tsx",
+  54,
+  "'現在の媒体库(标签・评分・視聴履歴を含む)はこの备份の内容で置き換わります。\\n' +"
+ ],
+ [
+  "src\\components\\settings\\DataSection.tsx",
+  55,
+  "'動画文件自体には影響しません。\\n\\n' +"
+ ],
+ [
+  "src\\components\\settings\\DataSection.tsx",
+  64,
+  "`復元を予約しました。アプリを再起動すると適用されます。\\n\\n` +"
+ ],
+ [
+  "src\\components\\settings\\LibrarySection.tsx",
+  39,
+  "`「${lib.name}」を一覧から外しますか?\\n\\n`"
+ ],
+ [
+  "src\\components\\settings\\LibrarySection.tsx",
+  62,
+  "`${selected}  的下级を、次のスキャンから取り込まないようにします。\\n\\n` +"
+ ],
+ [
+  "src\\components\\settings\\LibrarySection.tsx",
+  63,
+  "'今媒体库に入っている配下の動画も外しますか?\\n' +"
+ ],
+ [
+  "src\\components\\settings\\LibrarySection.tsx",
+  64,
+  "'「いいえ」を選ぶと一覧には残ったまま、今後増えなくなります。\\n\\n' +"
+ ],
+ [
+  "src\\components\\settings\\LibrarySection.tsx",
+  86,
+  "`${path} を監視除外から外しますか?\\n\\n次のスキャンで該当する動画が媒体库に再登録されます。`,"
+ ],
+ [
+  "src\\components\\settings\\McpSettings.tsx",
+  93,
+  ": // Claude Desktop / Gemini CLI / 其他 は同じ mcpServers 形式"
+ ],
+ [
+  "src\\components\\settings\\McpSettings.tsx",
+  106,
+  "{libraryName ? `(現在:「${libraryName}」)` : ''}です。"
+ ],
+ [
+  "src\\components\\settings\\McpSettings.tsx",
+  107,
+  "別の媒体库に切り替えると AI 側もそのまま追従するので、設定を貼り直す必要はありません"
+ ],
+ [
+  "src\\components\\settings\\ThumbnailSection.tsx",
+  104,
+  "保存先文件夹（留空则 {info?.framesDir ?? 'ピクチャ\\\\DVM'})"
+ ],
+ [
+  "src\\lib\\aiTools.ts",
+  337,
+  "selectionBlock += `\\n(ほか ${s.selection.length - 20} 件)`;"
+ ],
+ [
+  "src\\lib\\filterChips.ts",
+  193,
+  "? `${after}〜${before} に${suffix}`"
+ ],
+ [
+  "src\\lib\\queueLoad.ts",
+  31,
+  "`未保存的队列（${s.queue.items.length} 件)を捨てて、\\n${opts.label}を読み込みますか?`,"
+ ],
+ [
+  "src\\lib\\ai\\anthropic.ts",
+  224,
+  "continue; // 壊れた行は捨てる(keep-alive など)"
+ ],
+ [
+  "src\\lib\\ai\\providers.ts",
+  31,
+  "keyHint: 'console.anthropic.com で発行できます(Claude Pro / Max のサブスクリプションとは別契約です)',"
+ ]
+]

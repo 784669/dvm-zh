@@ -1,0 +1,1537 @@
+{
+ " / 配下すべて ${n.totalCount} 件": [
+  "src\\components\\FolderCard.tsx"
+ ],
+ " ではなく ": [
+  "src\\components\\SubtitleStyleEditor.tsx"
+ ],
+ " の配下": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ " または ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ " 重複を数えています…": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "${after} 以降に${suffix}": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "${after}〜${before} に${suffix}": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "${base}(うち ${s.unknownCount} 回は位置不明)": [
+  "src\\lib\\viewHistory.ts"
+ ],
+ "${before} 以前に${suffix}": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "${count} 件を": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${count}ごみ箱へ": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${count}ライブラリから削除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${group.tagCount} 個のタグは未分類に移ります": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${head}。${result.failed.toLocaleString()} 件は送れなかったので登録も残しています": [
+  "src\\lib\\dedupeMessage.ts"
+ ],
+ "${info.full} の映像です。SDR に変換して表示しています": [
+  "src\\lib\\hdrInfo.ts"
+ ],
+ "${info.full} の映像です。SDR に変換して表示しています(HDR パススルー: オフ)": [
+  "src\\lib\\hdrInfo.ts"
+ ],
+ "${info.full} の映像を HDR のまま出力しています": [
+  "src\\lib\\hdrInfo.ts"
+ ],
+ "${input.videoIds.length} 件にタグ「${input.tag}」を付けました": [
+  "src\\lib\\aiTools.ts",
+  "src\\lib\\aiTools.ts"
+ ],
+ "${input.videoIds.length} 件のレーティングを ${input.rating} にしました": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "${input.videoIds.length} 件のレーティングを ★${input.rating} にしました": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "${input.videoIds.length} 件をシリーズ「${input.series}」に追加しました": [
+  "src\\lib\\aiTools.ts",
+  "src\\lib\\aiTools.ts"
+ ],
+ "${label} の API キーが未設定です。ツールバーの設定ボタンから「AI 連携」で保存してください": [
+  "src\\lib\\ai\\config.ts"
+ ],
+ "${label}を表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${label}を隠す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${lib.root} に接続できません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${n} 件のフルパスをコピー": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${n} 件を": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${n}キューに追加": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${n}キューを置き換えて再生": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${n}次に再生": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${opts.label}の動画はどれも見つかりませんでした": [
+  "src\\lib\\queueLoad.ts"
+ ],
+ "${result.removed.toLocaleString()} 件をライブラリから外しました(ファイルは残っています)": [
+  "src\\lib\\dedupeMessage.ts"
+ ],
+ "${result.trashed.toLocaleString()} 件をごみ箱へ送りました": [
+  "src\\lib\\dedupeMessage.ts"
+ ],
+ "${series.videoCount} 件の動画から外れます(動画自体は消えません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "${tag.videoCount} 件の動画から外れます(動画自体は消えません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "(HDR パススルーはオンですが、ディスプレイが HDR モードではありません)": [
+  "src\\lib\\hdrInfo.ts"
+ ],
+ "(なし)": [
+  "src\\lib\\aiTools.ts",
+  "src\\lib\\aiTools.ts"
+ ],
+ "(不要なら空欄)": [
+  "src\\lib\\ai\\providers.ts"
+ ],
+ "+ ファイルを追加": [
+  "src\\components\\Sidebar.tsx"
+ ],
+ "+ フォルダを追加": [
+  "src\\components\\Sidebar.tsx"
+ ],
+ "0 で影なし": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "1 件だけ選んでいるときに使えます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "1 行おきに背景を濃くする": [
+  "src\\components\\ColumnPicker.tsx"
+ ],
+ "1 行ぶん上下へ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "10 秒 戻す / 進める": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "AI アシスタント": [
+  "src\\components\\AiPanel.tsx",
+  "src\\components\\settings\\AiSection.tsx",
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "AI アシスタントでは送信": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "AI アシスタントで改行": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "API エラー (${status})${detail ? ": [
+  "src\\lib\\ai\\errors.ts"
+ ],
+ "API エラー: ${(err?.message as string) ?? ": [
+  "src\\lib\\ai\\anthropic.ts"
+ ],
+ "API キーが無効です。設定 > AI 連携 を確認してください": [
+  "src\\lib\\ai\\errors.ts"
+ ],
+ "ASS/SSA 字幕にもこの見た目を適用する": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "M3U8 へ書き出す...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "MCP 連携(外部の AI から操作する)": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "OpenRouter・Ollama・LM Studio など、OpenAI 互換の API を持つサービスやローカル LLM に繋げます": [
+  "src\\lib\\ai\\providers.ts"
+ ],
+ "\\n(ほか ${s.selection.length - 20} 件)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "\\n共通タグ: ${tags.map((t) => t.name).join(": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "\\n配下すべてでは ${n.totalCount} 件": [
+  "src\\components\\FolderTree.tsx"
+ ],
+ "aistudio.google.com の「Get API key」で発行できます": [
+  "src\\lib\\ai\\providers.ts"
+ ],
+ "console.anthropic.com で発行できます(Claude Pro / Max のサブスクリプションとは別契約です)": [
+  "src\\lib\\ai\\providers.ts"
+ ],
+ "fps(低い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "fps(高い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "mpv で再生しているときだけ": [
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "platform.openai.com で発行できます(ChatGPT Plus のサブスクリプションとは別契約です)": [
+  "src\\lib\\ai\\providers.ts"
+ ],
+ "text の検索対象にフォルダのパスも含める": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "text の検索対象にメモも含める": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "true で dirPath をサブフォルダ込みで解釈する": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "}に更新": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "}に追加": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "↑ 上へ": [
+  "src\\components\\TagTree.tsx"
+ ],
+ "↓ 下へ": [
+  "src\\components\\TagTree.tsx"
+ ],
+ "★なし": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "★なし(未評価)": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "「${f.text.trim()}」を含む": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "「${playlist.name} のコピー」を作ります": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "「${sf.name}」の条件を、いまの絞り込みで置き換えますか?": [
+  "src\\components\\Sidebar.tsx"
+ ],
+ "いま DVM で開いているライブラリ": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "いまの絞り込みで「${sf.name}」を置き換えます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "いま再生している動画の次に挟みます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "いま絞り込んでいる条件はありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "かつ": [
+  "src\\components\\FilterBar.tsx"
+ ],
+ "このキー操作の一覧を開く / 閉じる": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "このグループで絞り込む": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このグループにタグを作成...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このグループの絞り込みを解除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このコマを画像として保存": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "このシリーズで絞り込む": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このタグが付いた動画に絞ります": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このタグが付いた動画はまだありません": [
+  "src\\components\\TagTree.tsx"
+ ],
+ "このタグだけで絞り込む": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このフォルダーの重複を解消": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このフォルダーをエクスプローラーで表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このフォルダーを開く": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このフォルダー直下だけを表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このフォルダー直下を表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このフォルダー配下を表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "このフォルダ直下にある動画だけに絞る(サブフォルダは含まない)。絶対パスで指定する": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "このリストで絞り込む": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "この中のタグが付いた動画をまとめて表示します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "この位置をサムネイルにする": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "この期間の記録はありません": [
+  "src\\lib\\viewHistory.ts"
+ ],
+ "この条件を開く": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "これ以上、上のフォルダーはありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "すでにこのタグだけで絞り込んでいます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "すでに先頭です": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "すでに末尾です": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "すでに監視フォルダです": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "すべて": [
+  "src\\lib\\viewHistory.ts"
+ ],
+ "すべて再生成": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "すべて畳む": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "すべて選択": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "すべて開く": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "その 1 件だけを選ぶ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "そのツールはありません: ${call.name}": [
+  "src\\lib\\ai\\runner.ts"
+ ],
+ "その他 ${others.length}": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "どこでも": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "どちらの削除にしますか?": [
+  "src\\components\\DeleteDialog.tsx"
+ ],
+ "どれを選んでも動画ファイルは削除しません。": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "の直下": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "の配下すべて": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "または": [
+  "src\\components\\FilterBar.tsx"
+ ],
+ "まだ視聴の記録がありません": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "まだ記録がありません": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "もう一度選ぶと解除します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "よく見た順": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "アスペクト比": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "アニメ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "アニメなどで制作者が付けた色・位置・タイミング演出は失われます": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "アプリのグリッド表示を絞り込む(ユーザーに結果を見せる)。省略した条件は解除される。全条件を省略すると絞り込み解除。": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "アプリ内プレイヤーで再生しているとき": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "イタリア語": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "インターレース (${order})": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ウィンドウ共通": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "エクスプローラーで表示": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "エラー: ${e instanceof Error ? e.message : String(e)}": [
+  "src\\lib\\ai\\runner.ts"
+ ],
+ "オフライン": [
+  "src\\components\\VideoCard.tsx",
+  "src\\components\\VideoListRow.tsx"
+ ],
+ "オレンジ": [
+  "src\\lib\\tagColors.ts"
+ ],
+ "カバー画像": [
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "カラースペース": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "カードの上から掴むとキューパネルへの追加": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "キャンセル": [
+  "src\\components\\DeleteDialog.tsx",
+  "src\\components\\ExcludeDialog.tsx",
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "キュー": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "キューに読み込んで再生": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "キューの上限は ${QUEUE_LIMIT} 件のため、先頭 ${QUEUE_LIMIT} 件だけを読み込みました": [
+  "src\\lib\\queueLoad.ts"
+ ],
+ "キューの末尾に足します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "キューの置き換え": [
+  "src\\lib\\queueLoad.ts"
+ ],
+ "キー操作": [
+  "src\\components\\ShortcutsModal.tsx",
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "クリック": [
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "グリッドを絞り込みました(${count} 件)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "グループ": [
+  "src\\components\\TagTree.tsx",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "グループに属さないタグを作成...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "グループを作成...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "グループを削除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "コマの保存": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "コンテナ": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "コーデック": [
+  "src\\components\\AdvancedSearch.tsx",
+  "src\\lib\\filterChips.ts",
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "コーデックタグ": [
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "サイズ": [
+  "src\\components\\AdvancedSearch.tsx",
+  "src\\lib\\listColumns.ts"
+ ],
+ "サイズ(大きい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "サイズ(小さい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "サイズ指定なし": [
+  "src\\lib\\query.ts"
+ ],
+ "サイドバー": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "サブフォルダーはありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "サブフォルダーも含めてまとめて表示します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "サブフォルダーを含めず直下だけに絞ります": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "サブフォルダーを表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "サブフォルダーを隠す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "サブメニューが開いていれば、それだけ閉じます": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "サブメニューを閉じる": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "サブメニューを開く": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "サムネイル": [
+  "src\\components\\settings\\ThumbnailSection.tsx",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\listColumns.ts"
+ ],
+ "サムネイルの大きさ": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "サムネイルを作り直す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "サムネイルキャッシュ": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "サムネイル表示・詳細リスト表示のとき": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "サンプルレート": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "サンプル形式": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "サーバーの場所": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "ショートカット: Esc": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "ショートカット: S": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "ショートカット: T": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "シリーズ": [
+  "src\\components\\Inspector.tsx",
+  "src\\lib\\aiTools.ts",
+  "src\\lib\\listColumns.ts"
+ ],
+ "シリーズ: ": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "シリーズ「${name}」が見つかりません": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "シリーズなし": [
+  "src\\components\\Inspector.tsx"
+ ],
+ "シリーズを削除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "シリーズ内は登録順で並べます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "シリーズ名(完全一致)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "シリーズ順": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ストリーム": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "スペイン語": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "スマートフォルダ・AI 検索・統計から変えた条件を行き来します": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "タイトル": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "タイトル: ${v.title}": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "タイトル・メモ・タグ・シリーズ・AI アシスタントの入力欄": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "タイトル・メモ・タグ名の変更": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "タグ": [
+  "src\\components\\Inspector.tsx",
+  "src\\lib\\listColumns.ts"
+ ],
+ "タグ ${s.tagIds.length} 件": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "タグ / シリーズ": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "タグ「${name}」が見つかりません": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "タグが 1 つも付いていない動画だけ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "タグがまだありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "タグなし": [
+  "src\\components\\Inspector.tsx",
+  "src\\components\\StatsModal.tsx",
+  "src\\lib\\filterChips.ts"
+ ],
+ "タグを削除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "タグを表示": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "タグを隠す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "タググループがまだありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "タグ名(完全一致)で絞る。同じグループのタグ同士は OR、グループをまたぐと AND になる(例: [": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "チャプター": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "チャプター ${i + 1}": [
+  "src\\lib\\chapters.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "チャンネル": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ツールの実行が上限(${maxIterations} 回)に達しました": [
+  "src\\lib\\ai\\runner.ts"
+ ],
+ "データの保存場所": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "データフォルダ(アプリ全体)": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "データフォルダを開く": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "データベース": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "ドイツ語": [
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ドライブが未接続です": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "バックアップ": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "バックアップフォルダを開く": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "パスも検索": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "パスをコピー": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "ビットレート": [
+  "src\\lib\\listColumns.ts",
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ビットレート(低い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ビットレート(高い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ビット深度": [
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ピクセル形式": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ピクセル比": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ピンク": [
+  "src\\lib\\tagColors.ts"
+ ],
+ "ファイル": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "ファイルが見つからない動画だけ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ファイルが見つかりません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "ファイルは削除しません。": [
+  "src\\components\\ExcludeDialog.tsx"
+ ],
+ "ファイルをごみ箱へ": [
+  "src\\components\\DeleteDialog.tsx"
+ ],
+ "ファイルをごみ箱へ送り、ライブラリからも削除します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "ファイルサイズ": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ファイルサイズの上限(バイト)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ファイルサイズの下限(バイト)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ファイル作成日": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ファイル作成日(古い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ファイル作成日(新しい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ファイル名: ${v.filename}": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ファイル名・タイトルの部分一致。空白区切りで複数語すべてを含むものに絞る": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ファイル更新日": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ファイル更新日(古い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ファイル更新日(新しい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "ファイル更新日の上限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ファイル更新日の下限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ファイル自体は削除されません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "フォルダ": [
+  "src\\lib\\aiTools.ts",
+  "src\\lib\\listColumns.ts"
+ ],
+ "フォルダ(昇順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "フォルダ(降順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "フォルダを選んで追加...": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "フォルダー: ": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "フォルダーで絞り込んでいるときに使えます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "フォルダー自体は削除されません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "フォント": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "フラグ": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "フランス語": [
+  "src\\lib\\mediaInfo.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "フル (pc)": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "フルスクリーン ⇄ 解除": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "フルスクリーン中は解除だけ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "フルパスをコピー": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "フレームレート": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "フレーム数": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "プレイリスト: ": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "プレイリスト順": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "プログラムを選ぶ...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "プログレッシブ": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "ベース URL": [
+  "src\\components\\settings\\AiProviderFields.tsx"
+ ],
+ "ベース URL が未設定です。設定 > AI 連携 で入力してください": [
+  "src\\lib\\ai\\config.ts"
+ ],
+ "ポルトガル語": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "マウスと組み合わせる": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "ミュート ⇄ 解除": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "メニューが開いている間(裏の一覧・再生の操作は止まります)": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "メモも検索": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "モデルが応答を拒否しました": [
+  "src\\lib\\ai\\runner.ts"
+ ],
+ "モデルが見つかりません。設定 > AI 連携 のモデル名を確認してください(${detail || status})": [
+  "src\\lib\\ai\\errors.ts"
+ ],
+ "モデル名が未設定です。設定 > AI 連携 で入力してください": [
+  "src\\lib\\ai\\config.ts"
+ ],
+ "ライブラリ": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "ライブラリからか、ごみ箱かをダイアログで選びます": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "ライブラリから削除": [
+  "src\\components\\DeleteDialog.tsx"
+ ],
+ "ライブラリから外す": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "ライブラリを新規作成...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "ライブラリフォルダを開く": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "ライブラリ追加日の上限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ライブラリ追加日の下限(YYYY-MM-DD。その日を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "ランダム": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "リストだけを消します(動画は消えません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "リピート再生の切り替え": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "レーティング": [
+  "src\\components\\Inspector.tsx",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "レーティング(低い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "レーティングを付けていない動画だけ。minRating の 0 は「無条件」なので別物": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "レーティング順": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "レート制限に達しました。少し待ってから試してください${detail ? ": [
+  "src\\lib\\ai\\errors.ts"
+ ],
+ "ロシア語": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "一度も再生していない動画だけ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "一覧に保存した並び順で出します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "一覧のカード・行と、その余白": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "上のフォルダーへ": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "上へ移動": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "下へ移動": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "不透明度を上げると文字の後ろに帯が敷かれます(明るい映像で読みやすくなります)": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "並び順": [
+  "src\\components\\TagTree.tsx",
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "並べ替え": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "中断しました": [
+  "src\\lib\\ai\\runner.ts",
+  "src\\lib\\ai\\runner.ts",
+  "src\\lib\\ai\\transport.ts",
+  "src\\lib\\ai\\transport.ts",
+  "src\\lib\\ai\\transport.ts"
+ ],
+ "今すぐ掃除": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "今のキューを捨てて、選んだ動画だけで再生を始めます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "今のキューを置き換えます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "今の使用量(すべてのライブラリの合計)": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "他に絞り込み中のタグがありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "他のアプリで開く": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "他のタグの絞り込みを外してこれだけにします": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "他のライブラリを開く": [
+  "src\\components\\LibraryUnavailable.tsx"
+ ],
+ "会話が長くなりすぎました。ゴミ箱ボタンで会話をクリアしてください(${detail})": [
+  "src\\lib\\ai\\errors.ts"
+ ],
+ "余白からドラッグ": [
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "保存した条件だけを消します(動画は消えません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "保存した検索条件を復元します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "保存していないキュー(${s.queue.items.length} 件)を捨てて、\\n${opts.label}を読み込みますか?": [
+  "src\\lib\\queueLoad.ts"
+ ],
+ "保存しました": [
+  "src\\components\\Inspector.tsx"
+ ],
+ "保存先を開く": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "先頭 / 末尾へ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "先頭 1000 件まで": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "全シリーズと各シリーズの動画数を一覧する": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "全タグと各タグの動画数、所属グループ(groupName)を一覧する。グループは分類の軸(例:「ジャンル」「メディア種別」)で、検索では同じグループのタグ同士が OR になる": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "内容が同一(サイズと先頭ハッシュが一致)の動画だけ。sort=dup と併せると同じものが隣り合う": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "内訳を見る軸": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "再スキャン": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "再生する": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "再生キューを開く / 閉じる": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "再生中でも並べ替え・削除ができます": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "再生回数の上限。0 で未視聴のみ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "再生回数の下限": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "再生回数の指定なし": [
+  "src\\lib\\query.ts"
+ ],
+ "再生用の変換キャッシュ": [
+  "src\\components\\settings\\DataSection.tsx"
+ ],
+ "再生速度を 下げる / 上げる": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "再読み込み": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "削除する": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "前 / 次のチャプターへ": [
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "前後の動画へ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "動画がありません": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "動画にタグを付ける(タグが無ければ作成される)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "動画のレーティングを設定する(0 で解除)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "動画をシリーズに追加する(シリーズが無ければ作成される)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "動画を選ぶとここに詳細が出ます": [
+  "src\\components\\Inspector.tsx"
+ ],
+ "動画ファイルは削除しません。": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "動画ライブラリを検索して結果を JSON で返す(画面は変わらない)。結果を画面に表示したいときは apply_filter を使うこと。": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "反映されないときは英語名(例: Meiryo)を入れてください": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "右クリックした 1 件を表示します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "右クリックした動画のフォルダーで絞り込みます": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "右クリックの「キュー」からは「次に再生」も選べます": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "右クリックメニュー": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "合計サイズ": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "同じ内容の動画を 1 本だけ残します(ファイルは消しません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "名前を変更...": [
+  "src\\components\\settings\\LibrarySection.tsx",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "向き": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "囲んだ範囲をまとめて選ぶ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "囲んだ範囲を選択に足す": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "変更は選択中の全動画に適用されます": [
+  "src\\components\\Inspector.tsx"
+ ],
+ "外す動画のあるフォルダー": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "外部プレイヤーで使えるリストとして保存します": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "大きいほど下。100 が既定の位置": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "太字にする": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "失敗した分を再生成": [
+  "src\\components\\settings\\ThumbnailSection.tsx"
+ ],
+ "字幕の見た目": [
+  "src\\components\\player\\SubtitleStylePanel.tsx"
+ ],
+ "字幕の見た目(アプリ内再生)": [
+  "src\\components\\settings\\SubtitleSection.tsx"
+ ],
+ "字幕オフ": [
+  "src\\components\\player\\PlayerControls.tsx"
+ ],
+ "実体を触れるファイルがありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "対象がありません": [
+  "src\\components\\FileOpDialog.tsx"
+ ],
+ "尺の上限(秒)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "尺の下限(秒)。durationBucket より細かく指定したいとき": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "履歴がありません": [
+  "src\\components\\HistoryModal.tsx"
+ ],
+ "引数の JSON が壊れています: ${e instanceof Error ? e.message : String(e)}": [
+  "src\\lib\\ai\\anthropic.ts",
+  "src\\lib\\ai\\openai.ts"
+ ],
+ "影の色": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "影の距離": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "応答が空のまま終わりました": [
+  "src\\lib\\ai\\runner.ts"
+ ],
+ "応答が長すぎて途中で切れました": [
+  "src\\lib\\ai\\runner.ts"
+ ],
+ "拡張子で絞る(例: [": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "指定なし": [
+  "src\\components\\AdvancedSearch.tsx",
+  "src\\lib\\query.ts",
+  "src\\lib\\query.ts",
+  "src\\lib\\query.ts",
+  "src\\lib\\query.ts"
+ ],
+ "探し方": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "接続できませんでした: ${e instanceof Error ? e.message : String(e)}": [
+  "src\\lib\\ai\\transport.ts"
+ ],
+ "文字の色": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "文字サイズ": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "既存のライブラリを開く...": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "既定のアプリ": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "映像コーデック(昇順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "映像コーデック(降順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "映像コーデックで絞る(例: [": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "最終視聴(古い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "最近見た順": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "期間を指定": [
+  "src\\lib\\viewHistory.ts"
+ ],
+ "未分類は並べ替えられません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "未分類は削除できません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "未分類は名前を変えられません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "条件に合う動画で今のキューを置き換えます(先頭 500 件まで)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "条件を保存": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "次 / 前の動画へ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "次のスキャンから配下を無視します(ファイルは消しません)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "次のスキャンで再登録されます": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "残る本数(1 グループ 1 本)": [
+  "src\\components\\DedupeDialog.tsx"
+ ],
+ "添付ファイル": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "現在の検索条件で上書き": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "画面の向き。portrait = 縦長、landscape = 横長(正方形を含む)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "監視フォルダに追加": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "監視対象から外す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "監視除外フォルダ": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "監視除外フォルダに登録": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "直前に選んだ位置からの範囲を選ぶ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "矢印・Home・End のどれでも": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "確定する": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "空のプレイリストです": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "絞り込み": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "絞り込みから外す": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "絞り込みなし": [
+  "src\\components\\FilterBar.tsx"
+ ],
+ "絞り込みに追加": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "絞り込みを 戻す / 進む": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "絞り込みをすべて解除": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "絞り込みを戻す": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "絞り込みを解除": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "絞り込みを進める": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "絞り込みを適用しました。該当 ${count} 件": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "絞り込み中は並べ替えられません": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "絞り込み結果で今のキューを置き換えます(先頭 500 件まで)": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "総ビットレート": [
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "編集を取り消す": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "縁取りの太さ": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "縁取りの色": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "縦解像度の上限。**その値未満**なので 720 で「720p 未満」": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "縦解像度の下限。1080 で FHD 以上、2160 で 4K 以上": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "考え中…": [
+  "src\\components\\AiPanel.tsx"
+ ],
+ "背景の帯": [
+  "src\\lib\\subtitleStyle.ts"
+ ],
+ "色なし": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "表示の切り替え": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "表示サイズ 等倍 ⇄ フィット": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "表示中の一覧をキューに読み込んで再生": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "表示中の動画がありません": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\contextMenu.ts"
+ ],
+ "見つからない": [
+  "src\\components\\StatsModal.tsx"
+ ],
+ "見つからないファイル": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "見つかりません": [
+  "src\\components\\VideoCard.tsx",
+  "src\\components\\VideoListRow.tsx"
+ ],
+ "視聴回数(少ない順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "親フォルダーごと除外して削除": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "解像度(低い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "解像度(高い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "解消できる重複はありませんでした": [
+  "src\\lib\\dedupeMessage.ts"
+ ],
+ "評価なし": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "詳細ペイン": [
+  "src\\lib\\toolbarItems.ts"
+ ],
+ "詳細リスト": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "読み取れる情報がありませんでした": [
+  "src\\components\\MediaInfoSection.tsx"
+ ],
+ "読み込み中...": [
+  "src\\components\\MediaInfoSection.tsx"
+ ],
+ "読み込み中…": [
+  "src\\components\\AdvancedSearch.tsx"
+ ],
+ "貼り付ける設定": [
+  "src\\components\\settings\\McpSettings.tsx"
+ ],
+ "起動時のスキャンと自動監視の対象になります": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "追加日時(古い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "追加日時(新しい順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "途中まで観た": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "途中まで観て終わっていない動画だけ(アプリ内再生でのみ記録される)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "連続再生の切り替え": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "連続再生・再生キューで開いたときだけ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "過去 N 日以内に更新されたものだけ": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "過去 N 日以内に追加されたものだけ(7 で直近 1 週間)": [
+  "src\\lib\\aiTools.ts"
+ ],
+ "選んだまま移動して範囲を広げる": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "選んだファイルだけ除外して削除": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "選んだ項目を実行": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "選択に足す / 外す": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "選択を再生キューに追加": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "選択を解除": [
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "選択中の動画がありません": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "重複のみ": [
+  "src\\lib\\filterChips.ts"
+ ],
+ "重複をまとめる": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "長さ": [
+  "src\\components\\AdvancedSearch.tsx",
+  "src\\lib\\listColumns.ts",
+  "src\\lib\\mediaInfo.ts"
+ ],
+ "長さ(短い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "長さ(長い順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "長さ指定なし": [
+  "src\\lib\\query.ts"
+ ],
+ "閉じる": [
+  "src\\components\\AdvancedSearch.tsx",
+  "src\\components\\HistoryModal.tsx",
+  "src\\components\\SettingsModal.tsx",
+  "src\\components\\ShortcutsModal.tsx",
+  "src\\components\\StatsModal.tsx",
+  "src\\components\\TagTree.tsx",
+  "src\\components\\TagTree.tsx",
+  "src\\lib\\contextMenu.ts",
+  "src\\lib\\shortcuts.ts",
+  "src\\lib\\shortcuts.ts"
+ ],
+ "開いています": [
+  "src\\components\\settings\\LibrarySection.tsx"
+ ],
+ "開いているモーダル・メニューを閉じる": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "開く": [
+  "src\\lib\\contextMenu.ts"
+ ],
+ "除外せずに削除する": [
+  "src\\components\\ExcludeOnDeleteDialog.tsx"
+ ],
+ "音声コーデック(昇順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "音声コーデック(降順)": [
+  "src\\lib\\listColumns.ts"
+ ],
+ "項目を選ぶ": [
+  "src\\lib\\shortcuts.ts"
+ ],
+ "高さ 720px の画面を基準にした大きさ。ウィンドウの大きさで見え方が変わります": [
+  "src\\lib\\subtitleStyle.ts"
+ ]
+}

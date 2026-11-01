@@ -1,0 +1,2965 @@
+{
+ "src\\components\\AdvancedSearch.tsx": [
+  {
+   "line": 127,
+   "kind": "jsx",
+   "text": "探し方"
+  },
+  {
+   "line": 158,
+   "kind": "jsx",
+   "text": "指定なし"
+  },
+  {
+   "line": 159,
+   "kind": "jsx",
+   "text": "★なし(未評価)"
+  },
+  {
+   "line": 207,
+   "kind": "jsx",
+   "text": "長さ"
+  },
+  {
+   "line": 246,
+   "kind": "jsx",
+   "text": "ファイル"
+  },
+  {
+   "line": 248,
+   "kind": "jsx",
+   "text": "サイズ"
+  },
+  {
+   "line": 273,
+   "kind": "jsx",
+   "text": "読み込み中…"
+  },
+  {
+   "line": 274,
+   "kind": "jsx",
+   "text": "動画がありません"
+  },
+  {
+   "line": 310,
+   "kind": "jsx",
+   "text": "向き"
+  },
+  {
+   "line": 322,
+   "kind": "jsx",
+   "text": "コーデック"
+  },
+  {
+   "line": 399,
+   "kind": "jsx",
+   "text": "閉じる"
+  }
+ ],
+ "src\\components\\AiPanel.tsx": [
+  {
+   "line": 137,
+   "kind": "jsx",
+   "text": "AI アシスタント"
+  },
+  {
+   "line": 168,
+   "kind": "jsx",
+   "text": "考え中…"
+  }
+ ],
+ "src\\components\\ColumnPicker.tsx": [
+  {
+   "line": 125,
+   "kind": "jsx",
+   "text": "1 行おきに背景を濃くする"
+  }
+ ],
+ "src\\components\\DedupeDialog.tsx": [
+  {
+   "line": 66,
+   "kind": "jsx",
+   "text": " の配下"
+  },
+  {
+   "line": 70,
+   "kind": "jsx",
+   "text": " 重複を数えています…"
+  },
+  {
+   "line": 78,
+   "kind": "jsx",
+   "text": "ライブラリから外す"
+  },
+  {
+   "line": 82,
+   "kind": "jsx",
+   "text": "残る本数(1 グループ 1 本)"
+  },
+  {
+   "line": 111,
+   "kind": "jsx",
+   "text": "外す動画のあるフォルダー"
+  }
+ ],
+ "src\\components\\DeleteDialog.tsx": [
+  {
+   "line": 22,
+   "kind": "jsx",
+   "text": "どちらの削除にしますか?"
+  },
+  {
+   "line": 28,
+   "kind": "jsx",
+   "text": "ライブラリから削除"
+  },
+  {
+   "line": 38,
+   "kind": "jsx",
+   "text": "ファイルをごみ箱へ"
+  },
+  {
+   "line": 47,
+   "kind": "jsx",
+   "text": "キャンセル"
+  }
+ ],
+ "src\\components\\ExcludeDialog.tsx": [
+  {
+   "line": 41,
+   "kind": "jsx",
+   "text": "ファイルは削除しません。"
+  },
+  {
+   "line": 61,
+   "kind": "jsx",
+   "text": "キャンセル"
+  }
+ ],
+ "src\\components\\ExcludeOnDeleteDialog.tsx": [
+  {
+   "line": 65,
+   "kind": "jsx",
+   "text": "次のスキャンで再登録されます"
+  },
+  {
+   "line": 67,
+   "kind": "jsx",
+   "text": "どれを選んでも動画ファイルは削除しません。"
+  },
+  {
+   "line": 74,
+   "kind": "jsx",
+   "text": "選んだファイルだけ除外して削除"
+  },
+  {
+   "line": 85,
+   "kind": "jsx",
+   "text": "親フォルダーごと除外して削除"
+  },
+  {
+   "line": 100,
+   "kind": "jsx",
+   "text": "除外せずに削除する"
+  },
+  {
+   "line": 109,
+   "kind": "jsx",
+   "text": "キャンセル"
+  }
+ ],
+ "src\\components\\FileOpDialog.tsx": [
+  {
+   "line": 119,
+   "kind": "jsx",
+   "text": "対象がありません"
+  }
+ ],
+ "src\\components\\FilterBar.tsx": [
+  {
+   "line": 128,
+   "kind": "jsx",
+   "text": "絞り込みなし"
+  },
+  {
+   "line": 131,
+   "kind": "jsx",
+   "text": "かつ"
+  },
+  {
+   "line": 154,
+   "kind": "jsx",
+   "text": "または"
+  }
+ ],
+ "src\\components\\FolderCard.tsx": [
+  {
+   "line": 31,
+   "kind": "str",
+   "text": " / 配下すべて ${n.totalCount} 件"
+  }
+ ],
+ "src\\components\\FolderTree.tsx": [
+  {
+   "line": 137,
+   "kind": "str",
+   "text": "\\n配下すべてでは ${n.totalCount} 件"
+  }
+ ],
+ "src\\components\\HistoryModal.tsx": [
+  {
+   "line": 142,
+   "kind": "jsx",
+   "text": "閉じる"
+  },
+  {
+   "line": 271,
+   "kind": "jsx",
+   "text": "まだ記録がありません"
+  },
+  {
+   "line": 375,
+   "kind": "jsx",
+   "text": "履歴がありません"
+  }
+ ],
+ "src\\components\\Inspector.tsx": [
+  {
+   "line": 145,
+   "kind": "jsx",
+   "text": "動画を選ぶとここに詳細が出ます"
+  },
+  {
+   "line": 302,
+   "kind": "jsx",
+   "text": "保存しました"
+  },
+  {
+   "line": 339,
+   "kind": "jsx",
+   "text": "レーティング"
+  },
+  {
+   "line": 353,
+   "kind": "jsx",
+   "text": "タグ"
+  },
+  {
+   "line": 366,
+   "kind": "jsx",
+   "text": "タグなし"
+  },
+  {
+   "line": 409,
+   "kind": "jsx",
+   "text": "シリーズ"
+  },
+  {
+   "line": 423,
+   "kind": "jsx",
+   "text": "シリーズなし"
+  },
+  {
+   "line": 449,
+   "kind": "jsx",
+   "text": "変更は選択中の全動画に適用されます"
+  }
+ ],
+ "src\\components\\LibraryUnavailable.tsx": [
+  {
+   "line": 105,
+   "kind": "jsx",
+   "text": "他のライブラリを開く"
+  }
+ ],
+ "src\\components\\MediaInfoSection.tsx": [
+  {
+   "line": 103,
+   "kind": "jsx",
+   "text": "読み込み中..."
+  },
+  {
+   "line": 109,
+   "kind": "jsx",
+   "text": "読み取れる情報がありませんでした"
+  }
+ ],
+ "src\\components\\SettingsModal.tsx": [
+  {
+   "line": 162,
+   "kind": "jsx",
+   "text": "閉じる"
+  }
+ ],
+ "src\\components\\ShortcutsModal.tsx": [
+  {
+   "line": 46,
+   "kind": "jsx",
+   "text": "キー操作"
+  },
+  {
+   "line": 80,
+   "kind": "jsx",
+   "text": "閉じる"
+  }
+ ],
+ "src\\components\\Sidebar.tsx": [
+  {
+   "line": 560,
+   "kind": "str",
+   "text": "「${sf.name}」の条件を、いまの絞り込みで置き換えますか?"
+  },
+  {
+   "line": 906,
+   "kind": "jsx",
+   "text": "+ フォルダを追加"
+  },
+  {
+   "line": 907,
+   "kind": "jsx",
+   "text": "+ ファイルを追加"
+  }
+ ],
+ "src\\components\\StatsModal.tsx": [
+  {
+   "line": 134,
+   "kind": "jsx",
+   "text": "まだ視聴の記録がありません"
+  },
+  {
+   "line": 246,
+   "kind": "jsx",
+   "text": "合計サイズ"
+  },
+  {
+   "line": 264,
+   "kind": "jsx",
+   "text": "タグなし"
+  },
+  {
+   "line": 275,
+   "kind": "jsx",
+   "text": "見つからない"
+  },
+  {
+   "line": 281,
+   "kind": "jsx",
+   "text": "タグ / シリーズ"
+  },
+  {
+   "line": 287,
+   "kind": "jsx",
+   "text": "内訳を見る軸"
+  },
+  {
+   "line": 458,
+   "kind": "jsx",
+   "text": "閉じる"
+  }
+ ],
+ "src\\components\\SubtitleStyleEditor.tsx": [
+  {
+   "line": 123,
+   "kind": "jsx",
+   "text": " ではなく "
+  }
+ ],
+ "src\\components\\TagTree.tsx": [
+  {
+   "line": 128,
+   "kind": "jsx",
+   "text": "グループ"
+  },
+  {
+   "line": 152,
+   "kind": "jsx",
+   "text": "閉じる"
+  },
+  {
+   "line": 155,
+   "kind": "jsx",
+   "text": "このタグが付いた動画はまだありません"
+  },
+  {
+   "line": 204,
+   "kind": "jsx",
+   "text": "並び順"
+  },
+  {
+   "line": 205,
+   "kind": "jsx",
+   "text": "↑ 上へ"
+  },
+  {
+   "line": 206,
+   "kind": "jsx",
+   "text": "↓ 下へ"
+  },
+  {
+   "line": 218,
+   "kind": "jsx",
+   "text": "閉じる"
+  }
+ ],
+ "src\\components\\VideoCard.tsx": [
+  {
+   "line": 111,
+   "kind": "jsx",
+   "text": "オフライン"
+  },
+  {
+   "line": 113,
+   "kind": "jsx",
+   "text": "見つかりません"
+  }
+ ],
+ "src\\components\\VideoListRow.tsx": [
+  {
+   "line": 59,
+   "kind": "jsx",
+   "text": "オフライン"
+  },
+  {
+   "line": 61,
+   "kind": "jsx",
+   "text": "見つかりません"
+  }
+ ],
+ "src\\components\\player\\PlayerControls.tsx": [
+  {
+   "line": 169,
+   "kind": "jsx",
+   "text": "字幕オフ"
+  }
+ ],
+ "src\\components\\player\\SubtitleStylePanel.tsx": [
+  {
+   "line": 63,
+   "kind": "jsx",
+   "text": "字幕の見た目"
+  }
+ ],
+ "src\\components\\settings\\AiProviderFields.tsx": [
+  {
+   "line": 28,
+   "kind": "jsx",
+   "text": "ベース URL"
+  }
+ ],
+ "src\\components\\settings\\AiSection.tsx": [
+  {
+   "line": 46,
+   "kind": "jsx",
+   "text": "AI アシスタント"
+  }
+ ],
+ "src\\components\\settings\\DataSection.tsx": [
+  {
+   "line": 88,
+   "kind": "jsx",
+   "text": "データの保存場所"
+  },
+  {
+   "line": 96,
+   "kind": "jsx",
+   "text": "データフォルダ(アプリ全体)"
+  },
+  {
+   "line": 100,
+   "kind": "jsx",
+   "text": "データベース"
+  },
+  {
+   "line": 104,
+   "kind": "jsx",
+   "text": "サムネイルキャッシュ"
+  },
+  {
+   "line": 116,
+   "kind": "jsx",
+   "text": "ライブラリフォルダを開く"
+  },
+  {
+   "line": 117,
+   "kind": "jsx",
+   "text": "データフォルダを開く"
+  },
+  {
+   "line": 122,
+   "kind": "jsx",
+   "text": "再生用の変換キャッシュ"
+  },
+  {
+   "line": 126,
+   "kind": "jsx",
+   "text": "今の使用量(すべてのライブラリの合計)"
+  },
+  {
+   "line": 145,
+   "kind": "jsx",
+   "text": "今すぐ掃除"
+  },
+  {
+   "line": 155,
+   "kind": "jsx",
+   "text": "バックアップ"
+  },
+  {
+   "line": 160,
+   "kind": "jsx",
+   "text": "バックアップフォルダを開く"
+  }
+ ],
+ "src\\components\\settings\\LibrarySection.tsx": [
+  {
+   "line": 97,
+   "kind": "jsx",
+   "text": "ライブラリ"
+  },
+  {
+   "line": 111,
+   "kind": "jsx",
+   "text": "開いています"
+  },
+  {
+   "line": 117,
+   "kind": "jsx",
+   "text": "名前を変更..."
+  },
+  {
+   "line": 140,
+   "kind": "jsx",
+   "text": "監視除外フォルダ"
+  },
+  {
+   "line": 145,
+   "kind": "jsx",
+   "text": "動画ファイルは削除しません。"
+  },
+  {
+   "line": 167,
+   "kind": "jsx",
+   "text": "フォルダを選んで追加..."
+  }
+ ],
+ "src\\components\\settings\\McpSettings.tsx": [
+  {
+   "line": 98,
+   "kind": "jsx",
+   "text": "MCP 連携(外部の AI から操作する)"
+  },
+  {
+   "line": 105,
+   "kind": "jsx",
+   "text": "いま DVM で開いているライブラリ"
+  },
+  {
+   "line": 118,
+   "kind": "jsx",
+   "text": "サーバーの場所"
+  },
+  {
+   "line": 139,
+   "kind": "jsx",
+   "text": "貼り付ける設定"
+  }
+ ],
+ "src\\components\\settings\\SubtitleSection.tsx": [
+  {
+   "line": 19,
+   "kind": "jsx",
+   "text": "字幕の見た目(アプリ内再生)"
+  }
+ ],
+ "src\\components\\settings\\ThumbnailSection.tsx": [
+  {
+   "line": 77,
+   "kind": "jsx",
+   "text": "サムネイル"
+  },
+  {
+   "line": 79,
+   "kind": "jsx",
+   "text": "失敗した分を再生成"
+  },
+  {
+   "line": 80,
+   "kind": "jsx",
+   "text": "すべて再生成"
+  },
+  {
+   "line": 102,
+   "kind": "jsx",
+   "text": "コマの保存"
+  },
+  {
+   "line": 116,
+   "kind": "jsx",
+   "text": "保存先を開く"
+  }
+ ],
+ "src\\lib\\aiTools.ts": [
+  {
+   "line": 45,
+   "kind": "str",
+   "text": "ファイル名・タイトルの部分一致。空白区切りで複数語すべてを含むものに絞る"
+  },
+  {
+   "line": 46,
+   "kind": "str",
+   "text": "text の検索対象にフォルダのパスも含める"
+  },
+  {
+   "line": 47,
+   "kind": "str",
+   "text": "このフォルダ直下にある動画だけに絞る(サブフォルダは含まない)。絶対パスで指定する"
+  },
+  {
+   "line": 48,
+   "kind": "str",
+   "text": "タグ名(完全一致)で絞る。同じグループのタグ同士は OR、グループをまたぐと AND になる(例: ["
+  },
+  {
+   "line": 48,
+   "kind": "str",
+   "text": "アニメ"
+  },
+  {
+   "line": 49,
+   "kind": "str",
+   "text": "シリーズ名(完全一致)"
+  },
+  {
+   "line": 50,
+   "kind": "str",
+   "text": "text の検索対象にメモも含める"
+  },
+  {
+   "line": 51,
+   "kind": "str",
+   "text": "true で dirPath をサブフォルダ込みで解釈する"
+  },
+  {
+   "line": 53,
+   "kind": "str",
+   "text": "レーティングを付けていない動画だけ。minRating の 0 は「無条件」なので別物"
+  },
+  {
+   "line": 55,
+   "kind": "str",
+   "text": "尺の下限(秒)。durationBucket より細かく指定したいとき"
+  },
+  {
+   "line": 56,
+   "kind": "str",
+   "text": "尺の上限(秒)"
+  },
+  {
+   "line": 57,
+   "kind": "str",
+   "text": "タグが 1 つも付いていない動画だけ"
+  },
+  {
+   "line": 58,
+   "kind": "str",
+   "text": "一度も再生していない動画だけ"
+  },
+  {
+   "line": 59,
+   "kind": "str",
+   "text": "途中まで観て終わっていない動画だけ(アプリ内再生でのみ記録される)"
+  },
+  {
+   "line": 60,
+   "kind": "str",
+   "text": "再生回数の下限"
+  },
+  {
+   "line": 61,
+   "kind": "str",
+   "text": "再生回数の上限。0 で未視聴のみ"
+  },
+  {
+   "line": 62,
+   "kind": "str",
+   "text": "内容が同一(サイズと先頭ハッシュが一致)の動画だけ。sort=dup と併せると同じものが隣り合う"
+  },
+  {
+   "line": 63,
+   "kind": "str",
+   "text": "ファイルサイズの下限(バイト)"
+  },
+  {
+   "line": 64,
+   "kind": "str",
+   "text": "ファイルサイズの上限(バイト)"
+  },
+  {
+   "line": 65,
+   "kind": "str",
+   "text": "拡張子で絞る(例: ["
+  },
+  {
+   "line": 66,
+   "kind": "str",
+   "text": "縦解像度の下限。1080 で FHD 以上、2160 で 4K 以上"
+  },
+  {
+   "line": 67,
+   "kind": "str",
+   "text": "縦解像度の上限。**その値未満**なので 720 で「720p 未満」"
+  },
+  {
+   "line": 68,
+   "kind": "str",
+   "text": "画面の向き。portrait = 縦長、landscape = 横長(正方形を含む)"
+  },
+  {
+   "line": 69,
+   "kind": "str",
+   "text": "映像コーデックで絞る(例: ["
+  },
+  {
+   "line": 70,
+   "kind": "str",
+   "text": "ライブラリ追加日の下限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 71,
+   "kind": "str",
+   "text": "ライブラリ追加日の上限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 72,
+   "kind": "str",
+   "text": "過去 N 日以内に追加されたものだけ(7 で直近 1 週間)"
+  },
+  {
+   "line": 73,
+   "kind": "str",
+   "text": "ファイル更新日の下限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 74,
+   "kind": "str",
+   "text": "ファイル更新日の上限(YYYY-MM-DD。その日を含む)"
+  },
+  {
+   "line": 75,
+   "kind": "str",
+   "text": "過去 N 日以内に更新されたものだけ"
+  },
+  {
+   "line": 165,
+   "kind": "str",
+   "text": "タグ「${name}」が見つかりません"
+  },
+  {
+   "line": 173,
+   "kind": "str",
+   "text": "シリーズ「${name}」が見つかりません"
+  },
+  {
+   "line": 189,
+   "kind": "str",
+   "text": "動画ライブラリを検索して結果を JSON で返す(画面は変わらない)。結果を画面に表示したいときは apply_filter を使うこと。"
+  },
+  {
+   "line": 220,
+   "kind": "str",
+   "text": "全タグと各タグの動画数、所属グループ(groupName)を一覧する。グループは分類の軸(例:「ジャンル」「メディア種別」)で、検索では同じグループのタグ同士が OR になる"
+  },
+  {
+   "line": 227,
+   "kind": "str",
+   "text": "全シリーズと各シリーズの動画数を一覧する"
+  },
+  {
+   "line": 235,
+   "kind": "str",
+   "text": "アプリのグリッド表示を絞り込む(ユーザーに結果を見せる)。省略した条件は解除される。全条件を省略すると絞り込み解除。"
+  },
+  {
+   "line": 240,
+   "kind": "str",
+   "text": "ファイルが見つからない動画だけ"
+  },
+  {
+   "line": 250,
+   "kind": "str",
+   "text": "グリッドを絞り込みました(${count} 件)"
+  },
+  {
+   "line": 251,
+   "kind": "str",
+   "text": "絞り込みを適用しました。該当 ${count} 件"
+  },
+  {
+   "line": 257,
+   "kind": "str",
+   "text": "動画にタグを付ける(タグが無ければ作成される)"
+  },
+  {
+   "line": 269,
+   "kind": "str",
+   "text": "${input.videoIds.length} 件にタグ「${input.tag}」を付けました"
+  },
+  {
+   "line": 270,
+   "kind": "str",
+   "text": "${input.videoIds.length} 件にタグ「${input.tag}」を付けました"
+  },
+  {
+   "line": 276,
+   "kind": "str",
+   "text": "動画のレーティングを設定する(0 で解除)"
+  },
+  {
+   "line": 288,
+   "kind": "str",
+   "text": "${input.videoIds.length} 件のレーティングを ★${input.rating} にしました"
+  },
+  {
+   "line": 289,
+   "kind": "str",
+   "text": "${input.videoIds.length} 件のレーティングを ${input.rating} にしました"
+  },
+  {
+   "line": 295,
+   "kind": "str",
+   "text": "動画をシリーズに追加する(シリーズが無ければ作成される)"
+  },
+  {
+   "line": 307,
+   "kind": "str",
+   "text": "${input.videoIds.length} 件をシリーズ「${input.series}」に追加しました"
+  },
+  {
+   "line": 308,
+   "kind": "str",
+   "text": "${input.videoIds.length} 件をシリーズ「${input.series}」に追加しました"
+  },
+  {
+   "line": 318,
+   "kind": "str",
+   "text": "(なし)"
+  },
+  {
+   "line": 324,
+   "kind": "str",
+   "text": "ファイル名: ${v.filename}"
+  },
+  {
+   "line": 325,
+   "kind": "str",
+   "text": "タイトル: ${v.title}"
+  },
+  {
+   "line": 334,
+   "kind": "str",
+   "text": "\\n共通タグ: ${tags.map((t) => t.name).join("
+  },
+  {
+   "line": 337,
+   "kind": "str",
+   "text": "\\n(ほか ${s.selection.length - 20} 件)"
+  },
+  {
+   "line": 350,
+   "kind": "str",
+   "text": "タグ ${s.tagIds.length} 件"
+  },
+  {
+   "line": 351,
+   "kind": "str",
+   "text": "シリーズ"
+  },
+  {
+   "line": 352,
+   "kind": "str",
+   "text": "フォルダ"
+  },
+  {
+   "line": 356,
+   "kind": "str",
+   "text": " または "
+  },
+  {
+   "line": 371,
+   "kind": "str",
+   "text": "(なし)"
+  }
+ ],
+ "src\\lib\\chapters.ts": [
+  {
+   "line": 48,
+   "kind": "str",
+   "text": "チャプター ${i + 1}"
+  }
+ ],
+ "src\\lib\\contextMenu.ts": [
+  {
+   "line": 64,
+   "kind": "str",
+   "text": "ドライブが未接続です"
+  },
+  {
+   "line": 64,
+   "kind": "str",
+   "text": "ファイルが見つかりません"
+  },
+  {
+   "line": 81,
+   "kind": "str",
+   "text": "評価なし"
+  },
+  {
+   "line": 95,
+   "kind": "str",
+   "text": "${count} 件を"
+  },
+  {
+   "line": 97,
+   "kind": "str",
+   "text": "${n}キューに追加"
+  },
+  {
+   "line": 97,
+   "kind": "str",
+   "text": "キューの末尾に足します"
+  },
+  {
+   "line": 100,
+   "kind": "str",
+   "text": "${n}次に再生"
+  },
+  {
+   "line": 102,
+   "kind": "str",
+   "text": "いま再生している動画の次に挟みます"
+  },
+  {
+   "line": 107,
+   "kind": "str",
+   "text": "${n}キューを置き換えて再生"
+  },
+  {
+   "line": 109,
+   "kind": "str",
+   "text": "今のキューを捨てて、選んだ動画だけで再生を始めます"
+  },
+  {
+   "line": 127,
+   "kind": "str",
+   "text": "1 件だけ選んでいるときに使えます"
+  },
+  {
+   "line": 128,
+   "kind": "str",
+   "text": "実体を触れるファイルがありません"
+  },
+  {
+   "line": 129,
+   "kind": "str",
+   "text": "${n} 件を"
+  },
+  {
+   "line": 142,
+   "kind": "str",
+   "text": "レーティング"
+  },
+  {
+   "line": 157,
+   "kind": "str",
+   "text": "キュー"
+  },
+  {
+   "line": 174,
+   "kind": "str",
+   "text": "他のアプリで開く"
+  },
+  {
+   "line": 179,
+   "kind": "str",
+   "text": "既定のアプリ"
+  },
+  {
+   "line": 180,
+   "kind": "str",
+   "text": "プログラムを選ぶ..."
+  },
+  {
+   "line": 185,
+   "kind": "str",
+   "text": "エクスプローラーで表示"
+  },
+  {
+   "line": 189,
+   "kind": "str",
+   "text": "右クリックした 1 件を表示します"
+  },
+  {
+   "line": 194,
+   "kind": "str",
+   "text": "このフォルダーを開く"
+  },
+  {
+   "line": 197,
+   "kind": "str",
+   "text": "右クリックした動画のフォルダーで絞り込みます"
+  },
+  {
+   "line": 201,
+   "kind": "str",
+   "text": "フルパスをコピー"
+  },
+  {
+   "line": 201,
+   "kind": "str",
+   "text": "${n} 件のフルパスをコピー"
+  },
+  {
+   "line": 207,
+   "kind": "str",
+   "text": "名前を変更..."
+  },
+  {
+   "line": 221,
+   "kind": "str",
+   "text": "サムネイルを作り直す"
+  },
+  {
+   "line": 229,
+   "kind": "str",
+   "text": "${count}ライブラリから削除"
+  },
+  {
+   "line": 233,
+   "kind": "str",
+   "text": "ファイル自体は削除されません"
+  },
+  {
+   "line": 237,
+   "kind": "str",
+   "text": "${count}ごみ箱へ"
+  },
+  {
+   "line": 241,
+   "kind": "str",
+   "text": "ファイルをごみ箱へ送り、ライブラリからも削除します"
+  },
+  {
+   "line": 249,
+   "kind": "str",
+   "text": "開く"
+  },
+  {
+   "line": 250,
+   "kind": "str",
+   "text": "エクスプローラーで表示"
+  },
+  {
+   "line": 251,
+   "kind": "str",
+   "text": "パスをコピー"
+  },
+  {
+   "line": 264,
+   "kind": "str",
+   "text": "すでに先頭です"
+  },
+  {
+   "line": 265,
+   "kind": "str",
+   "text": "すでに末尾です"
+  },
+  {
+   "line": 277,
+   "kind": "str",
+   "text": "色なし"
+  },
+  {
+   "line": 310,
+   "kind": "str",
+   "text": "絞り込みから外す"
+  },
+  {
+   "line": 310,
+   "kind": "str",
+   "text": "絞り込みに追加"
+  },
+  {
+   "line": 313,
+   "kind": "str",
+   "text": "このタグが付いた動画に絞ります"
+  },
+  {
+   "line": 317,
+   "kind": "str",
+   "text": "このタグだけで絞り込む"
+  },
+  {
+   "line": 321,
+   "kind": "str",
+   "text": "すでにこのタグだけで絞り込んでいます"
+  },
+  {
+   "line": 323,
+   "kind": "str",
+   "text": "他に絞り込み中のタグがありません"
+  },
+  {
+   "line": 324,
+   "kind": "str",
+   "text": "他のタグの絞り込みを外してこれだけにします"
+  },
+  {
+   "line": 327,
+   "kind": "str",
+   "text": "名前を変更..."
+  },
+  {
+   "line": 336,
+   "kind": "str",
+   "text": "グループ"
+  },
+  {
+   "line": 339,
+   "kind": "str",
+   "text": "タググループがまだありません"
+  },
+  {
+   "line": 345,
+   "kind": "str",
+   "text": "タグを削除"
+  },
+  {
+   "line": 348,
+   "kind": "str",
+   "text": "${tag.videoCount} 件の動画から外れます(動画自体は消えません)"
+  },
+  {
+   "line": 368,
+   "kind": "str",
+   "text": "タグがまだありません"
+  },
+  {
+   "line": 370,
+   "kind": "str",
+   "text": "未分類は並べ替えられません"
+  },
+  {
+   "line": 375,
+   "kind": "str",
+   "text": "このグループの絞り込みを解除"
+  },
+  {
+   "line": 375,
+   "kind": "str",
+   "text": "このグループで絞り込む"
+  },
+  {
+   "line": 379,
+   "kind": "str",
+   "text": "この中のタグが付いた動画をまとめて表示します"
+  },
+  {
+   "line": 383,
+   "kind": "str",
+   "text": "タグを表示"
+  },
+  {
+   "line": 383,
+   "kind": "str",
+   "text": "タグを隠す"
+  },
+  {
+   "line": 391,
+   "kind": "str",
+   "text": "このグループにタグを作成..."
+  },
+  {
+   "line": 391,
+   "kind": "str",
+   "text": "グループに属さないタグを作成..."
+  },
+  {
+   "line": 394,
+   "kind": "str",
+   "text": "グループを作成..."
+  },
+  {
+   "line": 398,
+   "kind": "str",
+   "text": "名前を変更..."
+  },
+  {
+   "line": 401,
+   "kind": "str",
+   "text": "未分類は名前を変えられません"
+  },
+  {
+   "line": 405,
+   "kind": "str",
+   "text": "上へ移動"
+  },
+  {
+   "line": 412,
+   "kind": "str",
+   "text": "下へ移動"
+  },
+  {
+   "line": 420,
+   "kind": "str",
+   "text": "グループを削除"
+  },
+  {
+   "line": 425,
+   "kind": "str",
+   "text": "未分類は削除できません"
+  },
+  {
+   "line": 426,
+   "kind": "str",
+   "text": "${group.tagCount} 個のタグは未分類に移ります"
+  },
+  {
+   "line": 442,
+   "kind": "str",
+   "text": "${label}を表示"
+  },
+  {
+   "line": 442,
+   "kind": "str",
+   "text": "${label}を隠す"
+  },
+  {
+   "line": 446,
+   "kind": "str",
+   "text": "すべて畳む"
+  },
+  {
+   "line": 447,
+   "kind": "str",
+   "text": "すべて開く"
+  },
+  {
+   "line": 459,
+   "kind": "str",
+   "text": "ドライブが未接続です"
+  },
+  {
+   "line": 463,
+   "kind": "str",
+   "text": "このフォルダー配下を表示"
+  },
+  {
+   "line": 466,
+   "kind": "str",
+   "text": "サブフォルダーも含めてまとめて表示します"
+  },
+  {
+   "line": 470,
+   "kind": "str",
+   "text": "このフォルダー直下だけを表示"
+  },
+  {
+   "line": 472,
+   "kind": "str",
+   "text": "サブフォルダーを含めず直下だけに絞ります"
+  },
+  {
+   "line": 477,
+   "kind": "str",
+   "text": "エクスプローラーで表示"
+  },
+  {
+   "line": 482,
+   "kind": "str",
+   "text": "パスをコピー"
+  },
+  {
+   "line": 486,
+   "kind": "str",
+   "text": "監視対象から外す"
+  },
+  {
+   "line": 489,
+   "kind": "str",
+   "text": "フォルダー自体は削除されません"
+  },
+  {
+   "line": 507,
+   "kind": "str",
+   "text": "絞り込み中は並べ替えられません"
+  },
+  {
+   "line": 511,
+   "kind": "str",
+   "text": "この条件を開く"
+  },
+  {
+   "line": 513,
+   "kind": "str",
+   "text": "保存した検索条件を復元します"
+  },
+  {
+   "line": 518,
+   "kind": "str",
+   "text": "キューに読み込んで再生"
+  },
+  {
+   "line": 520,
+   "kind": "str",
+   "text": "条件に合う動画で今のキューを置き換えます(先頭 500 件まで)"
+  },
+  {
+   "line": 523,
+   "kind": "str",
+   "text": "名前を変更..."
+  },
+  {
+   "line": 526,
+   "kind": "str",
+   "text": "現在の検索条件で上書き"
+  },
+  {
+   "line": 528,
+   "kind": "str",
+   "text": "いまの絞り込みで「${sf.name}」を置き換えます"
+  },
+  {
+   "line": 532,
+   "kind": "str",
+   "text": "上へ移動"
+  },
+  {
+   "line": 539,
+   "kind": "str",
+   "text": "下へ移動"
+  },
+  {
+   "line": 550,
+   "kind": "str",
+   "text": "保存した条件だけを消します(動画は消えません)"
+  },
+  {
+   "line": 572,
+   "kind": "str",
+   "text": "絞り込み中は並べ替えられません"
+  },
+  {
+   "line": 576,
+   "kind": "str",
+   "text": "キューに読み込んで再生"
+  },
+  {
+   "line": 579,
+   "kind": "str",
+   "text": "空のプレイリストです"
+  },
+  {
+   "line": 579,
+   "kind": "str",
+   "text": "今のキューを置き換えます"
+  },
+  {
+   "line": 583,
+   "kind": "str",
+   "text": "絞り込みを解除"
+  },
+  {
+   "line": 583,
+   "kind": "str",
+   "text": "このリストで絞り込む"
+  },
+  {
+   "line": 586,
+   "kind": "str",
+   "text": "一覧に保存した並び順で出します"
+  },
+  {
+   "line": 589,
+   "kind": "str",
+   "text": "名前を変更..."
+  },
+  {
+   "line": 594,
+   "kind": "str",
+   "text": "「${playlist.name} のコピー」を作ります"
+  },
+  {
+   "line": 600,
+   "kind": "str",
+   "text": "M3U8 へ書き出す..."
+  },
+  {
+   "line": 603,
+   "kind": "str",
+   "text": "空のプレイリストです"
+  },
+  {
+   "line": 603,
+   "kind": "str",
+   "text": "外部プレイヤーで使えるリストとして保存します"
+  },
+  {
+   "line": 607,
+   "kind": "str",
+   "text": "上へ移動"
+  },
+  {
+   "line": 614,
+   "kind": "str",
+   "text": "下へ移動"
+  },
+  {
+   "line": 625,
+   "kind": "str",
+   "text": "リストだけを消します(動画は消えません)"
+  },
+  {
+   "line": 635,
+   "kind": "str",
+   "text": "絞り込みを解除"
+  },
+  {
+   "line": 635,
+   "kind": "str",
+   "text": "このシリーズで絞り込む"
+  },
+  {
+   "line": 638,
+   "kind": "str",
+   "text": "シリーズ内は登録順で並べます"
+  },
+  {
+   "line": 641,
+   "kind": "str",
+   "text": "名前を変更..."
+  },
+  {
+   "line": 645,
+   "kind": "str",
+   "text": "シリーズを削除"
+  },
+  {
+   "line": 648,
+   "kind": "str",
+   "text": "${series.videoCount} 件の動画から外れます(動画自体は消えません)"
+  },
+  {
+   "line": 670,
+   "kind": "str",
+   "text": "このフォルダー直下を表示"
+  },
+  {
+   "line": 673,
+   "kind": "str",
+   "text": "もう一度選ぶと解除します"
+  },
+  {
+   "line": 677,
+   "kind": "str",
+   "text": "サブフォルダーを隠す"
+  },
+  {
+   "line": 677,
+   "kind": "str",
+   "text": "サブフォルダーを表示"
+  },
+  {
+   "line": 680,
+   "kind": "str",
+   "text": "サブフォルダーはありません"
+  },
+  {
+   "line": 685,
+   "kind": "str",
+   "text": "エクスプローラーで表示"
+  },
+  {
+   "line": 688,
+   "kind": "str",
+   "text": "ドライブが未接続です"
+  },
+  {
+   "line": 690,
+   "kind": "str",
+   "text": "パスをコピー"
+  },
+  {
+   "line": 694,
+   "kind": "str",
+   "text": "監視フォルダに追加"
+  },
+  {
+   "line": 698,
+   "kind": "str",
+   "text": "すでに監視フォルダです"
+  },
+  {
+   "line": 698,
+   "kind": "str",
+   "text": "起動時のスキャンと自動監視の対象になります"
+  },
+  {
+   "line": 704,
+   "kind": "str",
+   "text": "このフォルダーの重複を解消"
+  },
+  {
+   "line": 706,
+   "kind": "str",
+   "text": "同じ内容の動画を 1 本だけ残します(ファイルは消しません)"
+  },
+  {
+   "line": 710,
+   "kind": "str",
+   "text": "監視除外フォルダに登録"
+  },
+  {
+   "line": 712,
+   "kind": "str",
+   "text": "次のスキャンから配下を無視します(ファイルは消しません)"
+  },
+  {
+   "line": 734,
+   "kind": "str",
+   "text": "${lib.root} に接続できません"
+  },
+  {
+   "line": 737,
+   "kind": "str",
+   "text": "ライブラリを新規作成..."
+  },
+  {
+   "line": 738,
+   "kind": "str",
+   "text": "既存のライブラリを開く..."
+  },
+  {
+   "line": 765,
+   "kind": "str",
+   "text": "フォルダーで絞り込んでいるときに使えます"
+  },
+  {
+   "line": 773,
+   "kind": "str",
+   "text": "すべて選択"
+  },
+  {
+   "line": 776,
+   "kind": "str",
+   "text": "表示中の動画がありません"
+  },
+  {
+   "line": 780,
+   "kind": "str",
+   "text": "選択を解除"
+  },
+  {
+   "line": 783,
+   "kind": "str",
+   "text": "選択中の動画がありません"
+  },
+  {
+   "line": 789,
+   "kind": "str",
+   "text": "表示中の一覧をキューに読み込んで再生"
+  },
+  {
+   "line": 793,
+   "kind": "str",
+   "text": "表示中の動画がありません"
+  },
+  {
+   "line": 794,
+   "kind": "str",
+   "text": "絞り込み結果で今のキューを置き換えます(先頭 500 件まで)"
+  },
+  {
+   "line": 802,
+   "kind": "str",
+   "text": "サムネイル"
+  },
+  {
+   "line": 803,
+   "kind": "str",
+   "text": "詳細リスト"
+  },
+  {
+   "line": 808,
+   "kind": "str",
+   "text": "並べ替え"
+  },
+  {
+   "line": 820,
+   "kind": "str",
+   "text": "上のフォルダーへ"
+  },
+  {
+   "line": 824,
+   "kind": "str",
+   "text": "これ以上、上のフォルダーはありません"
+  },
+  {
+   "line": 829,
+   "kind": "str",
+   "text": "このフォルダーをエクスプローラーで表示"
+  },
+  {
+   "line": 837,
+   "kind": "str",
+   "text": "絞り込みをすべて解除"
+  },
+  {
+   "line": 840,
+   "kind": "str",
+   "text": "いま絞り込んでいる条件はありません"
+  },
+  {
+   "line": 842,
+   "kind": "str",
+   "text": "再読み込み"
+  },
+  {
+   "line": 859,
+   "kind": "str",
+   "text": "レーティング"
+  },
+  {
+   "line": 863,
+   "kind": "str",
+   "text": "この位置をサムネイルにする"
+  },
+  {
+   "line": 865,
+   "kind": "str",
+   "text": "ショートカット: T"
+  },
+  {
+   "line": 871,
+   "kind": "str",
+   "text": "このコマを画像として保存"
+  },
+  {
+   "line": 874,
+   "kind": "str",
+   "text": "ショートカット: S"
+  },
+  {
+   "line": 879,
+   "kind": "str",
+   "text": "エクスプローラーで表示"
+  },
+  {
+   "line": 884,
+   "kind": "str",
+   "text": "フルパスをコピー"
+  },
+  {
+   "line": 886,
+   "kind": "str",
+   "text": "閉じる"
+  },
+  {
+   "line": 886,
+   "kind": "str",
+   "text": "ショートカット: Esc"
+  }
+ ],
+ "src\\lib\\dedupeMessage.ts": [
+  {
+   "line": 12,
+   "kind": "str",
+   "text": "解消できる重複はありませんでした"
+  },
+  {
+   "line": 15,
+   "kind": "str",
+   "text": "${result.removed.toLocaleString()} 件をライブラリから外しました(ファイルは残っています)"
+  },
+  {
+   "line": 17,
+   "kind": "str",
+   "text": "${result.trashed.toLocaleString()} 件をごみ箱へ送りました"
+  },
+  {
+   "line": 20,
+   "kind": "str",
+   "text": "${head}。${result.failed.toLocaleString()} 件は送れなかったので登録も残しています"
+  }
+ ],
+ "src\\lib\\filterChips.ts": [
+  {
+   "line": 193,
+   "kind": "str",
+   "text": "${after}〜${before} に${suffix}"
+  },
+  {
+   "line": 195,
+   "kind": "str",
+   "text": "${after} 以降に${suffix}"
+  },
+  {
+   "line": 196,
+   "kind": "str",
+   "text": "${before} 以前に${suffix}"
+  },
+  {
+   "line": 201,
+   "kind": "str",
+   "text": "「${f.text.trim()}」を含む"
+  },
+  {
+   "line": 204,
+   "kind": "str",
+   "text": "パスも検索"
+  },
+  {
+   "line": 207,
+   "kind": "str",
+   "text": "メモも検索"
+  },
+  {
+   "line": 214,
+   "kind": "str",
+   "text": "フォルダー: "
+  },
+  {
+   "line": 221,
+   "kind": "str",
+   "text": "の配下すべて"
+  },
+  {
+   "line": 221,
+   "kind": "str",
+   "text": "の直下"
+  },
+  {
+   "line": 229,
+   "kind": "str",
+   "text": "シリーズ: "
+  },
+  {
+   "line": 233,
+   "kind": "str",
+   "text": "プレイリスト: "
+  },
+  {
+   "line": 239,
+   "kind": "str",
+   "text": "★なし"
+  },
+  {
+   "line": 257,
+   "kind": "str",
+   "text": "見つからないファイル"
+  },
+  {
+   "line": 260,
+   "kind": "str",
+   "text": "重複のみ"
+  },
+  {
+   "line": 263,
+   "kind": "str",
+   "text": "タグなし"
+  },
+  {
+   "line": 269,
+   "kind": "str",
+   "text": "途中まで観た"
+  },
+  {
+   "line": 306,
+   "kind": "str",
+   "text": "コーデック"
+  },
+  {
+   "line": 312,
+   "kind": "str",
+   "text": "}に追加"
+  },
+  {
+   "line": 323,
+   "kind": "str",
+   "text": "}に更新"
+  }
+ ],
+ "src\\lib\\hdrInfo.ts": [
+  {
+   "line": 59,
+   "kind": "str",
+   "text": "${info.full} の映像を HDR のまま出力しています"
+  },
+  {
+   "line": 62,
+   "kind": "str",
+   "text": "${info.full} の映像です。SDR に変換して表示しています"
+  },
+  {
+   "line": 63,
+   "kind": "str",
+   "text": "(HDR パススルーはオンですが、ディスプレイが HDR モードではありません)"
+  },
+  {
+   "line": 64,
+   "kind": "str",
+   "text": "${info.full} の映像です。SDR に変換して表示しています(HDR パススルー: オフ)"
+  }
+ ],
+ "src\\lib\\listColumns.ts": [
+  {
+   "line": 91,
+   "kind": "str",
+   "text": "サムネイル"
+  },
+  {
+   "line": 96,
+   "kind": "str",
+   "text": "長さ"
+  },
+  {
+   "line": 101,
+   "kind": "str",
+   "text": "サイズ"
+  },
+  {
+   "line": 147,
+   "kind": "str",
+   "text": "フォルダ"
+  },
+  {
+   "line": 152,
+   "kind": "str",
+   "text": "ファイル更新日"
+  },
+  {
+   "line": 157,
+   "kind": "str",
+   "text": "ファイル作成日"
+  },
+  {
+   "line": 169,
+   "kind": "str",
+   "text": "ビットレート"
+  },
+  {
+   "line": 181,
+   "kind": "str",
+   "text": "タグ"
+  },
+  {
+   "line": 186,
+   "kind": "str",
+   "text": "シリーズ"
+  },
+  {
+   "line": 334,
+   "kind": "str",
+   "text": "追加日時(新しい順)"
+  },
+  {
+   "line": 335,
+   "kind": "str",
+   "text": "追加日時(古い順)"
+  },
+  {
+   "line": 338,
+   "kind": "str",
+   "text": "サイズ(小さい順)"
+  },
+  {
+   "line": 339,
+   "kind": "str",
+   "text": "サイズ(大きい順)"
+  },
+  {
+   "line": 340,
+   "kind": "str",
+   "text": "長さ(短い順)"
+  },
+  {
+   "line": 341,
+   "kind": "str",
+   "text": "長さ(長い順)"
+  },
+  {
+   "line": 342,
+   "kind": "str",
+   "text": "レーティング(低い順)"
+  },
+  {
+   "line": 343,
+   "kind": "str",
+   "text": "レーティング順"
+  },
+  {
+   "line": 344,
+   "kind": "str",
+   "text": "最終視聴(古い順)"
+  },
+  {
+   "line": 345,
+   "kind": "str",
+   "text": "最近見た順"
+  },
+  {
+   "line": 346,
+   "kind": "str",
+   "text": "視聴回数(少ない順)"
+  },
+  {
+   "line": 347,
+   "kind": "str",
+   "text": "よく見た順"
+  },
+  {
+   "line": 348,
+   "kind": "str",
+   "text": "解像度(低い順)"
+  },
+  {
+   "line": 349,
+   "kind": "str",
+   "text": "解像度(高い順)"
+  },
+  {
+   "line": 352,
+   "kind": "str",
+   "text": "映像コーデック(昇順)"
+  },
+  {
+   "line": 353,
+   "kind": "str",
+   "text": "映像コーデック(降順)"
+  },
+  {
+   "line": 354,
+   "kind": "str",
+   "text": "音声コーデック(昇順)"
+  },
+  {
+   "line": 355,
+   "kind": "str",
+   "text": "音声コーデック(降順)"
+  },
+  {
+   "line": 356,
+   "kind": "str",
+   "text": "フォルダ(昇順)"
+  },
+  {
+   "line": 357,
+   "kind": "str",
+   "text": "フォルダ(降順)"
+  },
+  {
+   "line": 358,
+   "kind": "str",
+   "text": "ファイル更新日(古い順)"
+  },
+  {
+   "line": 359,
+   "kind": "str",
+   "text": "ファイル更新日(新しい順)"
+  },
+  {
+   "line": 360,
+   "kind": "str",
+   "text": "ファイル作成日(古い順)"
+  },
+  {
+   "line": 361,
+   "kind": "str",
+   "text": "ファイル作成日(新しい順)"
+  },
+  {
+   "line": 362,
+   "kind": "str",
+   "text": "fps(低い順)"
+  },
+  {
+   "line": 363,
+   "kind": "str",
+   "text": "fps(高い順)"
+  },
+  {
+   "line": 364,
+   "kind": "str",
+   "text": "ビットレート(低い順)"
+  },
+  {
+   "line": 365,
+   "kind": "str",
+   "text": "ビットレート(高い順)"
+  },
+  {
+   "line": 366,
+   "kind": "str",
+   "text": "シリーズ順"
+  },
+  {
+   "line": 367,
+   "kind": "str",
+   "text": "プレイリスト順"
+  },
+  {
+   "line": 368,
+   "kind": "str",
+   "text": "重複をまとめる"
+  },
+  {
+   "line": 369,
+   "kind": "str",
+   "text": "ランダム"
+  }
+ ],
+ "src\\lib\\mediaInfo.ts": [
+  {
+   "line": 57,
+   "kind": "str",
+   "text": "フランス語"
+  },
+  {
+   "line": 57,
+   "kind": "str",
+   "text": "フランス語"
+  },
+  {
+   "line": 58,
+   "kind": "str",
+   "text": "ドイツ語"
+  },
+  {
+   "line": 58,
+   "kind": "str",
+   "text": "ドイツ語"
+  },
+  {
+   "line": 59,
+   "kind": "str",
+   "text": "スペイン語"
+  },
+  {
+   "line": 59,
+   "kind": "str",
+   "text": "イタリア語"
+  },
+  {
+   "line": 59,
+   "kind": "str",
+   "text": "ロシア語"
+  },
+  {
+   "line": 59,
+   "kind": "str",
+   "text": "ポルトガル語"
+  },
+  {
+   "line": 77,
+   "kind": "str",
+   "text": "フル (pc)"
+  },
+  {
+   "line": 82,
+   "kind": "str",
+   "text": "プログレッシブ"
+  },
+  {
+   "line": 82,
+   "kind": "str",
+   "text": "インターレース (${order})"
+  },
+  {
+   "line": 119,
+   "kind": "str",
+   "text": "長さ"
+  },
+  {
+   "line": 122,
+   "kind": "str",
+   "text": "タイトル"
+  },
+  {
+   "line": 124,
+   "kind": "str",
+   "text": "フラグ"
+  },
+  {
+   "line": 139,
+   "kind": "str",
+   "text": "コーデック"
+  },
+  {
+   "line": 142,
+   "kind": "str",
+   "text": "アスペクト比"
+  },
+  {
+   "line": 145,
+   "kind": "str",
+   "text": "ピクセル比"
+  },
+  {
+   "line": 147,
+   "kind": "str",
+   "text": "フレームレート"
+  },
+  {
+   "line": 148,
+   "kind": "str",
+   "text": "ピクセル形式"
+  },
+  {
+   "line": 149,
+   "kind": "str",
+   "text": "ビット深度"
+  },
+  {
+   "line": 151,
+   "kind": "str",
+   "text": "カラースペース"
+  },
+  {
+   "line": 157,
+   "kind": "str",
+   "text": "ビットレート"
+  },
+  {
+   "line": 158,
+   "kind": "str",
+   "text": "フレーム数"
+  },
+  {
+   "line": 159,
+   "kind": "str",
+   "text": "コーデックタグ"
+  },
+  {
+   "line": 166,
+   "kind": "str",
+   "text": "コーデック"
+  },
+  {
+   "line": 169,
+   "kind": "str",
+   "text": "チャンネル"
+  },
+  {
+   "line": 171,
+   "kind": "str",
+   "text": "サンプルレート"
+  },
+  {
+   "line": 172,
+   "kind": "str",
+   "text": "サンプル形式"
+  },
+  {
+   "line": 173,
+   "kind": "str",
+   "text": "ビット深度"
+  },
+  {
+   "line": 174,
+   "kind": "str",
+   "text": "ビットレート"
+  },
+  {
+   "line": 175,
+   "kind": "str",
+   "text": "コーデックタグ"
+  },
+  {
+   "line": 182,
+   "kind": "str",
+   "text": "コーデック"
+  },
+  {
+   "line": 192,
+   "kind": "str",
+   "text": "カバー画像"
+  },
+  {
+   "line": 223,
+   "kind": "str",
+   "text": "コンテナ"
+  },
+  {
+   "line": 229,
+   "kind": "str",
+   "text": "ファイルサイズ"
+  },
+  {
+   "line": 230,
+   "kind": "str",
+   "text": "総ビットレート"
+  },
+  {
+   "line": 235,
+   "kind": "str",
+   "text": "その他 ${others.length}"
+  },
+  {
+   "line": 237,
+   "kind": "str",
+   "text": "ストリーム"
+  },
+  {
+   "line": 238,
+   "kind": "str",
+   "text": "添付ファイル"
+  },
+  {
+   "line": 239,
+   "kind": "str",
+   "text": "カバー画像"
+  },
+  {
+   "line": 272,
+   "kind": "str",
+   "text": "チャプター"
+  },
+  {
+   "line": 275,
+   "kind": "str",
+   "text": "チャプター ${i + 1}"
+  }
+ ],
+ "src\\lib\\query.ts": [
+  {
+   "line": 30,
+   "kind": "str",
+   "text": "指定なし"
+  },
+  {
+   "line": 39,
+   "kind": "str",
+   "text": "指定なし"
+  },
+  {
+   "line": 47,
+   "kind": "str",
+   "text": "指定なし"
+  },
+  {
+   "line": 54,
+   "kind": "str",
+   "text": "指定なし"
+  },
+  {
+   "line": 124,
+   "kind": "str",
+   "text": "長さ指定なし"
+  },
+  {
+   "line": 149,
+   "kind": "str",
+   "text": "サイズ指定なし"
+  },
+  {
+   "line": 157,
+   "kind": "str",
+   "text": "再生回数の指定なし"
+  }
+ ],
+ "src\\lib\\queueLoad.ts": [
+  {
+   "line": 31,
+   "kind": "str",
+   "text": "保存していないキュー(${s.queue.items.length} 件)を捨てて、\\n${opts.label}を読み込みますか?"
+  },
+  {
+   "line": 32,
+   "kind": "str",
+   "text": "キューの置き換え"
+  },
+  {
+   "line": 46,
+   "kind": "str",
+   "text": "キューの上限は ${QUEUE_LIMIT} 件のため、先頭 ${QUEUE_LIMIT} 件だけを読み込みました"
+  },
+  {
+   "line": 53,
+   "kind": "str",
+   "text": "${opts.label}の動画はどれも見つかりませんでした"
+  }
+ ],
+ "src\\lib\\shortcuts.ts": [
+  {
+   "line": 91,
+   "kind": "str",
+   "text": "サムネイル表示・詳細リスト表示のとき"
+  },
+  {
+   "line": 93,
+   "kind": "str",
+   "text": "前後の動画へ"
+  },
+  {
+   "line": 94,
+   "kind": "str",
+   "text": "1 行ぶん上下へ"
+  },
+  {
+   "line": 95,
+   "kind": "str",
+   "text": "選んだまま移動して範囲を広げる"
+  },
+  {
+   "line": 95,
+   "kind": "str",
+   "text": "矢印・Home・End のどれでも"
+  },
+  {
+   "line": 96,
+   "kind": "str",
+   "text": "先頭 / 末尾へ"
+  },
+  {
+   "line": 97,
+   "kind": "str",
+   "text": "再生する"
+  },
+  {
+   "line": 98,
+   "kind": "str",
+   "text": "すべて選択"
+  },
+  {
+   "line": 98,
+   "kind": "str",
+   "text": "先頭 1000 件まで"
+  },
+  {
+   "line": 99,
+   "kind": "str",
+   "text": "選択を再生キューに追加"
+  },
+  {
+   "line": 99,
+   "kind": "str",
+   "text": "右クリックの「キュー」からは「次に再生」も選べます"
+  },
+  {
+   "line": 100,
+   "kind": "str",
+   "text": "削除する"
+  },
+  {
+   "line": 100,
+   "kind": "str",
+   "text": "ライブラリからか、ごみ箱かをダイアログで選びます"
+  },
+  {
+   "line": 102,
+   "kind": "str",
+   "text": "絞り込みを 戻す / 進む"
+  },
+  {
+   "line": 102,
+   "kind": "str",
+   "text": "スマートフォルダ・AI 検索・統計から変えた条件を行き来します"
+  },
+  {
+   "line": 103,
+   "kind": "str",
+   "text": "選択を解除"
+  },
+  {
+   "line": 109,
+   "kind": "str",
+   "text": "アプリ内プレイヤーで再生しているとき"
+  },
+  {
+   "line": 112,
+   "kind": "str",
+   "text": "10 秒 戻す / 進める"
+  },
+  {
+   "line": 113,
+   "kind": "str",
+   "text": "前 / 次のチャプターへ"
+  },
+  {
+   "line": 113,
+   "kind": "str",
+   "text": "mpv で再生しているときだけ"
+  },
+  {
+   "line": 114,
+   "kind": "str",
+   "text": "前 / 次のチャプターへ"
+  },
+  {
+   "line": 114,
+   "kind": "str",
+   "text": "mpv で再生しているときだけ"
+  },
+  {
+   "line": 116,
+   "kind": "str",
+   "text": "ミュート ⇄ 解除"
+  },
+  {
+   "line": 117,
+   "kind": "str",
+   "text": "フルスクリーン ⇄ 解除"
+  },
+  {
+   "line": 118,
+   "kind": "str",
+   "text": "再生速度を 下げる / 上げる"
+  },
+  {
+   "line": 119,
+   "kind": "str",
+   "text": "次 / 前の動画へ"
+  },
+  {
+   "line": 119,
+   "kind": "str",
+   "text": "連続再生・再生キューで開いたときだけ"
+  },
+  {
+   "line": 120,
+   "kind": "str",
+   "text": "再生キューを開く / 閉じる"
+  },
+  {
+   "line": 120,
+   "kind": "str",
+   "text": "再生中でも並べ替え・削除ができます"
+  },
+  {
+   "line": 121,
+   "kind": "str",
+   "text": "この位置をサムネイルにする"
+  },
+  {
+   "line": 122,
+   "kind": "str",
+   "text": "このコマを画像として保存"
+  },
+  {
+   "line": 123,
+   "kind": "str",
+   "text": "表示サイズ 等倍 ⇄ フィット"
+  },
+  {
+   "line": 123,
+   "kind": "str",
+   "text": "mpv で再生しているときだけ"
+  },
+  {
+   "line": 124,
+   "kind": "str",
+   "text": "連続再生の切り替え"
+  },
+  {
+   "line": 125,
+   "kind": "str",
+   "text": "リピート再生の切り替え"
+  },
+  {
+   "line": 126,
+   "kind": "str",
+   "text": "閉じる"
+  },
+  {
+   "line": 126,
+   "kind": "str",
+   "text": "フルスクリーン中は解除だけ"
+  },
+  {
+   "line": 131,
+   "kind": "str",
+   "text": "右クリックメニュー"
+  },
+  {
+   "line": 132,
+   "kind": "str",
+   "text": "メニューが開いている間(裏の一覧・再生の操作は止まります)"
+  },
+  {
+   "line": 134,
+   "kind": "str",
+   "text": "項目を選ぶ"
+  },
+  {
+   "line": 135,
+   "kind": "str",
+   "text": "サブメニューを開く"
+  },
+  {
+   "line": 136,
+   "kind": "str",
+   "text": "サブメニューを閉じる"
+  },
+  {
+   "line": 137,
+   "kind": "str",
+   "text": "選んだ項目を実行"
+  },
+  {
+   "line": 138,
+   "kind": "str",
+   "text": "閉じる"
+  },
+  {
+   "line": 138,
+   "kind": "str",
+   "text": "サブメニューが開いていれば、それだけ閉じます"
+  },
+  {
+   "line": 144,
+   "kind": "str",
+   "text": "タイトル・メモ・タグ・シリーズ・AI アシスタントの入力欄"
+  },
+  {
+   "line": 146,
+   "kind": "str",
+   "text": "確定する"
+  },
+  {
+   "line": 146,
+   "kind": "str",
+   "text": "AI アシスタントでは送信"
+  },
+  {
+   "line": 147,
+   "kind": "str",
+   "text": "AI アシスタントで改行"
+  },
+  {
+   "line": 148,
+   "kind": "str",
+   "text": "編集を取り消す"
+  },
+  {
+   "line": 148,
+   "kind": "str",
+   "text": "タイトル・メモ・タグ名の変更"
+  },
+  {
+   "line": 153,
+   "kind": "str",
+   "text": "マウスと組み合わせる"
+  },
+  {
+   "line": 154,
+   "kind": "str",
+   "text": "一覧のカード・行と、その余白"
+  },
+  {
+   "line": 156,
+   "kind": "str",
+   "text": "クリック"
+  },
+  {
+   "line": 156,
+   "kind": "str",
+   "text": "その 1 件だけを選ぶ"
+  },
+  {
+   "line": 157,
+   "kind": "str",
+   "text": "クリック"
+  },
+  {
+   "line": 157,
+   "kind": "str",
+   "text": "選択に足す / 外す"
+  },
+  {
+   "line": 158,
+   "kind": "str",
+   "text": "クリック"
+  },
+  {
+   "line": 158,
+   "kind": "str",
+   "text": "直前に選んだ位置からの範囲を選ぶ"
+  },
+  {
+   "line": 161,
+   "kind": "str",
+   "text": "余白からドラッグ"
+  },
+  {
+   "line": 162,
+   "kind": "str",
+   "text": "囲んだ範囲をまとめて選ぶ"
+  },
+  {
+   "line": 163,
+   "kind": "str",
+   "text": "カードの上から掴むとキューパネルへの追加"
+  },
+  {
+   "line": 168,
+   "kind": "str",
+   "text": "余白からドラッグ"
+  },
+  {
+   "line": 169,
+   "kind": "str",
+   "text": "囲んだ範囲を選択に足す"
+  },
+  {
+   "line": 175,
+   "kind": "str",
+   "text": "ウィンドウ共通"
+  },
+  {
+   "line": 176,
+   "kind": "str",
+   "text": "どこでも"
+  },
+  {
+   "line": 178,
+   "kind": "str",
+   "text": "このキー操作の一覧を開く / 閉じる"
+  },
+  {
+   "line": 179,
+   "kind": "str",
+   "text": "開いているモーダル・メニューを閉じる"
+  }
+ ],
+ "src\\lib\\subtitleStyle.ts": [
+  {
+   "line": 123,
+   "kind": "str",
+   "text": "大きいほど下。100 が既定の位置"
+  },
+  {
+   "line": 126,
+   "kind": "str",
+   "text": "フォント"
+  },
+  {
+   "line": 127,
+   "kind": "str",
+   "text": "反映されないときは英語名(例: Meiryo)を入れてください"
+  },
+  {
+   "line": 130,
+   "kind": "str",
+   "text": "文字サイズ"
+  },
+  {
+   "line": 132,
+   "kind": "str",
+   "text": "高さ 720px の画面を基準にした大きさ。ウィンドウの大きさで見え方が変わります"
+  },
+  {
+   "line": 134,
+   "kind": "str",
+   "text": "太字にする"
+  },
+  {
+   "line": 135,
+   "kind": "str",
+   "text": "文字の色"
+  },
+  {
+   "line": 138,
+   "kind": "str",
+   "text": "縁取りの色"
+  },
+  {
+   "line": 141,
+   "kind": "str",
+   "text": "縁取りの太さ"
+  },
+  {
+   "line": 146,
+   "kind": "str",
+   "text": "影の色"
+  },
+  {
+   "line": 149,
+   "kind": "str",
+   "text": "影の距離"
+  },
+  {
+   "line": 151,
+   "kind": "str",
+   "text": "0 で影なし"
+  },
+  {
+   "line": 155,
+   "kind": "str",
+   "text": "背景の帯"
+  },
+  {
+   "line": 156,
+   "kind": "str",
+   "text": "不透明度を上げると文字の後ろに帯が敷かれます(明るい映像で読みやすくなります)"
+  },
+  {
+   "line": 160,
+   "kind": "str",
+   "text": "ASS/SSA 字幕にもこの見た目を適用する"
+  },
+  {
+   "line": 161,
+   "kind": "str",
+   "text": "アニメなどで制作者が付けた色・位置・タイミング演出は失われます"
+  }
+ ],
+ "src\\lib\\tagColors.ts": [
+  {
+   "line": 17,
+   "kind": "str",
+   "text": "オレンジ"
+  },
+  {
+   "line": 22,
+   "kind": "str",
+   "text": "ピンク"
+  }
+ ],
+ "src\\lib\\toolbarItems.ts": [
+  {
+   "line": 68,
+   "kind": "str",
+   "text": "サイドバー"
+  },
+  {
+   "line": 75,
+   "kind": "str",
+   "text": "絞り込み"
+  },
+  {
+   "line": 77,
+   "kind": "str",
+   "text": "絞り込みを戻す"
+  },
+  {
+   "line": 78,
+   "kind": "str",
+   "text": "絞り込みを進める"
+  },
+  {
+   "line": 80,
+   "kind": "str",
+   "text": "並び順"
+  },
+  {
+   "line": 81,
+   "kind": "str",
+   "text": "条件を保存"
+  },
+  {
+   "line": 82,
+   "kind": "str",
+   "text": "表示の切り替え"
+  },
+  {
+   "line": 83,
+   "kind": "str",
+   "text": "サムネイルの大きさ"
+  },
+  {
+   "line": 84,
+   "kind": "str",
+   "text": "再スキャン"
+  },
+  {
+   "line": 88,
+   "kind": "str",
+   "text": "詳細ペイン"
+  },
+  {
+   "line": 89,
+   "kind": "str",
+   "text": "AI アシスタント"
+  },
+  {
+   "line": 92,
+   "kind": "str",
+   "text": "キー操作"
+  }
+ ],
+ "src\\lib\\viewHistory.ts": [
+  {
+   "line": 101,
+   "kind": "str",
+   "text": "すべて"
+  },
+  {
+   "line": 105,
+   "kind": "str",
+   "text": "期間を指定"
+  },
+  {
+   "line": 146,
+   "kind": "str",
+   "text": "この期間の記録はありません"
+  },
+  {
+   "line": 153,
+   "kind": "str",
+   "text": "${base}(うち ${s.unknownCount} 回は位置不明)"
+  }
+ ],
+ "src\\lib\\ai\\anthropic.ts": [
+  {
+   "line": 174,
+   "kind": "str",
+   "text": "引数の JSON が壊れています: ${e instanceof Error ? e.message : String(e)}"
+  },
+  {
+   "line": 193,
+   "kind": "str",
+   "text": "API エラー: ${(err?.message as string) ?? "
+  }
+ ],
+ "src\\lib\\ai\\config.ts": [
+  {
+   "line": 105,
+   "kind": "str",
+   "text": "ベース URL が未設定です。設定 > AI 連携 で入力してください"
+  },
+  {
+   "line": 106,
+   "kind": "str",
+   "text": "モデル名が未設定です。設定 > AI 連携 で入力してください"
+  },
+  {
+   "line": 111,
+   "kind": "str",
+   "text": "${label} の API キーが未設定です。ツールバーの設定ボタンから「AI 連携」で保存してください"
+  }
+ ],
+ "src\\lib\\ai\\errors.ts": [
+  {
+   "line": 40,
+   "kind": "str",
+   "text": "API キーが無効です。設定 > AI 連携 を確認してください"
+  },
+  {
+   "line": 45,
+   "kind": "str",
+   "text": "レート制限に達しました。少し待ってから試してください${detail ? "
+  },
+  {
+   "line": 54,
+   "kind": "str",
+   "text": "モデルが見つかりません。設定 > AI 連携 のモデル名を確認してください(${detail || status})"
+  },
+  {
+   "line": 62,
+   "kind": "str",
+   "text": "会話が長くなりすぎました。ゴミ箱ボタンで会話をクリアしてください(${detail})"
+  },
+  {
+   "line": 67,
+   "kind": "str",
+   "text": "API エラー (${status})${detail ? "
+  }
+ ],
+ "src\\lib\\ai\\openai.ts": [
+  {
+   "line": 120,
+   "kind": "str",
+   "text": "引数の JSON が壊れています: ${e instanceof Error ? e.message : String(e)}"
+  }
+ ],
+ "src\\lib\\ai\\providers.ts": [
+  {
+   "line": 31,
+   "kind": "str",
+   "text": "console.anthropic.com で発行できます(Claude Pro / Max のサブスクリプションとは別契約です)"
+  },
+  {
+   "line": 40,
+   "kind": "str",
+   "text": "platform.openai.com で発行できます(ChatGPT Plus のサブスクリプションとは別契約です)"
+  },
+  {
+   "line": 49,
+   "kind": "str",
+   "text": "aistudio.google.com の「Get API key」で発行できます"
+  },
+  {
+   "line": 57,
+   "kind": "str",
+   "text": "(不要なら空欄)"
+  },
+  {
+   "line": 59,
+   "kind": "str",
+   "text": "OpenRouter・Ollama・LM Studio など、OpenAI 互換の API を持つサービスやローカル LLM に繋げます"
+  }
+ ],
+ "src\\lib\\ai\\runner.ts": [
+  {
+   "line": 48,
+   "kind": "str",
+   "text": "中断しました"
+  },
+  {
+   "line": 67,
+   "kind": "str",
+   "text": "モデルが応答を拒否しました"
+  },
+  {
+   "line": 69,
+   "kind": "str",
+   "text": "応答が長すぎて途中で切れました"
+  },
+  {
+   "line": 74,
+   "kind": "str",
+   "text": "応答が空のまま終わりました"
+  },
+  {
+   "line": 82,
+   "kind": "str",
+   "text": "中断しました"
+  },
+  {
+   "line": 99,
+   "kind": "str",
+   "text": "そのツールはありません: ${call.name}"
+  },
+  {
+   "line": 109,
+   "kind": "str",
+   "text": "エラー: ${e instanceof Error ? e.message : String(e)}"
+  },
+  {
+   "line": 122,
+   "kind": "str",
+   "text": "ツールの実行が上限(${maxIterations} 回)に達しました"
+  }
+ ],
+ "src\\lib\\ai\\transport.ts": [
+  {
+   "line": 38,
+   "kind": "str",
+   "text": "中断しました"
+  },
+  {
+   "line": 76,
+   "kind": "str",
+   "text": "中断しました"
+  },
+  {
+   "line": 77,
+   "kind": "str",
+   "text": "接続できませんでした: ${e instanceof Error ? e.message : String(e)}"
+  },
+  {
+   "line": 91,
+   "kind": "str",
+   "text": "中断しました"
+  }
+ ]
+}

@@ -199,6 +199,37 @@ pub fn run() {
                 rotate_lock: Mutex::new(()),
             });
 
+            // 旋转备份(*.dvm-bak)の定期掃除。起動直後はスキャンやサムネ生成で
+            // ディスクが埋まっているので、少し待ってから裏で走らせる。
+            // 消すのは RETENTION_DAYS より古いものだけ = 今回のセッションで作った
+            // バックアップには絶対に触らない
+            let cleanup_handle = app.handle().clone();
+            std::thread::spawn(move || {
+                use tauri::Emitter;
+                std::thread::sleep(std::time::Duration::from_secs(5));
+                let state = cleanup_handle.state::<AppState>();
+                match crate::core::cleanup::purge_old_backups(state.inner()) {
+                    Ok(r) if r.removed > 0 || r.failed > 0 => {
+                        eprintln!(
+                            "已清理 {} 个旋转备份，释放 {:.1} MB（失败 {} 个）",
+                            r.removed,
+                            r.megabytes(),
+                            r.failed
+                        );
+                        let _ = cleanup_handle.emit(
+                            "cleanup:done",
+                            serde_json::json!({
+                                "removed": r.removed,
+                                "bytes": r.bytes,
+                                "failed": r.failed,
+                            }),
+                        );
+                    }
+                    Ok(_) => {}
+                    Err(e) => eprintln!("清理旋转备份失败: {e:#}"),
+                }
+            });
+
             // 外部プロセス(MCP 等)からの DB 変更を検知して UI に反映する。
             // PRAGMA data_version は「他コネクションのコミット」でのみ増えるため、
             // アプリ自身の書き込みには反応しない。

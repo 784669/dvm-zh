@@ -1,5 +1,6 @@
 pub mod ai_http;
 pub mod backup;
+pub mod cleanup;
 pub mod datadir;
 pub mod dedupe;
 pub mod display;

@@ -298,6 +298,15 @@ export default function App() {
     // 中身が変わった缩略图を読み直させる(URL は {id}.jpg のままなので lib/thumbs.ts 参照)
     listen('thumbs:changed', () => bumpThumbVersion()).then(track);
 
+    // 启动时的旋转备份清理。后端删完才发事件，没删就不打扰
+    listen<{ removed: number; bytes: number; failed: number }>('cleanup:done', (e) => {
+      const { removed, bytes, failed } = e.payload;
+      const mb = bytes / 1_048_576;
+      const size = mb >= 1024 ? `${(mb / 1024).toFixed(2)} GB` : `${mb.toFixed(1)} MB`;
+      const tail = failed > 0 ? `（${failed} 个失败）` : '';
+      useLibrary.getState().pushToast(`已清理 ${removed} 个过期旋转备份，释放 ${size}${tail}`, 'info');
+    }).then(track);
+
     getCurrentWebview()
       .onDragDropEvent((e) => {
         if (e.payload.type === 'drop' && e.payload.paths.length > 0) {

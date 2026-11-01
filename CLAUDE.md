@@ -1,4 +1,9 @@
-# DVM(Demodemo Video Manager)
+# DVM 中文增强版（DVM-zh）
+
+> 本仓库是 [demodemo/DVM](https://github.com/demodemo0818/dvm) 的**非官方简体中文分支**，基于上游 v1.43.0。
+> 标识为 `jp.demo2.dvm.zh`，数据目录与官方版分开，首次启动由 `core/datadir.rs` 从旧目录迁移。
+> 上游的日文文档（`docs/DESIGN.md`、`CHANGELOG.md`、`README.upstream.ja.md`）保持原样，
+> 改动时只动必要处，方便日后合并上游更新。
 
 Windows 向け動画管理ソフト(Tauri 2 + React + TypeScript + Rust)。
 設計の全体像・データモデル・ロードマップは [docs/DESIGN.md](docs/DESIGN.md) を必ず参照すること。
@@ -67,8 +72,9 @@ Windows 向け動画管理ソフト(Tauri 2 + React + TypeScript + Rust)。
 - 手順は [docs/RELEASE.md](docs/RELEASE.md)。バージョンの上げ忘れ・上げ間違いは
   `cargo test` の `version_consistency` が落とす
 
-## 会話・ドキュメント
+## 对话与文档
 
-- ユーザーへの説明は日本語で行う
-- git コミットメッセージはタイトル・本文とも日本語で書く
-- 設計変更をしたら docs/DESIGN.md も更新する
+- 本分支面向中文用户：**对用户的说明一律用简体中文**
+- **git 提交信息（标题与正文）用中文书写**
+- 设计变更后同步更新 docs/DESIGN.md
+- 界面文案改动请同时更新 `tools/zh_dict5.json`，保证汉化流程可复现

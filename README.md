@@ -1,178 +1,124 @@
-# DVM(Demodemo Video Manager)
+# DVM 中文增强版（DVM-zh）
 
-Windows 向けの動画管理ソフトです。動画ファイルを**コピーも移動もせず**、元の場所に置いたまま
-サムネイル・タグ・シリーズ・評価で整理します。外付け HDD や NAS に置いた大量の動画を
-そのまま扱えます。
+> **这是非官方分支。** 本项目基于 [demodemo / DVM (Demodemo Video Manager)](https://github.com/demodemo0818/dvm)
+> v1.43.0 修改而来，原始著作权归原作者 **demodemo** 所有，继续遵循 **GPL-3.0-or-later**。
+> 本仓库与上游官方项目没有隶属关系，也不代表原作者的意见或背书。
+> 修改内容与日期见下文「[本分支的改动](#本分支的改动)」及 [CHANGELOG-zh.md](CHANGELOG-zh.md)。
 
-![DVM のメイン画面](docs/images/main.png)
+DVM 是一款 Windows 上的视频管理软件：**不复制、不移动视频文件**，片子留在原来的位置，
+用缩略图、标签、系列、评分在 SQLite 里建立索引。外接硬盘和 NAS 上的几万个视频也能直接管理。
 
-- サムネイルグリッド(仮想化済みなので数万件でも軽い)
-- タグ / タググループ / シリーズ / 評価 / スマートフォルダ
-- アプリ内再生(libmpv)、ホバープレビュー、視聴履歴とレジューム
-- 重複検出、見つからないファイルの検出と再リンク
-- **AI からの操作**(下記)
+![主界面](docs/images/main.png)
 
-| タグとシリーズで分類 | libmpv によるアプリ内再生 |
-|---|---|
-| ![タグ付け](docs/images/tags.png) | ![プレイヤー](docs/images/player.png) |
+> 截图取自上游版本，界面文本在本分支中已全部汉化为简体中文。
 
-使い方の詳しい説明は **[公式サイト(demo2.jp/dvm)](https://demo2.jp/dvm/)** にあります。
+- 缩略图网格（虚拟化，几万条也不卡）
+- 标签 / 标签组 / 系列 / 评分 / 智能文件夹 / 播放列表
+- 应用内播放（libmpv）、悬停预览、观看历史与断点续播
+- 重复检测、丢失文件检测与重新链接
+- 内置 MCP 服务器，可用 Claude Desktop / Claude Code 等 AI 客户端检索与整理库
 
-## 動作環境
+## 本分支的改动
 
-- Windows 10 / 11(64bit)
-- WebView2 ランタイム — Windows 11 には標準で入っています。無い場合はインストーラが自動で入れます
+| 项目 | 官方 DVM | DVM-zh |
+|---|---|---|
+| 界面语言 | 日文 | **简体中文**（约 570 处、54 个文件全量汉化）|
+| 悬停预览 | 悬停即自动播放 | **点播放按钮才播**，滚动列表不再白白转码 |
+| 预览画质 | 单一档位 | **三档可调**，持久缓存，可手动清理 |
+| 预览控制 | 只有播放 | 固定进度条（加载 / 播放双层）、点击跳转、**倍速 X1→X2→X4→X8** |
+| 预览并发 | — | **同时只转码一个**，点新的自动停旧的 |
+| 预览旋转 | — | **顺时针 / 逆时针 90° 写回源文件**，带圆环进度；MKV 等不支持的容器会拒绝并提示 |
+| 应用标识 | `jp.demo2.dvm` | `jp.demo2.dvm.zh`（**可与官方版并存**）|
+| 数据目录 | `%APPDATA%\jp.demo2.dvm` | `%APPDATA%\jp.demo2.dvm.zh`（首次启动自动迁移）|
 
-## インストール
+旋转采用**改写容器 display matrix、不重新编码**的方式，几秒完成且不掉画质；代价是只对
+MP4 / MOV 一类容器有效，MKV、AVI、WMV 会直接提示「无法同步修改源文件」而不是硬转。
 
-[Releases](https://github.com/demodemo0818/dvm/releases) から最新の
-`DVM_x.y.z_x64-setup.exe` をダウンロードして実行してください。FFmpeg も MCP サーバーも
-同梱されているので、別途用意するものはありません。
+## 下载与安装
 
-> [!IMPORTANT]
-> **「WindowsによってPCが保護されました」と出た場合**
->
-> コード署名証明書を付けていないため、Windows SmartScreen が警告を出します。
-> **「詳細情報」→「実行」** で進めてください。ダウンロードした exe を信用できるか
-> 確かめたい場合は、Releases に併記した SHA-256 ハッシュと照合できます。
+到 [Releases](../../releases/latest) 下载最新的 `DVM-zh_x.y.z_x64-setup.exe` 运行即可。
+FFmpeg 与 MCP 服务器都已同捆，不需要另外准备。
+
+> **提示「Windows 已保护你的电脑」**：因为没有购买代码签名证书，SmartScreen 会拦截。
+> 点「更多信息」→「仍要运行」。可用 Release 页附带的 SHA-256 校验安装包完整性：
 >
 > ```powershell
-> Get-FileHash .\DVM_1.43.0_x64-setup.exe
+> Get-FileHash .\DVM-zh_1.43.0_x64-setup.exe
 > ```
 
-データベースとサムネイルは「ライブラリフォルダ」(既定は
-`%APPDATA%\jp.demo2.dvm\libraries\マイライブラリ`)に保存されます。
-動画ファイル自体には触れません。
+系统要求：Windows 10 / 11 64 位；WebView2 运行时（Windows 11 自带，缺失时安装器会自动装）。
 
-アンインストールしてもライブラリフォルダは残ります。完全に消したい場合は
-`%APPDATA%\jp.demo2.dvm` とライブラリフォルダを手で削除してください。
+## 首次启动与旧数据迁移
 
-## 複数のライブラリを使い分ける
+如果你之前装过官方版 DVM，第一次启动 DVM-zh 时会自动执行一次迁移：
 
-用途ごとに中身を完全に分けられます。サイドバー上部のライブラリ名をクリックすると、
-切り替え・新規作成・既存のライブラリを開くができます(切り替えるとアプリが再起動します)。
+1. 把 `%APPDATA%\jp.demo2.dvm` 下的 `app.db` 与 `libraries\` 复制到 `%APPDATA%\jp.demo2.dvm.zh`
+2. 改写库记录里的绝对路径，指向新目录
+3. 原目录**保持不动**，官方版可以继续用
 
-- 動画・タグ・シリーズ・監視フォルダはライブラリごとに分かれます
-- 見た目の設定・API キー・外部プレイヤーなどはアプリ全体で共有されます
-- 置き場所は自由に選べます。**外付け HDD に置けば、ドライブごと別の PC に持ち運べます**
-  (別の PC では「既存のライブラリを開く」から選びます)
-- AI(MCP)が見るのは、いま DVM で開いているライブラリです。切り替えても
-  AI 側の設定を変える必要はありません
+迁移只在「新目录还没有 app.db」时发生一次。之后两个版本的库索引各自独立演进。
 
-## AI から操作する
+> 如果迁移失败，程序会照常启动并显示空库，日志里会打印原因；此时可以用侧边栏的
+> 「打开已有库」手动指向原来的库文件夹。
 
-DVM には AI 連携の入口が 2 つあります。**既に契約している AI アプリ(Claude Pro / Max など)
-をそのまま使いたい場合は MCP のほうを選んでください。**
+## 与官方版共存
 
-| | MCP 連携 | アプリ内 AI アシスタント |
-|---|---|---|
-| 使う場所 | Claude Desktop など別のアプリ | DVM のツールバー ✨ |
-| 必要なもの | 対応 AI アプリ(サブスクで可) | API キー(従量課金)またはローカル LLM |
-| 使える AI | MCP 対応クライアント全般 | Claude / GPT / Gemini / OpenAI 互換 |
-| DVM の起動 | 不要 | 必要 |
-| できること | 検索・統計・タグ付け・評価・シリーズ整理 | 左に同じ + 画面のグリッドを直接絞り込む |
+两个版本的库索引互相独立，但**指向的是同一批视频文件**。DVM 对视频文件只读（旋转功能
+是唯一的例外，且只在你主动点击时才会写），所以同时安装不会破坏素材。
 
-### MCP の設定(推奨)
+需要注意：**不要用两个版本同时打开同一个库文件夹**。SQLite 会加锁，而且两边的标签、
+评分会各改各的。要用官方版的库，就让 DVM-zh 用迁移出来的副本。
 
-DVM の **設定 → MCP 連携** を開くと、お使いのアプリに貼り付ける内容がそのまま出ます。
-コピーボタンを押して貼り付けるだけです。
+## 从源码构建
 
-- **Claude Desktop** — 設定 → 開発者 → 「構成を編集」で設定ファイルを開き、
-  表示された JSON を貼り付けて再起動します(ファイルの場所はアプリによって違うので、
-  自分でパスを探すより「構成を編集」から開くほうが確実です)
-- **Claude Code** — 表示されたコマンド(`claude mcp add dvm -s user -- "..."`)を
-  PowerShell に貼り付けて実行します
-- **その他**(Cursor / Cline / VS Code など)— 同じ `mcpServers` 形式の JSON が使えます
-
-> **JSON を貼り付けるときの注意**: 設定ファイルに既に中身がある場合、貼り付ける直前の行の
-> 末尾に `,` が要ります。これが抜けると JSON として壊れ、**AI アプリ自体が起動時に
-> エラーになります**(MCP が動かないのではなく、アプリが設定を読めなくなります)。
->
-> ```json
->   "既存の設定": "値",          ← このカンマを忘れない
->   "mcpServers": { ... }
-> ```
-
-設定できたら、AI にこんなふうに話しかけられます。
-
-- 「ライブラリの統計を見せて」
-- 「タグが付いてない動画を 20 件教えて」
-- 「FHD 以上で 30 分を超える未視聴の動画を探して」
-- 「内容が重複してる動画ある?」
-
-**既定では読み取り専用です。** データベースを読み取り専用で開くため、AI がライブラリを
-変更することは構造的にできません。設定画面の「AI からの変更を許可する」をオンにすると、
-タグ・評価・シリーズの編集もできるようになります(変更はすべて操作履歴に `ai` として残ります)。
-ファイルをごみ箱へ送る操作だけは、オンにしても必ず対象一覧の確認を挟みます。
-
-DB の場所を変えている場合は、設定に環境変数 `DVM_DB` でフルパスを指定してください。
-
-### アプリ内 AI アシスタント
-
-設定 → AI 連携 で使う AI を選び、その API キーを入れると、ツールバーの ✨ から使えるように
-なります。自然言語での検索結果をそのままグリッドに反映できるのがこちらの利点です。
-
-| 選べる AI | 必要なもの | 既定のモデル |
-|---|---|---|
-| Anthropic (Claude) | `sk-ant-...`([console.anthropic.com](https://console.anthropic.com)) | `claude-opus-5` |
-| OpenAI (GPT) | `sk-...`([platform.openai.com](https://platform.openai.com)) | `gpt-5` |
-| Google Gemini | `AIza...`([aistudio.google.com](https://aistudio.google.com)) | `gemini-2.5-pro` |
-| OpenAI 互換 | ベース URL(+ 必要ならキー) | 自分で指定 |
-
-**サブスクリプション(Claude Pro / Max、ChatGPT Plus など)では使えません** —— どの会社も
-API は従量課金の別契約です。サブスクのまま使いたい場合は上の MCP 連携をお使いください。
-
-「OpenAI 互換」を選ぶと、OpenRouter・Ollama・LM Studio など OpenAI 互換の API を持つ
-サービスやローカル LLM に繋げます。**ローカル LLM なら API 料金はかかりません**
-(ベース URL のプリセットボタンから選べます)。
-
-モデルは候補から選べますが手入力もできます。費用を抑えたいときは `claude-haiku-4-5` や
-`gpt-5-mini`、`gemini-2.5-flash` などに変更してください。
-
-> [!WARNING]
-> **API キーは暗号化されずに保存されます。** `%APPDATA%\jp.demo2.dvm\app.db` に平文で
-> 入るため、その PC を使える人はキーを読み出せます。共用 PC では使わないでください
-> (Windows DPAPI での保護は今後の課題です)。
-
-## 開発
-
-初回だけ、同梱するバイナリを揃えます。**これをやらないと `cargo` のビルドが
-「resource path ... doesn't exist」で止まります**(`tauri.conf.json` の `bundle.resources` に
-書いてあるファイルの実在をビルドスクリプトが確認するため)。
+完整步骤见 [BUILD-zh.md](BUILD-zh.md)。简版：
 
 ```powershell
 npm install
-powershell -ExecutionPolicy Bypass -File scripts/fetch-ffmpeg.ps1
-npx tauri-plugin-libmpv-api setup-lib
-npm run build:mcp -- -Config debug   # 開発用。配布ビルドでは release 版が自動で作られる
+powershell -ExecutionPolicy Bypass -File scripts/fetch-ffmpeg.ps1   # 取 FFmpeg / ffprobe
+npx tauri-plugin-libmpv-api setup-lib                                # 取 libmpv
+npm run build:mcp                                                    # 构建 MCP 服务器
+npm run tauri build                                                  # 出安装包
 ```
 
-あとは通常どおり起動できます。
+要求 Node 18+、Rust（MSVC 工具链）、Visual Studio Build Tools 2022（C++ 桌面开发工作负载）
+与 Windows SDK。中文路径下构建可能遇到 MSVC 环境探测问题，`BUILD-zh.md` 里有说明。
 
-```powershell
-npm run tauri dev
-```
-
-| コマンド | 内容 |
+| 命令 | 作用 |
 |---|---|
-| `npm run tauri dev` | 開発起動(フロント HMR + Rust 自動再ビルド) |
-| `npm run tauri build` | 配布ビルド(MCP サーバーのビルドと同梱まで自動) |
-| `npm run build:mcp` | MCP サーバーだけをビルドして `src-tauri/binaries/` に配置 |
-| `npm run test` | フロントの純関数テスト(vitest) |
-| `cd src-tauri && cargo test` | コアロジックのテスト |
-| `cd src-tauri && cargo check` | Rust の型チェック |
+| `npm run tauri dev` | 开发模式（前端热更新 + Rust 自动重编译）|
+| `npm run tauri build` | 出安装包（自动先构建 MCP 服务器）|
+| `npm run test` | 前端纯函数测试（vitest）|
+| `cd src-tauri && cargo test` | 后端与核心逻辑测试 |
 
-設計の全体像・データモデル・ロードマップは [docs/DESIGN.md](docs/DESIGN.md) にあります。
+## 汉化是怎么做的
 
-## ライセンス
+`tools/` 里保留了完整的汉化工具链，可复现，不是一次性手工替换：
 
-**GPL-3.0-or-later**([LICENSE](LICENSE))。
+| 脚本 | 作用 |
+|---|---|
+| `jp_scan.py` / `extract_jp.py` | 扫描 `.tsx` / `.rs` 里的日文字符串，导出清单 |
+| `kanji_scan.py` | 按汉字出现率识别残留日文 |
+| `dict.mjs` / `zh_dict5.json` | 日→中词条映射（491 条）|
+| `apply_zh.py` / `apply-translate.mjs` | 按清单回写译文，保留占位符与 JSX 结构 |
+| `residual_strings.mjs` | 复查残留日文并出报告（`*_report.md`）|
 
-GPL を選んでいるのは、サムネイル生成と変換に使う **FFmpeg を GPL ビルドのまま同梱している**
-ためです。同梱している FFmpeg / libmpv のライセンスとソース入手先は
-[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) にまとめてあります。
+未翻译的部分是刻意保留的：MCP 接口描述与协议文本、日志输出、代码注释、字体名与示例路径。
+它们不影响界面观感，翻成中文反而会让排查问题和对接 AI 客户端变难。
 
-Copyright (C) 2026 demodemo
+## 已知限制
 
-このプログラムはフリーソフトウェアです。**まったく無保証**です。詳しくは
-GNU General Public License をお読みください。
+- 只提供 Windows x64 构建，macOS / Linux 未经测试
+- 旋转仅支持能写入 display matrix 的容器（MP4 / MOV），其它容器会明确拒绝
+- 安装包未做代码签名，首次运行会被 SmartScreen 拦截
+- 与上游的界面结构保持一致，未做布局改动，方便日后合并上游更新
+
+## 许可与致谢
+
+- 本分支：**GPL-3.0-or-later**，见 [LICENSE](LICENSE)
+- 原始项目：Copyright (C) 2026 **demodemo** — <https://github.com/demodemo0818/dvm>
+- 同捆的 FFmpeg（GPL 构建）与 libmpv（动态链接）版权归各自权利人，
+  版本与源码获取方式见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
+- 上游日文 README 原件保留在 [README.upstream.ja.md](README.upstream.ja.md)
+
+本项目**完全没有担保**。整理视频库属于会改动文件的操作，重要素材请先自行备份。

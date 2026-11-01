@@ -83,7 +83,7 @@ pub fn rename_library(state: State<AppState>, id: String, name: String) -> Resul
 #[tauri::command]
 pub fn forget_library(state: State<AppState>, id: String) -> Result<(), String> {
     if id == state.library_id && state.library_status == LibraryStatus::Ok {
-        return Err("開いているライブラリは一覧から外せません".into());
+        return Err("无法将当前打开的媒体库从列表中移除".into());
     }
     let conn = state.app_db.lock().unwrap();
     libraries::forget(&conn, &id).map_err(|e| e.to_string())
@@ -105,7 +105,7 @@ pub fn switch_library(app: AppHandle, id: String) -> Result<(), String> {
         let conn = state.app_db.lock().unwrap();
         libraries::get(&conn, &id)
             .map_err(|e| e.to_string())?
-            .ok_or_else(|| "そのライブラリは一覧にありません".to_string())?
+            .ok_or_else(|| "该媒体库不在列表中".to_string())?
     };
     // **再起動する前に必ず確かめる。** 開けないものに切り替えると次の起動が
     // 復旧画面から始まることになり、原因がユーザーから見えない

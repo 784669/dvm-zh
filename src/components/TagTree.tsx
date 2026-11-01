@@ -10,23 +10,23 @@ import { pickState, useLibrary } from '../store';
 import type { Tag, TagGroup } from '../types';
 import { ContextMenu } from './ContextMenu';
 
-/** 折りたたんだグループの id。未分類は id を持たないので 0 で表す(グループ id は 1 以上) */
+/** 折りたたんだ群组の id。未分類は id を持たないので 0 で表す(群组 id は 1 以上) */
 const UNGROUPED = 0;
 
 /**
- * 折りたたみ状態の保存キー。**ライブラリごとに分ける**(v1.27) ——
- * 中身は `tag_groups.id` の配列で、id はライブラリごとに別物なので、
- * 共有すると「ジャンル(id=3)」を畳んだ状態が別のライブラリの
- * 「出演者(id=3)」に効いて、身に覚えのないグループが畳まれる
+ * 折りたたみ状態の保存キー。**媒体库ごとに分ける**(v1.27) ——
+ * 中身は `tag_groups.id` の配列で、id は媒体库ごとに別物なので、
+ * 共有すると「ジャンル(id=3)」を畳んだ状態が別の媒体库の
+ * 「出演者(id=3)」に効いて、身に覚えのない群组が畳まれる
  */
 const collapsedKey = (libraryId: string) => `dvm.collapsedTagGroups.${libraryId}`;
 
 /**
- * ドラッグとみなすまでの移動量(px)。これ未満はクリック(絞り込みのトグル)として扱う。
+ * ドラッグとみなすまでの移動量(px)。これ未満は点击(筛选のトグル)として扱う。
  *
  * **HTML5 の D&D は使えない**。Tauri のドラッグ&ドロップハンドラを無効にしないと
  * Windows では draggable / onDrop が動かず、無効にすると App.tsx の onDragDropEvent
- * (フォルダを落として監視フォルダ登録)が壊れる。なのでポインタイベントで自前実装する
+ * (文件夹を落として监视文件夹登録)が壊れる。なのでポインタイベントで自前実装する
  */
 const DRAG_THRESHOLD = 4;
 
@@ -40,29 +40,29 @@ function loadCollapsed(libraryId: string): Set<number> {
 }
 
 /**
- * タグの削除。**確認からここに閉じ込める**(v1.20)。
- * `⋯` の編集パネルと右クリックメニューの両方から呼ぶので、
+ * 删除标签。**確認からここに閉じ込める**(v1.20)。
+ * `⋯` の編集パネルと右键菜单の両方から呼ぶので、
  * 文言をコピペすると片方だけ直して挙動がずれる。消えたら true
  */
 async function confirmDeleteTag(tag: Tag): Promise<boolean> {
   const yes = await ask(
-    `タグ「${tag.name}」を削除しますか?\n(${tag.videoCount} 件の動画から外れます。動画自体は消えません)`,
-    { title: 'タグの削除' },
+    `要删除标签「${tag.name}」吗？\n（将从 ${tag.videoCount} 个视频中移除。视频本身不会被删除）`,
+    { title: '删除标签' },
   );
   if (!yes) return false;
   const { tagIds, toggleTagFilter, bumpVersion } = useLibrary.getState();
   await api.deleteTag(tag.id);
-  // 消したタグで絞り込んだままだと 0 件になって戻れなくなる
+  // 消した标签で絞り込んだままだと 0 个なって戻れなくなる
   if (tagIds.includes(tag.id)) toggleTagFilter(tag.id);
   bumpVersion();
   return true;
 }
 
-/** グループの削除。中のタグは消えず未分類に落ちる。呼び出し口は上と同じ理由で 1 つ */
+/** 删除分组。中の标签は消えず未分類に落ちる。呼び出し口は上と同じ理由で 1 つ */
 async function confirmDeleteGroup(group: TagGroup): Promise<boolean> {
   const yes = await ask(
-    `グループ「${group.name}」を削除しますか?\n(${group.tagCount} 個のタグは未分類に移ります。動画に付いたタグはそのままです)`,
-    { title: 'グループの削除' },
+    `要删除分组「${group.name}」吗？\n（${group.tagCount} 个标签将移到未分类。已添加到视频上的标签保持不变）`,
+    { title: '删除分组' },
   );
   if (!yes) return false;
   await api.deleteTagGroup(group.id);
@@ -94,13 +94,13 @@ function TagEditor({ tag, groups, onDone }: { tag: Tag; groups: TagGroup[]; onDo
               apply(() => api.renameTag(tag.id, name.trim()));
             }
           }}
-          placeholder="タグ名"
+          placeholder="标签名"
         />
         <button
           disabled={!name.trim() || name === tag.name}
           onClick={() => apply(() => api.renameTag(tag.id, name.trim()))}
         >
-          名前を変更
+          重命名
         </button>
       </div>
 
@@ -117,7 +117,7 @@ function TagEditor({ tag, groups, onDone }: { tag: Tag; groups: TagGroup[]; onDo
         ))}
         <button
           className="tag-swatch none"
-          title="色なし"
+          title="无颜色"
           onClick={() => apply(() => api.setTagColor(tag.id, null))}
         >
           ×
@@ -125,7 +125,7 @@ function TagEditor({ tag, groups, onDone }: { tag: Tag; groups: TagGroup[]; onDo
       </div>
 
       <div className="tag-editor-row">
-        <span className="tag-editor-label">グループ</span>
+        <span className="tag-editor-label">群组</span>
         <select
           value={tag.groupId ?? ''}
           onChange={(e) => {
@@ -147,12 +147,12 @@ function TagEditor({ tag, groups, onDone }: { tag: Tag; groups: TagGroup[]; onDo
             if (await confirmDeleteTag(tag)) onDone();
           }}
         >
-          タグを削除
+          删除标签
         </button>
-        <button onClick={onDone}>閉じる</button>
+        <button onClick={onDone}>关闭</button>
       </div>
       {tag.videoCount === 0 && (
-        <div className="tag-editor-note">このタグが付いた動画はまだありません</div>
+        <div className="tag-editor-note">还没有带有此标签的视频</div>
       )}
     </div>
   );
@@ -190,20 +190,20 @@ function GroupEditor({
               apply(() => api.renameTagGroup(group.id, name.trim()));
             }
           }}
-          placeholder="グループ名"
+          placeholder="分组名称"
         />
         <button
           disabled={!name.trim() || name === group.name}
           onClick={() => apply(() => api.renameTagGroup(group.id, name.trim()))}
         >
-          名前を変更
+          重命名
         </button>
       </div>
 
       <div className="tag-editor-row">
-        <span className="tag-editor-label">並び順</span>
-        <button disabled={index === 0} onClick={() => onMove(-1)}>↑ 上へ</button>
-        <button disabled={index === total - 1} onClick={() => onMove(1)}>↓ 下へ</button>
+        <span className="tag-editor-label">排序</span>
+        <button disabled={index === 0} onClick={() => onMove(-1)}>↑ 上移</button>
+        <button disabled={index === total - 1} onClick={() => onMove(1)}>↓ 下移</button>
       </div>
 
       <div className="tag-editor-row">
@@ -213,33 +213,33 @@ function GroupEditor({
             if (await confirmDeleteGroup(group)) onDone();
           }}
         >
-          グループを削除
+          删除群组
         </button>
-        <button onClick={onDone}>閉じる</button>
+        <button onClick={onDone}>关闭</button>
       </div>
     </div>
   );
 }
 
 /**
- * サイドバーのタグ一覧。tag_groups > tags の 2 階層で出す(v1.19)。
+ * 侧边栏の标签一覧。tag_groups > tags の 2 階層で出す(v1.19)。
  *
- * グループ見出しをクリックすると配下タグをまとめて絞り込みに入れる。
- * 同じグループのタグ同士は Rust 側(core/query.rs)で OR になるので、
- * 「このグループのタグが何か付いている動画」が出る
+ * 群组見出しを点击すると配下标签をまとめて筛选に入れる。
+ * 同じ群组の标签同士は Rust 側(core/query.rs)で OR になるので、
+ * 「この群组の标签が何か付いている動画」が出る
  */
 export function TagTree({
   tags, groups, filtering,
 }: {
   tags: Tag[];
   groups: TagGroup[];
-  /** サイドバーの絞り込みが効いているか。効いている間は畳まず、空のグループも出さない */
+  /** 侧边栏の筛选が効いているか。効いている間は畳まず、空の群组も出さない */
   filtering: boolean;
 }) {
   const { tagIds, toggleTagFilter, setTagFilter, bumpVersion, libraryId } = useLibrary(
     useShallow(pickState('tagIds', 'toggleTagFilter', 'setTagFilter', 'bumpVersion', 'libraryId')),
   );
-  // ライブラリ id が分かってから読む(App.tsx が起動直後に 1 回だけ入れる)。
+  // 媒体库 id が分かってから読む(App.tsx が起動直後に 1 回だけ入れる)。
   // それまでは畳まれていない状態 = 全部見えている側に倒す
   const [collapsed, setCollapsed] = useState<Set<number>>(new Set());
   useEffect(() => {
@@ -247,14 +247,14 @@ export function TagTree({
   }, [libraryId]);
   const [editingTag, setEditingTag] = useState<number | null>(null);
   const [editingGroup, setEditingGroup] = useState<number | null>(null);
-  // 作成フォームの表示先。tag は「どのグループに作るか」を持つ(null = 未分類)
+  // 作成フォームの表示先。tag は「どの群组に作るか」を持つ(null = 未分類)
   const [creating, setCreating] =
     useState<{ kind: 'group' } | { kind: 'tag'; groupId: number | null } | null>(null);
   const [newName, setNewName] = useState('');
 
   /**
    * D&D の状態。**掴むものによってドロップ先の意味が違う**ので判別可能ユニオンにしてある:
-   * タグはグループの上に落として所属を変え、グループは他のグループの前後に落として並べ替える
+   * 标签は群组の上に落として所属を変え、群组は他の群组の前後に落として排列る
    */
   const dragStart = useRef<{ kind: 'tag' | 'group'; id: number; x: number; y: number } | null>(null);
   const [dragging, setDragging] = useState<
@@ -262,18 +262,18 @@ export function TagTree({
     | { kind: 'group'; id: number; x: number; y: number; insertAt: number | null }
     | null
   >(null);
-  // ドラッグで終わった pointerup の直後に click が来るので、絞り込みのトグルを 1 回だけ抑える
+  // ドラッグで終わった pointerup の直後に click が来るので、筛选のトグルを 1 回だけ抑える
   const suppressClick = useRef(false);
 
-  /** 右クリックメニュー(v1.20)。対象はタグ 1 個かグループ見出し(未分類は group=null) */
+  /** 右键菜单(v1.20)。対象は标签 1 個か群组見出し(未分類は group=null) */
   const { menu, open: openMenu, close: closeMenu } = useContextMenu<
     { kind: 'tag'; tag: Tag } | { kind: 'group'; group: TagGroup | null; index: number }
   >();
 
   /**
-   * ドラッグ中の右クリックはドラッグを中止してメニューを出さない(エクスプローラーと同じ)。
+   * ドラッグ中の右点击はドラッグを中止してメニューを出さない(エクスプローラーと同じ)。
    * `onDragPointerDown` が `e.button !== 0` で弾くのでドラッグ自体は始まらないが、
-   * **左ボタンで掴んだままの右クリック**では pointerup が来ず、掴んだ状態が宙に浮く
+   * **左ボタンで掴んだままの右点击**では pointerup が来ず、掴んだ状態が宙に浮く
    */
   const cancelDragForMenu = () => {
     if (!dragStart.current && !dragging) return false;
@@ -300,7 +300,7 @@ export function TagTree({
       const over = el instanceof HTMLElement ? Number(el.dataset.dropGroup) : null;
       setDragging({ kind: 'tag', id: start.id, x: e.clientX, y: e.clientY, overGroup: over });
     } else {
-      // グループは「どのグループの前に入るか」。見出しの上半分なら手前、下半分なら次の位置
+      // 群组は「どの群组の前に入るか」。見出しの上半分なら手前、下半分なら次の位置
       const el = at?.closest('[data-group-index]');
       let insertAt: number | null = null;
       if (el instanceof HTMLElement) {
@@ -317,17 +317,17 @@ export function TagTree({
     const drop = dragging;
     dragStart.current = null;
     setDragging(null);
-    if (!start || !drop) return; // 動かしていない = ただのクリック
+    if (!start || !drop) return; // 動かしていない = ただの点击
     suppressClick.current = true;
-    // click が来なかったとき(ドロップ先がボタンの上だった等)にフラグが残って
-    // 次のクリックを食べてしまわないよう、同じイベントループの最後で必ず戻す
+    // click が来なかったとき(ドロップ先がボタンの上だった等)に标志が残って
+    // 次の点击を食べてしまわないよう、同じイベントループの最後で必ず戻す
     setTimeout(() => {
       suppressClick.current = false;
     }, 0);
     try {
       if (drop.kind === 'tag') {
         const tag = tags.find((t) => t.id === drop.id);
-        // ドロップ先が無い(サイドバーの外)か、元と同じグループなら何もしない
+        // ドロップ先が無い(侧边栏の外)か、元と同じ群组なら何もしない
         if (drop.overGroup === null || !tag) return;
         if ((tag.groupId ?? UNGROUPED) === drop.overGroup) return;
         await api.setTagGroup(tag.id, drop.overGroup === UNGROUPED ? null : drop.overGroup);
@@ -353,12 +353,12 @@ export function TagTree({
       const next = new Set(cur);
       if (next.has(id)) next.delete(id);
       else next.add(id);
-      // id が分かる前に書くと、どのライブラリのものか分からない行が残る
+      // id が分かる前に書くと、どの媒体库のものか分からない行が残る
       if (libraryId) localStorage.setItem(collapsedKey(libraryId), JSON.stringify([...next]));
       return next;
     });
 
-  // グループごとに仕分ける。消えたグループを指すタグは未分類に落とす(参照切れ対策)
+  // 群组ごとに仕分ける。消えた群组を指す标签は未分類に落とす(参照切れ対策)
   const known = new Set(groups.map((g) => g.id));
   const byGroup = new Map<number, Tag[]>();
   for (const t of tags) {
@@ -401,7 +401,7 @@ export function TagTree({
     }
   };
 
-  /** グループ見出しのクリックと同じ絞り込み。配下タグをまとめて入れ替える */
+  /** 群组見出しの点击と同じ筛选。配下标签をまとめて入れ替える */
   const toggleGroupFilter = (ids: number[]) => {
     if (ids.length === 0) return;
     const allOn = ids.every((id) => tagIds.includes(id));
@@ -410,7 +410,7 @@ export function TagTree({
     );
   };
 
-  /** 右クリックメニューの実行(v1.20)。削除は `⋯` の編集パネルと同じ関数を通す */
+  /** 右键菜单の実行(v1.20)。削除は `⋯` の編集パネルと同じ関数を通す */
   const runMenuAction = async (
     id: string,
     target: { kind: 'tag'; tag: Tag } | { kind: 'group'; group: TagGroup | null; index: number },
@@ -434,7 +434,7 @@ export function TagTree({
           case 'tag:filter': toggleTagFilter(tag.id); break;
           case 'tag:filterOnly': setTagFilter([tag.id]); break;
           case 'tag:rename': {
-            const name = window.prompt('新しいタグ名', tag.name);
+            const name = window.prompt('新标签名称', tag.name);
             if (name === null || name.trim() === '' || name.trim() === tag.name) return;
             await api.renameTag(tag.id, name.trim());
             bumpVersion();
@@ -457,7 +457,7 @@ export function TagTree({
         case 'group:newGroup': startCreate({ kind: 'group' }); break;
         case 'group:rename': {
           if (!group) return;
-          const name = window.prompt('新しいグループ名', group.name);
+          const name = window.prompt('新分组名称', group.name);
           if (name === null || name.trim() === '' || name.trim() === group.name) return;
           await api.renameTagGroup(group.id, name.trim());
           bumpVersion();
@@ -506,7 +506,7 @@ export function TagTree({
           setDragging(null);
         }}
         onClick={() => {
-          // ドラッグで終わったときは絞り込みを切り替えない
+          // ドラッグで終わったときは筛选を切り替えない
           if (suppressClick.current) return;
           toggleTagFilter(t.id);
         }}
@@ -514,15 +514,15 @@ export function TagTree({
           if (cancelDragForMenu()) return;
           openMenu(e, buildTagMenu(t, groups, tagIds), { kind: 'tag', tag: t });
         }}
-        title={`${t.name}(クリックで絞り込み。グループの見出しへドラッグすると移動できます)`}
+        title={`${t.name}（点击筛选。拖到分组标题上即可移动）`}
       >
-        {/* タグ色の丸。監視フォルダの接続状態(.dot)と同じ CSS の円にしている */}
+        {/* 标签色の丸。监视文件夹の接続状態(.dot)と同じ CSS の円にしている */}
         <span className="tag-dot" style={t.color ? { background: t.color } : undefined} />
         <span className="folder-name">{t.name}</span>
         <span className="count">{t.videoCount}</span>
         <button
           className="remove"
-          title="タグを編集(名前・色・グループ・削除)"
+          title="编辑标签（名称·颜色·分组·删除）"
           // ここを掴んでもドラッグを始めない(ボタンとして押せなくなるため)
           onPointerDown={(e) => e.stopPropagation()}
           onClick={(e) => {
@@ -539,19 +539,19 @@ export function TagTree({
     </div>
   );
 
-  /** グループ / 未分類の見出し行。未分類は id を持たないので group = null で呼ぶ */
+  /** 群组 / 未分類の見出し行。未分類は id を持たないので group = null で呼ぶ */
   const renderHeader = (group: TagGroup | null, index: number) => {
     const key = group?.id ?? UNGROUPED;
     const groupTags = byGroup.get(key) ?? [];
     const ids = groupTags.map((t) => t.id);
-    // 配下タグが全部選ばれていれば「グループごと選択中」とみなす
-    // 絞り込みで空になったグループは見出しごと消す。
+    // 配下标签が全部選ばれていれば「群组ごと選択中」とみなす
+    // 筛选で空になった群组は見出しごと消す。
     // ただしドラッグ中は「移動先」として要るので残す
     if (filtering && groupTags.length === 0 && !dragging) return null;
     const allOn = ids.length > 0 && ids.every((id) => tagIds.includes(id));
-    // 絞った結果が畳まれていては意味がないので、絞り込み中は必ず開く
+    // 絞った結果が畳まれていては意味がないので、筛选中は必ず打开
     const isCollapsed = !filtering && collapsed.has(key);
-    // ドラッグ中のタグを受け入れられるか(元と同じグループには落とせない)
+    // ドラッグ中の标签を受け入れられるか(元と同じ群组には落とせない)
     const tagDrag = dragging?.kind === 'tag' ? dragging : null;
     const draggingTag = tagDrag ? tags.find((t) => t.id === tagDrag.id) : undefined;
     const isDropTarget =
@@ -560,7 +560,7 @@ export function TagTree({
       draggingTag != null &&
       (draggingTag.groupId ?? UNGROUPED) !== key;
 
-    // グループの並べ替え中の挿入位置。動かない位置(自分のすぐ前後)には線を出さない
+    // 群组の排列中の挿入位置。動かない位置(自分のすぐ前後)には線を出さない
     const groupDrag = dragging?.kind === 'group' ? dragging : null;
     const from = groupDrag ? groups.findIndex((g) => g.id === groupDrag.id) : -1;
     const insertAt =
@@ -579,9 +579,9 @@ export function TagTree({
       <div
         key={`g${key}`}
         className={cls}
-        // 未分類は並べ替えの対象外(常に最後)なので index を持たせない。
-        // 見出しではなく**ブロック全体**に付けるのは、展開したまま並べ替えるときに
-        // 配下タグの上を通っても挿入位置の線が消えないようにするため
+        // 未分類は排列の対象外(常に最後)なので index を持たせない。
+        // 見出しではなく**ブロック全体**に付けるのは、展開したまま排列るときに
+        // 配下标签の上を通っても挿入位置の線が消えないようにするため
         {...(group ? { 'data-group-index': index } : {})}
       >
         <div
@@ -597,7 +597,7 @@ export function TagTree({
             setDragging(null);
           }}
           onClick={() => {
-            // 並べ替えのドラッグで終わったときは絞り込みを切り替えない
+            // 排列のドラッグで終わったときは筛选を切り替えない
             if (suppressClick.current) return;
             toggleGroupFilter(ids);
           }}
@@ -612,15 +612,15 @@ export function TagTree({
           title={[
             group?.name ?? '未分類',
             ids.length === 0
-              ? '(タグがまだありません'
-              : '(クリックでこの中のタグが付いた動画をまとめて表示',
-            group ? '。上下にドラッグで並べ替え)' : ')',
+              ? '（还没有标签'
+              : '（点击可汇总显示带有其中标签的视频',
+            group ? '。上下拖动可排序）' : ')',
           ].join('')}
         >
           <button
             className={`tree-toggle ${isCollapsed ? '' : 'open'}`}
-            title={isCollapsed ? 'タグを表示' : 'タグを隠す'}
-            // ここを掴んでも並べ替えを始めない(ボタンとして押せなくなるため)
+            title={isCollapsed ? '显示标签' : '隐藏标签'}
+            // ここを掴んでも排列を始めない(ボタンとして押せなくなるため)
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => {
               e.stopPropagation();
@@ -634,7 +634,7 @@ export function TagTree({
           <span className="count">{groupTags.length}</span>
           <button
             className="remove"
-            title={group ? `「${group.name}」にタグを追加` : 'グループに属さないタグを追加'}
+            title={group ? `「${group.name}」添加标签` : '添加不属于任何分组的标签'}
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => {
               e.stopPropagation();
@@ -646,7 +646,7 @@ export function TagTree({
           {group && (
             <button
               className="remove"
-              title="グループを編集(名前・並び順・削除)"
+              title="编辑分组（名称·排序·删除）"
               onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
@@ -667,7 +667,7 @@ export function TagTree({
           />
         )}
         {creating?.kind === 'tag' && creating.groupId === (group?.id ?? null) &&
-          createForm('タグ名を入力して Enter')}
+          createForm('输入标签名后按 Enter')}
         {!isCollapsed && groupTags.map(renderTag)}
       </div>
     );
@@ -675,27 +675,27 @@ export function TagTree({
 
   return (
     <>
-      {/* 絞り込み中は作成ボタンを出さない — 探している最中に出ていても邪魔なだけ */}
+      {/* 筛选中は作成ボタンを出さない — 探している最中に出ていても邪魔なだけ */}
       {!filtering && (
         <>
           <div className="tag-tree-head">
-            <button onClick={() => startCreate({ kind: 'group' })} title="タグをまとめる軸を作る">
-              <Plus size={12} /> グループ
+            <button onClick={() => startCreate({ kind: 'group' })} title="创建归纳标签的分类轴">
+              <Plus size={12} /> 群组
             </button>
             <button
               onClick={() => startCreate({ kind: 'tag', groupId: null })}
-              title="グループに属さないタグを作る"
+              title="创建不属于任何分组的标签"
             >
-              <Plus size={12} /> タグ
+              <Plus size={12} /> 标签
             </button>
           </div>
-          {creating?.kind === 'group' && createForm('グループ名を入力して Enter')}
+          {creating?.kind === 'group' && createForm('输入分组名后按 Enter')}
         </>
       )}
 
       {groups.map((g, i) => renderHeader(g, i))}
       {/* 未分類は中身があるときだけ出す。作成フォームを開いている間と、
-          ドラッグ中(グループから外す先が要る)も出しておく */}
+          ドラッグ中(群组から外す先が要る)も出しておく */}
       {(ungrouped.length > 0 ||
         dragging != null ||
         (creating?.kind === 'tag' && creating.groupId === null)) &&
@@ -712,7 +712,7 @@ export function TagTree({
 
       {!filtering && tags.length === 0 && groups.length === 0 && (
         <div className="tag-tree-empty">
-          まずグループ(「ジャンル」など)とタグを作ると、動画を選んで詳細ペインから付けられます
+          先创建分组（如「类型」）和标签，之后选中视频即可在详情面板中添加
         </div>
       )}
 

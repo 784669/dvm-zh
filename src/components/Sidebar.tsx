@@ -38,7 +38,7 @@ const VIDEO_EXTENSIONS = [
   'rm', 'rmvb', 'asf', 'divx', '3gp',
 ];
 
-/** 右クリックメニューの対象(v1.20)。タグは TagTree、フォルダーツリーは FolderTree の担当 */
+/** 右键菜单の対象(v1.20)。标签は TagTree、文件夹ツリーは FolderTree の担当 */
 type MenuTarget =
   | { kind: 'wf'; folder: WatchedFolder }
   | { kind: 'sf'; sf: SmartFolder }
@@ -46,22 +46,22 @@ type MenuTarget =
   | { kind: 'playlist'; playlist: Playlist }
   // v1.42。セクション見出しの折りたたみ
   | { kind: 'section'; section: SectionKey; label: string }
-  // v1.27。これだけ右クリックではなくボタンの左クリックで開く
+  // v1.27。これだけ右点击ではなくボタンの左点击で打开
   | { kind: 'library' };
 
 /**
- * 折りたためるセクションの見出し(v1.42)。ライブラリタブの 5 か所で使う。
+ * 折りたためるセクションの見出し(v1.42)。媒体库タブの 5 か所で使う。
  *
- * **見出しの JSX はここ 1 本にする**。三角・件数・右クリックが付いて 1 か所 10 行になり、
- * 5 か所に写すと片方だけ直したときにずれる。三角の見た目は詳細ペインの
+ * **見出しの JSX はここ 1 本にする**。三角·件数·右点击が付いて 1 か所 10 行になり、
+ * 5 か所に写すと片方だけ直したときにずれる。三角の見た目は详情面板の
  * `.section-toggle` / `.section-chevron` をそのまま使う(もともと `.side-section` と
  * 同じトーンで作られている。App.css の v1.15 の節を参照)。
  *
- * **`<div>` で包まずフラグメントを返すこと**。`.sidebar` は `gap: 2px` の 1 段の flex で
- * 行がすべてその直接の子なので、包むとセクションまるごとが 1 個の flex アイテムに潰れて
- * 行間が消える(`MediaInfoSection` がフラグメントを返しているのも同じ理由)。
+ * **`<div>` で包まず标志メントを返すこと**。`.sidebar` は `gap: 2px` の 1 段の flex で
+ * 行が全部その直接の子なので、包むとセクションまるごとが 1 個の flex アイテムに潰れて
+ * 行間が消える(`MediaInfoSection` が标志メントを返しているのも同じ理由)。
  *
- * `children` にはその節の一覧だけでなく「+ フォルダを追加」のような**付属のボタンも入れる** ——
+ * `children` にはその節の一覧だけでなく「+ 添加文件夹」のような**付属のボタンも入れる** ——
  * 見出しを畳んだのにボタンだけ残ると、何に対する追加なのか分からなくなる
  */
 function SideSection({
@@ -72,7 +72,7 @@ function SideSection({
    *  開いている間も出すと同じ見た目の数字が 2 つの意味で並ぶ */
   count: number;
   collapsed: boolean;
-  /** 絞り込み中。畳みを無視して必ず開き、押しても何も起きない三角は消す */
+  /** 筛选中。畳みを無視して必ず開き、押しても何も起きない三角は消す */
   filtering: boolean;
   onToggle: () => void;
   onContextMenu: (e: React.MouseEvent) => void;
@@ -83,14 +83,14 @@ function SideSection({
     <>
       <div className="side-section-head" onContextMenu={onContextMenu}>
         {filtering ? (
-          // 絞り込み中は畳めないので、v1.41 までと同じただの見出しに戻す。
+          // 筛选中は畳めないので、v1.41 までと同じただの見出しに戻す。
           // 三角を残すと「押しても何も変わらないボタン」になる
           <span className="side-section-label">{label}</span>
         ) : (
           <button
             className={`section-toggle ${open ? 'open' : ''}`}
             onClick={onToggle}
-            title={open ? `${label}を隠す` : `${label}を表示`}
+            title={open ? `${label}隐藏` : `${label}显示`}
           >
             {/* 開閉でアイコンを変えず CSS で回す(形が変わると大きさが違って見える) */}
             <ChevronDown className="section-chevron" />
@@ -105,7 +105,7 @@ function SideSection({
 }
 
 /**
- * いま画面に効いている絞り込みを VideoQuery にする(スマートフォルダの上書き用)。
+ * いま画面に効いている筛选を VideoQuery にする(覆盖智能文件夹用)。
  * store は FilterState を丸ごと含んでいるのでそのまま渡す ——
  * 項目を書き写すと、条件が増えたときにここだけ古いまま残る
  */
@@ -139,20 +139,20 @@ export function Sidebar() {
   const [missingCount, setMissingCount] = useState(0);
   const [duplicateCount, setDuplicateCount] = useState(0);
   const [relinkPlan, setRelinkPlan] = useState<PlanItem[] | null>(null);
-  // ライブラリの切り替え(v1.27)。一覧は version で取り直す —— 設定モーダルで
+  // 切换媒体库(v1.27)。一覧は version で取り直す —— 設定モーダルで
   // 名前を変えたときにボタンの表示を追従させるため(切り替え自体は再起動なので稀)
   const [libraries, setLibraries] = useState<LibraryEntry[]>([]);
   const [switching, setSwitching] = useState(false);
   const { menu, open: openMenu, openAt, close: closeMenu } = useContextMenu<MenuTarget>();
-  // ライブラリタブの項目名で絞り込む(v1.19)。DB は引かず手元の配列を絞るだけなので
+  // 媒体库タブの項目名で絞り込む(v1.19)。DB は引かず手元の配列を絞るだけなので
   // デバウンスは要らない。動画そのものの検索はツールバー側の担当
   const [sideFilter, setSideFilter] = useState('');
   /*
    * 畳んでいるセクション(v1.42)。項目が増えると左ペインが縦に伸びきるので節ごとに畳める。
    *
-   * **localStorage ではなく settings に持つ**。TagTree のグループを localStorage に
-   * 置いているのは中身が `tag_groups.id` でライブラリごとに別物だからで、
-   * こちらのキーはライブラリに依存しない固定文字列。`sidebar_tab` と同じ扱いにする
+   * **localStorage ではなく settings に持つ**。TagTree の群组を localStorage に
+   * 置いているのは中身が `tag_groups.id` で媒体库ごとに別物だからで、
+   * こちらのキーは媒体库に依存しない固定文字列。`sidebar_tab` と同じ扱いにする
    */
   const [collapsed, setCollapsed] = useState<Set<SectionKey>>(new Set());
 
@@ -181,7 +181,7 @@ export function Sidebar() {
 
   /**
    * ツリーは全動画のパスを 1 回読んで組み立てるので、
-   * 「フォルダー」タブを開いているときだけ取りに行く
+   * 「文件夹」タブを開いているときだけ取りに行く
    */
   useEffect(() => {
     if (tab !== 'folders') return;
@@ -212,10 +212,10 @@ export function Sidebar() {
   };
 
   /**
-   * 保存した検索条件を復元する。壊れた JSON は握り潰さずトーストで知らせる。
+   * 保存した検索条个復元する。壊れた JSON は握り潰さずトーストで知らせる。
    *
    * **項目をここで並べないこと**。以前は手で書き写していたため尺の範囲が抜けており、
-   * 保存して開き直すと長さの条件だけ静かに消えていた。
+   * 保存して開き直すと时长の条件だけ静かに消えていた。
    * 変換は `toFilterState`(= `buildQuery` の逆)に一本化してある
    */
   const openSmartFolder = (sf: SmartFolder) => {
@@ -223,35 +223,35 @@ export function Sidebar() {
     try {
       q = JSON.parse(sf.queryJson);
     } catch {
-      pushToast(`「${sf.name}」の検索条件を読めませんでした`);
+      pushToast(`「${sf.name}」的搜索条件读取失败`);
       return;
     }
     applyFilter(toFilterState(q));
   };
 
   /**
-   * フォルダごと動かした動画の再リンク。
-   * 変更前は文字入力(消えたフォルダはダイアログで選べない)、変更後はフォルダ選択にする
+   * 文件夹ごと動かした動画の再リンク。
+   * 変更前は文字入力(消えた文件夹はダイアログで選べない)、変更後は文件夹選択にする
    */
   const startRelink = async () => {
     const fromPrefix = window.prompt(
-      '変更前のフォルダパスを入力してください\n(このパスで始まる動画が対象になります)',
+      '请输入变更前的文件夹路径\n（以此路径开头的视频将作为处理对象）',
       '',
     );
     if (fromPrefix === null || fromPrefix.trim() === '') return;
-    const dest = await open({ directory: true, multiple: false, title: '変更後のフォルダ' });
+    const dest = await open({ directory: true, multiple: false, title: '变更后的文件夹' });
     if (typeof dest !== 'string') return;
     const plan = await api.planRelink(fromPrefix.trim(), dest);
     if (plan.length === 0) {
-      pushToast('そのパスで始まる動画はありませんでした', 'info');
+      pushToast('没有以该路径开头的视频', 'info');
       return;
     }
     setRelinkPlan(plan);
   };
 
   const removeSmartFolder = async (sf: SmartFolder) => {
-    const yes = await ask(`スマートフォルダ「${sf.name}」を削除しますか?\n(動画は消えません)`, {
-      title: 'スマートフォルダの削除',
+    const yes = await ask(`要删除智能文件夹「${sf.name}」吗？\n（视频不会被删除）`, {
+      title: '删除智能文件夹',
     });
     if (!yes) return;
     await api.deleteSmartFolder(sf.id);
@@ -259,17 +259,17 @@ export function Sidebar() {
   };
 
   /**
-   * 保存リストをキューへ**複写**して再生を始める(v1.40)。
+   * 保存リストを队列へ**複写**して再生を始める(v1.40)。
    * 複写なので、ここから先の編集は保存リストに一切届かない
-   * (書き戻すのは「上書き保存」を押したときだけ)。
-   * 確認(A-29)・上限・再生開始は replaceQueueWith(v1.41 で C-4 と共通化)の担当
+   * (書き戻すのは「覆盖保存」を押したときだけ)。
+   * 確認(A-29)·上限·再生開始は replaceQueueWith(v1.41 で C-4 と共通化)の担当
    */
   const loadPlaylist = async (p: Playlist) => {
     try {
       const rows = await api.getPlaylistVideos(p.id);
       await replaceQueueWith(rows, { id: p.id, name: p.name }, {
         label: `「${p.name}」`,
-        emptyMessage: `「${p.name}」は空です`,
+        emptyMessage: `「${p.name}」为空`,
       });
     } catch {
       // トーストは call() の担当
@@ -277,15 +277,15 @@ export function Sidebar() {
   };
 
   /**
-   * スマートフォルダの中身でキューを置き換えて再生する(v1.41、C-4)。
-   * 「平日の消化リスト」のような条件を 1 クリックで流すための入口
+   * 智能文件夹の中身で替换队列并播放する(v1.41、C-4)。
+   * 「平日の消化リスト」のような条个 1 点击で流すための入口
    */
   const loadSmartFolder = async (sf: SmartFolder) => {
     let q: VideoQuery;
     try {
       q = JSON.parse(sf.queryJson);
     } catch {
-      pushToast(`「${sf.name}」の検索条件を読めませんでした`);
+      pushToast(`「${sf.name}」的搜索条件读取失败`);
       return;
     }
     try {
@@ -293,47 +293,47 @@ export function Sidebar() {
       const rows = await api.queryVideos(q, QUEUE_LIMIT + 1, 0);
       await replaceQueueWith(rows, null, {
         label: `「${sf.name}」`,
-        emptyMessage: `「${sf.name}」に一致する動画はありません`,
+        emptyMessage: `「${sf.name}」匹配的视频不存在`,
       });
     } catch {
       // トーストは call() の担当
     }
   };
 
-  /** プレイリストを M3U8 に書き出す(v1.41、C-3)。外部プレイヤーでそのまま流せる */
+  /** 播放列表を M3U8 に書き出す(v1.41、C-3)。外部プレイヤーでそのまま流せる */
   const exportPlaylist = async (p: Playlist) => {
     const dest = await save({
-      title: 'M3U8 へ書き出す',
-      // リスト名はファイル名に使えない文字を含み得るので、そこだけ置き換える
+      title: '导出为 M3U8',
+      // リスト名は文件名に使えない文字を含み得るので、そこだけ置き換える
       defaultPath: `${p.name.replace(/[\\/:*?"<>|]/g, '_')}.m3u8`,
-      filters: [{ name: 'M3U8 プレイリスト', extensions: ['m3u8'] }],
+      filters: [{ name: 'M3U8 播放列表', extensions: ['m3u8'] }],
     });
     if (typeof dest !== 'string') return;
     try {
       const n = await api.exportM3u8(p.id, dest);
-      pushToast(`「${p.name}」を書き出しました(${n} 件)`, 'info');
+      pushToast(`「${p.name}」已导出（${n} 件)`, 'info');
     } catch {
       // トーストは call() の担当
     }
   };
 
   /**
-   * M3U8 を読み込んでプレイリストを作る(v1.41、C-3)。
-   * 未登録の動画は個別登録としてライブラリにも入る(取り込みは Rust 側)
+   * M3U8 を読み込んで播放列表を作る(v1.41、C-3)。
+   * 未登録の動画は個別登録として媒体库にも入る(取り込みは Rust 側)
    */
   const importM3u8 = async () => {
     const selected = await open({
       multiple: false,
-      title: 'M3U8 を読み込む',
-      filters: [{ name: 'M3U8 プレイリスト', extensions: ['m3u8', 'm3u'] }],
+      title: '读取 M3U8',
+      filters: [{ name: 'M3U8 播放列表', extensions: ['m3u8', 'm3u'] }],
     });
     if (typeof selected !== 'string') return;
     try {
       const r = await api.importM3u8(selected);
       pushToast(
         r.skipped > 0
-          ? `「${r.name}」を作成しました(${r.count} 件。${r.skipped} 行は見つからないため外しました)`
-          : `「${r.name}」を作成しました(${r.count} 件)`,
+          ? `「${r.name}」已创建（${r.count} 件。${r.skipped} 行未找到，已移除）`
+          : `「${r.name}」已创建（${r.count} 件)`,
         'info',
       );
       bumpVersion();
@@ -344,13 +344,13 @@ export function Sidebar() {
 
   const removePlaylist = async (p: Playlist) => {
     const yes = await ask(
-      `プレイリスト「${p.name}」を削除しますか?\n(動画自体は消えません)`,
-      { title: 'プレイリストの削除' },
+      `要删除播放列表「${p.name}」吗？\n（视频本身不会被删除）`,
+      { title: '删除播放列表' },
     );
     if (!yes) return;
     await api.deletePlaylist(p.id);
     if (playlistId === p.id) togglePlaylistFilter(p.id);
-    // このリストから読み込んだキューの出所を外す(残すと「上書き保存」が必ず失敗する)
+    // このリストから読み込んだ队列の出所を外す(残すと「覆盖保存」が必ず失敗する)
     const s = useLibrary.getState();
     s.setQueue(sourceRemoved(s.queue, p.id));
     bumpVersion();
@@ -358,8 +358,8 @@ export function Sidebar() {
 
   const removeSeries = async (s: Series) => {
     const yes = await ask(
-      `シリーズ「${s.name}」を削除しますか?\n(動画自体は消えません)`,
-      { title: 'シリーズの削除' },
+      `要删除系列「${s.name}」吗？\n（视频本身不会被删除）`,
+      { title: '删除系列' },
     );
     if (!yes) return;
     await api.deleteSeries(s.id);
@@ -368,7 +368,7 @@ export function Sidebar() {
   };
 
   const addFolder = async () => {
-    const selected = await open({ directory: true, multiple: false, title: '監視フォルダを追加' });
+    const selected = await open({ directory: true, multiple: false, title: '添加监视文件夹' });
     if (typeof selected === 'string') {
       await api.addWatchedFolder(selected);
       bumpVersion();
@@ -378,8 +378,8 @@ export function Sidebar() {
   const addFiles = async () => {
     const selected = await open({
       multiple: true,
-      title: '動画ファイルを追加',
-      filters: [{ name: '動画', extensions: VIDEO_EXTENSIONS }],
+      title: '添加视频文件',
+      filters: [{ name: '视频', extensions: VIDEO_EXTENSIONS }],
     });
     if (Array.isArray(selected) && selected.length > 0) {
       await api.registerFiles(selected);
@@ -388,13 +388,13 @@ export function Sidebar() {
   };
 
   const removeFolder = async (f: WatchedFolder) => {
-    const yes = await ask(`「${f.path}」を監視対象から外しますか?`, { title: '監視フォルダの解除' });
+    const yes = await ask(`「${f.path}」从监视对象中移除吗？`, { title: '取消监视文件夹' });
     if (!yes) return;
     let removeVideos = false;
     if (f.videoCount > 0) {
       removeVideos = await ask(
-        `このフォルダ由来の動画 ${f.videoCount} 件をライブラリからも削除しますか?\n(いいえ = 個別登録として残します。ファイル自体は消えません)`,
-        { title: '登録の扱い' },
+        `要同时从媒体库删除来自该文件夹的 ${f.videoCount} 个视频吗？\n（否 = 保留为逐个登记。文件本身不会被删除）`,
+        { title: '注册处理方式' },
       );
     }
     await api.removeWatchedFolder(f.id, removeVideos);
@@ -405,9 +405,9 @@ export function Sidebar() {
   const copyPath = async (path: string) => {
     try {
       await navigator.clipboard.writeText(path);
-      pushToast('パスをコピーしました', 'info');
+      pushToast('已复制路径', 'info');
     } catch {
-      pushToast('クリップボードにコピーできませんでした');
+      pushToast('无法复制到剪贴板');
     }
   };
 
@@ -415,14 +415,14 @@ export function Sidebar() {
     try {
       await revealItemInDir(path);
     } catch {
-      pushToast('エクスプローラーで表示できませんでした');
+      pushToast('无法在资源管理器中显示');
     }
   };
 
   /**
-   * 並べ替えは 1 つ隣と入れ替えるだけ。**絞り込む前の配列**を渡すこと —
+   * 排列は 1 つ隣と入れ替えるだけ。**絞り込む前の配列**を渡すこと —
    * 見えている行の index で動かすと、隠れている行を飛び越して並びが壊れる
-   * (メニュー側でも絞り込み中は無効にしてある)
+   * (メニュー側でも筛选中は無効にしてある)
    */
   const moveSmartFolder = async (index: number, dir: -1 | 1) => {
     const next = [...smartFolders];
@@ -437,7 +437,7 @@ export function Sidebar() {
     }
   };
 
-  /** プレイリストの並べ替え。moveSmartFolder と同じ流儀(絞り込む前の index で動かす) */
+  /** 播放列表の排列。moveSmartFolder と同じ流儀(絞り込む前の index で動かす) */
   const movePlaylist = async (index: number, dir: -1 | 1) => {
     const next = [...playlists];
     const j = index + dir;
@@ -452,7 +452,7 @@ export function Sidebar() {
   };
 
   /**
-   * ライブラリを切り替える(v1.27)。**成功するとアプリが再起動する**ので、
+   * 媒体库を切り替える(v1.27)。**成功するとアプリが再起動する**ので、
    * この呼び出しの後ろに処理を書かないこと(Promise は解決しない)。
    * 再生中なら先に止める —— mpv は透過ウィンドウを別に持っているので、
    * 再生したままプロセスを差し替えない
@@ -460,16 +460,16 @@ export function Sidebar() {
   const switchLibrary = async (lib: LibraryEntry) => {
     if (lib.id === currentLibId) return;
     if (!lib.online) {
-      pushToast(`「${lib.name}」に接続できません(${lib.root})`);
+      pushToast(`「${lib.name}」无法连接（${lib.root})`);
       return;
     }
     /*
-     * v1.40 まではここで「キューが失われます」の確認を挟んでいたが、v1.41 の
-     * 常時自動保存(C-2)で不要になった —— キューはこのライブラリの library.db に
+     * v1.40 まではここで「队列が失われます」の確認を挟んでいたが、v1.41 の
+     * 常時自動保存(C-2)で不要になった —— 队列はこの媒体库の library.db に
      * 保存済みで、戻ってくればそのまま復元される
      */
-    const yes = await ask(`「${lib.name}」に切り替えます。アプリを再起動しますか?`, {
-      title: 'ライブラリの切り替え',
+    const yes = await ask(`「${lib.name}」切换。要重启应用吗？`, {
+      title: '切换媒体库',
     });
     if (!yes) return;
     setSwitching(true);
@@ -482,15 +482,15 @@ export function Sidebar() {
     }
   };
 
-  /** 新規作成 → 置き場所を選ぶ → 空のライブラリを作る → 続けて切り替えるか聞く */
+  /** 新規作成 → 置き場所を選ぶ → 空の媒体库を作る → 続けて切り替えるか聞く */
   const createLibrary = async () => {
-    const name = window.prompt('新しいライブラリの名前');
+    const name = window.prompt('新媒体库名称');
     if (name === null || name.trim() === '') return;
-    // 既定はアプリのデータフォルダ配下。外付け HDD を選べばドライブごと持ち運べる
+    // 既定はアプリのデータ文件夹配下。外付け HDD を選べばドライブごと持ち運べる
     const parent = await open({
       directory: true,
       defaultPath: await api.defaultLibraryDir(),
-      title: 'ライブラリを置くフォルダを選ぶ',
+      title: '选择存放媒体库的文件夹',
     });
     if (typeof parent !== 'string') return;
     const lib = await api.createLibrary(name.trim(), parent);
@@ -498,16 +498,16 @@ export function Sidebar() {
     await switchLibrary(lib);
   };
 
-  /** 既存のライブラリフォルダを一覧に加える(外付け HDD を別の PC に挿したとき等) */
+  /** 既存の媒体库文件夹を一覧に加える(外付け HDD を別の PC に挿したとき等) */
   const addExistingLibrary = async () => {
-    const root = await open({ directory: true, title: 'ライブラリのフォルダを選ぶ' });
+    const root = await open({ directory: true, title: '选择媒体库文件夹' });
     if (typeof root !== 'string') return;
     const lib = await api.addExistingLibrary(root);
     setLibraries(await api.listLibraries());
     await switchLibrary(lib);
   };
 
-  /** 右クリックメニューの実行(v1.20)。削除系は × ボタンと同じ関数を呼ぶ */
+  /** 右键菜单の実行(v1.20)。削除系は × ボタンと同じ関数を呼ぶ */
   const runMenuAction = async (id: string, target: MenuTarget) => {
     try {
       if (target.kind === 'library') {
@@ -532,7 +532,7 @@ export function Sidebar() {
         const f = target.folder;
         switch (id) {
           case 'wf:open': setFolderId(f.id); break;
-          // 配下すべてではなく直下だけ。フォルダーツリー側の絞り込みに切り替わる
+          // 配下全部ではなく直下だけ。文件夹ツリー側の筛选に切り替わる
           case 'wf:openDirect': useLibrary.getState().toggleDirPath(f.path); break;
           case 'wf:reveal': await reveal(f.path); break;
           case 'wf:copyPath': await copyPath(f.path); break;
@@ -549,7 +549,7 @@ export function Sidebar() {
           case 'sf:open': openSmartFolder(sf); break;
           case 'sf:load': await loadSmartFolder(sf); break;
           case 'sf:rename': {
-            const name = window.prompt('新しい名前', sf.name);
+            const name = window.prompt('新名称', sf.name);
             if (name === null || name.trim() === '' || name.trim() === sf.name) return;
             await api.updateSmartFolder(sf.id, name.trim());
             bumpVersion();
@@ -557,8 +557,8 @@ export function Sidebar() {
           }
           case 'sf:overwrite': {
             const yes = await ask(
-              `「${sf.name}」の条件を、いまの絞り込みで置き換えますか?`,
-              { title: 'スマートフォルダの上書き' },
+              `「${sf.name}」的条件替换为当前筛选条件吗？`,
+              { title: '覆盖智能文件夹' },
             );
             if (!yes) return;
             await api.updateSmartFolder(sf.id, undefined, currentQuery());
@@ -580,10 +580,10 @@ export function Sidebar() {
           case 'pl:load': await loadPlaylist(p); break;
           case 'pl:filter': togglePlaylistFilter(p.id); break;
           case 'pl:rename': {
-            const name = window.prompt('新しいプレイリスト名', p.name);
+            const name = window.prompt('新播放列表名称', p.name);
             if (name === null || name.trim() === '' || name.trim() === p.name) return;
             await api.renamePlaylist(p.id, name.trim());
-            // このリストから読み込んだキューのタイトルも追随させる
+            // このリストから読み込んだ队列の标题も追随させる
             const s = useLibrary.getState();
             s.setQueue(sourceRenamed(s.queue, p.id, name.trim()));
             bumpVersion();
@@ -603,7 +603,7 @@ export function Sidebar() {
       switch (id) {
         case 'series:filter': toggleSeriesFilter(s.id); break;
         case 'series:rename': {
-          const name = window.prompt('新しいシリーズ名', s.name);
+          const name = window.prompt('新系列名称', s.name);
           if (name === null || name.trim() === '' || name.trim() === s.name) return;
           await api.renameSeries(s.id, name.trim());
           bumpVersion();
@@ -617,21 +617,21 @@ export function Sidebar() {
     }
   };
 
-  // ライブラリタブの絞り込み。マッチしないセクションは見出しごと消える
+  // 媒体库タブの筛选。マッチしないセクションは見出しごと消える
   const needle = sideFilter.trim().toLowerCase();
   const hit = (s: string) => !needle || s.toLowerCase().includes(needle);
   const shownSmart = smartFolders.filter((sf) => hit(sf.name));
   const shownPlaylists = playlists.filter((p) => hit(p.name));
   const shownFolders = folders.filter((f) => hit(baseName(f.path)));
   const shownSeries = seriesList.filter((s) => hit(s.name));
-  // タグはグループ名でも引ける(「ジャンル」と打てばそのグループのタグが全部出る)
+  // 标签は分组名称でも引ける(「ジャンル」と打てばその群组の标签が全部出る)
   const shownTags = tags.filter(
     (t) => hit(t.name) || hit(t.groupName ?? '') || (t.groupId == null && hit('未分類')),
   );
   const currentLib = libraries.find((l) => l.id === currentLibId) ?? null;
   /*
-   * セクション見出しに渡す共通の props(v1.42)。絞り込み中は畳みを無視して必ず開く ——
-   * TagTree のグループ(`renderHeader` の `!filtering && collapsed.has(key)`)と同じ規約で、
+   * セクション見出しに渡す共通の props(v1.42)。筛选中は畳みを無視して必ず打开 ——
+   * TagTree の群组(`renderHeader` の `!filtering && collapsed.has(key)`)と同じ規約で、
    * 絞った結果が畳まれていては意味がないため
    */
   const sectionProps = (section: SectionKey, label: string, count: number) => ({
@@ -663,9 +663,9 @@ export function Sidebar() {
       <button
         className="sidebar-title library-switch"
         disabled={switching}
-        title={currentLib ? `${currentLib.root}\nクリックでライブラリを切り替え` : 'DVM'}
+        title={currentLib ? `${currentLib.root}\n单击切换媒体库` : 'DVM'}
         onClick={(e) => {
-          // クリック位置ではなくボタンの真下に出す(押す場所で位置がずれない)
+          // 点击位置ではなくボタンの真下に出す(押す場所で位置がずれない)
           const r = e.currentTarget.getBoundingClientRect();
           openAt(r.left, r.bottom + 2, buildLibraryMenu(libraries, currentLibId), {
             kind: 'library',
@@ -674,7 +674,7 @@ export function Sidebar() {
       >
         <Library />
         <span className="library-name">
-          {switching ? '切り替え中...' : (currentLib?.name ?? 'DVM')}
+          {switching ? '正在切换...' : (currentLib?.name ?? 'DVM')}
         </span>
         <ChevronDown className="library-caret" />
       </button>
@@ -682,32 +682,32 @@ export function Sidebar() {
         className={`side-item ${folderId === null && dirPath === null && !missingOnly ? 'active' : ''}`}
         onClick={() => {
           if (missingOnly) toggleMissingOnly();
-          // setFolderId は dirPath(フォルダーツリーの絞り込み)も一緒に外す
+          // setFolderId は dirPath(文件夹ツリーの筛选)も一緒に外す
           setFolderId(null);
         }}
       >
-        すべての動画 <span className="count">{totalCount}</span>
+        全部视频 <span className="count">{totalCount}</span>
       </button>
       {missingCount > 0 && (
         <button
           className={`side-item warn ${missingOnly ? 'active' : ''}`}
           onClick={toggleMissingOnly}
-          title="ファイルが見つからない動画だけを表示(パスの再リンクか、ライブラリからの削除で整理できます)"
+          title="仅显示找不到文件的视频（可通过重新链接路径或从媒体库删除来清理）"
         >
           <TriangleAlert />
-          見つからない <span className="count">{missingCount}</span>
+          找不到 <span className="count">{missingCount}</span>
         </button>
       )}
       {missingOnly && (
         <button className="side-action" onClick={startRelink}>
-          パスを再リンク...
+          重新链接路径...
         </button>
       )}
       {duplicateCount > 0 && (
         <button
           className={`side-item ${duplicatesOnly ? 'active' : ''}`}
           onClick={toggleDuplicatesOnly}
-          title="内容が同じ動画(サイズと先頭ハッシュが一致)だけを表示。同じものが隣り合って並びます"
+          title="仅显示内容相同的视频（大小与首部哈希一致）。相同项会相邻排列"
         >
           <Copy />
           重複 <span className="count">{duplicateCount}</span>
@@ -719,16 +719,16 @@ export function Sidebar() {
         <button
           className={`sidebar-tab ${tab === 'library' ? 'active' : ''}`}
           onClick={() => selectTab('library')}
-          title="スマートフォルダ・監視フォルダ・シリーズ・タグ"
+          title="智能文件夹·监视文件夹·系列·标签"
         >
-          ライブラリ
+          媒体库
         </button>
         <button
           className={`sidebar-tab ${tab === 'folders' ? 'active' : ''}`}
           onClick={() => selectTab('folders')}
-          title="フォルダの階層で絞り込む(そのフォルダ直下の動画だけを表示)"
+          title="按文件夹层级筛选（仅显示该文件夹直属视频）"
         >
-          フォルダー
+          文件夹
         </button>
       </div>
 
@@ -739,14 +739,14 @@ export function Sidebar() {
           <input
             className="side-filter"
             type="search"
-            placeholder="タグ・シリーズを絞り込む"
-            title="サイドバーの項目名で絞り込みます(動画そのものの検索は上の検索ボックス)"
+            placeholder="筛选标签·系列"
+            title="按侧边栏项目名筛选（搜索视频本身请用上方搜索框）"
             value={sideFilter}
             onChange={(e) => setSideFilter(e.target.value)}
           />
 
           {shownSmart.length > 0 && (
-            <SideSection {...sectionProps('smart', 'スマートフォルダ', smartFolders.length)}>
+            <SideSection {...sectionProps('smart', '智能文件夹', smartFolders.length)}>
               {shownSmart.map((sf) => (
                 <div
                   key={sf.id}
@@ -755,7 +755,7 @@ export function Sidebar() {
                   onContextMenu={(e) =>
                     openMenu(
                       e,
-                      // 並べ替えの index は絞り込む前の並びで数える
+                      // 排列の index は絞り込む前の並びで数える
                       buildSmartFolderMenu(
                         sf,
                         smartFolders.findIndex((x) => x.id === sf.id),
@@ -764,13 +764,13 @@ export function Sidebar() {
                       ),
                       { kind: 'sf', sf },
                     )}
-                  title={`${sf.name}(保存した検索条件を復元します)`}
+                  title={`${sf.name}（恢复已保存的搜索条件）`}
                 >
                   <FolderSearch className="tag-mark" />
                   <span className="folder-name">{sf.name}</span>
                   <button
                     className="remove"
-                    title="スマートフォルダを削除"
+                    title="删除智能文件夹"
                     onClick={(e) => {
                       e.stopPropagation();
                       removeSmartFolder(sf);
@@ -784,18 +784,18 @@ export function Sidebar() {
           )}
 
           {/*
-            保存プレイリスト(v1.40)。**スマートフォルダの直後**に置く ——
-            スマートフォルダ = 条件で選んだ集合、プレイリスト = 手で選んだ集合で、
+            保存播放列表(v1.40)。**智能文件夹の直後**に置く ——
+            智能文件夹 = 条件で選んだ集合、播放列表 = 手で選んだ集合で、
             並べるなら隣同士が意味的に正しい。
-            クリックは既存 2 つと揃えて「一覧を絞り込む」。キューへの読み込みは右クリックから。
-            **0 件でも見出し + 案内を出す**(タグと同じ「ここから始める」流儀)——
-            機能に気づく入口が右クリックメニューと Q キーだけで、棚が空の人ほど見えなかった
+            点击は既存 2 つと揃えて「一覧を絞り込む」。队列への読み込みは右点击から。
+            **0 件でも見出し + 案内を出す**(标签と同じ「ここから始める」流儀)——
+            機能に気づく入口が右键菜单と Q キーだけで、棚が空の人ほど見えなかった
           */}
           {(shownPlaylists.length > 0 || !needle) && (
-            <SideSection {...sectionProps('playlist', 'プレイリスト', playlists.length)}>
+            <SideSection {...sectionProps('playlist', '播放列表', playlists.length)}>
               {playlists.length === 0 && !needle && (
                 <div className="side-empty">
-                  動画を選んで右クリック →「キュー」で並べ、キューパネルから保存するとここに並びます
+                  选中视频后右键 →「队列」排列，再从队列面板保存后就会显示在这里
                 </div>
               )}
               {shownPlaylists.map((p) => (
@@ -806,7 +806,7 @@ export function Sidebar() {
                   onContextMenu={(e) =>
                     openMenu(
                       e,
-                      // 並べ替えの index は絞り込む前の並びで数える(スマートフォルダと同じ)
+                      // 排列の index は絞り込む前の並びで数える(智能文件夹と同じ)
                       buildPlaylistMenu(
                         p,
                         playlistId === p.id,
@@ -816,12 +816,12 @@ export function Sidebar() {
                       ),
                       { kind: 'playlist', playlist: p },
                     )}
-                  title={`${p.name}(クリックで絞り込み。右クリックからキューに読み込めます)`}
+                  title={`${p.name}（点击筛选。右键可读取到队列）`}
                 >
                   {/*
-                    先頭サムネイル + 2 行(v1.41、C-6)。キュー行と同じ 44×25 の枠で、
+                    先頭缩略图 + 2 行(v1.41、C-6)。队列行と同じ 44×25 の枠で、
                     **ディスクキャッシュの jpg を読むだけ**(原則 2 の内側)。
-                    サムネイルを持つ動画が 1 本も無ければ枠の地色だけが見える
+                    缩略图を持つ動画が 1 本も無ければ枠の地色だけが見える
                   */}
                   <span className="pl-thumb">
                     {p.thumbPath && (
@@ -843,12 +843,12 @@ export function Sidebar() {
                     <span className="folder-name">{p.name}</span>
                     <span className="pl-meta">
                       {p.videoCount} 本
-                      {p.durationMs > 0 ? `・${fmtTime(p.durationMs / 1000)}` : ''}
+                      {p.durationMs > 0 ? `·${fmtTime(p.durationMs / 1000)}` : ''}
                     </span>
                   </span>
                   <button
                     className="remove"
-                    title="プレイリストを削除"
+                    title="删除播放列表"
                     onClick={(e) => {
                       e.stopPropagation();
                       removePlaylist(p);
@@ -858,21 +858,21 @@ export function Sidebar() {
                   </button>
                 </div>
               ))}
-              {/* M3U8 の取り込み(v1.41、C-3)。絞り込み中は追加ボタンを隠す(下の 2 つと同じ) */}
+              {/* M3U8 の取り込み(v1.41、C-3)。筛选中は追加ボタン隐藏(下の 2 つと同じ) */}
               {!needle && (
                 <button
                   className="side-action"
-                  title="M3U8 / M3U を読み込んで同じ名前のプレイリストを作ります(未登録の動画はライブラリにも登録されます)"
+                  title="读取 M3U8 / M3U 并创建同名播放列表（未登记的视频也会一并登记到媒体库）"
                   onClick={importM3u8}
                 >
-                  + M3U8 を読み込む
+                  + 读取 M3U8
                 </button>
               )}
             </SideSection>
           )}
 
           {(shownFolders.length > 0 || !needle) && (
-            <SideSection {...sectionProps('watched', '監視フォルダ', folders.length)}>
+            <SideSection {...sectionProps('watched', '监视文件夹', folders.length)}>
               {shownFolders.map((f) => (
                 <div
                   key={f.id}
@@ -882,14 +882,14 @@ export function Sidebar() {
                     openMenu(e, buildWatchedFolderMenu(f, folderId === f.id), {
                       kind: 'wf', folder: f,
                     })}
-                  title={`${f.path}\nクリックでこのフォルダ配下すべてを表示(サブフォルダ単位で絞るなら「フォルダー」タブ)`}
+                  title={`${f.path}\n单击显示该文件夹下的全部（若要按子文件夹筛选，请用「文件夹」标签页）`}
                 >
                   <span className={`dot ${f.online ? 'online' : 'offline'}`} />
                   <span className="folder-name">{baseName(f.path)}</span>
                   <span className="count">{f.videoCount}</span>
                   <button
                     className="remove"
-                    title="監視対象から外す"
+                    title="从监控对象中移除"
                     onClick={(e) => {
                       e.stopPropagation();
                       removeFolder(f);
@@ -900,18 +900,18 @@ export function Sidebar() {
                 </div>
               ))}
 
-              {/* 絞り込み中は追加ボタンを隠す — 探している最中に出ていても邪魔なだけ */}
+              {/* 筛选中は追加ボタン隐藏 — 探している最中に出ていても邪魔なだけ */}
               {!needle && (
                 <>
-                  <button className="side-action" onClick={addFolder}>+ フォルダを追加</button>
-                  <button className="side-action" onClick={addFiles}>+ ファイルを追加</button>
+                  <button className="side-action" onClick={addFolder}>+ 添加文件夹</button>
+                  <button className="side-action" onClick={addFiles}>+ 添加文件</button>
                 </>
               )}
             </SideSection>
           )}
 
           {shownSeries.length > 0 && (
-            <SideSection {...sectionProps('series', 'シリーズ', seriesList.length)}>
+            <SideSection {...sectionProps('series', '系列', seriesList.length)}>
               {shownSeries.map((s) => (
                 <div
                   key={s.id}
@@ -921,14 +921,14 @@ export function Sidebar() {
                     openMenu(e, buildSeriesMenu(s, seriesId === s.id), {
                       kind: 'series', series: s,
                     })}
-                  title={`${s.name}(クリックで絞り込み。シリーズ内は登録順で表示)`}
+                  title={`${s.name}（点击筛选。系列内按登记顺序显示）`}
                 >
                   <ListOrdered className="tag-mark" />
                   <span className="folder-name">{s.name}</span>
                   <span className="count">{s.videoCount}</span>
                   <button
                     className="remove"
-                    title="シリーズを削除"
+                    title="删除系列"
                     onClick={(e) => {
                       e.stopPropagation();
                       removeSeries(s);
@@ -941,16 +941,16 @@ export function Sidebar() {
             </SideSection>
           )}
 
-          {/* タグが 0 個でも見出しを出す — ここから作成を始めるため。
-              ただし絞り込み中にヒットが無いなら消す(TagTree 側も全部 null を返す) */}
+          {/* 标签が 0 個でも見出しを出す — ここから作成を始めるため。
+              ただし筛选中にヒットが無いなら消す(TagTree 側も全部 null を返す) */}
           {(shownTags.length > 0 || !needle) && (
-            <SideSection {...sectionProps('tag', 'タグ', tags.length)}>
+            <SideSection {...sectionProps('tag', '标签', tags.length)}>
               <TagTree tags={shownTags} groups={tagGroups} filtering={needle !== ''} />
             </SideSection>
           )}
 
           {nothingMatches && (
-            <div className="side-empty">「{sideFilter.trim()}」に一致する項目はありません</div>
+            <div className="side-empty">没有与「{sideFilter.trim()}」匹配的项目</div>
           )}
         </>
       )}

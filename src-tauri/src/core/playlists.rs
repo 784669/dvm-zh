@@ -87,10 +87,10 @@ pub fn find_by_name(conn: &Connection, name: &str) -> Result<Option<i64>> {
 /// (「上書きするか」の判断は UI が find_by_name で先に済ませ、上書きなら replace を呼ぶ)
 pub fn create(conn: &Connection, actor: &str, name: &str, video_ids: &[i64]) -> Result<i64> {
     let name = name.trim();
-    anyhow::ensure!(!name.is_empty(), "名前が空です");
+    anyhow::ensure!(!name.is_empty(), "名称为空");
     anyhow::ensure!(
         find_by_name(conn, name)?.is_none(),
-        "同じ名前のプレイリストがすでにあります"
+        "已存在同名播放列表"
     );
     // 行の作成とエントリ書き込みを 1 トランザクションに。分けると、エントリ側が
     // 失敗したときに「名前だけ取られた空のプレイリスト」が残る
@@ -122,7 +122,7 @@ pub fn replace(conn: &Connection, actor: &str, playlist_id: i64, video_ids: &[i6
         .query_row("SELECT name FROM playlists WHERE id = ?1", params![playlist_id], |r| {
             r.get(0)
         })
-        .map_err(|_| anyhow::anyhow!("プレイリストが見つかりません"))?;
+        .map_err(|_| anyhow::anyhow!("找不到播放列表"))?;
     let tx = conn.unchecked_transaction()?;
     write_entries(&tx, playlist_id, video_ids)?;
     tx.commit()?;
@@ -167,9 +167,9 @@ fn write_entries(conn: &Connection, playlist_id: i64, video_ids: &[i64]) -> Resu
 /// メッセージを日本語で出したいので先に見る)
 pub fn rename(conn: &Connection, actor: &str, playlist_id: i64, new_name: &str) -> Result<()> {
     let new_name = new_name.trim();
-    anyhow::ensure!(!new_name.is_empty(), "名前が空です");
+    anyhow::ensure!(!new_name.is_empty(), "名称为空");
     if let Some(other) = find_by_name(conn, new_name)? {
-        anyhow::ensure!(other == playlist_id, "同じ名前のプレイリストがすでにあります");
+        anyhow::ensure!(other == playlist_id, "已存在同名播放列表");
     }
     let before: String = conn
         .query_row("SELECT name FROM playlists WHERE id = ?1", params![playlist_id], |r| {
@@ -197,7 +197,7 @@ pub fn duplicate(conn: &Connection, actor: &str, playlist_id: i64) -> Result<i64
         .query_row("SELECT name FROM playlists WHERE id = ?1", params![playlist_id], |r| {
             r.get(0)
         })
-        .map_err(|_| anyhow::anyhow!("プレイリストが見つかりません"))?;
+        .map_err(|_| anyhow::anyhow!("找不到播放列表"))?;
     let ids = entries(conn, playlist_id)?;
     let name = free_copy_name(conn, &base)?;
     create(conn, actor, &name, &ids)
@@ -205,7 +205,7 @@ pub fn duplicate(conn: &Connection, actor: &str, playlist_id: i64) -> Result<i64
 
 /// 「◯◯ のコピー」「◯◯ のコピー (2)」… と空いている名前を探す
 fn free_copy_name(conn: &Connection, base: &str) -> Result<String> {
-    let first = format!("{base} のコピー");
+    let first = format!("{base} 的副本");
     if find_by_name(conn, &first)?.is_none() {
         return Ok(first);
     }
@@ -216,7 +216,7 @@ fn free_copy_name(conn: &Connection, base: &str) -> Result<String> {
             return Ok(cand);
         }
     }
-    anyhow::bail!("コピー名の空きが見つかりませんでした")
+    anyhow::bail!("未找到可用的副本名")
 }
 
 pub fn delete(conn: &Connection, actor: &str, playlist_id: i64) -> Result<()> {
@@ -282,7 +282,7 @@ mod tests {
     #[test]
     fn duplicate_video_ids_collapse_without_gaps() {
         let conn = setup();
-        let id = create(&conn, "user", "重複あり", &[1, 2, 1, 3]).unwrap();
+        let id = create(&conn, "user", "有重复", &[1, 2, 1, 3]).unwrap();
         // 2 つ目の 1 は落ちる。position が飛ぶと並べ替えの結果がずれるので詰まっていること
         assert_eq!(entries(&conn, id).unwrap(), vec![1, 2, 3]);
         let positions: Vec<i64> = conn
@@ -309,12 +309,12 @@ mod tests {
     #[test]
     fn rename_allows_self_and_rejects_others() {
         let conn = setup();
-        let a = create(&conn, "user", "あとで", &[1]).unwrap();
-        create(&conn, "user", "お気に入り", &[2]).unwrap();
-        assert!(rename(&conn, "user", a, "お気に入り").is_err());
+        let a = create(&conn, "user", "稍后", &[1]).unwrap();
+        create(&conn, "user", "收藏", &[2]).unwrap();
+        assert!(rename(&conn, "user", a, "收藏").is_err());
         // 自分自身と同じ名前は通す(大文字小文字だけ直したいことがある)
-        assert!(rename(&conn, "user", a, "あとで").is_ok());
-        assert!(rename(&conn, "user", a, "あとで観る").is_ok());
+        assert!(rename(&conn, "user", a, "稍后").is_ok());
+        assert!(rename(&conn, "user", a, "稍后观看").is_ok());
         assert!(rename(&conn, "user", a, "").is_err());
     }
 
@@ -325,8 +325,8 @@ mod tests {
         let b = duplicate(&conn, "user", a).unwrap();
         let c = duplicate(&conn, "user", a).unwrap();
         let names: Vec<String> = list(&conn, None).unwrap().into_iter().map(|p| p.name).collect();
-        assert!(names.contains(&"夜 のコピー".to_string()));
-        assert!(names.contains(&"夜 のコピー (2)".to_string()));
+        assert!(names.contains(&"夜 的副本".to_string()));
+        assert!(names.contains(&"夜 的副本 (2)".to_string()));
         // 中身も並びごと複製される
         assert_eq!(entries(&conn, b).unwrap(), vec![2, 1]);
         assert_eq!(entries(&conn, c).unwrap(), vec![2, 1]);

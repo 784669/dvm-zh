@@ -12,18 +12,18 @@ export const MPV_OBSERVED = [
   ['mute', 'flag'],
   ['speed', 'double'],
   ['demuxer-cache-time', 'double', 'none'],
-  // 音声・字幕トラックの一覧と現在の選択(v1.8)。
+  // 音声·字幕トラックの一覧と現在の選択(v1.8)。
   // node は JSON 相当のまま届くので、選択状態も track-list 側で分かる
   ['track-list', 'node', 'none'],
   /*
-   * チャプター(v1.29)。**一覧だけ購読して現在位置は time-pos から自前で求める** ——
-   * `chapter` も購読すると「今どのチャプターか」の出所が 2 つになり、
-   * シークバーの目盛りと現在チャプターの表示がずれて見える瞬間ができる
+   * 章节（v1.29)。**一覧だけ購読して現在位置は time-pos から自前で求める** ——
+   * `chapter` も購読すると「今どの章节か」の出所が 2 つになり、
+   * シークバーの目盛りと現在章节の表示がずれて見える瞬間ができる
    */
   ['chapter-list', 'node', 'none'],
   /*
    * 映像のパラメータ(v1.31)。HDR バッジの判定に使う転送特性(gamma)がここに入る。
-   * **ファイルではなく「今デコードしている映像」が出所**なので追加の I/O が要らない
+   * **文件ではなく「今デコードしている映像」が出所**なので追加の I/O が要らない
    */
   ['video-params', 'node', 'none'],
 ] as const satisfies MpvObservableProperty[];
@@ -73,7 +73,7 @@ export function ensureMpv(): Promise<boolean> {
         idle: 'yes',
         'force-window': 'yes',
         pause: 'yes',
-        // キー操作・OSD は WebView 側の UI に一元化する
+        // 快捷键·OSD は WebView 側の UI に一元化する
         'input-default-bindings': 'no',
         osc: 'no',
         'osd-level': '0',
@@ -82,7 +82,7 @@ export function ensureMpv(): Promise<boolean> {
     })
       .then(() => true)
       .catch((e) => {
-        console.warn('mpv の初期化に失敗しました。WebView2 プレイヤーで再生します:', e);
+        console.warn('mpv 初始化失败。将使用 WebView2 播放器播放:', e);
         return false;
       });
   }

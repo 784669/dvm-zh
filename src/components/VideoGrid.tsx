@@ -31,19 +31,19 @@ import { ListHeader } from './ListHeader';
 import { VideoCard } from './VideoCard';
 import { VideoListRow } from './VideoListRow';
 
-/** 詳細リストの行の高さ。サムネイルを外したら文字だけになるので詰める */
+/** 详细列表の行の高さ。缩略图を外したら文字だけになるので詰める */
 const LIST_ROW_H = 44;
 const LIST_ROW_H_SLIM = 28;
 /**
- * Ctrl+A で選択できる上限。数万件を state に載せると Inspector の再描画が固まるため。
+ * Ctrl+A で選択できる上限。数万个 state に載せると Inspector の再描画が固まるため。
  * 超えたぶんは黙って捨てずにトーストで知らせる
  */
 const SELECT_ALL_LIMIT = 1000;
 
 /**
- * カード → キューパネル D&D(v1.41、C-5)のドラッグ判定(px)。これ未満はクリック。
- * キューパネル内の並べ替え(4px)よりわずかに大きいのは、こちらはクリック・
- * ダブルクリック・範囲選択と同居していて誤発動の実害が大きいため
+ * カード → 队列パネル D&D(v1.41、C-5)のドラッグ判定(px)。これ未満は点击。
+ * 队列パネル内の排列(4px)よりわずかに大きいのは、こちらは点击·
+ * ダブル点击·範囲選択と同居していて誤発動の実害が大きいため
  */
 const QUEUE_DRAG_THRESHOLD = 6;
 
@@ -53,11 +53,11 @@ const MARQUEE_EDGE = 48;
 const MARQUEE_SPEED_MAX = 1400;
 
 /**
- * カード・行・列ヘッダの上か。**余白の右クリックメニュー(v1.20)と投げ縄(v1.42)で
- * 必ず同じ判定を使う** —— 片方だけ増やすと「右クリックはメニューが出るのに
+ * カード·行·列ヘッダの上か。**余白の右键菜单(v1.20)と投げ縄(v1.42)で
+ * 必ず同じ判定を使う** —— 片方だけ増やすと「右点击はメニューが出るのに
  * 左ドラッグは始まらない」ずれになる。
- * フォルダカードは `.card` を持ち `data-grid-index` を持たないので、ここで落ちる
- * (フォルダは選択の対象外という既存の規約と一致する)
+ * 文件夹カードは `.card` を持ち `data-grid-index` を持たないので、ここで落ちる
+ * (文件夹は選択の対象外という既存の規約と一致する)
  */
 const BLANK_SELECTOR = '.card, .list-row, .list-head';
 const isBlank = (t: EventTarget | null) =>
@@ -65,11 +65,11 @@ const isBlank = (t: EventTarget | null) =>
 
 /**
  * ドラッグで終わった pointerup の直後に来る click を 1 回だけ食べる。
- * キューへの D&D(v1.41)と投げ縄(v1.42)が共用する。
+ * 队列への D&D(v1.41)と投げ縄(v1.42)が共用する。
  *
- * 通すと、キュー D&D では単独選択が走って複数選択が 1 件に潰れ、
- * 投げ縄では `.grid-scroll` の余白クリックが走って**囲んだ選択がその場で消える**。
- * click が来なかったときに次のクリックを食べないよう、必ず外す(QueuePanel と同じ)
+ * 通すと、队列 D&D では単独選択が走って複数選択が 1 个潰れ、
+ * 投げ縄では `.grid-scroll` の余白点击が走って**囲んだ選択がその場で消える**。
+ * click が来なかったときに次の点击を食べないよう、必ず外す(QueuePanel と同じ)
  */
 function eatNextClick() {
   const eat = (ce: MouseEvent) => {
@@ -82,7 +82,7 @@ function eatNextClick() {
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(Math.max(v, lo), hi);
 
-/** 右クリックメニューの対象。動画・サブフォルダ・余白で持ち物が違う */
+/** 右键菜单の対象。動画·サブ文件夹·余白で持ち物が違う */
 type MenuTarget =
   | { kind: 'video'; video: VideoRow; index: number }
   | { kind: 'folder'; path: string }
@@ -103,7 +103,7 @@ export function VideoGrid() {
     'playingVideo', 'showAiPanel', 'pushToast', 'contextMenuOpen', 'cardTags', 'cardSeries',
   )));
 
-  /** 絞り込み一式。buildQuery と余白メニューが同じものを見る */
+  /** 筛选一式。buildQuery と余白メニューが同じものを見る */
   const filters = useMemo<FilterState>(() => ({
     text, sort, folderId, dirPath, dirPathRecursive, tagIds, seriesId, playlistId, missingOnly,
     duplicatesOnly, advanced, randomSeed,
@@ -113,7 +113,7 @@ export function VideoGrid() {
   ]);
   const query = useMemo<VideoQuery>(() => buildQuery(filters), [filters]);
   /**
-   * タグ・シリーズを実際に出すときだけ別便(api.videoLabels)を投げる。
+   * 标签·系列を実際に出すときだけ別便(api.videoLabels)を投げる。
    * リストは列ピッカー、グリッドは設定で決まるので、見ている表示モードのほうだけ見る
    */
   const showChips = viewMode === 'list' ? needsLabels(listColumns) : cardTags || cardSeries;
@@ -122,7 +122,7 @@ export function VideoGrid() {
   const parentRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const { menu, open: openMenu, close: closeMenu } = useContextMenu<MenuTarget>();
-  /** Delete キーで開く「どちらの削除か」の確認 */
+  /** Delete キーで打开「どちらの削除か」の確認 */
   const [askDelete, setAskDelete] = useState(false);
   /**
    * 監視除外を勧めるダイアログの対象(v1.33)。
@@ -144,20 +144,20 @@ export function VideoGrid() {
   }, []);
 
   /**
-   * フォルダーツリーで絞っているときだけ、そのフォルダのサブフォルダを一覧の先頭に出す。
-   * 「すべての動画」などフォルダ以外の絞り込みでは出さない(従来の見た目のまま)
+   * 文件夹ツリーで絞っているときだけ、その文件夹のサブ文件夹を一覧の先頭に出す。
+   * 「全部视频」など文件夹以外の筛选では出さない(従来の見た目のまま)
    */
   const [folderEntries, setFolderEntries] = useState<FolderEntry[]>([]);
   /*
-   * 見ているものが変わったら先頭から見せる(前の絞り込みのスクロール位置が残ると迷子になる)。
+   * 見ているものが変わったら先頭から見せる(前の筛选のスクロール位置が残ると迷子になる)。
    *
    * **`version` を混ぜないこと**(v1.32 で分離)。`version` は「中身が変わったので
    * 取り直せ」の合図で、再生中の `setResume` / `markViewed` / 視聴履歴の記録でも上がる。
-   * 下のサブフォルダ取得と同じ effect に入れていたせいで、**動画を再生しただけで
+   * 下のサブ文件夹取得と同じ effect に入れていたせいで、**動画を再生しただけで
    * 一覧が先頭に飛んでいた**(実測: scrollTop 22890 → 0)。
    *
-   * 見ている対象そのものは `query` が表す(検索語・並び順・フォルダ・タグ・シリーズ・
-   * 詳細検索など一式)。フォルダ移動だけでなく、絞り込みや並び替えでも先頭に戻る
+   * 見ている対象そのものは `query` が表す(検索語·排序·文件夹·标签·系列·
+   * 詳細検索など一式)。文件夹移動だけでなく、筛选や並び替えでも先頭に戻る
    */
   /** mpv 再生中に一覧が消える間、位置を控えておく場所(下の effect 2 つで使う) */
   const savedTop = useRef(0);
@@ -221,7 +221,7 @@ export function VideoGrid() {
 
   const list = viewMode === 'list';
   const listRowH = listColumns.includes('thumb') ? LIST_ROW_H : LIST_ROW_H_SLIM;
-  // カード下に足すタグ行・シリーズ行の本数。行の高さが変わるので gridMetrics に渡す
+  // カード下に足す标签行·系列行の本数。行の高さが変わるので gridMetrics に渡す
   const chipRows = (cardTags ? 1 : 0) + (cardSeries ? 1 : 0);
   // まだ測れていないうちは 4 列ぶんの幅と仮定する
   const grid = gridMetrics(width || cardWidth * 4, cardWidth, chipRows);
@@ -229,8 +229,8 @@ export function VideoGrid() {
   const cols = list ? 1 : grid.cols;
   const rowHeight = list ? listRowH : grid.rowHeight;
 
-  // フォルダは動画より前に、独立した行として並べる(1 行の中で混ざらないようにする)。
-  // こうしておけば選択・キーボード操作は従来どおり動画の通し番号だけで考えられる
+  // 文件夹は動画より前に、独立した行として並べる(1 行の中で混ざらないようにする)。
+  // こうしておけば選択·キーボード操作は従来どおり動画の通し番号だけで考えられる
   const folderRows = Math.ceil(folderEntries.length / cols);
   const rowCount = folderRows + Math.ceil(total / cols);
   const virtualizer = useVirtualizer({
@@ -240,7 +240,7 @@ export function VideoGrid() {
     overscan: 4,
   });
 
-  // カード幅・表示モードを変えたら行高が変わるので測り直させる
+  // カード幅·表示モードを変えたら行高が変わるので測り直させる
   useEffect(() => virtualizer.measure(), [rowHeight, cols, virtualizer]);
 
   /*
@@ -255,7 +255,7 @@ export function VideoGrid() {
   const layoutRef = useRef(layout);
   layoutRef.current = layout;
 
-  /** その位置の動画で再生を開始する(⏭ で続きへ進めるようキューも渡す) */
+  /** その位置の動画で再生を開始する(⏭ で続きへ進めるよう队列も渡す) */
   const play = useCallback(
     (video: VideoRow, index: number) => {
       if (video.isMissing || video.isOffline) return;
@@ -270,10 +270,10 @@ export function VideoGrid() {
   );
 
   /**
-   * 選択をキューに入れる(v1.40)。`Q` キーと右クリックメニューが共用する。
+   * 選択を队列に入れる(v1.40)。`Q` キーと右键菜单が共用する。
    *
-   * `replace` は「今のキューを捨てて、選んだものだけで再生を始める」。
-   * ダブルクリックはクエリ方式の連続再生のままなので、**選んだものだけを流す唯一の入口**。
+   * `replace` は「今の队列を捨てて、選んだものだけで再生を始める」。
+   * ダブル点击はクエリ方式の連続再生のままなので、**選んだものだけを流す唯一の入口**。
    * 上限に当たったときは部分的に入れず全部断る(何が入ったのか分からなくなるため)
    */
   const addSelectionToQueue = useCallback(
@@ -285,19 +285,19 @@ export function VideoGrid() {
       if (mode === 'replace') {
         const { queue: next, overflow } = addToQueue(EMPTY_QUEUE, videos);
         if (overflow) {
-          // ここで setQueue すると空キューで**既存のキューを消してしまう**。
+          // ここで setQueue すると空队列で**既存の队列を消してしまう**。
           // 断り方は追加系と同じ(部分的に入れず全部断る)
-          pushToast(`キューの上限は ${QUEUE_LIMIT} 件です(${videos.length} 件は入りません)`);
+          pushToast(`队列上限为 ${QUEUE_LIMIT} 项（${videos.length} 项无法加入）`);
           return;
         }
         /*
-         * 手で編集したキューを黙って捨てない(A-29)。終了時は保存を尋ねるのに
+         * 手で編集した队列を黙って捨てない(A-29)。終了時は保存を尋ねるのに
          * ここだけ無言で消えるのは非対称。判定は終了時と同じ needsSavePrompt
          */
         if (needsSavePrompt(s.queue)) {
           const yes = await ask(
-            `保存していないキュー(${s.queue.items.length} 件)を捨てて置き換えますか?`,
-            { title: 'キューの置き換え', kind: 'warning' },
+            `未保存的队列（${s.queue.items.length} 项）丢弃并替换吗？`,
+            { title: '替换队列', kind: 'warning' },
           );
           if (!yes) return;
         }
@@ -305,23 +305,23 @@ export function VideoGrid() {
         s.setQueueTabOpen(true);
         const first = next.items.find((v) => !v.isMissing && !v.isOffline);
         if (first) s.playFromQueue(first);
-        else pushToast('再生できる動画がありません');
+        else pushToast('没有可播放的视频');
         return;
       }
 
       const { queue: next, added, overflow } = addToQueue(s.queue, videos, mode);
       if (overflow) {
-        pushToast(`キューが上限の ${QUEUE_LIMIT} 件を超えるため追加しませんでした`);
+        pushToast(`队列已达上限的 ${QUEUE_LIMIT} 项超出上限，未添加`);
         return;
       }
       if (added === 0) {
-        pushToast('すでにキューに入っています', 'info');
+        pushToast('已在队列中', 'info');
         return;
       }
       s.setQueue(next);
       s.setQueueTabOpen(true);
       pushToast(
-        mode === 'next' ? `${added} 件を次に再生します` : `${added} 件をキューに追加しました`,
+        mode === 'next' ? `${added} 项接着播放` : `${added} 项已添加到队列`,
         'info',
       );
     },
@@ -329,15 +329,15 @@ export function VideoGrid() {
   );
 
   /*
-   * カードからキューパネルへの D&D(v1.41、C-5)。
+   * カードから队列パネルへの D&D(v1.41、C-5)。
    *
-   * **HTML5 の D&D は使えない**(Tauri のドロップハンドラを切るとフォルダの
-   * ドロップ登録が壊れる。DESIGN.md「タグのグループ移動は D&D」節)ので、
-   * キューパネル内の並べ替えと同じくポインタイベントの自前実装。
+   * **HTML5 の D&D は使えない**(Tauri のドロップハンドラを切ると文件夹の
+   * ドロップ登録が壊れる。DESIGN.md「标签の群组移動は D&D」節)ので、
+   * 队列パネル内の排列と同じくポインタイベントの自前実装。
    * ドロップ先は elementFromPoint で `[data-queue-dropzone]` を探す ——
-   * 右ペインのキューパネルと、詳細ペインの「キュー」タブの 2 か所が受け皿。
-   * 掴んだカードが選択の外なら選択をそこへ移す(右クリックメニューと同じ規則)ので、
-   * ドラッグを始めた時点で詳細ペインが現れ、パネルを開いていなくてもタブに落とせる
+   * 右ペインの队列パネルと、详情面板の「队列」タブの 2 か所が受け皿。
+   * 掴んだカードが選択の外なら選択をそこへ移す(右键菜单と同じ規則)ので、
+   * ドラッグを始めた時点で详情面板が現れ、パネルを開いていなくてもタブに落とせる
    */
   const [queuePress, setQueuePress] = useState<
     { x: number; y: number; video: VideoRow; index: number } | null
@@ -349,7 +349,7 @@ export function VideoGrid() {
   /*
    * 余白からの矩形選択(投げ縄、v1.42)。
    *
-   * 掴んだ場所で意味が変わる —— **カードの上ならキューへの D&D、余白なら投げ縄**
+   * 掴んだ場所で意味が変わる —— **カードの上なら队列への D&D、余白なら投げ縄**
    * (エクスプローラーと同じ)。入口は `onPointerDown` 1 つしか持てないのでここで分けるが、
    * move / up の中身が互いに何も共有しないので**状態は別に持つ**。
    *
@@ -379,7 +379,7 @@ export function VideoGrid() {
         setQueuePress({ x: e.clientX, y: e.clientY, video, index });
         return;
       }
-      // カード(未取得のプレースホルダとフォルダカードを含む)と列ヘッダの上では始めない
+      // カード(未取得のプレースホルダと文件夹カードを含む)と列ヘッダの上では始めない
       if (!isBlank(e.target)) return;
       const inner = innerRef.current;
       if (!inner) return;
@@ -399,12 +399,12 @@ export function VideoGrid() {
   );
 
   /**
-   * 囲み終わったときに 1 回だけ選択を確定する。
+   * 囲み終わったときに 1 回だけ選択を确定。
    *
    * **ドラッグ中は store の `selection` を触らない**。`getRange` が非同期なので
    * 毎フレームは待てず、同期の `getVideo` で埋めると未取得ページに穴が空く。
    * それ以上に、`showInspector` が選択件数を見ているので**選択が 0 → 1 になった瞬間に
-   * 詳細ペインが開いて一覧の幅が変わり、指の下で列数が組み替わる**
+   * 详情面板が開いて一覧の幅が変わり、指の下で列数が組み替わる**
    */
   const commitMarquee = useCallback(
     async (hit: MarqueeHit | null, additive: boolean, downward: boolean) => {
@@ -412,7 +412,7 @@ export function VideoGrid() {
       const l = layoutRef.current;
       const idx = hit ? cellIndices(hit.range, l) : [];
       if (idx.length === 0) {
-        // 何も囲めなかった。素のドラッグなら余白クリックと同じく選択を捨てる
+        // 何も囲めなかった。素のドラッグなら余白点击と同じく選択を捨てる
         if (!additive) s.clearSelection();
         return;
       }
@@ -426,7 +426,7 @@ export function VideoGrid() {
       const base = additive ? marqueeBase.current : [];
       const seen = new Set(base.map((v) => v.id));
       const merged = [...base, ...picked.filter((v) => !seen.has(v.id))];
-      // 次の Shift+クリックの起点はドラッグの終わり側に置く(そこから素直に伸びる)
+      // 次の Shift+点击の起点はドラッグの終わり側に置く(そこから素直に伸びる)
       const edge = downward ? idx[idx.length - 1] : lo;
       s.setSelection(merged, edge, edge);
       /*
@@ -435,7 +435,7 @@ export function VideoGrid() {
        * 996 件しか選ばれていないと、数字を信じて次の操作をしたときに食い違う
        */
       if (hit?.truncated) {
-        pushToast(`先頭 ${idx.length} 件を選択しました(囲みの残りは入りません)`, 'info');
+        pushToast(`先頭 ${idx.length} 项已选中（框选剩余部分未纳入）`, 'info');
       }
     },
     [getRange, getVideo, pushToast],
@@ -519,7 +519,7 @@ export function VideoGrid() {
       const hit = started ? compute() : null;
       const downward = e.clientY - marqueePress.y >= 0;
       setMarqueePress(null);
-      // 動かしていない = ただのクリック。従来どおり余白クリックの選択解除に任せる
+      // 動かしていない = ただの点击。従来どおり余白点击の選択解除に任せる
       if (!started) return;
       eatNextClick();
       void commitMarquee(hit, marqueePress.additive, downward);
@@ -567,15 +567,15 @@ export function VideoGrid() {
     const onUp = (e: PointerEvent) => {
       const dropped = started && overDropzone(e.clientX, e.clientY);
       finish();
-      if (!started) return; // 動かしていない = ただのクリック。通常の選択に任せる
+      if (!started) return; // 動かしていない = ただの点击。通常の選択に任せる
       // ドラッグで終わった pointerup の直後の click を 1 回だけ食べる
-      // (通さないと単独選択が走って、複数選択で掴んだものが 1 件に潰れる)
+      // (通さないと単独選択が走って、複数選択で掴んだものが 1 个潰れる)
       const eat = (ce: MouseEvent) => {
         ce.stopPropagation();
         ce.preventDefault();
       };
       window.addEventListener('click', eat, { capture: true, once: true });
-      // click が来なかったときに次のクリックを食べないよう、必ず外す(QueuePanel と同じ)
+      // click が来なかったときに次の点击を食べないよう、必ず外す(QueuePanel と同じ)
       window.setTimeout(
         () => window.removeEventListener('click', eat, { capture: true }),
         0,
@@ -592,7 +592,7 @@ export function VideoGrid() {
     };
   }, [queuePress, addSelectionToQueue]);
 
-  /** クリック。Shift = anchor からの範囲、Ctrl = トグル、素 = 単独選択 */
+  /** 点击。Shift = anchor からの範囲、Ctrl = トグル、素 = 単独選択 */
   const onPick = useCallback(
     async (video: VideoRow, index: number, e: React.MouseEvent | { shiftKey: boolean; ctrlKey: boolean; metaKey: boolean }) => {
       if (e.shiftKey && anchorIndex != null) {
@@ -610,8 +610,8 @@ export function VideoGrid() {
   );
 
   /**
-   * カードの右クリック(v1.14)。エクスプローラーと同じ挙動にする:
-   * 選択の外を押したらそこへ選択を移し、選択済みを押したら選択を保ったまま全件を対象にする。
+   * カードの右点击(v1.14)。エクスプローラーと同じ挙動にする:
+   * 選択の外を押したらそこへ選択を移し、選択済みを押したら選択を保ったまま全个対象にする。
    * メニューを見る前に「何が対象か」が見た目で分かるのが要点
    */
   const onCardContextMenu = useCallback(
@@ -627,7 +627,7 @@ export function VideoGrid() {
 
   const onFolderContextMenu = useCallback(
     (entry: FolderEntry, e: React.MouseEvent) => {
-      // フォルダは選択の対象外。左クリックと同じく動画の選択は解除する
+      // 文件夹は選択の対象外。左点击と同じく動画の選択は解除する
       clearSelection();
       openMenu(e, buildFolderMenu(), { kind: 'folder', path: entry.path });
     },
@@ -641,14 +641,14 @@ export function VideoGrid() {
         await navigator.clipboard.writeText(text);
         pushToast(done, 'info');
       } catch {
-        pushToast('クリップボードにコピーできませんでした');
+        pushToast('无法复制到剪贴板');
       }
     },
     [pushToast],
   );
 
   /**
-   * ライブラリ登録だけ消す(ファイルは残す)。
+   * 媒体库登録だけ消す(文件は残す)。
    * confirm=false は呼び出し側で既に確認を取っているとき(Delete キーのダイアログ)
    */
   const removeFromLibrary = useCallback(async (confirm: boolean) => {
@@ -656,7 +656,7 @@ export function VideoGrid() {
     const sel = s.selection;
     if (sel.length === 0) return;
     /*
-     * 監視フォルダ由来のものが混じっていたら、消す前に監視除外を勧める。
+     * 监视文件夹由来のものが混じっていたら、消す前に監視除外を勧める。
      * このまま消しても次のスキャンで再登録されるのはこの場合だけなので、
      * 個別登録しか選んでいなければ黙って消す(問いかけを騒がしくしない)。
      *
@@ -669,8 +669,8 @@ export function VideoGrid() {
     }
     if (confirm) {
       const yes = await ask(
-        `${sel.length} 件をライブラリから削除しますか?\n(登録とタグ情報が消えます。ファイル自体は削除されません)`,
-        { title: 'ライブラリから削除' },
+        `要从媒体库删除 ${sel.length} 个吗？\n（注册信息与标签信息将被删除。文件本身不会被删除）`,
+        { title: '从媒体库删除' },
       );
       if (!yes) return;
     }
@@ -680,7 +680,7 @@ export function VideoGrid() {
   }, []);
 
   /**
-   * 監視除外の選択を受けて、除外に入れてから削除する。
+   * 監視除外の選択を受けて、除外に入れてから删除。
    * **順番が逆だと、間に監視が走ったときに拾い直される**
    */
   const removeWithExclude = useCallback(
@@ -698,7 +698,7 @@ export function VideoGrid() {
       s.bumpVersion();
       if (choice !== 'none') {
         pushToast(
-          `${sel.length.toLocaleString()} 件を削除し、${paths.length.toLocaleString()} 件を監視除外に登録しました`,
+          `${sel.length.toLocaleString()} 项删除，并${paths.length.toLocaleString()} 项已登记为监视排除`,
           'info',
         );
       }
@@ -706,7 +706,7 @@ export function VideoGrid() {
     [pushToast],
   );
 
-  /** ファイルをごみ箱へ。実行前に必ず dry-run の表を見せる(FileOpDialog が承認を取る) */
+  /** 将文件送入回收站。実行前に必ず dry-run の表を見せる(FileOpDialog が承認を取る) */
   const trashSelection = useCallback(async () => {
     const sel = useLibrary.getState().selection;
     if (sel.length === 0) return;
@@ -751,7 +751,7 @@ export function VideoGrid() {
           try {
             await revealItemInDir(target.path);
           } catch {
-            pushToast('エクスプローラーで表示できませんでした');
+            pushToast('无法在资源管理器中显示');
           }
           break;
         case 'openFolder': {
@@ -762,17 +762,17 @@ export function VideoGrid() {
         case 'copyPath':
           await copyToClipboard(
             sel.map((v) => v.path).join('\r\n'),
-            `${sel.length} 件のパスをコピーしました`,
+            `${sel.length} 项的路径已复制`,
           );
           break;
         case 'rename': {
-          const name = window.prompt('新しいファイル名', target.filename);
+          const name = window.prompt('新文件名', target.filename);
           if (name === null || name.trim() === '' || name === target.filename) return;
           setFileOp({ kind: 'rename', plan: [await api.planRename(target.id, name.trim())] });
           break;
         }
         case 'move': {
-          const dest = await open({ directory: true, multiple: false, title: '移動先フォルダ' });
+          const dest = await open({ directory: true, multiple: false, title: '目标文件夹' });
           if (typeof dest !== 'string') return;
           setFileOp({ kind: 'move', plan: await api.planMove(ids, dest) });
           break;
@@ -780,7 +780,7 @@ export function VideoGrid() {
         case 'rethumb':
           // 生成そのものは Rust のワーカーが順にこなす。ここでは 1 回の IPC でまとめて予約するだけ
           await api.rethumbVideos(sel.map((v) => v.id));
-          pushToast(`${sel.length} 件のサムネイルを作り直しています`, 'info');
+          pushToast(`${sel.length} 项缩略图正在重新生成`, 'info');
           break;
         case 'removeFromLibrary':
           await removeFromLibrary(true);
@@ -807,11 +807,11 @@ export function VideoGrid() {
           try {
             await revealItemInDir(path);
           } catch {
-            pushToast('エクスプローラーで表示できませんでした');
+            pushToast('无法在资源管理器中显示');
           }
           break;
         case 'folderCopyPath':
-          await copyToClipboard(path, 'パスをコピーしました');
+          await copyToClipboard(path, '已复制路径');
           break;
         default:
       }
@@ -824,7 +824,7 @@ export function VideoGrid() {
     async (next: number, extend: boolean) => {
       const clamped = Math.min(Math.max(next, 0), Math.max(total - 1, 0));
       if (total === 0) return;
-      // 動画の行はフォルダの行のぶんだけ下にずれている
+      // 動画の行は文件夹の行のぶんだけ下にずれている
       virtualizer.scrollToIndex(folderRows + Math.floor(clamped / cols), { align: 'auto' });
       if (extend && anchorIndex != null) {
         const rows = await getRange(anchorIndex, clamped);
@@ -842,27 +842,27 @@ export function VideoGrid() {
     if (total === 0) return;
     const limit = Math.min(total, SELECT_ALL_LIMIT);
     const rows = await getRange(0, limit - 1);
-    // anchor も先頭に置く。据え置くと全選択の直後の Shift+クリックが的外れな範囲を選ぶ
+    // anchor も先頭に置く。据え置くと全選択の直後の Shift+点击が的外れな範囲を選ぶ
     setSelection(rows, 0, 0);
     if (total > SELECT_ALL_LIMIT) {
-      pushToast(`先頭 ${SELECT_ALL_LIMIT} 件を選択しました(全 ${total} 件)`, 'info');
+      pushToast(`先頭 ${SELECT_ALL_LIMIT} 项已选中（共 ${total} 件)`, 'info');
     }
   }, [total, getRange, setSelection, pushToast]);
 
-  /** 「上のフォルダ」の行き先。フォルダーで絞っていないか、監視フォルダの外に出るときは null */
+  /** 「上层文件夹」の行き先。文件夹で絞っていないか、监视文件夹の外に出るときは null */
   const parentPath = folderEntries[0]?.up ? folderEntries[0].path : null;
 
   /**
-   * グリッドの余白(v1.20)。カード・行・列ヘッダの上では出さない —
+   * グリッドの余白(v1.20)。カード·行·列ヘッダの上では出さない —
    * どれも stopPropagation していないので、ここで弾かないと
    * それぞれのメニューが出た直後にこれで上書きされてしまう
    */
   const onBlankContextMenu = useCallback(
     (e: React.MouseEvent) => {
       /*
-       * **左ボタンで掴んだままの右クリック**では pointerup が来ず帯が宙に浮くので、
+       * **左ボタンで掴んだままの右点击**では pointerup が来ず帯が宙に浮くので、
        * 投げ縄を中止してメニューは出さない(TagTree の `cancelDragForMenu` と同じ判断)。
-       * 右クリックで投げ縄が始まらないのは `onGridPointerDown` の `e.button !== 0`
+       * 右点击で投げ縄が始まらないのは `onGridPointerDown` の `e.button !== 0`
        */
       if (marqueePress) {
         setMarqueePress(null);
@@ -906,14 +906,14 @@ export function VideoGrid() {
         case 'blank:clearSelection':
           s.clearSelection();
           break;
-        // 表示中の絞り込み結果でキューを置き換えて再生(v1.41、C-4)
+        // 表示中の筛选結果で替换队列并播放(v1.41、C-4)
         case 'blank:loadQueue':
           try {
             // 上限 + 1 件引く。501 件返れば「切り詰めた」と分かる
             const rows = await api.queryVideos(query, QUEUE_LIMIT + 1, 0);
             await replaceQueueWith(rows, null, {
-              label: '表示中の一覧',
-              emptyMessage: '表示中の動画がありません',
+              label: '当前显示列表',
+              emptyMessage: '没有正在显示的视频',
             });
           } catch {
             // トーストは call() の担当
@@ -927,10 +927,10 @@ export function VideoGrid() {
           try {
             await revealItemInDir(s.dirPath);
           } catch {
-            pushToast('エクスプローラーで表示できませんでした');
+            pushToast('无法在资源管理器中显示');
           }
           break;
-        // 空オブジェクトを渡すと絞り込みだけが既定に戻る(並び順は残る)
+        // 空オブジェクトを渡すと筛选だけが既定に戻る(排序は残る)
         case 'blank:clearFilters':
           s.applyFilter({});
           break;
@@ -947,7 +947,7 @@ export function VideoGrid() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (playingVideo) return;
-      // 右クリックメニューが開いている間のキーはメニュー側が処理する。
+      // 右键菜单が開いている間のキーはメニュー側が処理する。
       // ここで横取りすると、メニューを出したまま裏で選択が動いてしまう
       if (contextMenuOpen) return;
       const tag = (e.target as HTMLElement | null)?.tagName;
@@ -958,7 +958,7 @@ export function VideoGrid() {
         void selectAll();
         return;
       }
-      // Ctrl+A 以外の修飾キー付き(コピー・貼り付け等)は横取りしない
+      // Ctrl+A 以外の修飾キー付き(复制·貼り付け等)は横取りしない
       if (e.ctrlKey || e.metaKey || e.altKey) return;
 
       const cur = focusIndex ?? -1;
@@ -995,14 +995,14 @@ export function VideoGrid() {
           break;
         }
         case 'Delete':
-          // ここでは消さない。「ライブラリからか / ごみ箱か」をダイアログで選ばせる
+          // ここでは消さない。「媒体库からか / ごみ箱か」をダイアログで選ばせる
           if (selection.length === 0) return;
           e.preventDefault();
           setAskDelete(true);
           break;
         /*
-         * 選択をキューの末尾に足す(v1.40)。プレイヤー側の Q は
-         * 「キューパネルの開閉」で意味が違うが、これは既存の作法どおり ——
+         * 選択を队列の末尾に足す(v1.40)。プレイヤー側の Q は
+         * 「队列パネルの開閉」で意味が違うが、これは既存の作法どおり ——
          * ArrowLeft も一覧では「前の動画へ」、プレイヤーでは「10 秒戻す」になっている
          */
         case 'q':
@@ -1021,7 +1021,7 @@ export function VideoGrid() {
     moveFocus, selectAll, getVideo, play, addSelectionToQueue,
   ]);
 
-  // 選択が空になったら削除の確認は用済み。Esc(App 側で選択解除)でも閉じることになる
+  // 選択が空になったら削除の確認は用済み。Esc(App 側で選択解除)でも关闭ことになる
   useEffect(() => {
     if (selection.length === 0) setAskDelete(false);
   }, [selection.length]);
@@ -1031,28 +1031,28 @@ export function VideoGrid() {
   return (
     <>
     {/*
-      絞り込み帯(v1.28)。フラグメントの子はそのまま .main の直接の子として並ぶので、
+      筛选帯(v1.28)。标志メントの子はそのまま .main の直接の子として並ぶので、
       ツールバーと一覧の間に入る。件数は useVideos のものを渡す(数え直さない)
     */}
     <FilterBar filters={filters} total={total} counted={counted} />
     <div
       ref={parentRef}
       className={`grid-scroll ${list ? 'list-mode' : ''}`}
-      // ヘッダ行・動画行・フォルダ行が同じ列幅を共有するための CSS 変数
+      // ヘッダ行·動画行·文件夹行が同じ列幅を共有するための CSS 変数
       style={list ? ({ '--list-cols': gridTemplate(listColumns) } as React.CSSProperties) : undefined}
-      // スクロールしたらメニューを閉じる処理は ContextMenu 側が持つ(v1.20)
+      // スクロールしたらメニューを关闭処理は ContextMenu 側が持つ(v1.20)
       onContextMenu={onBlankContextMenu}
-      // カード → キューパネルの D&D(v1.41、C-5)。カード上の pointerdown を委譲で拾う
+      // カード → 队列パネルの D&D(v1.41、C-5)。カード上の pointerdown を委譲で拾う
       onPointerDown={onGridPointerDown}
       onClick={(e) => {
-        // カード以外の余白クリックで選択解除(フォルダは選択の対象外なので押しても解除する)
+        // カード以外の余白点击で選択解除(文件夹は選択の対象外なので押しても解除する)
         const hit = (e.target as HTMLElement).closest('.card, .list-row');
         if (!hit || hit.classList.contains('folder-card') || hit.classList.contains('folder-row')) {
           clearSelection();
         }
       }}
     >
-      {/* 仮想化コンテナの手前に置く。中に入れると folderRows の添字計算が崩れる */}
+      {/* 仮想化容器の手前に置く。中に入れると folderRows の添字計算が崩れる */}
       {list && <ListHeader columns={listColumns} />}
       <div ref={innerRef} style={{ height: virtualizer.getTotalSize(), position: 'relative' }}>
         {virtualizer.getVirtualItems().map((row) => (
@@ -1061,13 +1061,13 @@ export function VideoGrid() {
             /*
               1 行おきの濃淡(v1.25)。**縞のクラスはここ(ラッパ)に付け、塗るのは
               .list-row 側**にする —— ここを塗ると左右 12px の padding まで届く
-              角無しの帯になり、選択・ホバーのハイライトと形が変わってしまう。
+              角無しの帯になり、選択·ホバーのハイライトと形が変わってしまう。
 
               :nth-child は使えない(仮想化で DOM 上の順番 = 絶対行番号ではないので、
               スクロールすると縞が反転して波打つ)。row.index は**画面上の通し行番号**
-              なので、先頭にフォルダ行が混ざってもパリティがずれない
+              なので、先頭に文件夹行が混ざってもパリティがずれない
               (動画側の index は folderRows を引いた値なのでこの用途には使えない)。
-              動画行・フォルダ行・未取得プレースホルダの 3 種すべてに props 追加なしで乗る。
+              動画行·文件夹行·未取得プレースホルダの 3 種全部に props 追加なしで乗る。
               **list && を外さないこと**(グリッドのカードにクラスが漏れる)
             */
             className={list && listZebra && row.index % 2 === 1 ? 'list-odd' : undefined}
@@ -1077,7 +1077,7 @@ export function VideoGrid() {
               left: 0,
               // リストは列を増やすと可視幅を超えることがある。width:100% のままだと
               // 行が可視幅で切れ、横スクロールしたときにハイライトの右端が途切れる。
-              // max-content は使わない(ファイル名の長さで行ごとに幅が変わってしまう)。
+              // max-content は使わない(文件名の时长で行ごとに幅が変わってしまう)。
               // 足しているのは下の padding ぶん(border-box なので幅に含める)
               width: list ? `max(100%, ${totalWidth(listColumns) + GRID_PAD * 2}px)` : '100%',
               height: rowHeight,
@@ -1090,7 +1090,7 @@ export function VideoGrid() {
             }}
           >
             {Array.from({ length: cols }, (_, c) => {
-              // 先頭の folderRows 行はフォルダ、その後ろが動画
+              // 先頭の folderRows 行は文件夹、その後ろが動画
               if (row.index < folderRows) {
                 const entry = folderEntries[row.index * cols + c];
                 if (!entry) return <div key={c} />;
@@ -1123,7 +1123,7 @@ export function VideoGrid() {
                 /*
                  * 投げ縄の最中は**囲みの中身をそのまま選択の見た目で出す**(v1.42)。
                  * 別のクラスにすると「離したら結果が変わった」に見えるので、
-                 * 見えているとおりが離した瞬間に確定するようにしてある。
+                 * 見えているとおりが離した瞬間に确定ようにしてある。
                  * Ctrl 併用のときだけ掴む前の選択も残す
                  */
                 selected: video
@@ -1146,7 +1146,7 @@ export function VideoGrid() {
           </div>
         ))}
         {/*
-          投げ縄の帯(v1.42)。**仮想化コンテナの中**に内容座標で置く ——
+          投げ縄の帯(v1.42)。**仮想化容器の中**に内容座標で置く ——
           当たり判定と同じ座標系になるので、`.grid-scroll` の padding-top や
           sticky な列ヘッダのぶんを自分で足し引きしなくて済む。
           位置は rAF が style に直接書く(毎フレーム React を通さないため)
@@ -1155,9 +1155,9 @@ export function VideoGrid() {
       </div>
       {total === 0 && folderEntries.length === 0 && (
         <div className="empty-hint">
-          左の「+ フォルダを追加」から動画フォルダを登録するか、
+          从左侧「+ 添加文件夹」登记视频文件夹，或
           <br />
-          動画ファイルをこのウィンドウにドロップしてください
+          将视频文件拖放到此窗口
         </div>
       )}
     </div>
@@ -1170,8 +1170,8 @@ export function VideoGrid() {
       >
         <ListVideo />
         {queueDrag.over
-          ? `${queueDrag.count} 件をキューに追加`
-          : `${queueDrag.count} 件 — キューパネルへドロップ`}
+          ? `${queueDrag.count} 项添加到队列`
+          : `${queueDrag.count} 项 — 拖放到队列面板`}
       </div>
     )}
 
@@ -1196,7 +1196,7 @@ export function VideoGrid() {
       <DeleteDialog
         count={selection.length}
         onClose={() => setAskDelete(false)}
-        // このダイアログ自体が確認なので、ライブラリ削除で二重に尋ねない
+        // このダイアログ自体が確認なので、媒体库削除で二重に尋ねない
         onLibrary={() => {
           setAskDelete(false);
           void removeFromLibrary(false);

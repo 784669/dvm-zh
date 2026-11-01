@@ -19,45 +19,45 @@ const CLIENTS: { key: Client; label: string }[] = [
   { key: 'codex', label: 'Codex CLI' },
   { key: 'gemini', label: 'Gemini CLI' },
   { key: 'vscode', label: 'VS Code' },
-  { key: 'other', label: 'その他のアプリ' },
+  { key: 'other', label: '其他应用' },
 ];
 
 const HOWTO: Record<Client, string> = {
   desktop:
-    `Claude Desktop の 設定 → 開発者 → 「構成を編集」で ${CLAUDE_DESKTOP_CONFIG} を開き、` +
-    '上の内容を貼り付けて Claude Desktop を再起動してください。' +
-    'すでに mcpServers がある場合は "dvm": { ... } の部分だけをその中に足します',
+    `在 Claude Desktop 的 设置 → 开发者 → 「编辑配置」中 ${CLAUDE_DESKTOP_CONFIG} ，然后` +
+    '请粘贴上面的内容并重启 Claude Desktop。' +
+    '若已有 mcpServers，只需将 "dvm": { ... } 部分添加到其中',
   code:
-    'PowerShell かコマンドプロンプトに貼り付けて実行してください。' +
-    'そのあと claude mcp list で「dvm ... Connected」と出れば成功です',
+    '请粘贴到 PowerShell 或命令提示符中执行。' +
+    '之后运行 claude mcp list，若出现「dvm ... Connected」即成功',
   codex:
-    `${CODEX_CONFIG} を開いて末尾に貼り付けてください(ファイルが無ければ新しく作ります)。` +
-    'そのあと codex を起動し直すと使えるようになります',
+    `${CODEX_CONFIG} ，粘贴到末尾（文件不存在则新建）。` +
+    '之后重新启动 codex 即可使用',
   gemini:
-    `${GEMINI_CLI_CONFIG} を開いて貼り付けてください(ファイルが無ければ新しく作ります)。` +
-    'そのあと gemini を起動し直し、/mcp で「dvm」が出れば成功です',
+    `${GEMINI_CLI_CONFIG} ，粘贴进去（文件不存在则新建）。` +
+    '之后重新启动 gemini，在 /mcp 中看到「dvm」即成功',
   vscode:
-    `${VSCODE_MCP_CONFIG} を開いて貼り付けてください` +
-    '(コマンドパレットの「MCP: Open User Configuration」でも開けます)。' +
-    'VS Code だけ mcpServers ではなく servers 形式で、type の指定が要ります',
+    `${VSCODE_MCP_CONFIG} ，粘贴进去` +
+    '（也可通过命令面板的「MCP: Open User Configuration」打开）。' +
+    '只有 VS Code 用的是 servers 格式而非 mcpServers，且需要指定 type',
   other:
-    'Cursor・Cline・Windsurf など、mcpServers 形式に対応した MCP クライアントで同じ設定が使えます。' +
-    'それぞれの設定ファイルに貼り付けてアプリを再起動してください',
+    'Cursor·Cline·Windsurf 等支持 mcpServers 格式的 MCP 客户端可以使用相同设置。' +
+    '请粘贴到各自的设置文件中并重启应用',
 };
 
 /**
  * JSON を貼り付けるクライアント共通の注意。
- * 中身が空でない設定ファイルに継ぎ足すとき、直前の行のカンマを忘れるのが定番の事故で、
+ * 中身が空でない設定文个継ぎ足すとき、直前の行のカンマを忘れるのが定番の事故で、
  * JSON が壊れると設定を読めずにアプリ自体が起動しなくなる(実際に踏んだので明記する)
  */
 const JSON_CAVEAT =
-  '設定ファイルに既に中身がある場合、貼り付ける直前の行の末尾に , が要ります。' +
-  'これが抜けると JSON として壊れ、AI アプリが起動時にエラーになります';
+  '若设置文件中已有内容，粘贴位置前一行末尾需要加逗号。' +
+  '缺少逗号会破坏 JSON，导致 AI 应用启动时报错';
 
 /** TOML はカンマの問題が無い代わりに、セクションの入れ子で事故る */
 const TOML_CAVEAT =
-  '設定ファイルに既に [mcp_servers.○○] がある場合は、上のセクションをそのまま末尾に足してください。' +
-  '既存のセクションの中に入れると別のサーバーの設定として読まれます';
+  '若设置文件中已有 [mcp_servers.○○]，请把上面的段落原样添加到末尾。' +
+  '若放入已有的段落内，会被当作其他服务器的配置读取';
 
 export function McpSettings({
   exePath,
@@ -69,7 +69,7 @@ export function McpSettings({
   exePath: string | null | undefined;
   allowWrite: boolean;
   onAllowWriteChange: (v: boolean) => void;
-  /** いま開いているライブラリ(v1.27)。設定を貼り直す必要が無いことを説明するために出す */
+  /** いま開いている媒体库(v1.27)。設定を貼り直す必要が無いことを説明するために出す */
   libraryName?: string;
 }) {
   const [client, setClient] = useState<Client>('desktop');
@@ -90,36 +90,36 @@ export function McpSettings({
         ? codexConfigToml({ exePath, allowWrite })
         : client === 'vscode'
           ? vscodeMcpJson({ exePath, allowWrite })
-          : // Claude Desktop / Gemini CLI / その他 は同じ mcpServers 形式
+          : // Claude Desktop / Gemini CLI / 其他 は同じ mcpServers 形式
             mcpServersJson({ exePath, allowWrite });
 
   return (
     <div className="settings-section">
-      <div className="settings-heading">MCP 連携(外部の AI から操作する)</div>
+      <div className="settings-heading">MCP 联动(由外部 AI 操作)</div>
       <div className="settings-note">
-        Claude Desktop などの AI アプリからライブラリを直接検索・整理できるようにします。
-        「タグの付いていない動画を 20 件見せて」「このシリーズに評価を付けて」のように話しかけるだけです。
-        DVM を起動していなくても動きます
+        让 Claude Desktop 等 AI 应用直接搜索·整理媒体库。
+        只需像「显示 20 个没有标签的视频」「给这个系列打分」这样对话即可。
+        即使未启动 DVM 也能工作
       </div>
       <div className="settings-note">
-        AI が見るのは<b>いま DVM で開いているライブラリ</b>
-        {libraryName ? `(現在:「${libraryName}」)` : ''}です。
-        別のライブラリに切り替えると AI 側もそのまま追従するので、設定を貼り直す必要はありません
+        AI 看到的是<b>当前在 DVM 中打开的媒体库</b>
+        {libraryName ? `（当前:「${libraryName}」）` : ''}。
+        切换到其他媒体库时 AI 侧也会自动跟随，无需重新粘贴设置
       </div>
 
       {exePath === undefined ? null : !exePath ? (
         <div className="settings-note">
-          MCP サーバー(dvm-mcp.exe)が見つかりません。開発環境で動かしている場合は
+          找不到 MCP 服务器（dvm-mcp.exe）。若在开发环境中运行
           <code> npm run build:mcp </code>
-          を実行すると配置されます
+          ，即会自动部署
         </div>
       ) : (
         <>
-          <label className="modal-label">サーバーの場所</label>
+          <label className="modal-label">服务器位置</label>
           <div className="modal-row">
             <input readOnly value={exePath} title={exePath} />
             <button onClick={() => copy('path', exePath)}>
-              {copied === 'path' ? 'コピーしました' : 'コピー'}
+              {copied === 'path' ? '已复制' : '复制'}
             </button>
           </div>
 
@@ -129,14 +129,14 @@ export function McpSettings({
               checked={allowWrite}
               onChange={(e) => onAllowWriteChange(e.target.checked)}
             />
-            AI からの変更を許可する(タグ・レーティング・シリーズの編集)
+            允许 AI 进行修改（标签·评分·系列的编辑）
           </label>
           <div className="settings-note">
-            オフのままなら DB を読み取り専用で開くので、AI はライブラリを一切変更できません。
-            オンにした場合も、ファイルをごみ箱へ送る操作だけは必ず対象一覧の確認を挟みます
+            保持关闭时以只读方式打开数据库，AI 完全无法修改媒体库。
+            即使开启，将文件送入回收站的操作也一定会先显示对象列表供确认
           </div>
 
-          <label className="modal-label">貼り付ける設定</label>
+          <label className="modal-label">要粘贴的设置</label>
           <div className="mcp-tabs">
             {CLIENTS.map((c) => (
               <button
@@ -151,7 +151,7 @@ export function McpSettings({
           <pre className="mcp-snippet">{snippet}</pre>
           <div className="modal-row">
             <button onClick={() => copy('snippet', snippet)}>
-              {copied === 'snippet' ? 'コピーしました' : 'コピー'}
+              {copied === 'snippet' ? '已复制' : '复制'}
             </button>
           </div>
           <div className="settings-note">{HOWTO[client]}</div>

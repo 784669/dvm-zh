@@ -13,7 +13,7 @@ import type { PlayerState, VideoPlayer } from './types';
 /**
  * <video> 要素(WebView2 エンジン)用の VideoPlayer 実装。
  * 状態はイベント経由で同期し、操作は要素へ直接反映する(要素が唯一の真実)。
- * 音量・ミュートは localStorage に保存して次回再生・mpv エンジンと共有する。
+ * 音量·ミュートは localStorage に保存して次回再生·mpv エンジンと共有する。
  */
 export function useVideoPlayer(videoRef: RefObject<HTMLVideoElement | null>, src: string): VideoPlayer {
   const [state, setState] = useState<PlayerState>(() => ({

@@ -49,20 +49,20 @@ fn parse_payload(payload: Option<&str>) -> Option<Value> {
 
 fn judge(action: &str, payload: Option<&str>, undone_at: Option<&str>) -> (bool, Option<String>) {
     if undone_at.is_some() {
-        return (false, Some("取り消し済みです".into()));
+        return (false, Some("已撤销".into()));
     }
     if !UNDOABLE.contains(&action) {
         let reason = match action {
-            "trash_file" => "ごみ箱から手動で戻してください",
-            "remove_videos" => "登録削除は元に戻せません(再スキャンで取り込み直せます)",
-            "move_file" | "rename_file" => "逆向きの移動・リネームを実行してください",
-            _ => "この操作は取り消せません",
+            "trash_file" => "请从回收站手动还原",
+            "remove_videos" => "删除注册无法撤销（可通过重新扫描再次收录）",
+            "move_file" | "rename_file" => "请执行反向的移动・重命名",
+            _ => "此操作无法撤销",
         };
         return (false, Some(reason.into()));
     }
     if parse_payload(payload).is_none() {
         // v1.9 より前の記録。変更前の値が残っていないので戻しようがない
-        return (false, Some("古い形式の記録のため取り消せません".into()));
+        return (false, Some("因记录为旧格式无法撤销".into()));
     }
     (true, None)
 }
@@ -239,7 +239,7 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
     )?;
 
     let (undoable, reason) = judge(&action, payload.as_deref(), undone_at.as_deref());
-    anyhow::ensure!(undoable, "{}", reason.unwrap_or_else(|| "取り消せません".into()));
+    anyhow::ensure!(undoable, "{}", reason.unwrap_or_else(|| "无法撤销".into()));
     let p = parse_payload(payload.as_deref()).unwrap();
 
     let summary = match action.as_str() {
@@ -252,7 +252,7 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
                     params![vid, tag_id],
                 )?;
             }
-            format!("{} 件からタグを外しました", ids.len())
+            format!("已从 {} 项移除标签", ids.len())
         }
         "untag_videos" => {
             let tag_id = p["tagId"].as_i64().unwrap_or(0);
@@ -263,7 +263,7 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
                     params![vid, tag_id],
                 )?;
             }
-            format!("{} 件にタグを戻しました", ids.len())
+            format!("已在 {} 项恢复标签", ids.len())
         }
         "add_to_series" => {
             let series_id = p["seriesId"].as_i64().unwrap_or(0);
@@ -274,7 +274,7 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
                     params![series_id, vid],
                 )?;
             }
-            format!("{} 件をシリーズから外しました", ids.len())
+            format!("已从 {} 项移出系列", ids.len())
         }
         "remove_from_series" => {
             let series_id = p["seriesId"].as_i64().unwrap_or(0);
@@ -286,7 +286,7 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
                     params![series_id, e["id"].as_i64(), e["position"].as_i64().unwrap_or(0)],
                 )?;
             }
-            format!("{} 件をシリーズに戻しました", entries.len())
+            format!("已在 {} 项恢复系列", entries.len())
         }
         "set_rating" => {
             let before = p["before"].as_array().cloned().unwrap_or_default();
@@ -296,7 +296,7 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
                     params![e["rating"].as_i64().unwrap_or(0), e["id"].as_i64()],
                 )?;
             }
-            format!("{} 件のレーティングを戻しました", before.len())
+            format!("已恢复 {} 项的评分", before.len())
         }
         "set_video_info" => {
             let id = p["id"].as_i64().unwrap_or(0);
@@ -319,14 +319,14 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
                 };
                 conn.execute(sql, params![p["before"][key].as_str(), id])?;
             }
-            "情報を元に戻しました".to_string()
+            "已恢复信息".to_string()
         }
         "rename_tag" => {
             conn.execute(
                 "UPDATE tags SET name = ?1 WHERE id = ?2",
                 params![p["before"].as_str(), p["tagId"].as_i64()],
             )?;
-            "タグ名を戻しました".to_string()
+            "已恢复标签名".to_string()
         }
         "relink" => {
             let items = p["items"].as_array().cloned().unwrap_or_default();
@@ -342,9 +342,9 @@ pub fn undo_op(conn: &Connection, op_id: i64) -> Result<String> {
                     params![from, filename, if exists { 0 } else { 1 }, e["id"].as_i64()],
                 )?;
             }
-            format!("{} 件のパスを戻しました", items.len())
+            format!("已恢复 {} 项路径", items.len())
         }
-        other => anyhow::bail!("取り消しに未対応の操作です: {other}"),
+        other => anyhow::bail!("该操作不支持撤销：{other}"),
     };
 
     conn.execute(
@@ -453,7 +453,7 @@ mod tests {
     #[test]
     fn undo_video_info_leaves_the_untouched_field_alone() {
         let conn = setup();
-        videos::set_video_info(&conn, "user", 1, None, Some("あとで見返す")).unwrap();
+        videos::set_video_info(&conn, "user", 1, None, Some("稍后回看")).unwrap();
         videos::set_video_info(&conn, "user", 1, Some("第 1 話"), None).unwrap();
         undo_op(&conn, last_op(&conn)).unwrap();
 
@@ -463,7 +463,7 @@ mod tests {
             })
             .unwrap();
         assert_eq!(title, None);
-        assert_eq!(comment.as_deref(), Some("あとで見返す"), "メモは取り消しの対象外");
+        assert_eq!(comment.as_deref(), Some("稍后回看"), "メモは取り消しの対象外");
     }
 
     /// v1.34 より前の記録(fields が無い)も、従来どおりの読み方で戻せること
@@ -497,7 +497,7 @@ mod tests {
         db::log_op(&conn, "user", "set_rating", "rating=5 videos=[1, 2]");
         let old = last_op(&conn);
         let e = undo_op(&conn, old).unwrap_err().to_string();
-        assert!(e.contains("古い形式"), "理由が伝わること: {e}");
+        assert!(e.contains("旧格式"), "理由要能让人看懂: {e}");
     }
 
     /// v1.18。同じ動画を複数回観たら、その回数ぶん新しい順に並ぶこと
@@ -565,7 +565,7 @@ mod tests {
     #[test]
     fn blank_range_is_not_a_filter() {
         let conn = setup_views();
-        assert_eq!(range("", "").where_clause().0, "", "空文字は条件にしない");
+        assert_eq!(range("", "").where_clause().0, "", "空字符串不作为筛选条件");
         assert_eq!(list_view_history(&conn, None, &range("   ", ""), 50, 0).unwrap().len(), 4);
     }
 

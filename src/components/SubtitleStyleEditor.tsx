@@ -4,7 +4,7 @@ import { isDefaultSubStyle, SUB_COLOR_PRESETS, SUB_STYLE_FIELDS } from '../lib/s
 import type { SubStyle, SubStyleField, SubStyleGroup } from '../lib/subtitleStyle';
 
 /**
- * 字幕の見た目を編集する UI(v1.24)。
+ * 字幕样式を編集する UI(v1.24)。
  *
  * **状態を持たない**。プレイヤーのパネル(SubtitleStylePanel)と設定モーダルの
  * 両方から同じ挙動で使えるよう、値も保存も呼び出し側(= store)に任せる。
@@ -17,11 +17,11 @@ import type { SubStyle, SubStyleField, SubStyleGroup } from '../lib/subtitleStyl
  * ここで解く** —— sub-scale と sub-font-size は効く対象が違うので見出しで切る
  */
 const GROUPS: { key: SubStyleGroup; title: string; note?: string }[] = [
-  { key: 'all', title: 'すべての字幕', note: 'ASS/SSA(アニメなど)にも効きます' },
+  { key: 'all', title: '全部字幕', note: '对 ASS/SSA（动画等）也有效' },
   {
     key: 'plain',
-    title: '文字の見た目',
-    note: 'SRT など、自前の装飾を持たない字幕にだけ効きます',
+    title: '文字外观',
+    note: '仅对 SRT 等自身不带样式的字幕有效',
   },
   { key: 'ass', title: 'ASS/SSA 字幕', note: undefined },
 ];
@@ -59,7 +59,7 @@ function ColorRow({
     <div className="sub-style-control sub-style-color">
       {/*
         定番色を先に並べる。<input type="color"> は WebView2 のネイティブダイアログを
-        開くので、全画面再生中に開くと画面の外に出る。日常の操作はここで完結させる
+        打开ので、全画面再生中に打开と画面の外に出る。日常の操作はここで完結させる
       */}
       <div className="sub-style-swatches">
         {SUB_COLOR_PRESETS.map((c) => (
@@ -77,7 +77,7 @@ function ColorRow({
           type="color"
           className="sub-style-picker"
           value={hex}
-          title="その他の色"
+          title="其他颜色"
           onChange={(e) => onChange(e.target.value.toUpperCase(), alpha)}
         />
       </div>
@@ -120,14 +120,14 @@ export function SubtitleStyleEditor({
         return (
           <div className="sub-style-control">
             {/*
-              <select> ではなく <input list> にしてある —— フォント列挙に失敗しても
+              <select> ではなく <input list> にしてある —— 字体列挙に失敗しても
               名前を直接打てば効くので、機能そのものが列挙の成否に依存しない
             */}
             <input
               className="sub-style-font"
               list={fontListId}
               value={value.font}
-              placeholder="既定(sans-serif)"
+              placeholder="默认(sans-serif)"
               onChange={(e) => onChange({ font: e.target.value })}
             />
             <datalist id={fontListId}>
@@ -157,8 +157,8 @@ export function SubtitleStyleEditor({
     <div className={`sub-style${compact ? ' compact' : ''}`}>
       {assWarning && (
         <div className="sub-style-warn">
-          この字幕は制作者が付けたスタイルを持っています。
-          「拡大率」「縦位置」以外は反映されません
+          该字幕带有制作者设定的样式。
+          除「缩放比例」「垂直位置」外都不会生效
         </div>
       )}
       {GROUPS.map((g) => {
@@ -170,7 +170,7 @@ export function SubtitleStyleEditor({
             {g.note && <div className="sub-style-group-note">{g.note}</div>}
             {fields.map((f) =>
               // チェックは「ラベル 104px + コントロール」の枠に収まらない
-              // (「ASS/SSA 字幕にもこの見た目を適用する」が切れる)。
+              // (「此样式也应用于 ASS/SSA 字幕」が切れる)。
               // 行を分けて、設定モーダルのチェックと同じ「□ + 文」の形にする
               f.kind === 'check' ? (
                 <div key={f.key} className="sub-style-check-row">
@@ -204,7 +204,7 @@ export function SubtitleStyleEditor({
           onMouseDown={(e) => e.preventDefault()}
           onClick={onReset}
         >
-          既定に戻す
+          恢复默认
         </button>
       </div>
     </div>

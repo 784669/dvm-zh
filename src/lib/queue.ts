@@ -1,13 +1,13 @@
 import type { QueueState, VideoRow } from '../types';
 
 /**
- * 再生キューの純関数(v1.40)。**判断はすべてここに置き、store は結果を入れるだけ**にする。
- * 「再生中のものを消した」「並べ替えた」「上限に当たった」の 3 つはどれも
+ * 再生队列の純関数(v1.40)。**判断は全部ここに置き、store は結果を入れるだけ**にする。
+ * 「再生中のものを消した」「排列た」「上限に当たった」の 3 つはどれも
  * 目で確かめきれないので、テストできる場所に閉じ込める(lib/chapters.ts と同じ作法)。
  */
 
 /**
- * キューに入る上限。
+ * 队列に入る上限。
  *
  * `Ctrl+A` で全選択して追加できる以上、無防備にするとパフォーマンス原則 4
  * (フロントに全件データを一括で渡さない)に正面から反する。500 本は 1 本 5 分でも
@@ -38,8 +38,8 @@ export interface AddResult {
 }
 
 /**
- * キューに足す。**すでに入っているものは無視する(冪等)** ——
- * 「選択して追加」を 2 回押してもキューが倍にならない。
+ * 队列に足す。**すでに入っているものは無視する(冪等)** ——
+ * 「選択して追加」を 2 回押しても队列が倍にならない。
  *
  * 上限を超えるときは**部分的に入れず全部断る**。中途半端に入ると
  * 何が入って何が入らなかったのか画面から読み取れない
@@ -63,7 +63,7 @@ export function addToQueue(q: QueueState, videos: VideoRow[], mode: AddMode = 'e
   let items: VideoRow[];
   if (mode === 'next' && q.currentId != null) {
     const at = q.items.findIndex((v) => v.id === q.currentId);
-    // 再生中のものがキューから外れているときは、外した位置に挿す
+    // 再生中のものが队列から外れているときは、外した位置に挿す
     const insert = at >= 0 ? at + 1 : (q.orphanIndex ?? q.items.length);
     items = [...q.items.slice(0, insert), ...fresh, ...q.items.slice(insert)];
   } else {
@@ -73,7 +73,7 @@ export function addToQueue(q: QueueState, videos: VideoRow[], mode: AddMode = 'e
 }
 
 /**
- * キューから 1 件外す。
+ * 队列から 1 件外す。
  *
  * **再生中のものを外しても再生は止めない**(「このリストからは外す」と
  * 「今観るのをやめる」は別の意思)。代わりに外した位置を `orphanIndex` に覚えて、
@@ -94,7 +94,7 @@ function shiftOrphan(orphan: number | null, removedAt: number): number | null {
 }
 
 /**
- * ドラッグで並べ替える。`from` の要素を `to` の位置へ差し込む。
+ * 拖动排序る。`from` の要素を `to` の位置へ差し込む。
  *
  * **`currentId` は触らない** —— 現在位置を video_id で指しているので、
  * どこへ動かしても再生中のものは追随する(これが Q10 で重複を許さなかった見返り)
@@ -128,8 +128,8 @@ export function clearQueue(q: QueueState): QueueState {
  * `library:changed` で引き直した行で中身を差し替える(v1.40)。
  * 消えた動画は `rows` に入って来ないので、これで自然に落ちる。
  *
- * **`dirty` は変えない** —— ライブラリ側の都合で消えただけなのに
- * 「変更あり」が点くと、ユーザーが触っていないのに上書き保存を促すことになる
+ * **`dirty` は変えない** —— 媒体库側の都合で消えただけなのに
+ * 「有变更」が点くと、ユーザーが触っていないのに覆盖保存を促すことになる
  */
 export function syncQueue(q: QueueState, rows: VideoRow[]): QueueState {
   const byId = new Map(rows.map((r) => [r.id, r]));
@@ -139,7 +139,7 @@ export function syncQueue(q: QueueState, rows: VideoRow[]): QueueState {
   /*
    * 隙間(orphanIndex)の追随。再生中の行がこの同期で消えたときは、
    * 居た位置をそのまま隙間として覚える —— これが無いと位置 400 で再生中の
-   * 動画がライブラリから消えた瞬間、「次へ」がキュー先頭へ飛ぶ
+   * 動画が媒体库から消えた瞬間、「次へ」が队列先頭へ飛ぶ
    */
   const survivorsBefore = (at: number) => q.items.slice(0, at).filter((v) => byId.has(v.id)).length;
   const currentAt = q.currentId === null ? -1 : q.items.findIndex((v) => v.id === q.currentId);
@@ -156,9 +156,9 @@ export function loadedQueue(items: VideoRow[], sourceId: number, sourceName: str
 }
 
 /**
- * スマートフォルダ・絞り込み結果から組んだ直後の状態(v1.41、C-4)。
- * 出所(sourceId)を持たない —— スマートフォルダは条件でありリストではないので、
- * 「上書き保存」の書き戻し先にならない。保存するなら「名前を付けて保存」から。
+ * 智能文件夹·筛选結果から組んだ直後の状態(v1.41、C-4)。
+ * 出所(sourceId)を持たない —— 智能文件夹は条件でありリストではないので、
+ * 「覆盖保存」の書き戻し先にならない。保存するなら「命名并保存」起。
  * `dirty` は立てる(この中身はまだどこにも保存されていない)
  */
 export function composedQueue(items: VideoRow[]): QueueState {
@@ -178,23 +178,23 @@ export function savedQueue(q: QueueState, sourceId: number, sourceName: string):
 }
 
 /**
- * 読み込み元プレイリストが削除されたときの追随。出所を外して、
- * 以後の保存は「名前を付けて保存」に戻す —— 消えたリストへの「上書き保存」は
- * 「プレイリストが見つかりません」で必ず失敗するため。中身と `dirty` は触らない
+ * 読み込み元播放列表が削除されたときの追随。出所を外して、
+ * 以後の保存は「命名并保存」に戻す —— 消えたリストへの「覆盖保存」は
+ * 「播放列表が未找到」で必ず失敗するため。中身と `dirty` は触らない
  */
 export function sourceRemoved(q: QueueState, sourceId: number): QueueState {
   if (q.sourceId !== sourceId) return q;
   return { ...q, sourceId: null, sourceName: '' };
 }
 
-/** 読み込み元プレイリストの改名に、パネルのタイトル(sourceName)を追随させる */
+/** 読み込み元播放列表の改名に、パネルの标题(sourceName)を追随させる */
 export function sourceRenamed(q: QueueState, sourceId: number, name: string): QueueState {
   if (q.sourceId !== sourceId || q.sourceName === name) return q;
   return { ...q, sourceName: name };
 }
 
 /**
- * いま再生している位置(0 始まり)。キューに居なければ -1。
+ * いま再生している位置(0 始まり)。队列に居なければ -1。
  * 表示の「3 / 12」とボタンの活性がここから決まる
  */
 export function queueIndex(q: QueueState): number {
@@ -205,13 +205,13 @@ export function queueIndex(q: QueueState): number {
 /**
  * `delta` ぶん進んだ先の動画。端なら null。
  *
- * 再生中のものがキューから外れているとき(`orphanIndex`)は、
+ * 再生中のものが队列から外れているとき(`orphanIndex`)は、
  * 「外した位置の 1 つ前に居る」とみなして数える —— 次へ進むと外した位置の要素が来る
  */
 export function queueStep(q: QueueState, delta: 1 | -1): VideoRow | null {
   const at = queueIndex(q);
   /*
-   * キューに居ないとき(外した直後 / まだキューで再生していない)は、
+   * 队列に居ないとき(外した直後 / まだ队列で再生していない)は、
    * **行の上ではなく行と行の「あいだ」にいる**。だから前と後ろで解決が違う ——
    * 「次」は隙間のうしろ、「前」は隙間の手前。1 つの base に足し引きすると、
    * 外した直後の ⏮ が 1 つ飛び越してしまう
@@ -225,18 +225,18 @@ export function queueStep(q: QueueState, delta: 1 | -1): VideoRow | null {
   return q.items[next];
 }
 
-/** キューモードで 1 件を再生し始めたときの状態(orphan は解消する) */
+/** 队列モードで 1 个再生し始めたときの状態(orphan は解消する) */
 export function playingInQueue(q: QueueState, videoId: number): QueueState {
   return { ...q, currentId: videoId, orphanIndex: null };
 }
 
 /**
- * 「保存していないキューを捨てますか?」を確認するか。
+ * 「保存していない队列を捨てますか?」を確認するか。
  *
  * v1.40 では終了時の 3 択にも使っていたが、v1.41 の常時自動保存(C-2)で終了確認は
- * 廃止した。残る用途は**キューを丸ごと置き換える操作の前の確認**(プレイリストの
- * 読み込み・「キューを置き換えて再生」・スマートフォルダの読み込み)。
- * **空のとき・保存済みと同じ内容のときは尋ねない**
+ * 廃止した。残る用途は**队列を丸ごと置き換える操作の前の確認**(播放列表の
+ * 読み込み·「替换队列并播放」·智能文件夹の読み込み)。
+ * **空のとき·保存済みと同じ内容のときは尋ねない**
  */
 export function needsSavePrompt(q: QueueState): boolean {
   return q.items.length > 0 && q.dirty;

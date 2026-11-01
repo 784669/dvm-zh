@@ -6,14 +6,14 @@ import type { ColumnKey } from '../lib/listColumns';
 import { useLibrary } from '../store';
 
 /**
- * 詳細リストの見た目を決めるポップオーバー(列は v1.16、1 行おきの濃淡は v1.25)。
+ * 详细列表の見た目を決めるポップオーバー(列は v1.16、1 行おきの濃淡は v1.25)。
  *
  * `.grid-scroll` の overflow に切られるので**スクロール領域の外**に fixed で描く
- * (右クリックメニューと同じ扱い)。
+ * (右键菜单と同じ扱い)。
  *
- * 並べ替えはドラッグではなく ↑↓ ボタン。項目が十数個なら十分で、
- * ヘッダのクリック(並び替え)とドラッグ開始の見分けを書かずに済む。
- * サムネイルは先頭固定なので移動できない。
+ * 排列はドラッグではなく ↑↓ ボタン。項目が十数個なら十分で、
+ * ヘッダの点击(並び替え)とドラッグ開始の見分けを書かずに済む。
+ * 缩略图は先頭固定なので移動できない。
  *
  * **リスト表示の見た目に関する切替はここに集める**(設定モーダルには置かない)。
  * ここはリスト表示のときしか開けないので、設定が効く場所と操作する場所が一致する
@@ -30,13 +30,13 @@ export function ColumnPicker({
   const setZebra = useLibrary((s) => s.setListZebra);
   const ref = useRef<HTMLDivElement>(null);
 
-  // 外側のクリックと Esc で閉じる(右クリックメニューと同じ作法)
+  // 外側の点击と Esc で关闭(右键菜单と同じ作法)
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
       if (!ref.current?.contains(e.target as Node)) onClose();
     };
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    // 開いた直後のクリックで閉じないよう、次のフレームから拾う
+    // 開いた直後の点击で閉じないよう、次のフレームから拾う
     const timer = window.setTimeout(() => document.addEventListener('mousedown', onDown), 0);
     window.addEventListener('keydown', onKey);
     return () => {
@@ -51,7 +51,7 @@ export function ColumnPicker({
     void api.setSetting('list_columns', JSON.stringify(next));
   };
 
-  /** apply() は「列を確定する」関数なので流用しない。保存の作法だけ合わせる */
+  /** apply() は「列を确定」関数なので流用しない。保存の作法だけ合わせる */
   const applyZebra = (next: boolean) => {
     setZebra(next);
     void api.setSetting('list_zebra', next ? '1' : '0');
@@ -67,7 +67,7 @@ export function ColumnPicker({
     apply([...columns, key].sort((a, b) => rank(a) - rank(b)));
   };
 
-  /** 表示中の列だけを対象に 1 つ動かす。サムネイルは先頭固定なので対象外 */
+  /** 表示中の列だけを対象に 1 つ動かす。缩略图は先頭固定なので対象外 */
   const move = (key: ColumnKey, delta: -1 | 1) => {
     const movable: ColumnKey[] = columns.filter((k) => k !== 'thumb');
     const i = movable.indexOf(key);
@@ -99,7 +99,7 @@ export function ColumnPicker({
               <>
                 <button
                   className="col-move"
-                  title="上へ"
+                  title="上移"
                   disabled={!shown || i <= 0}
                   onClick={() => move(key, -1)}
                 >
@@ -107,7 +107,7 @@ export function ColumnPicker({
                 </button>
                 <button
                   className="col-move"
-                  title="下へ"
+                  title="下移"
                   disabled={!shown || i < 0 || i >= movable.length - 1}
                   onClick={() => move(key, 1)}
                 >
@@ -122,10 +122,10 @@ export function ColumnPicker({
       <div className="col-item">
         <label>
           <input type="checkbox" checked={zebra} onChange={() => applyZebra(!zebra)} />
-          <span className="name">1 行おきに背景を濃くする</span>
+          <span className="name">隔行加深背景</span>
         </label>
       </div>
-      {/* ラベルは「列を既定に戻す」ではなくポップオーバー全体を指すので、縞も一緒に戻す */}
+      {/* ラベルは「列を恢复默认」ではなくポップオーバー全体を指すので、縞も一緒に戻す */}
       <button
         className="col-reset"
         onClick={() => {
@@ -133,7 +133,7 @@ export function ColumnPicker({
           applyZebra(false);
         }}
       >
-        既定に戻す
+        恢复默认
       </button>
     </div>
   );

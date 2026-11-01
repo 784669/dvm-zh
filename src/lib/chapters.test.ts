@@ -7,7 +7,7 @@ import type { Chapter } from './chapters';
 /** 0:00 / 1:30 / 3:00 / 5:00 の 4 チャプター */
 const four: Chapter[] = [
   { time: 0, label: 'オープニング' },
-  { time: 90, label: 'チャプター 2' },
+  { time: 90, label: '章节 2' },
   { time: 180, label: '本編' },
   { time: 300, label: 'エンディング' },
 ];
@@ -28,8 +28,8 @@ describe('toChapters', () => {
   // 名前無しの mkv は珍しくない。詳細ペインのメディア情報と同じ規則で埋める
   it('タイトルが無い / 空白だけなら「チャプター N」で埋める', () => {
     expect(toChapters([{ time: 0 }, { time: 10, title: '   ' }, { time: 20, title: '終' }])).toEqual([
-      { time: 0, label: 'チャプター 1' },
-      { time: 10, label: 'チャプター 2' },
+      { time: 0, label: '章节 1' },
+      { time: 10, label: '章节 2' },
       { time: 20, label: '終' },
     ]);
   });
@@ -38,22 +38,22 @@ describe('toChapters', () => {
   // 実機で一覧に「(unnamed)」が並んだので足したテスト
   it('mpv の "(unnamed)" は名前無しとして扱う', () => {
     expect(toChapters([{ time: 0, title: '(unnamed)' }, { time: 20, title: '(unnamed)' }])).toEqual([
-      { time: 0, label: 'チャプター 1' },
-      { time: 20, label: 'チャプター 2' },
+      { time: 0, label: '章节 1' },
+      { time: 20, label: '章节 2' },
     ]);
   });
 
   it('時刻が数値でない要素は捨てる(NaN の目盛りを出さない)', () => {
     expect(toChapters([{ time: 0 }, { title: '時刻なし' }, { time: null }, null, 'ごみ'])).toEqual([
-      { time: 0, label: 'チャプター 1' },
+      { time: 0, label: '章节 1' },
     ]);
   });
 
   // 番号は並べ替えたあとの順番。崩れると一覧と目盛りの対応が狂う
   it('時刻順に並べ替えてから番号を振る', () => {
     expect(toChapters([{ time: 90 }, { time: 0 }])).toEqual([
-      { time: 0, label: 'チャプター 1' },
-      { time: 90, label: 'チャプター 2' },
+      { time: 0, label: '章节 1' },
+      { time: 90, label: '章节 2' },
     ]);
   });
 

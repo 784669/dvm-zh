@@ -36,7 +36,7 @@ pub const PLACEHOLDER_CACHE_KEY: &str = "_placeholder";
 const CURRENT_KEY: &str = "current_library_id";
 const MIGRATED_KEY: &str = "migrated_from_v126_at";
 /// v1.26 以前の単一ライブラリを移す先の名前
-const LEGACY_NAME: &str = "マイライブラリ";
+const LEGACY_NAME: &str = "我的媒体库";
 
 /// フォルダ名に使えない文字(Windows)
 const FORBIDDEN: &[char] = &['\\', '/', ':', '*', '?', '"', '<', '>', '|'];
@@ -205,7 +205,7 @@ fn bootstrap(conn: &Connection, data_dir: &Path) -> Result<()> {
 /// **同一ボリューム内の rename なので一瞬で終わる。**
 /// 途中で失敗したら移動済みのものを全部戻す(中途半端な状態を残さない)
 fn move_legacy(data_dir: &Path, dest: &Path) -> Result<()> {
-    anyhow::ensure!(!dest.exists(), "移行先が既にあります: {}", dest.display());
+    anyhow::ensure!(!dest.exists(), "迁移目标已存在：{}", dest.display());
     std::fs::create_dir_all(dest)?;
     // restore.pending も一緒に運ぶ(復元予約したまま更新した人のため)
     const ITEMS: &[&str] = &[
@@ -227,7 +227,7 @@ fn move_legacy(data_dir: &Path, dest: &Path) -> Result<()> {
                 let _ = std::fs::rename(dest.join(done), data_dir.join(done));
             }
             let _ = std::fs::remove_dir_all(dest);
-            return Err(anyhow!("{name} を移せません: {e}"));
+            return Err(anyhow!("无法移动 {name}：{e}"));
         }
         moved.push(name);
     }
@@ -336,7 +336,7 @@ fn create_at(conn: &Connection, name: &str, root: &Path) -> Result<LibraryEntry>
             .unwrap_or(false);
         anyhow::ensure!(
             empty,
-            "そのフォルダには既に中身があります: {}",
+            "该文件夹已有内容：{}",
             root.display()
         );
     }
@@ -356,7 +356,7 @@ pub fn add_existing(conn: &Connection, root: &Path) -> Result<LibraryEntry> {
         let same_path = normalize_root(&e.root) == target;
         let same_id = marker.as_ref().map(|m| m.id == e.id).unwrap_or(false);
         if same_path || same_id {
-            return Err(anyhow!("そのライブラリは既に一覧にあります:「{}」", e.name));
+            return Err(anyhow!("该媒体库已在列表中：「{}」", e.name));
         }
     }
     let name = marker
@@ -368,7 +368,7 @@ pub fn add_existing(conn: &Connection, root: &Path) -> Result<LibraryEntry> {
 
 pub fn rename(conn: &Connection, id: &str, name: &str) -> Result<()> {
     let name = name.trim();
-    anyhow::ensure!(!name.is_empty(), "名前を入力してください");
+    anyhow::ensure!(!name.is_empty(), "请输入名称");
     conn.execute(
         "UPDATE libraries SET name = ?1 WHERE id = ?2",
         params![name, id],
@@ -451,7 +451,7 @@ pub fn resolve_current(conn: &Connection, data_dir: &Path) -> Resolved {
     let Some(id) = current_id(conn) else {
         return fallback(
             LibraryStatus::None,
-            "ライブラリを選んでください".into(),
+            "请选择媒体库".into(),
             None,
         );
     };
@@ -460,7 +460,7 @@ pub fn resolve_current(conn: &Connection, data_dir: &Path) -> Resolved {
         _ => {
             return fallback(
                 LibraryStatus::None,
-                "ライブラリを選んでください".into(),
+                "请选择媒体库".into(),
                 None,
             )
         }
@@ -474,7 +474,7 @@ pub fn resolve_current(conn: &Connection, data_dir: &Path) -> Resolved {
         let drive = offline::root_of(&entry.root);
         return fallback(
             LibraryStatus::Offline,
-            format!("{drive} に接続できません。ドライブを繋いでから再試行してください"),
+            format!("无法连接到 {drive}。请连接驱动器后重试"),
             Some(entry),
         );
     }
@@ -482,7 +482,7 @@ pub fn resolve_current(conn: &Connection, data_dir: &Path) -> Resolved {
     if !db_path.is_file() {
         return fallback(
             LibraryStatus::Missing,
-            format!("ライブラリが見つかりません: {}", entry.root),
+            format!("找不到媒体库：{}", entry.root),
             Some(entry),
         );
     }
@@ -589,9 +589,9 @@ pub fn resolve_db_path(data_dir: &Path) -> Option<PathBuf> {
 /// **壊れたものに切り替えると次回起動がエラー画面から始まる**ので、
 /// 切り替えの前と復元の予約の前に必ず通す(`core/backup.rs` と共有)
 pub fn validate_db(path: &Path) -> Result<()> {
-    anyhow::ensure!(path.is_file(), "ファイルが見つかりません: {}", path.display());
+    anyhow::ensure!(path.is_file(), "找不到文件：{}", path.display());
     let conn = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_ONLY)
-        .map_err(|e| anyhow!("データベースを開けません: {e}"))?;
+        .map_err(|e| anyhow!("无法打开数据库：{e}"))?;
     let has_videos: bool = conn
         .query_row(
             "SELECT COUNT(*) > 0 FROM sqlite_master WHERE type='table' AND name='videos'",
@@ -599,7 +599,7 @@ pub fn validate_db(path: &Path) -> Result<()> {
             |r| r.get(0),
         )
         .unwrap_or(false);
-    anyhow::ensure!(has_videos, "DVM のデータベースではないようです");
+    anyhow::ensure!(has_videos, "似乎不是 DVM 的数据库");
     Ok(())
 }
 
@@ -608,7 +608,7 @@ pub fn validate_root(root: &Path) -> Result<()> {
     let s = root.to_string_lossy().to_string();
     anyhow::ensure!(
         is_online(&s),
-        "{} に接続できません",
+        "无法连接到 {}",
         offline::root_of(&s)
     );
     validate_db(&root.join(DB_NAME))
@@ -666,7 +666,7 @@ fn folder_name(root: &Path) -> String {
     root.file_name()
         .map(|n| n.to_string_lossy().to_string())
         .filter(|n| !n.is_empty())
-        .unwrap_or_else(|| "ライブラリ".to_string())
+        .unwrap_or_else(|| "媒体库".to_string())
 }
 
 /// ライブラリ名からフォルダ名を作る。`core/frames.rs` と同じ禁止文字を使う
@@ -688,7 +688,7 @@ pub fn sanitize_folder_name(name: &str) -> Result<String> {
         None => cleaned,
     };
     let cleaned = cleaned.trim_end_matches(['.', ' ']).to_string();
-    anyhow::ensure!(!cleaned.is_empty(), "フォルダ名にできない名前です");
+    anyhow::ensure!(!cleaned.is_empty(), "该名称不可用作文件夹名");
     Ok(cleaned)
 }
 
@@ -878,8 +878,8 @@ mod tests {
     fn add_existing_dedupes() {
         let dir = workspace("dedupe");
         let app = open_app_db(&dir).unwrap();
-        let other = dir.join("外付け");
-        let created = create_at(&app, "外付け", &other).unwrap();
+        let other = dir.join("外接");
+        let created = create_at(&app, "外接", &other).unwrap();
 
         // 同じフォルダ(マーカーの id 一致)
         assert!(add_existing(&app, &other).is_err());
@@ -898,14 +898,14 @@ mod tests {
     fn add_existing_reuses_marker_id() {
         let dir = workspace("marker");
         let app = open_app_db(&dir).unwrap();
-        let root = dir.join("持ち運び");
-        let created = create_at(&app, "持ち運び", &root).unwrap();
+        let root = dir.join("便携");
+        let created = create_at(&app, "便携", &root).unwrap();
         forget(&app, &created.id).unwrap();
 
         // 別 PC で開き直した想定
         let again = add_existing(&app, &root).unwrap();
         assert_eq!(again.id, created.id, "マーカーの id を引き継ぐこと");
-        assert_eq!(again.name, "持ち運び", "名前も引き継ぐこと");
+        assert_eq!(again.name, "便携", "名前も引き継ぐこと");
 
         let _ = std::fs::remove_dir_all(&dir);
     }

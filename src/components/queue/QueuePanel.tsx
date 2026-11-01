@@ -11,17 +11,17 @@ import { useLibrary } from '../../store';
 import type { VideoRow } from '../../types';
 
 /**
- * ドラッグとみなすまでの移動量(px)。これ未満はクリック(= その位置から再生)。
+ * ドラッグとみなすまでの移動量(px)。これ未満は点击(= その位置から再生)。
  * **HTML5 の D&D は使えない**ので TagTree と同じくポインタイベントで自前実装する
- * (理由は DESIGN.md「タグのグループ移動は D&D」節)
+ * (理由は DESIGN.md「标签の群组移動は D&D」節)
  */
 const DRAG_THRESHOLD = 4;
 
 /**
- * 再生キューのパネル(v1.40)。
+ * 再生队列のパネル(v1.40)。
  *
- * **同じコンポーネントを 2 か所にマウントする** —— 右ペインのキュータブと、
- * プレイヤーのコントロールバーから開くポップオーバー。再生中は
+ * **同じコンポーネントを 2 か所にマウントする** —— 右ペインの队列タブと、
+ * プレイヤーのコントロールバーから打开ポップオーバー。再生中は
  * `html.mpv-active .app { display: none }` で `.app` ごと消えるので、
  * 再生中も編集するには `.mpv-overlay` の内側にもいる必要がある
  * (字幕スタイルパネルと同じ制約)。
@@ -35,7 +35,7 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
   const playFromQueue = useLibrary((s) => s.playFromQueue);
   const pushToast = useLibrary((s) => s.pushToast);
   const bumpVersion = useLibrary((s) => s.bumpVersion);
-  // 作り直したサムネイルを読み直させるカウンタ(v1.22)。グリッドと同じものを見る
+  // 作り直した缩略图を読み直させるカウンタ(v1.22)。グリッドと同じものを見る
   const thumbVersion = useLibrary((s) => s.thumbVersion);
 
   /** 掴んだ瞬間の位置。ここから DRAG_THRESHOLD 動いて初めてドラッグになる */
@@ -74,9 +74,9 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
     const drop = dragging;
     dragStart.current = null;
     setDragging(null);
-    if (!start || !drop) return; // 動かしていない = ただのクリック
+    if (!start || !drop) return; // 動かしていない = ただの点击
     suppressClick.current = true;
-    // click が来なかったときにフラグが残って次のクリックを食べないよう、必ず戻す
+    // click が来なかったときに标志が残って次の点击を食べないよう、必ず戻す
     setTimeout(() => {
       suppressClick.current = false;
     }, 0);
@@ -86,11 +86,11 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
   };
 
   /**
-   * ドラッグ中の右クリック・フォーカス喪失で掴んだ状態が宙に浮かないようにする。
+   * ドラッグ中の右点击·フォーカス喪失で掴んだ状態が宙に浮かないようにする。
    *
    * **`pointerleave` では呼ばないこと** —— `setPointerCapture` しているので
    * リストの外へ出ても `pointerup` は必ず届く。leave で落とすと、
-   * 少しはみ出しただけで並べ替えが無かったことになる
+   * 少しはみ出しただけ排序方式が無かったことになる
    */
   const cancelDrag = () => {
     dragStart.current = null;
@@ -100,25 +100,25 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
   const play = (v: VideoRow) => {
     if (suppressClick.current) return;
     if (v.isMissing || v.isOffline) {
-      pushToast(`${v.filename} は見つかりません`, 'info');
+      pushToast(`${v.filename} 未找到`, 'info');
       return;
     }
     playFromQueue(v);
   };
 
   /**
-   * 名前を付けて保存。同名があれば**上書きするかを尋ねる**(弾かない) ——
+   * 命名并保存。同名があれば**上書きするかを尋ねる**(弾かない) ——
    * 同じ名前を打つ人の意図はほぼ「そのリストを更新したい」なので、
    * 名前を考え直させるより上書きを確認するほうが早い
    */
   const saveAs = async () => {
-    const name = window.prompt('プレイリストの名前', queue.sourceName || '')?.trim();
+    const name = window.prompt('播放列表名称', queue.sourceName || '')?.trim();
     if (!name) return;
     const ids = queue.items.map((v) => v.id);
     try {
       const existing = await api.findPlaylistByName(name);
       if (existing !== null) {
-        const ok = window.confirm(`「${name}」はすでにあります。上書きしますか?`);
+        const ok = window.confirm(`「${name}」已存在。要覆盖吗？`);
         if (!ok) return;
         await api.replacePlaylist(existing, ids);
         setQueue(savedQueue(queue, existing, name));
@@ -126,20 +126,20 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
         const id = await api.createPlaylist(name, ids);
         setQueue(savedQueue(queue, id, name));
       }
-      pushToast(`「${name}」に保存しました`, 'info');
+      pushToast(`「${name}」已保存`, 'info');
       bumpVersion();
     } catch {
       // トーストは call() の担当
     }
   };
 
-  /** 出所のリストへ書き戻す。「変更あり」のときだけ押せる */
+  /** 出所のリストへ書き戻す。「有变更」のときだけ押せる */
   const overwrite = async () => {
     if (queue.sourceId === null) return;
     try {
       await api.replacePlaylist(queue.sourceId, queue.items.map((v) => v.id));
       setQueue(savedQueue(queue, queue.sourceId, queue.sourceName));
-      pushToast(`「${queue.sourceName}」を上書きしました`, 'info');
+      pushToast(`「${queue.sourceName}」已覆盖`, 'info');
       bumpVersion();
     } catch {
       // トーストは call() の担当
@@ -150,47 +150,47 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
 
   return (
     // data-queue-dropzone: グリッドのカードをここへドラッグすると末尾に追加される
-    // (v1.41、C-5。掴む側・落とす判定は VideoGrid が持つ)
+    // (v1.41、C-5。掴む側·落とす判定は VideoGrid が持つ)
     <div className={`queue-panel ${compact ? 'compact' : ''}`} data-queue-dropzone>
       <div className="queue-head">
         <span className="queue-title">
           <ListVideo />
-          {queue.sourceId !== null ? queue.sourceName : 'キュー'}
-          {/* 「変更あり」はバナーやトーストではなく点 1 つで出す */}
-          {queue.dirty && queue.sourceId !== null && <span className="queue-dot" title="変更あり">●</span>}
+          {queue.sourceId !== null ? queue.sourceName : '队列'}
+          {/* 「有变更」はバナーやトーストではなく点 1 つで出す */}
+          {queue.dirty && queue.sourceId !== null && <span className="queue-dot" title="有变更">●</span>}
         </span>
         <span className="queue-count">{queue.items.length} / {QUEUE_LIMIT}</span>
       </div>
 
       <div className="queue-actions">
-        <button onClick={saveAs} disabled={empty} title={empty ? 'キューが空です' : undefined}>
-          <Save /> 名前を付けて保存
+        <button onClick={saveAs} disabled={empty} title={empty ? '队列为空' : undefined}>
+          <Save /> 命名并保存
         </button>
         <button
           onClick={overwrite}
           disabled={queue.sourceId === null || !queue.dirty}
           title={
             queue.sourceId === null
-              ? '保存リストから読み込んだキューではありません'
+              ? '不是从保存列表读取的队列'
               : !queue.dirty
-                ? '保存した内容から変わっていません'
+                ? '与保存的内容相比没有变化'
                 : undefined
           }
         >
-          <SaveAll /> 上書き保存
+          <SaveAll /> 覆盖保存
         </button>
         <button
           onClick={() => setQueue(clearQueue(queue))}
           disabled={empty}
-          title={empty ? 'キューが空です' : '再生中の動画はそのまま続きます'}
+          title={empty ? '队列为空' : '正在播放的视频会继续播放'}
         >
-          <Trash2 /> すべて外す
+          <Trash2 /> 全部移除
         </button>
       </div>
 
       {empty ? (
         <div className="queue-empty">
-          一覧で動画を選んで右クリック →「キュー」から追加するか、<kbd>Q</kbd> を押してください。
+          在列表中选中视频后右键 →「队列」添加，或<kbd>Q</kbd> 键。
         </div>
       ) : (
         <div className="queue-list">
@@ -222,7 +222,7 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
             >
               <span
                 className="queue-grip"
-                title="ドラッグで並べ替え"
+                title="拖动排序"
                 onPointerDown={(e) => onPointerDown(e, i)}
               >
                 <GripVertical />
@@ -230,9 +230,9 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
               <button className="queue-name" onClick={() => play(v)} title={v.path}>
                 <span className="queue-no">{i + 1}</span>
                 {/*
-                  サムネイル(v1.40)。**ディスクキャッシュの jpg を読むだけ**なので
+                  缩略图(v1.40)。**ディスクキャッシュの jpg を読むだけ**なので
                   原則 2 の内側(ChapterList の「コマは出さない」は、あちらが再生中の
-                  ファイルをシークデコードする話なので当てはまらない)。
+                  文个シークデコードする話なので当てはまらない)。
 
                   `loading="lazy"` が要点 —— このパネルは仮想化していないので、
                   500 件ぶんの img を一度に読ませないためにこれで間引く。
@@ -262,7 +262,7 @@ export function QueuePanel({ compact = false }: { compact?: boolean }) {
               <span className="queue-dur">{v.durationMs ? fmtTime(v.durationMs / 1000) : ''}</span>
               <button
                 className="queue-remove"
-                title="キューから外す"
+                title="从队列移除"
                 onClick={() => setQueue(removeFromQueue(queue, v.id))}
               >
                 <X />

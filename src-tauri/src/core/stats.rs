@@ -56,7 +56,7 @@ pub struct LibraryStats {
     pub by_file_year: Vec<Bucket>,
     /// 月ごとの視聴回数(古い順、直近 24 か月)。`view_history` 由来なので v1.18 以降だけ
     pub by_view_month: Vec<Bucket>,
-    /// 曜日 × 時間帯の視聴回数(v1.41、C-7)。`[曜日 0=日〜6=土][0〜23 時]` の 7×24。
+    /// 曜日 × 時間帯の視聴回数(v1.41、C-7)。`[星期 0=日〜6=土][0〜23 时]` の 7×24。
     /// `view_history` 由来なので v1.18 以降の記録だけ
     pub view_heatmap: Vec<Vec<i64>>,
 }
@@ -110,7 +110,7 @@ fn rating_buckets(conn: &Connection) -> Result<Vec<Bucket>> {
     let mut out: Vec<Bucket> = (0..=5)
         .map(|star: i64| Bucket {
             key: star.to_string(),
-            label: if star == 0 { "未評価".to_string() } else { "★".repeat(star as usize) },
+            label: if star == 0 { "未评分".to_string() } else { "★".repeat(star as usize) },
             count: 0,
             bytes: 0,
             duration_ms: 0,
@@ -164,7 +164,7 @@ pub fn library_stats(conn: &Connection) -> Result<LibraryStats> {
         by_codec: buckets(
             conn,
             &format!(
-                "SELECT COALESCE(video_codec, ''), COALESCE(video_codec, '(不明)'), {m}
+                "SELECT COALESCE(video_codec, ''), COALESCE(video_codec, '(未知)'), {m}
                  FROM videos GROUP BY video_codec ORDER BY COUNT(*) DESC LIMIT 12",
                 m = MEASURES
             ),
@@ -184,13 +184,13 @@ pub fn library_stats(conn: &Connection) -> Result<LibraryStats> {
                      WHEN height >= 480  THEN 480
                      ELSE 1 END AS bucket,
                    CASE
-                     WHEN height IS NULL THEN '(不明)'
-                     WHEN height >= 2160 THEN '4K 以上'
+                     WHEN height IS NULL THEN '(未知)'
+                     WHEN height >= 2160 THEN '4K 及以上'
                      WHEN height >= 1440 THEN '1440p'
                      WHEN height >= 1080 THEN '1080p'
                      WHEN height >= 720  THEN '720p'
                      WHEN height >= 480  THEN '480p'
-                     ELSE '480p 未満' END AS label,
+                     ELSE '480p 以下' END AS label,
                    size, duration_ms
                    FROM videos
                  ) GROUP BY bucket, label ORDER BY bucket DESC",
@@ -201,7 +201,7 @@ pub fn library_stats(conn: &Connection) -> Result<LibraryStats> {
             conn,
             &format!(
                 "SELECT CAST(COALESCE(v.watched_folder_id, 0) AS TEXT),
-                        COALESCE(w.path, '(個別登録)'), {m}
+                        COALESCE(w.path, '（单独注册）'), {m}
                  FROM videos v LEFT JOIN watched_folders w ON w.id = v.watched_folder_id
                  GROUP BY v.watched_folder_id ORDER BY COUNT(*) DESC",
                 m = MEASURES
@@ -236,11 +236,11 @@ pub fn library_stats(conn: &Connection) -> Result<LibraryStats> {
                             WHEN duration_ms <= 3600000  THEN '20to60'
                             ELSE 'gt60' END AS key,
                           CASE
-                            WHEN duration_ms IS NULL     THEN '(不明)'
-                            WHEN duration_ms <=  300000  THEN '5 分未満'
-                            WHEN duration_ms <= 1200000  THEN '5〜20 分'
-                            WHEN duration_ms <= 3600000  THEN '20〜60 分'
-                            ELSE '60 分以上' END AS label,
+                            WHEN duration_ms IS NULL     THEN '(未知)'
+                            WHEN duration_ms <=  300000  THEN '不足 5 分钟'
+                            WHEN duration_ms <= 1200000  THEN '5〜20 分钟'
+                            WHEN duration_ms <= 3600000  THEN '20〜60 分钟'
+                            ELSE '60 分钟以上' END AS label,
                           CASE WHEN duration_ms IS NULL THEN 1 ELSE 0 END AS unknown_last,
                           size, duration_ms
                    FROM videos
@@ -270,9 +270,9 @@ pub fn library_stats(conn: &Connection) -> Result<LibraryStats> {
                             WHEN height > width THEN 'portrait'
                             ELSE 'landscape' END AS key,
                           CASE
-                            WHEN width IS NULL OR height IS NULL THEN '(不明)'
-                            WHEN height > width THEN '縦長'
-                            ELSE '横長' END AS label,
+                            WHEN width IS NULL OR height IS NULL THEN '(未知)'
+                            WHEN height > width THEN '纵向'
+                            ELSE '横向' END AS label,
                           size, duration_ms
                    FROM videos
                  ) GROUP BY key, label ORDER BY COUNT(*) DESC",
@@ -290,11 +290,11 @@ pub fn library_stats(conn: &Connection) -> Result<LibraryStats> {
                             WHEN view_count <= 9 THEN '5-9'
                             ELSE '10-' END AS key,
                           CASE
-                            WHEN view_count <= 0 THEN '未視聴'
-                            WHEN view_count =  1 THEN '1 回'
-                            WHEN view_count <= 4 THEN '2〜4 回'
-                            WHEN view_count <= 9 THEN '5〜9 回'
-                            ELSE '10 回以上' END AS label,
+                            WHEN view_count <= 0 THEN '未观看'
+                            WHEN view_count =  1 THEN '1 次'
+                            WHEN view_count <= 4 THEN '2〜4 次'
+                            WHEN view_count <= 9 THEN '5〜9 次'
+                            ELSE '10 次以上' END AS label,
                           size, duration_ms, view_count
                    FROM videos
                  ) GROUP BY key, label ORDER BY MIN(view_count)",
@@ -311,7 +311,7 @@ pub fn library_stats(conn: &Connection) -> Result<LibraryStats> {
                             WHEN file_modified_at IS NULL OR file_modified_at = '' THEN ''
                             ELSE substr(file_modified_at, 1, 4) END AS key,
                           CASE
-                            WHEN file_modified_at IS NULL OR file_modified_at = '' THEN '(不明)'
+                            WHEN file_modified_at IS NULL OR file_modified_at = '' THEN '(未知)'
                             ELSE substr(file_modified_at, 1, 4) || ' 年' END AS label,
                           size, duration_ms
                    FROM videos
@@ -408,10 +408,10 @@ mod tests {
 
         // 解像度は高さで丸める。未取得は「(不明)」に落ちる
         let labels: Vec<&str> = s.by_resolution.iter().map(|b| b.label.as_str()).collect();
-        assert!(labels.contains(&"4K 以上") && labels.contains(&"1080p") && labels.contains(&"(不明)"));
+        assert!(labels.contains(&"4K 及以上") && labels.contains(&"1080p") && labels.contains(&"(未知)"));
 
         // 個別登録(watched_folder_id = NULL)も 1 グループとして出す
-        assert!(s.by_folder.iter().any(|b| b.label == "(個別登録)" && b.count == 1));
+        assert!(s.by_folder.iter().any(|b| b.label == "（单独注册）" && b.count == 1));
         // 月別は古い順
         assert_eq!(s.by_month.iter().map(|b| b.key.as_str()).collect::<Vec<_>>(), vec!["2026-01", "2026-02"]);
     }
@@ -512,7 +512,7 @@ mod tests {
         let keys: Vec<&str> = s.by_file_year.iter().map(|b| b.key.as_str()).collect();
         assert_eq!(keys, vec!["2024", "2025", ""], "古い順・不明は最後");
         assert_eq!(find(&s.by_file_year, "2024").count, 2);
-        assert_eq!(find(&s.by_file_year, "").label, "(不明)");
+        assert_eq!(find(&s.by_file_year, "").label, "(未知)");
     }
 
     /// v1.37。視聴の内訳は `view_history`(全回が残っている)から数える

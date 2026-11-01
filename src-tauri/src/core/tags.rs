@@ -82,7 +82,7 @@ pub fn list_tag_groups(conn: &Connection) -> Result<Vec<TagGroup>> {
 /// **名前で引く経路はここだけ**にしてある。MCP・AI アシスタントもこれを通る
 pub fn ensure_tag(conn: &Connection, name: &str) -> Result<i64> {
     let name = name.trim();
-    anyhow::ensure!(!name.is_empty(), "タグ名が空です");
+    anyhow::ensure!(!name.is_empty(), "标签名为空");
     conn.execute("INSERT OR IGNORE INTO tags (name) VALUES (?1)", params![name])?;
     let id = conn.query_row("SELECT id FROM tags WHERE name = ?1", params![name], |r| r.get(0))?;
     Ok(id)
@@ -92,13 +92,13 @@ pub fn ensure_tag(conn: &Connection, name: &str) -> Result<i64> {
 /// 既にある名前は弾く — ensure_tag と違い「作ったつもりが既存タグだった」を隠したくないため
 pub fn create_tag(conn: &Connection, actor: &str, name: &str, group_id: Option<i64>) -> Result<i64> {
     let name = name.trim();
-    anyhow::ensure!(!name.is_empty(), "タグ名が空です");
+    anyhow::ensure!(!name.is_empty(), "标签名为空");
     let exists: bool = conn.query_row(
         "SELECT COUNT(*) > 0 FROM tags WHERE name = ?1 COLLATE NOCASE",
         params![name],
         |r| r.get(0),
     )?;
-    anyhow::ensure!(!exists, "タグ「{name}」は既にあります");
+    anyhow::ensure!(!exists, "已存在标签「{name}」");
     conn.execute(
         "INSERT INTO tags (name, group_id) VALUES (?1, ?2)",
         params![name, group_id],
@@ -167,7 +167,7 @@ pub fn untag_videos(conn: &Connection, actor: &str, video_ids: &[i64], tag_id: i
 
 pub fn rename_tag(conn: &Connection, actor: &str, tag_id: i64, new_name: &str) -> Result<()> {
     let new_name = new_name.trim();
-    anyhow::ensure!(!new_name.is_empty(), "タグ名が空です");
+    anyhow::ensure!(!new_name.is_empty(), "标签名为空");
     let before: String = conn
         .query_row("SELECT name FROM tags WHERE id = ?1", params![tag_id], |r| r.get(0))
         .unwrap_or_default();
@@ -260,7 +260,7 @@ pub fn set_tag_color(conn: &Connection, actor: &str, tag_id: i64, color: Option<
             c.len() == 7
                 && c.starts_with('#')
                 && c[1..].chars().all(|ch| ch.is_ascii_hexdigit()),
-            "色は #rrggbb 形式で指定してください"
+            "请使用 #rrggbb 格式指定颜色"
         );
     }
     conn.execute("UPDATE tags SET color = ?1 WHERE id = ?2", params![color, tag_id])?;
@@ -287,7 +287,7 @@ pub fn set_tag_group(
             params![gid],
             |r| r.get(0),
         )?;
-        anyhow::ensure!(exists, "グループが見つかりません");
+        anyhow::ensure!(exists, "找不到组");
     }
     conn.execute("UPDATE tags SET group_id = ?1 WHERE id = ?2", params![group_id, tag_id])?;
     db::log_op(
@@ -301,13 +301,13 @@ pub fn set_tag_group(
 
 pub fn create_tag_group(conn: &Connection, actor: &str, name: &str) -> Result<i64> {
     let name = name.trim();
-    anyhow::ensure!(!name.is_empty(), "グループ名が空です");
+    anyhow::ensure!(!name.is_empty(), "组名为空");
     let exists: bool = conn.query_row(
         "SELECT COUNT(*) > 0 FROM tag_groups WHERE name = ?1 COLLATE NOCASE",
         params![name],
         |r| r.get(0),
     )?;
-    anyhow::ensure!(!exists, "グループ「{name}」は既にあります");
+    anyhow::ensure!(!exists, "已存在组「{name}」");
     // 新しいグループは末尾に置く(既存の並びを崩さない)
     conn.execute(
         "INSERT INTO tag_groups (name, sort_order)
@@ -326,7 +326,7 @@ pub fn create_tag_group(conn: &Connection, actor: &str, name: &str) -> Result<i6
 
 pub fn rename_tag_group(conn: &Connection, actor: &str, group_id: i64, new_name: &str) -> Result<()> {
     let new_name = new_name.trim();
-    anyhow::ensure!(!new_name.is_empty(), "グループ名が空です");
+    anyhow::ensure!(!new_name.is_empty(), "组名为空");
     let before: String = conn
         .query_row("SELECT name FROM tag_groups WHERE id = ?1", params![group_id], |r| r.get(0))
         .unwrap_or_default();
@@ -381,9 +381,9 @@ mod tests {
         let conn = Connection::open_in_memory().unwrap();
         crate::db::apply_schema(&conn).unwrap();
         conn.execute_batch(
-            "INSERT INTO tag_groups (id, name, sort_order) VALUES (1, 'ジャンル', 0), (2, 'メディア', 1);
+            "INSERT INTO tag_groups (id, name, sort_order) VALUES (1, '类型', 0), (2, '媒体', 1);
              INSERT INTO tags (id, name, group_id) VALUES
-               (1, 'ファンタジー', 1), (2, 'SF', 1), (3, 'アニメ', 2), (4, '未分類タグ', NULL);",
+               (1, 'ファンタジー', 1), (2, 'SF', 1), (3, 'アニメ', 2), (4, '未分类标签', NULL);",
         )
         .unwrap();
         conn
@@ -418,7 +418,7 @@ mod tests {
         let tags = list_tags(&conn).unwrap();
         let moved = tags.iter().find(|t| t.id == 4).unwrap();
         assert_eq!(moved.group_id, Some(1));
-        assert_eq!(moved.group_name.as_deref(), Some("ジャンル"));
+        assert_eq!(moved.group_name.as_deref(), Some("类型"));
 
         set_tag_group(&conn, "user", 4, None).unwrap();
         assert_eq!(list_tags(&conn).unwrap().iter().find(|t| t.id == 4).unwrap().group_id, None);
@@ -448,8 +448,8 @@ mod tests {
         let conn = setup();
         reorder_tag_groups(&conn, &[2, 1]).unwrap();
         let groups = list_tag_groups(&conn).unwrap();
-        assert_eq!(groups[0].name, "メディア");
-        assert_eq!(groups[1].name, "ジャンル");
+        assert_eq!(groups[0].name, "媒体");
+        assert_eq!(groups[1].name, "类型");
         assert_eq!(groups[0].tag_count, 1);
         assert_eq!(groups[1].tag_count, 2);
     }

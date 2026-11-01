@@ -45,11 +45,11 @@ describe('尺の範囲', () => {
 
   // 帯のチップとツールバーの「カスタム」項目が同じ文言を使う
   it('文言はプリセット名を優先し、外れたら範囲から組み立てる', () => {
-    expect(durationLabel(null, 300_000)).toBe('5 分未満');
+    expect(durationLabel(null, 300_000)).toBe('5 分以下');
     expect(durationLabel(3_600_000, null)).toBe('60 分以上');
     expect(durationLabel(120_000, 480_000)).toBe('2〜8 分');
     expect(durationLabel(120_000, null)).toBe('2 分以上');
-    expect(durationLabel(null, 120_000)).toBe('2 分未満');
+    expect(durationLabel(null, 120_000)).toBe('2 分以下');
   });
 
   it('絞っていなければ VideoQuery に出さない', () => {

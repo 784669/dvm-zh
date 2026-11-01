@@ -2,7 +2,7 @@ import { EMPTY_ADVANCED } from '../types';
 import type { AdvancedFilter, DurationBucket, Orientation, SortKey, VideoQuery } from '../types';
 
 const MIN = 60_000; // 1 分 (ms)
-/** サイズの単位。表示(fmtSize)が 1024 系なので入力もそれに合わせる */
+/** 大小の単位。表示(fmtSize)が 1024 系なので入力もそれに合わせる */
 export const MB = 1024 ** 2;
 export const GB = 1024 ** 3;
 
@@ -15,11 +15,11 @@ export const DURATION_RANGES: Record<DurationBucket, { min?: number; max?: numbe
 };
 
 /**
- * 尺プリセットの表示名。詳細検索のプリセットボタンと絞り込み帯のチップが同じ文言を使う
+ * 尺プリセットの表示名。詳細検索のプリセットボタンと筛选帯のチップが同じ文言を使う
  * (片方だけ言い回しが変わるのを防ぐ)
  */
 export const DURATION_LABELS: Record<DurationBucket, string> = {
-  lt5: '5 分未満',
+  lt5: '5 分以下',
   '5to20': '5〜20 分',
   '20to60': '20〜60 分',
   gt60: '60 分以上',
@@ -27,7 +27,7 @@ export const DURATION_LABELS: Record<DurationBucket, string> = {
 
 /** 解像度の下限プリセット */
 export const RESOLUTION_OPTIONS: { value: number; label: string }[] = [
-  { value: 0, label: '指定なし' },
+  { value: 0, label: '未指定' },
   { value: 480, label: '480p 以上' },
   { value: 720, label: '720p 以上' },
   { value: 1080, label: '1080p 以上' },
@@ -36,30 +36,30 @@ export const RESOLUTION_OPTIONS: { value: number; label: string }[] = [
 
 /** 解像度の上限プリセット。**「未満」**なので下限と隙間なく組み合わせられる */
 export const RESOLUTION_MAX_OPTIONS: { value: number; label: string }[] = [
-  { value: 0, label: '指定なし' },
-  { value: 480, label: '480p 未満' },
-  { value: 720, label: '720p 未満' },
-  { value: 1080, label: '1080p 未満' },
-  { value: 2160, label: '4K 未満' },
+  { value: 0, label: '未指定' },
+  { value: 480, label: '480p 以下' },
+  { value: 720, label: '720p 以下' },
+  { value: 1080, label: '1080p 以下' },
+  { value: 2160, label: '4K 以下' },
 ];
 
 export const ORIENTATION_OPTIONS: { value: Orientation; label: string }[] = [
-  { value: '', label: '指定なし' },
-  { value: 'landscape', label: '横長' },
-  { value: 'portrait', label: '縦長' },
+  { value: '', label: '未指定' },
+  { value: 'landscape', label: '横向' },
+  { value: 'portrait', label: '纵向长' },
 ];
 
 /** 相対日数のプリセット。**絶対日付と違って保存しても腐らない** */
 export const WITHIN_DAYS_OPTIONS: { value: number; label: string }[] = [
-  { value: 0, label: '指定なし' },
+  { value: 0, label: '未指定' },
   { value: 1, label: '今日' },
-  { value: 7, label: '過去 7 日' },
-  { value: 30, label: '過去 30 日' },
-  { value: 90, label: '過去 90 日' },
-  { value: 365, label: '過去 1 年' },
+  { value: 7, label: '最近 7 天' },
+  { value: 30, label: '最近 30 天' },
+  { value: 90, label: '最近 90 天' },
+  { value: 365, label: '最近 1 年' },
 ];
 
-/** 詳細検索で選べる映像コーデック(ffprobe が返す名前) */
+/** 詳細検索で選べる视频编码(ffprobe が返す名前) */
 export const CODEC_OPTIONS = ['h264', 'hevc', 'av1', 'vp9', 'vp8', 'mpeg4', 'mpeg2video', 'wmv3'];
 
 export interface FilterState {
@@ -67,11 +67,11 @@ export interface FilterState {
   sort: SortKey;
   folderId: number | null;
   dirPath: string | null;
-  /** dirPath をサブフォルダ込みで見る(絞り込み帯のトグル) */
+  /** dirPath をサブ文件夹込みで見る(筛选帯のトグル) */
   dirPathRecursive: boolean;
   tagIds: number[];
   seriesId: number | null;
-  /** 保存プレイリストで絞る(v1.40)。サイドバーの「プレイリスト」セクションから */
+  /** 保存播放列表で絞る(v1.40)。侧边栏の「播放列表」セクションから */
   playlistId: number | null;
   missingOnly: boolean;
   duplicatesOnly: boolean;
@@ -81,8 +81,8 @@ export interface FilterState {
 }
 
 /**
- * 何も絞っていない状態。**store の初期値・`applyFilter` の既定・テストの土台が
- * すべてここを見る**。条件を足したときに片方だけ初期値を書き忘れる事故を防ぐため
+ * 何も絞っていない状態。**store の初期値·`applyFilter` の既定·テストの土台が
+ * 全部ここを見る**。条个足したときに片方だけ初期値を書き忘れる事故を防ぐため
  */
 export const EMPTY_FILTER: FilterState = {
   text: '',
@@ -120,8 +120,8 @@ export function durationLabel(min: number | null, max: number | null): string {
   const m = (ms: number) => Math.round(ms / MIN);
   if (min !== null && max !== null) return `${m(min)}〜${m(max)} 分`;
   if (min !== null) return `${m(min)} 分以上`;
-  if (max !== null) return `${m(max)} 分未満`;
-  return '長さ指定なし';
+  if (max !== null) return `${m(max)} 分以下`;
+  return '不指定时长';
 }
 
 /**
@@ -134,7 +134,7 @@ export function sizeUnitFor(min: number | null, max: number | null): typeof MB |
   return biggest >= GB ? GB : MB;
 }
 
-/** サイズの範囲の表示名。fmtSize と違って「以上 / 未満 / 〜」の形にする */
+/** 大小の範囲の表示名。fmtSize と違って「以上 / 未満 / 〜」の形にする */
 export function sizeLabel(min: number | null, max: number | null): string {
   const unit = sizeUnitFor(min, max);
   const suffix = unit === GB ? 'GB' : 'MB';
@@ -145,22 +145,22 @@ export function sizeLabel(min: number | null, max: number | null): string {
   };
   if (min !== null && max !== null) return `${n(min)}〜${n(max)} ${suffix}`;
   if (min !== null) return `${n(min)} ${suffix} 以上`;
-  if (max !== null) return `${n(max)} ${suffix} 未満`;
-  return 'サイズ指定なし';
+  if (max !== null) return `${n(max)} ${suffix} 以下`;
+  return '不指定大小';
 }
 
 /** 再生回数の範囲の表示名 */
 export function viewCountLabel(min: number | null, max: number | null): string {
   if (min !== null && max !== null) return min === max ? `${min} 回` : `${min}〜${max} 回`;
-  if (min !== null) return `${min} 回以上`;
-  if (max !== null) return max === 0 ? '未視聴' : `${max} 回以下`;
-  return '再生回数の指定なし';
+  if (min !== null) return `${min} 次以上`;
+  if (max !== null) return max === 0 ? '未观看' : `${max} 次以下`;
+  return '不指定播放次数';
 }
 
 /**
  * store のフィルタ状態から Tauri / MCP に渡す VideoQuery を組み立てる。
  * 効いていない条件は undefined にして落とす(Rust 側で「未指定なら従来どおり」になるため)。
- * グリッド・件数表示・スマートフォルダの保存がすべてこの 1 か所を通る
+ * グリッド·件数表示·智能文件夹の保存が全部この 1 か所を通る
  */
 export function buildQuery(s: FilterState): VideoQuery {
   const a = s.advanced;
@@ -169,7 +169,7 @@ export function buildQuery(s: FilterState): VideoQuery {
     sort: s.sort,
     folderId: s.folderId,
     dirPath: s.dirPath ?? undefined,
-    // 単体では意味を持たないので、フォルダで絞っているときだけ送る
+    // 単体では意味を持たないので、文件夹で絞っているときだけ送る
     dirPathRecursive: s.dirPath !== null && s.dirPathRecursive ? true : undefined,
     tagIds: s.tagIds.length > 0 ? s.tagIds : undefined,
     seriesId: s.seriesId,
@@ -202,7 +202,7 @@ export function buildQuery(s: FilterState): VideoQuery {
     modifiedBefore: a.modifiedBefore || undefined,
     modifiedWithinDays: a.modifiedWithinDays > 0 ? a.modifiedWithinDays : undefined,
 
-    // 種はランダム並びのときだけ意味を持つ。常に送ると保存した条件の差分が無駄に出る
+    // 種は随机並びのときだけ意味を持つ。常に送ると保存した条件の差分が無駄に出る
     randomSeed: s.sort === 'random' ? s.randomSeed : undefined,
   };
 }
@@ -210,14 +210,14 @@ export function buildQuery(s: FilterState): VideoQuery {
 /**
  * `buildQuery` の逆。VideoQuery を画面の状態に戻す。
  *
- * **保存したスマートフォルダを開くときと、AI の `apply_filter` が共用する唯一の経路**。
- * 以前は Sidebar が項目を手で並べていたため、条件を足すたびに書き忘れが起き
+ * **保存した智能文件夹を打开ときと、AI の `apply_filter` が共用する唯一の経路**。
+ * 以前は Sidebar が項目を手で並べていたため、条个足すたびに書き忘れが起き
  * (実際に尺の範囲が復元されていなかった)、しかもテストが無いので気づけなかった。
  * `query.test.ts` の往復テストが `buildQuery` との対応を担保している ——
- * 条件を足したら、まず向こうのテストが落ちる。
+ * 条个足したら、まず向こうのテストが落ちる。
  *
  * `VideoQuery` にしか無い条件(`minWidth`)はここでは落ちる。UI が持っていない条件で、
- * `buildQuery` も出さないので、画面から保存した条件には入らない
+ * `buildQuery` も出さないので、画面から保存した条个は入らない
  */
 export function toFilterState(q: VideoQuery): FilterState {
   return {
@@ -264,8 +264,8 @@ export function toFilterState(q: VideoQuery): FilterState {
 /**
  * 詳細検索で何件の条件が効いているか(ツールバーのバッジ)。
  *
- * v1.35 で★と長さもここに入ったので、**この数字は「絞り込みの総数」に近い**
- * (別の入口を持つテキスト・タグ・フォルダ・見つからない・重複だけが外れる)。
+ * v1.35 で★と时长もここに入ったので、**この数字は「筛选の総数」に近い**
+ * (別の入口を持つテキスト·标签·文件夹·找不到·重複だけが外れる)。
  * 上限が 2 桁になったので、バッジの CSS も 2 桁が入る幅にしてある。
  *
  * 数え方は「1 行 = 1 件」ではなく**軸ごとに 1 件**。範囲の上下を別々に数えると

@@ -646,9 +646,9 @@ mod tests {
               (3, 'D:\backup\旅行 2024.mp4', '旅行 2024.mp4', NULL, 200, 'bbb', 60000, 3840, 2160, 'av1', 0, 0, '2026-03-10 10:00:00'),
               (4, 'C:\v\料理.avi', '料理.avi', 'カレーの作り方', 300, NULL, 60000, 640, 480, 'mpeg4', 2, 1, '2026-04-10 10:00:00');
 
-            INSERT INTO tag_groups (id, name, sort_order) VALUES (1, 'ジャンル', 0), (2, '画質', 1);
+            INSERT INTO tag_groups (id, name, sort_order) VALUES (1, '类型', 0), (2, '画質', 1);
             INSERT INTO tags (id, name, group_id) VALUES
-              (1, '家族', NULL), (2, '旅行', 1), (3, '料理', 1), (4, '4K', 2), (5, 'お気に入り', NULL);
+              (1, '家族', NULL), (2, '旅行', 1), (3, '料理', 1), (4, '4K', 2), (5, '收藏', NULL);
             -- 動画1: 旅行・4K・家族・お気に入り / 動画2: 旅行・お気に入り / 動画3: なし / 動画4: 料理
             INSERT INTO video_tags (video_id, tag_id) VALUES
               (1, 2), (2, 2), (4, 3), (1, 4), (1, 1), (1, 5), (2, 5);
@@ -896,7 +896,7 @@ mod tests {
     fn blank_dir_path_is_ignored() {
         let conn = setup_dirs();
         let q = VideoQuery { dir_path: Some("   ".into()), ..Default::default() };
-        assert_eq!(q.where_clause().0, "", "空文字は条件にしない");
+        assert_eq!(q.where_clause().0, "", "空字符串不作为筛选条件");
         assert_eq!(count(&conn, &q).unwrap(), 7);
     }
 

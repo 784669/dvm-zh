@@ -6,7 +6,7 @@ const PAGE_SIZE = 200;
 /** 同じページの取得に連続で失敗したら諦める回数(スクロールのたびに投げ続けないため) */
 const MAX_RETRY = 2;
 /**
- * version 更新(ライブラリ変更)のとき裏で取り直すページ数の上限。
+ * version 更新(媒体库変更)のとき裏で取り直すページ数の上限。
  * 最近アクセスした順にこの枚数だけ残す。5 枚 = 1,000 行で、可視範囲 + overscan には十分。
  * 深くスクロールした後に全ページを取り直すと、取り込み中(version が 300ms おきに上がる)に
  * 「数十ページ × 200 件」の query_videos が投げ続けられて IPC と読み取りコネクションを圧迫する
@@ -15,21 +15,21 @@ const KEEP_ON_VERSION = 5;
 
 /**
  * 仮想化グリッド用のスパースなページキャッシュ。
- * 全件を一括で持たず、表示に必要なページだけ遅延取得する。
+ * 全个一括で持たず、表示に必要なページだけ遅延取得する。
  *
  * ページは state ではなく ref で持ち、更新時に rerender する。
  * クエリ変更(= 中身が別物)ではキャッシュを捨てるが、
- * ライブラリ更新(version)では捨てずに裏で取り直して差し替える。
+ * 媒体库更新(version)では捨てずに裏で取り直して差し替える。
  * 捨ててしまうと取り込み中に一覧が毎回「…」へ戻ってちらつくため
  *
- * `withLabels` が true のときだけ、取得済みページの動画にタグ・シリーズを
+ * `withLabels` が true のときだけ、取得済みページの動画に标签·系列を
  * 後追いで足す(v1.23)。表示しない設定なら問い合わせ自体を投げない
  */
 export function useVideos(query: VideoQuery, version: number, withLabels = false) {
   const [total, setTotal] = useState(0);
   /*
    * 一度でも数え終わったか。total の初期値 0 は「まだ数えていない」と「0 件」の区別が
-   * つかず、起動直後に「0 件」が出て空ライブラリに見えるため(v1.28 の絞り込み帯用)。
+   * つかず、起動直後に「0 件」が出て空媒体库に見えるため(v1.28 の筛选帯用)。
    * **一度 true にしたら false に戻さない** —— クエリを変えるたびに「集計中…」へ
    * 落ちると数字がチラつく。数十 ms 古い数字が残るほうが目に優しい
    */
@@ -37,9 +37,9 @@ export function useVideos(query: VideoQuery, version: number, withLabels = false
   const pages = useRef<Map<number, VideoRow[]>>(new Map());
   const inflight = useRef<Set<number>>(new Set());
   const failures = useRef<Map<number, number>>(new Map());
-  /** video_id → タグ・シリーズ。行のキャッシュとは別に持つ(取得タイミングが違う) */
+  /** video_id → 标签·系列。行のキャッシュとは別に持つ(取得タイミングが違う) */
   const labels = useRef<Map<number, VideoLabels>>(new Map());
-  /** ラベルを取り終えた(または取得中の)ページ。同じページに何度も投げないため */
+  /** ラベルを取り終えた( 或 取得中の)ページ。同じページに何度も投げないため */
   const labelPages = useRef<Set<number>>(new Set());
   /** 世代番号。上げると進行中リクエストの結果は破棄される */
   const generation = useRef(0);
@@ -77,7 +77,7 @@ export function useVideos(query: VideoQuery, version: number, withLabels = false
   );
 
   /**
-   * ページ 1 枚ぶんのタグ・シリーズを引く。
+   * ページ 1 枚ぶんの标签·系列を引く。
    * 失敗しても握り潰す(call() がトースト済み。チップは飾りなので一覧は成立する)
    */
   const fetchLabels = useCallback((page: number, rows: VideoRow[]) => {
@@ -120,12 +120,12 @@ export function useVideos(query: VideoQuery, version: number, withLabels = false
     rerender();
   }, [queryKey]);
 
-  // クエリ変更 + ライブラリ更新: 件数を取り直し、保持中のページは裏で差し替える
+  // クエリ変更 + 媒体库更新: 件数を取り直し、保持中のページは裏で差し替える
   useEffect(() => {
     generation.current += 1;
     inflight.current.clear();
     failures.current.clear();
-    // タグの付け外しも version を上げるので、ラベルは取り直す。
+    // 标签の付け外しも version を上げるので、ラベルは取り直す。
     // labels 自体は消さない(消すとチップが一瞬空になってちらつく。届いた順に上書きする)
     labelPages.current.clear();
     const gen = generation.current;
@@ -176,7 +176,7 @@ export function useVideos(query: VideoQuery, version: number, withLabels = false
 
   /**
    * 範囲内の行を返す(足りないページは取得を待つ)。
-   * 範囲選択・全選択はページ境界をまたぐので、同期の getVideo では穴が空いてしまう。
+   * 範囲選択·全選択はページ境界をまたぐので、同期の getVideo では穴が空いてしまう。
    * クエリが変わっていたら(世代不一致)空を返す
    */
   const getRange = useCallback(
@@ -218,7 +218,7 @@ export function useVideos(query: VideoQuery, version: number, withLabels = false
   );
 
   /**
-   * その動画のタグ・シリーズ。まだ取れていなければ undefined(セルは `—`)、
+   * その動画の标签·系列。まだ取れていなければ undefined(セルは `—`)、
    * 取れていて 1 つも付いていなければ空配列を持つオブジェクト(セルは空欄)
    */
   const getLabels = useCallback(

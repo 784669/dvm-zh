@@ -91,6 +91,7 @@ pub fn remove_videos(
     for id in &video_ids {
         let _ = std::fs::remove_file(state.thumbs_dir.join(format!("{id}.jpg")));
         crate::core::playback::remove_cache_for(&state.transcode_dir, *id);
+        crate::core::playback::remove_preview_for(&state.preview_dir, *id);
     }
     Ok(())
 }
@@ -199,9 +200,9 @@ pub async fn save_frame(app: AppHandle, id: i64, at_ms: i64) -> Result<String, S
     if !std::path::Path::new(&path).exists() {
         let root = crate::core::offline::root_of(&path);
         return Err(if std::path::Path::new(&root).exists() {
-            format!("元の動画ファイルが見つかりません: {path}")
+            format!("找不到原始视频文件：{path}")
         } else {
-            format!("動画のあるドライブに接続できません: {root}")
+            format!("无法连接到视频所在驱动器：{root}")
         });
     }
 
@@ -264,7 +265,7 @@ pub fn open_with_dialog(state: State<AppState>, id: i64) -> Result<(), String> {
         .arg("shell32.dll,OpenAs_RunDLL")
         .arg(&path)
         .spawn()
-        .map_err(|e| format!("「プログラムから開く」を起動できません: {e}"))?;
+        .map_err(|e| format!("无法启动“打开方式”：{e}"))?;
     Ok(())
 }
 
@@ -288,7 +289,7 @@ pub fn open_video(state: State<AppState>, id: i64) -> Result<(), String> {
             std::process::Command::new(&player)
                 .arg(&path)
                 .spawn()
-                .map_err(|e| format!("プレイヤーを起動できません ({player}): {e}"))?;
+                .map_err(|e| format!("无法启动播放器（{player}）：{e}"))?;
         }
         None => {
             tauri_plugin_opener::open_path(&path, None::<&str>).map_err(|e| e.to_string())?;

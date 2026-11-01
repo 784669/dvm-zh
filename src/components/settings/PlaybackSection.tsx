@@ -6,7 +6,7 @@ import { useLibrary } from '../../store';
  * 再生まわり(v1.38 でカードの表示設定を「表示」へ移した)。
  *
  * シークバーのコマ出しはカードのホバープレビューとは**別設定**にしてある ——
- * こちらは再生中に同じ動画をもう 1 本デコードするので、外付け HDD の大きいファイルで
+ * こちらは再生中に同じ動画をもう 1 本デコードするので、外付け HDD の大きい文件で
  * 本編がカクつくなら単独で切りたい(DESIGN.md 参照)。
  */
 export function PlaybackSection() {
@@ -32,8 +32,8 @@ export function PlaybackSection() {
   const browsePlayer = async () => {
     const selected = await open({
       multiple: false,
-      title: '外部プレイヤーの実行ファイルを選択',
-      filters: [{ name: '実行ファイル', extensions: ['exe'] }],
+      title: '选择外部播放器的可执行文件',
+      filters: [{ name: '可执行文件', extensions: ['exe'] }],
     });
     // ダイアログで選んだ値は確定済みなので、blur を待たずに書く
     if (typeof selected === 'string') playerPath.save(selected);
@@ -41,9 +41,9 @@ export function PlaybackSection() {
 
   return (
     <div className="settings-section">
-      <div className="settings-heading">再生</div>
+      <div className="settings-heading">播放</div>
       <label className="modal-label">
-        外部プレイヤー(空欄なら Windows の既定のプレイヤーで開く)
+        外部播放器（留空则用 Windows 默认播放器打开）
       </label>
       <div className="modal-row">
         <input
@@ -52,7 +52,7 @@ export function PlaybackSection() {
           onChange={(e) => playerPath.edit(e.target.value)}
           onBlur={playerPath.commit}
         />
-        <button onClick={browsePlayer}>参照...</button>
+        <button onClick={browsePlayer}>浏览...</button>
       </div>
       <label className="settings-check">
         <input
@@ -60,7 +60,7 @@ export function PlaybackSection() {
           checked={seekPreview}
           onChange={(e) => saveStoreFlag('seek_preview', setSeekPreview, e.target.checked)}
         />
-        再生中、シークバーにカーソルを合わせるとその位置のコマを表示する(重い動画で本編がカクつく場合はオフ)
+        播放中将光标移到进度条上时显示该位置的画面（较重视频出现卡顿时请关闭）
       </label>
       <label className="settings-check">
         <input
@@ -68,7 +68,7 @@ export function PlaybackSection() {
           checked={autoplayNext}
           onChange={(e) => saveStoreFlag('autoplay_next', setAutoplayNext, e.target.checked)}
         />
-        最後まで再生したら次の動画へ進む(一覧の並び順。⏭ / N キーでも進めます)
+        播完后进入下一个视频（按列表顺序。也可用 ⏭ / N 键）
       </label>
       <label className="settings-check">
         <input
@@ -77,12 +77,12 @@ export function PlaybackSection() {
           /* store に入れた瞬間 useMpvPlayer が setProperty で押し込む(再生中でも切り替わる) */
           onChange={(e) => saveStoreFlag('hdr_passthrough', setHdrPassthrough, e.target.checked)}
         />
-        HDR パススルーを有効にする
+        启用 HDR 直通
       </label>
       <div className="settings-note">
-        HDR パススルーは、HDR 対応モニタで Windows の HDR をオンにしているときだけ効きます。
-        オフのときは従来どおり SDR に変換して表示します(アプリ内再生のみ)。
-        切り替えても変わらない場合はアプリを再起動してください
+        HDR 直通仅在 HDR 显示器且已开启 Windows HDR 时生效。
+        关闭时会照旧转换为 SDR 显示（仅应用内播放）。
+        切换后若无变化，请重启应用
       </div>
     </div>
   );

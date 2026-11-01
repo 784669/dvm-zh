@@ -9,7 +9,7 @@ import type { DurationBucket, LibraryStats, Orientation, StatBucket } from '../t
 
 /**
  * lib/format.ts の fmtSize とはわざと別実装。
- * ここはライブラリ全体の合計を出すので TB が要り、桁が大きいぶん小数を減らしている
+ * ここは媒体库全体の合計を出すので TB が要り、桁が大きいぶん小数を減らしている
  */
 function fmtSize(bytes: number): string {
   const TB = 1024 ** 4;
@@ -23,25 +23,25 @@ function fmtSize(bytes: number): string {
 /** 「12 日 3 時間」のようにざっくり表示する(合計再生時間は秒まで要らない) */
 function fmtTotalDuration(ms: number): string {
   const hours = Math.floor(ms / 3_600_000);
-  if (hours < 24) return `${hours} 時間`;
-  return `${Math.floor(hours / 24)} 日 ${hours % 24} 時間`;
+  if (hours < 24) return `${hours} 小时`;
+  return `${Math.floor(hours / 24)} 天 ${hours % 24} 小时`;
 }
 
 /** 棒の横に置く短い時間表記。桁が大きいので分と時間だけで足りる */
 function fmtHours(ms: number): string {
   if (ms <= 0) return '0';
   if (ms < 3_600_000) return `${Math.round(ms / 60_000)} 分`;
-  return `${Math.round(ms / 3_600_000).toLocaleString()} 時間`;
+  return `${Math.round(ms / 3_600_000).toLocaleString()} 小时`;
 }
 
 /**
  * 棒グラフの軸(v1.37)。**同じ内訳を「何本か」「何 GB か」「何時間か」で見比べる**。
- * 外付け HDD 前提のアプリでは「どのフォルダが容量を食っているか」のほうが
+ * 外付け HDD 前提のアプリでは「どの文件夹が容量を食っているか」のほうが
  * 件数より知りたい場面が多いので、グラフを増やさず軸だけ切り替えられるようにした
  */
 type Metric = 'count' | 'bytes' | 'time';
 
-const METRIC_LABELS: Record<Metric, string> = { count: '件数', bytes: '容量', time: '時間' };
+const METRIC_LABELS: Record<Metric, string> = { count: '项数', bytes: '容量', time: '時間' };
 
 const metricValue = (b: StatBucket, metric: Metric) =>
   metric === 'bytes' ? b.bytes : metric === 'time' ? b.durationMs : b.count;
@@ -53,7 +53,7 @@ const metricText = (b: StatBucket, metric: Metric) =>
       ? fmtHours(b.durationMs)
       : b.count.toLocaleString();
 
-/** 再生回数の内訳(key)→ 絞り込みの範囲。Rust 側の CASE と対になっている */
+/** 再生回数の内訳(key)→ 筛选の範囲。Rust 側の CASE と対になっている */
 const VIEW_COUNT_RANGES: Record<string, { min: number | null; max: number | null }> = {
   '0': { min: null, max: 0 },
   '1': { min: 1, max: 1 },
@@ -62,21 +62,21 @@ const VIEW_COUNT_RANGES: Record<string, { min: number | null; max: number | null
   '10-': { min: 10, max: null },
 };
 
-/** 横棒グラフ。ライブラリを足さずに CSS の幅指定だけで描く */
+/** 横棒グラフ。媒体库を足さずに CSS の幅指定だけで描く */
 function BarList({
   buckets,
   metric = 'count',
   unit = '本',
-  empty = 'データがありません',
+  empty = '没有数据',
   tailLabel,
   onPick,
 }: {
   buckets: StatBucket[];
-  /** 視聴回数の内訳のように容量・時間を持たない棒は 'count' 固定で渡す */
+  /** 視聴回数の内訳のように容量·時間を持たない棒は 'count' 固定で渡す */
   metric?: Metric;
   unit?: string;
   empty?: string;
-  /** ラベルがあふれたら**先頭**を省略する(パス用。末尾のフォルダ名を残すため) */
+  /** ラベルがあふれたら**先頭**を省略する(パス用。末尾の文件夹名を残すため) */
   tailLabel?: boolean;
   onPick?: (b: StatBucket) => void;
 }) {
@@ -87,7 +87,7 @@ function BarList({
     const parts = [`${b.count.toLocaleString()} ${unit}`];
     if (b.bytes > 0) parts.push(fmtSize(b.bytes));
     if (b.durationMs > 0) parts.push(fmtHours(b.durationMs));
-    return `${b.label}: ${parts.join(' / ')}${onPick ? '(クリックで絞り込む)' : ''}`;
+    return `${b.label}: ${parts.join(' / ')}${onPick ? '（单击筛选）' : ''}`;
   };
   return (
     <div className="stats-bars">
@@ -124,14 +124,14 @@ const heatColor = (n: number, max: number) =>
   n > 0 ? { background: `rgba(79, 129, 224, ${(0.18 + 0.82 * (n / max)).toFixed(3)})` } : undefined;
 
 /**
- * 曜日 × 時間帯の視聴回数(v1.41、C-7)。「自分はいつ観ているか」を 1 枚で見せる。
+ * 星期 × 时段的观看次数(v1.41、C-7)。「自分はいつ観ているか」を 1 枚で見せる。
  * 濃さは単一色相の濃淡だけ(色数を増やさない)。正確な回数はマスの title に出す
  */
 function ViewHeatmap({ grid }: { grid: number[][] }) {
   const cells = grid.flat();
   const max = Math.max(...cells, 1);
   if (cells.every((n) => n === 0)) {
-    return <div className="stats-empty">まだ視聴の記録がありません</div>;
+    return <div className="stats-empty">还没有观看记录</div>;
   }
   return (
     <>
@@ -203,7 +203,7 @@ export function StatsModal() {
   }, [showStats, version]);
 
   /*
-   * Escape で閉じる。**window ではなく document に張って stopPropagation する** ——
+   * Escape で关闭。**window ではなく document に張って stopPropagation する** ——
    * App.tsx の Escape(選択解除)は window にいるので、ここで止めれば届かない
    * (SettingsModal と同じ理由)。IME の変換中は「変換の取り消し」なので拾わない
    */
@@ -221,7 +221,7 @@ export function StatsModal() {
   if (!showStats) return null;
   const close = () => setShowStats(false);
 
-  /** 統計から絞り込みに飛ぶ。画面が切り替わるので統計は閉じる */
+  /** 統計から筛选に飛ぶ。画面が切り替わるので統計は关闭 */
   const jump = (filter: Parameters<typeof applyFilter>[0]) => {
     applyFilter(filter);
     close();
@@ -233,35 +233,35 @@ export function StatsModal() {
         <div className="modal-title">統計</div>
 
         {!stats ? (
-          <div className="stats-empty">集計中...</div>
+          <div className="stats-empty">统计中...</div>
         ) : (
           <>
             <div className="stats-tiles">
               <button className="stats-tile" onClick={() => jump({})}>
                 <span className="stats-tile-value">{stats.videoCount.toLocaleString()}</span>
-                <span className="stats-tile-label">動画</span>
+                <span className="stats-tile-label">视频</span>
               </button>
               <div className="stats-tile">
                 <span className="stats-tile-value">{fmtSize(stats.totalSizeBytes)}</span>
-                <span className="stats-tile-label">合計サイズ</span>
+                <span className="stats-tile-label">总大小</span>
               </div>
               <div className="stats-tile">
                 <span className="stats-tile-value">{fmtTotalDuration(stats.totalDurationMs)}</span>
-                <span className="stats-tile-label">合計再生時間</span>
+                <span className="stats-tile-label">总播放时长</span>
               </div>
               <button
                 className="stats-tile"
                 onClick={() => jump({ advanced: { unwatched: true } })}
               >
                 <span className="stats-tile-value">{stats.unwatchedCount.toLocaleString()}</span>
-                <span className="stats-tile-label">未視聴</span>
+                <span className="stats-tile-label">未观看</span>
               </button>
               <button
                 className="stats-tile"
                 onClick={() => jump({ advanced: { untagged: true } })}
               >
                 <span className="stats-tile-value">{stats.untaggedCount.toLocaleString()}</span>
-                <span className="stats-tile-label">タグなし</span>
+                <span className="stats-tile-label">无标签</span>
               </button>
               <button
                 className="stats-tile"
@@ -272,19 +272,19 @@ export function StatsModal() {
               </button>
               <button className="stats-tile" onClick={() => jump({ missingOnly: true })}>
                 <span className="stats-tile-value">{stats.missingCount.toLocaleString()}</span>
-                <span className="stats-tile-label">見つからない</span>
+                <span className="stats-tile-label">找不到</span>
               </button>
               <div className="stats-tile">
                 <span className="stats-tile-value">
                   {stats.tagCount} / {stats.seriesCount}
                 </span>
-                <span className="stats-tile-label">タグ / シリーズ</span>
+                <span className="stats-tile-label">标签 / 系列</span>
               </div>
             </div>
 
-            {/* 内訳の軸(v1.37)。棒の長さと右の数字がまとめて切り替わる */}
+            {/* 内訳の軸(v1.37)。棒の时长と右の数字がまとめて切り替わる */}
             <div className="stats-metrics">
-              <span className="stats-metric-label">内訳を見る軸</span>
+              <span className="stats-metric-label">查看明细的维度</span>
               {(Object.keys(METRIC_LABELS) as Metric[]).map((m) => (
                 <button
                   key={m}
@@ -297,7 +297,7 @@ export function StatsModal() {
             </div>
 
             <div className="stats-grid">
-              <Section title="レーティング">
+              <Section title="评分">
                 <BarList
                   buckets={stats.byRating}
                   metric={metric}
@@ -309,7 +309,7 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="長さ">
+              <Section title="时长">
                 <BarList
                   buckets={stats.byDuration}
                   metric={metric}
@@ -328,7 +328,7 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="解像度">
+              <Section title="分辨率">
                 <BarList
                   buckets={stats.byResolution}
                   metric={metric}
@@ -339,7 +339,7 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="向き">
+              <Section title="方向">
                 <BarList
                   buckets={stats.byOrientation}
                   metric={metric}
@@ -349,7 +349,7 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="映像コーデック">
+              <Section title="视频编码">
                 <BarList
                   buckets={stats.byCodec}
                   metric={metric}
@@ -357,7 +357,7 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="拡張子">
+              <Section title="扩展名">
                 <BarList
                   buckets={stats.byExtension}
                   metric={metric}
@@ -365,7 +365,7 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="再生回数">
+              <Section title="播放次数">
                 <BarList
                   buckets={stats.byViewCount}
                   metric={metric}
@@ -378,7 +378,7 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="ファイルの更新年">
+              <Section title="文件更新年份">
                 <BarList
                   buckets={stats.byFileYear}
                   metric={metric}
@@ -394,20 +394,20 @@ export function StatsModal() {
                 />
               </Section>
 
-              <Section title="保存先" wide>
+              <Section title="保存位置" wide>
                 <BarList
                   buckets={stats.byFolder}
                   metric={metric}
                   tailLabel
                   onPick={(b) => {
-                    // key = 監視フォルダ id。0 は個別登録なので絞り込みで表せない
+                    // key = 监视文件夹 id。0 は個別登録なので筛选で表せない
                     const id = Number(b.key);
                     if (id > 0) jump({ folderId: id });
                   }}
                 />
               </Section>
 
-              <Section title="追加した月(直近 24 か月)" wide>
+              <Section title="添加月份（最近 24 个月）" wide>
                 <BarList
                   buckets={stats.byMonth}
                   metric={metric}
@@ -429,33 +429,33 @@ export function StatsModal() {
               </Section>
 
               {/*
-                ここから下は「ライブラリの中身」ではなく「観かた」の統計(v1.37)。
+                ここから下は「媒体库の中身」ではなく「観かた」の統計(v1.37)。
                 view_history は v1.18 から貯めていて、v1.36 の期間集計に続いてここでも使う
               */}
-              <Section title="月ごとの視聴回数(直近 24 か月)" wide>
+              <Section title="每月观看次数（最近 24 个月）" wide>
                 <BarList
                   buckets={stats.byViewMonth}
                   unit="回"
-                  empty="まだ視聴の記録がありません"
+                  empty="还没有观看记录"
                 />
               </Section>
 
-              <Section title="曜日 × 時間帯の視聴回数" wide>
+              <Section title="星期 × 时段的观看次数" wide>
                 <ViewHeatmap grid={stats.viewHeatmap} />
               </Section>
             </div>
 
             <div className="settings-note">
-              合計再生時間は尺を取得できた動画のぶんだけです(全体では
-              {fmtTime(stats.totalDurationMs / 1000)})。
-              「再生回数」はライブラリに記録した全期間の累計、
-              「月ごとの視聴回数」は v1.18 以降の記録です
+              总播放时长仅统计能获取到片长的视频（整体为
+              {fmtTime(stats.totalDurationMs / 1000)}）。
+              「播放次数」是媒体库记录的全期间累计，
+              「每月观看次数」为 v1.18 之后的记录
             </div>
           </>
         )}
 
         <div className="modal-actions">
-          <button onClick={close}>閉じる</button>
+          <button onClick={close}>关闭</button>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import type { ViewMode } from '../types';
 /**
  * ツールバーの項目定義と折りたたみ(v1.17)。
  *
- * **ツールバーの幅に関する知識はすべてここに置く**。コンポーネントは
+ * **ツールバーの幅に関する知識は全部ここに置く**。コンポーネントは
  * 「どれをバーに出し、どれを ≫ メニューに入れるか」を受け取って描くだけにする
  * (列定義を lib/listColumns.ts に寄せているのと同じ作法)。
  *
@@ -38,7 +38,7 @@ export interface ToolbarItemDef {
   key: ToolbarItemKey;
   /**
    * ≫ メニューでの見出し。バーではアイコンの title にも使う。
-   * トグル項目(サイドバー・詳細ペイン)は状態で文言が変わるので、
+   * トグル項目(侧边栏·详情面板)は状態で文言が変わるので、
    * コンポーネント側で上書きする
    */
   label: string;
@@ -65,31 +65,31 @@ export const TOOLBAR_PADDING = 24;
 export const OVERFLOW_W = ICON_W;
 
 export const TOOLBAR_ITEMS: Record<ToolbarItemKey, ToolbarItemDef> = {
-  sidebarToggle: { key: 'sidebarToggle', label: 'サイドバー', width: ICON_W, priority: 0 },
+  sidebarToggle: { key: 'sidebarToggle', label: '侧边栏', width: ICON_W, priority: 0 },
   /*
    * 判定に使う幅と、CSS の min-width: 120px はわざと別の数字。
    * 120 は「これ以上は潰さない」ハードな床で、180 は「ここを切りそうになったら
    * 畳み始める」しきい値。畳んで余ったぶんは max-width: 420px まで伸び直す
    */
-  search: { key: 'search', label: '検索', width: 180, priority: 0 },
-  advanced: { key: 'advanced', label: '絞り込み', width: ICON_W, priority: 0 },
-  // 絞り込みの「戻る / 進む」(v1.41、C-8)。Alt+←/→ でも使えるので早めに畳んでよい
-  filterBack: { key: 'filterBack', label: '絞り込みを戻す', width: ICON_W, priority: 7 },
-  filterForward: { key: 'filterForward', label: '絞り込みを進める', width: ICON_W, priority: 8 },
-  // 並び順で「ランダム」を選ぶたびにシャッフルし直すので、専用ボタンは持たない(v1.20)
-  sort: { key: 'sort', label: '並び順', width: 172, priority: 13 },
-  saveQuery: { key: 'saveQuery', label: '条件を保存', width: ICON_W, priority: 1 },
-  viewMode: { key: 'viewMode', label: '表示の切り替え', width: ICON_W, priority: 12 },
-  cardSize: { key: 'cardSize', label: 'サムネイルの大きさ', width: 110, priority: 11 },
-  rescan: { key: 'rescan', label: '再スキャン', width: ICON_W, priority: 5 },
+  search: { key: 'search', label: '搜索', width: 180, priority: 0 },
+  advanced: { key: 'advanced', label: '筛选', width: ICON_W, priority: 0 },
+  // 筛选の「戻る / 進む」(v1.41、C-8)。Alt+←/→ でも使えるので早めに畳んでよい
+  filterBack: { key: 'filterBack', label: '筛选后退', width: ICON_W, priority: 7 },
+  filterForward: { key: 'filterForward', label: '筛选前进', width: ICON_W, priority: 8 },
+  // 排序で「随机」を選ぶたびにシャッフルし直すので、専用ボタンは持たない(v1.20)
+  sort: { key: 'sort', label: '排序', width: 172, priority: 13 },
+  saveQuery: { key: 'saveQuery', label: '保存条件', width: ICON_W, priority: 1 },
+  viewMode: { key: 'viewMode', label: '切换显示', width: ICON_W, priority: 12 },
+  cardSize: { key: 'cardSize', label: '缩略图大小', width: 110, priority: 11 },
+  rescan: { key: 'rescan', label: '重新扫描', width: ICON_W, priority: 5 },
   stats: { key: 'stats', label: '統計', width: ICON_W, priority: 3 },
   // v1.18 で視聴履歴のタブが入ったので「操作履歴」ではなくなった
-  history: { key: 'history', label: '履歴', width: ICON_W, priority: 2 },
-  inspectorPin: { key: 'inspectorPin', label: '詳細ペイン', width: ICON_W, priority: 10 },
-  aiPanel: { key: 'aiPanel', label: 'AI アシスタント', width: ICON_W, priority: 9 },
-  settings: { key: 'settings', label: '設定', width: ICON_W, priority: 6 },
+  history: { key: 'history', label: '历史', width: ICON_W, priority: 2 },
+  inspectorPin: { key: 'inspectorPin', label: '详情面板', width: ICON_W, priority: 10 },
+  aiPanel: { key: 'aiPanel', label: 'AI 助手', width: ICON_W, priority: 9 },
+  settings: { key: 'settings', label: '设置', width: ICON_W, priority: 6 },
   // v1.39。一度覚えれば ? で開けるので、バーの取り合いでは早めに畳んでよい
-  shortcuts: { key: 'shortcuts', label: 'キー操作', width: ICON_W, priority: 4 },
+  shortcuts: { key: 'shortcuts', label: '快捷键', width: ICON_W, priority: 4 },
 };
 
 /**
@@ -116,7 +116,7 @@ export const TOOLBAR_ORDER: ToolbarItemKey[] = [
   'shortcuts',
 ];
 
-/** サムネイルの大きさはグリッド表示のときしか意味がないので、リストでは項目ごと消す */
+/** 缩略图大小はグリッド表示のときしか意味がないので、リストでは項目ごと消す */
 export function toolbarKeys(viewMode: ViewMode): ToolbarItemKey[] {
   return TOOLBAR_ORDER.filter((k) => k !== 'cardSize' || viewMode === 'grid');
 }

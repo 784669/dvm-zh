@@ -137,7 +137,7 @@ mod tests {
                (11, 'X:\\旅行\\b.mp4', 'b.mp4'),
                (12, 'X:\\c.mp4', 'c.mp4');
              INSERT INTO tags (id, name, color) VALUES
-               (1, 'ぜんぶ', '#e05252'), (2, 'あとで', NULL), (3, 'Beach', NULL);
+               (1, '全部', '#e05252'), (2, '稍后', NULL), (3, 'Beach', NULL);
              INSERT INTO video_tags (video_id, tag_id) VALUES
                (10, 2), (10, 1), (10, 3), (11, 1);
              INSERT INTO series (id, name) VALUES (1, '第 2 期'), (2, 'あ行');
@@ -163,8 +163,9 @@ mod tests {
         let conn = setup();
         let labels = labels_for_videos(&conn, &[10]).unwrap();
         let names: Vec<&str> = labels[0].tags.iter().map(|t| t.name.as_str()).collect();
-        // COLLATE NOCASE の昇順。ASCII が先、日本語が後
-        assert_eq!(names, vec!["Beach", "あとで", "ぜんぶ"]);
+        // COLLATE NOCASE 只折叠 ASCII 的大小写，非 ASCII 一律按 UTF-8 字节序：
+        // ASCII 在前，中文在后（全 E5 < 稍 E7）。中文标签之间不要指望按拼音排序
+        assert_eq!(names, vec!["Beach", "全部", "稍后"]);
         let series: Vec<&str> = labels[0].series.iter().map(|s| s.name.as_str()).collect();
         assert_eq!(series, vec!["あ行", "第 2 期"]);
     }
@@ -173,9 +174,9 @@ mod tests {
     fn carries_tag_color() {
         let conn = setup();
         let labels = labels_for_videos(&conn, &[10]).unwrap();
-        let colored = labels[0].tags.iter().find(|t| t.name == "ぜんぶ").unwrap();
+        let colored = labels[0].tags.iter().find(|t| t.name == "全部").unwrap();
         assert_eq!(colored.color.as_deref(), Some("#e05252"));
-        let plain = labels[0].tags.iter().find(|t| t.name == "あとで").unwrap();
+        let plain = labels[0].tags.iter().find(|t| t.name == "稍后").unwrap();
         assert_eq!(plain.color, None);
     }
 

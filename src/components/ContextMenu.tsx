@@ -23,10 +23,10 @@ function nextIndex(entries: MenuEntry[], from: number | null, step: number): num
 }
 
 /**
- * 右クリックメニュー(v1.14)。
- * 項目の中身と有効・無効は `lib/contextMenu.ts` の純関数が決め、ここは描画と操作だけを持つ。
+ * 右键菜单(v1.14)。
+ * 項目の中身と有効·無効は `lib/contextMenu.ts` の純関数が決め、ここは描画と操作だけを持つ。
  *
- * 位置は fixed。画面の右端・下端をはみ出すときは反対側へ折り返す。
+ * 位置は fixed。画面の右端·下端をはみ出すときは反対側へ折り返す。
  * 無効項目は button ではなく div で描く — disabled な button は
  * Chromium がホバーを拾わず、`title` の「なぜ押せないか」が出せないため
  */
@@ -82,7 +82,7 @@ export function ContextMenu({
     setSubPos({ left, top, ready: true });
   }, [openSub]);
 
-  // メニューの外を押したら閉じる。別のカードを右クリックしたときも
+  // メニューの外を押したら关闭。別のカードを右点击したときも
   // ここで一度閉じてから、グリッド側が新しい位置で開き直す
   useEffect(() => {
     const inside = (t: EventTarget | null) =>
@@ -93,7 +93,7 @@ export function ContextMenu({
       onClose();
     };
     /**
-     * 裏の一覧・サイドバーがスクロールしたら閉じる(v1.20 でここへ移した)。
+     * 裏の一覧·侧边栏がスクロールしたら关闭(v1.20 でここへ移した)。
      * fixed で置いているので中身だけが動き、「何に対するメニューか」が分からなくなる。
      * グリッドは仮想化しているので対象のカード自体が DOM から消えることもある。
      *
@@ -105,7 +105,7 @@ export function ContextMenu({
       if (inside(e.target)) return;
       onClose();
     };
-    // ウィンドウの大きさが変われば位置の前提が崩れるので閉じる
+    // ウィンドウの大きさが変われば位置の前提が崩れるので关闭
     window.addEventListener('mousedown', onDown);
     window.addEventListener('resize', onClose);
     window.addEventListener('scroll', onScroll, true);
@@ -118,7 +118,7 @@ export function ContextMenu({
 
   /**
    * 項目を実行する。**閉じてから 1 拍おいて実行する** —
-   * 「名前を変更」の window.prompt は同期でスレッドを止めるので、
+   * 「重命名」の window.prompt は同期でスレッドを止めるので、
    * すぐ呼ぶとメニューが画面に残ったままダイアログが出てしまう
    */
   const run = (item: MenuItem) => {

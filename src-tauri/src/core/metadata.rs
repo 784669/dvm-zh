@@ -407,10 +407,10 @@ pub fn media_info(ff: &FfmpegPaths, path: &str) -> Result<MediaInfo> {
     // ドライブ未接続とファイル欠落は、ffprobe の英語エラーより先に日本語で返す
     let root = offline::root_of(path);
     if !Path::new(&root).exists() {
-        return Err(anyhow!("ドライブ({root})が接続されていません"));
+        return Err(anyhow!("驱动器（{root}）未连接"));
     }
     if !Path::new(path).exists() {
-        return Err(anyhow!("ファイルが見つかりません"));
+        return Err(anyhow!("找不到文件"));
     }
     let v = run_ffprobe(
         ff,

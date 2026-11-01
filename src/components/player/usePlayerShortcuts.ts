@@ -7,10 +7,10 @@ import { isQueuePlayback, useAutoplayToggle, useRepeatToggle } from './usePlayQu
  * プレイヤーのキーボードショートカット(両エンジン共用)。
  * Space/K=再生⇄停止、←→=±10秒、↑↓=音量±10%、M=ミュート、F=フルスクリーン、
  * < >=速度、A=連続再生の切替(v1.12)、R=リピート再生の切替(v1.13)、
- * Ctrl+←→ / PageUp・PageDown=前後のチャプター(v1.29、mpv のみ)、
- * U=表示サイズ 等倍⇄フィット(v1.12、mpv のみ)、
- * T=この位置をサムネイルに(v1.8)、S=このコマを画像として保存(v1.26)、
- * Esc=onEscape(フルスクリーン解除か閉じるかは呼び出し側が決める)
+ * Ctrl+←→ / PageUp·PageDown=前後の章节（v1.29、mpv のみ)、
+ * U=表示大小 等倍⇄フィット(v1.12、mpv のみ)、
+ * T=この位置を缩略图に(v1.8)、S=将此帧保存为图片(v1.26)、
+ * Esc=onEscape(フルスクリーン解除か关闭かは呼び出し側が決める)
  */
 export function usePlayerShortcuts(
   player: VideoPlayer,
@@ -22,14 +22,14 @@ export function usePlayerShortcuts(
     /** 連続再生の前後移動(N / P)。単発再生なら省略 */
     onNext?: () => void;
     onPrev?: () => void;
-    /** 現在位置をサムネイルにする(T) */
+    /** 現在位置を缩略图にする(T) */
     onSetThumbnail?: () => void;
     /** 今見ているコマを画像として保存する(S、v1.26) */
     onSaveFrame?: () => void;
-    /** 再生キューのパネルを開閉する(Q、v1.40) */
+    /** 再生队列のパネルを開閉する(Q、v1.40) */
     onToggleQueue?: () => void;
     /**
-     * 真の間はすべてのキーを無視する(v1.24)。
+     * 真の間は全部のキーを無視する(v1.24)。
      * 字幕設定パネルのように、入力欄が並んでいて Esc を自前で処理したい UI 用
      */
     suspended?: boolean;
@@ -41,22 +41,22 @@ export function usePlayerShortcuts(
     onEscape, toggleFullscreen, wake, onNext, onPrev, onSetThumbnail, onSaveFrame,
     onToggleQueue, suspended,
   } = opts;
-  // 連続再生・リピートは engine ごとに実装が変わらないので、opts を経由せず直接取る
+  // 連続再生·リピートは engine ごとに実装が変わらないので、opts を経由せず直接取る
   const { toggle: toggleAutoplay } = useAutoplayToggle();
   const { toggle: toggleRepeat } = useRepeatToggle();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       /*
-       * 右クリックメニューが開いている間のキーはメニュー側が処理する(v1.20)。
+       * 右键菜单が開いている間のキーはメニュー側が処理する(v1.20)。
        * ContextMenu の stopPropagation は React のルートまでしか効かないので、
        * メニューがフォーカスを失っていると window まで届いてしまう。
-       * **Esc の分岐より前に置くこと** — 後ろだと Esc でプレイヤーごと閉じる
+       * **Esc の分岐より前に置くこと** — 後ろだと Esc でプレイヤーごと关闭
        */
       if (useLibrary.getState().contextMenuOpen) return;
       // 字幕設定パネル等を開いている間は全キーを譲る(v1.24)。
       // **contextMenuOpen と同じくここに置く** — Esc の分岐より後ろだと、
-      // パネルを閉じるつもりの Esc でプレイヤーごと閉じてしまう
+      // パネルを关闭つもりの Esc でプレイヤーごと閉じてしまう
       if (suspended) return;
       if (e.key === 'Escape') {
         onEscape();
@@ -66,9 +66,9 @@ export function usePlayerShortcuts(
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
       /*
-       * Ctrl / Alt / Win 付きは**すべてのキーで一律に**拾わない。以前は S/U/A/R/Q だけ
-       * 除けていて、Ctrl+P(印刷)で前の動画へ飛ぶ・Ctrl+F で全画面になる等の
-       * 取りこぼしがあった。例外は ←→ だけ —— Ctrl+←→ を前後のチャプターに
+       * Ctrl / Alt / Win 付きは**全部のキーで一律に**拾わない。以前は S/U/A/R/Q だけ
+       * 除けていて、Ctrl+P(印刷)で前の動画へ飛ぶ·Ctrl+F で全画面になる等の
+       * 取りこぼしがあった。例外は ←→ だけ —— Ctrl+←→ を前後の章节に
        * 割り当てている(case 側で分岐)。**Shift は除外しない**(< > は Shift 入力)
        */
       if (
@@ -83,8 +83,8 @@ export function usePlayerShortcuts(
           togglePlay();
           break;
         /*
-         * ←→ は 10 秒シーク、**Ctrl 付きは前後のチャプター**(v1.29)。
-         * Ctrl の分岐をここに書かないと、チャプターへ飛んだうえに 10 秒ぶん
+         * ←→ は 10 秒シーク、**Ctrl 付きは前後の章节**(v1.29)。
+         * Ctrl の分岐をここに書かないと、章节へ飛んだうえに 10 秒ぶん
          * ずれてしまう(同じ case を 2 つの操作が通るため)。
          * mpv 以外のエンジンでは jumpChapter が undefined なので何も起きない
          */
@@ -152,7 +152,7 @@ export function usePlayerShortcuts(
           break;
         case 'a':
         case 'A':
-          // キューモード中はボタンと同じく効かせない(設定は変わるのに見た目が
+          // 队列モード中はボタンと同じく効かせない(設定は変わるのに見た目が
           // 何も変わらない、が起きないように。判定はボタンの disabled と共用)
           if (isQueuePlayback(useLibrary.getState())) return;
           toggleAutoplay();

@@ -2,9 +2,9 @@
  * 再生中の映像が HDR かどうか(v1.31、mpv のみ)。
  *
  * mpv の `video-params` を読むだけで、**ffprobe は叩かない** ——
- * 詳細ペインのメディア情報(`core/metadata.rs` の `hdr_label`)は同じことを
- * ファイル側から調べているが、こちらは「今デコードしている映像」が出所なので
- * 追加のファイル I/O がゼロで済む(チャプターと同じ考え方)。
+ * 详情面板の媒体信息(`core/metadata.rs` の `hdr_label`)は同じことを
+ * 文件側から調べているが、こちらは「今デコードしている映像」が出所なので
+ * 追加の文件 I/O がゼロで済む(章节と同じ考え方)。
  *
  * **「実際に HDR で出ているか」は mpv からは取れない**。`target-colorspace-hint` は
  * こちらが出した希望で、実際の出力を返す `target-params` は同梱 libmpv では
@@ -12,13 +12,13 @@
  * (`core/display.rs` / `is_hdr_display`)。
  *
  * **Dolby Vision は判定しない**。mpv の `video-params` には DV かどうかが出ず、
- * DV の多くは PQ ベースなので `HDR10` として出る。ファイル側の正確な種別は
- * 詳細ペインのメディア情報を見ること
+ * DV の多くは PQ ベースなので `HDR10` として出る。文件側の正確な種別は
+ * 详情面板の媒体信息を見ること
  */
 export interface HdrInfo {
   /** コントロールバーに出す短い名前 */
   short: string;
-  /** ツールチップに出す正式な名前(メディア情報の言い方に合わせる) */
+  /** ツールチップに出す正式な名前(媒体信息の言い方に合わせる) */
   full: string;
 }
 
@@ -56,10 +56,10 @@ export function hdrFromParams(data: unknown): HdrInfo | null {
  */
 export function hdrTooltip(info: HdrInfo, hdrOutput: boolean, passthrough: boolean): string {
   if (hdrOutput) {
-    return `${info.full} の映像を HDR のまま出力しています`;
+    return `${info.full} 的画面正以 HDR 原样输出`;
   }
   return passthrough
-    ? `${info.full} の映像です。SDR に変換して表示しています`
-      + '(HDR パススルーはオンですが、ディスプレイが HDR モードではありません)'
-    : `${info.full} の映像です。SDR に変換して表示しています(HDR パススルー: オフ)`;
+    ? `${info.full} 的画面。已转换为 SDR 显示`
+      + '(HDR 直通已开启，但显示器未处于 HDR 模式)'
+    : `${info.full} 的画面。已转换为 SDR 显示（HDR 直通: 关）`;
 }

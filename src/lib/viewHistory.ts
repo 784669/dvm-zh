@@ -6,7 +6,7 @@ import { fmtTime } from './format';
  *
  * 日付ごとのまとめは **Rust 側ではなくここでやる**。区切りの入れ方も「今日 / 昨日」の
  * 出し方も表示の都合でしかないので、SQL に持ち込まずテストできる場所に置く
- * (メディア情報を「Rust は生値、日本語化は TypeScript」に分けたのと同じ作法)。
+ * (媒体信息を「Rust は生値、日本語化は TypeScript」に分けたのと同じ作法)。
  */
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
@@ -59,7 +59,7 @@ export function dateLabel(date: string, today: string): string {
 
 /**
  * 新しい順に並んだ行を日付でまとめる。
- * **並べ替えはしない** —— Rust が返した順序をそのまま保つ(ページングと矛盾させないため)
+ * **排列はしない** —— Rust が返した順序をそのまま保つ(ページングと矛盾させないため)
  */
 export function groupByDate(entries: ViewEntry[], today: string): ViewGroup[] {
   const groups: ViewGroup[] = [];
@@ -83,7 +83,7 @@ export function progressLabel(entry: ViewEntry): string {
   return total ? `${watched} / ${total}` : watched;
 }
 
-/** グリッドと同じ表示名の決め方(タイトルがあれば優先) */
+/** グリッドと同じ表示名の決め方(标题があれば優先) */
 export function displayName(entry: ViewEntry): string {
   return entry.title?.trim() || entry.filename;
 }
@@ -98,14 +98,14 @@ export function displayName(entry: ViewEntry): string {
 export type ViewPeriod = 'all' | 'today' | 'last7' | 'thisMonth' | 'custom';
 
 export const PERIOD_LABELS: Record<ViewPeriod, string> = {
-  all: 'すべて',
+  all: '全部',
   today: '今日',
   last7: '過去 7 日',
   thisMonth: '今月',
-  custom: '期間を指定',
+  custom: '指定期间',
 };
 
-/** Rust に渡す期間。空文字は「指定なし」(core/history.rs の ViewRange と対) */
+/** Rust に渡す期間。空文字は「未指定」(core/history.rs の ViewRange と対) */
 export interface ViewRange {
   after: string;
   before: string;
@@ -143,12 +143,12 @@ export function periodRange(period: ViewPeriod, today: string): ViewRange {
  * (シークで飛ばすと実態より大きく出る)。不明な行があればその件数も断る
  */
 export function statsLabel(s: ViewStats): string {
-  if (s.count === 0) return 'この期間の記録はありません';
+  if (s.count === 0) return '此期间没有记录';
   const hours = s.watchedMs / 3_600_000;
   // 1 時間未満は分で出す(「0.2 時間」より「12 分」のほうが読める)
   const time = hours >= 1
-    ? `${hours.toFixed(1)} 時間`
+    ? `${hours.toFixed(1)} 小时`
     : `${Math.round(s.watchedMs / 60_000)} 分`;
-  const base = `${s.count.toLocaleString()} 回 / ${s.videoCount.toLocaleString()} 本 ・ 合計 ${time}`;
-  return s.unknownCount > 0 ? `${base}(うち ${s.unknownCount} 回は位置不明)` : base;
+  const base = `${s.count.toLocaleString()} 次 / ${s.videoCount.toLocaleString()} 个 · 合计 ${time}`;
+  return s.unknownCount > 0 ? `${base}（其中 ${s.unknownCount} 次位置未知）` : base;
 }

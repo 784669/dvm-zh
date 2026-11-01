@@ -21,7 +21,7 @@ import { usePlayQueue } from './usePlayQueue';
  * mpv エンジンのプレイヤービュー。
  * 映像は透過ウィンドウの背後にウィンドウ全面で描画され(html.mpv-active でグリッドを
  * 隠して透過)、HTML のコントロールをその上に重ねる。
- * ファイルが再生できない(end-file reason=error)ときは onFail で WebView2 経路へ。
+ * 文件が再生できない(end-file reason=error)ときは onFail で WebView2 経路へ。
  */
 export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () => void }) {
   const { setPlayingVideo, bumpVersion, pushToast } = useLibrary(
@@ -38,20 +38,20 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
   const hideTimer = useRef<number | undefined>(undefined);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [controlsVisible, setControlsVisible] = useState(true);
-  // 字幕の見た目パネル(v1.24)
+  // 字幕样式パネル(v1.24)
   const [styleOpen, setStyleOpen] = useState(false);
-  // チャプター一覧(v1.29)。バーの自動非表示と Esc の分岐に関わるのでここで持つ
+  // 章节一覧(v1.29)。バーの自動非表示と Esc の分岐に関わるのでここで持つ
   const [chaptersOpen, setChaptersOpen] = useState(false);
-  // 再生キュー(v1.40)。チャプター一覧とまったく同じ扱い
+  // 再生队列(v1.40)。章节一覧とまったく同じ扱い
   const [queueOpen, setQueueOpen] = useState(false);
   const queueCount = useLibrary((s) => s.queue.items.length);
 
   const stateRef = useRef(player.state);
   stateRef.current = player.state;
   /*
-   * 送りを自動でやるか(v1.12。v1.40 でキューモードを足した)。
+   * 送りを自動でやるか(v1.12。v1.40 で队列モードを足した)。
    * 値を deps に入れると、終端で止まったまま ON にした瞬間に下の effect が走って
-   * 次へ飛ぶので ref 経由で読む。**キューモードでは設定に関わらず常に true** になる
+   * 次へ飛ぶので ref 経由で読む。**队列モードでは設定に関わらず常に true** になる
    * (判断は usePlayQueue の autoAdvance が持つ)
    */
   const autoplayRef = useRef(queue.autoAdvance);
@@ -76,7 +76,7 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
     });
   }, []);
 
-  // 再生開始: 音量・速度を復元してから loadfile → 再生。終了時は保存して stop
+  // 再生開始: 音量·速度を復元してから loadfile → 再生。終了時は保存して stop
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -86,7 +86,7 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
       await command('loadfile', [video.path]);
       if (!cancelled) await setProperty('pause', false);
     })().catch((e) => {
-      console.warn('mpv で再生を開始できません:', e);
+      console.warn('mpv 无法开始播放:', e);
       onFail();
     });
     return () => {
@@ -172,11 +172,11 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
     prevPaused.current = s.paused;
   }, [player.state.paused, video.id]);
 
-  // このファイルだけ mpv で再生できない → WebView2 エンジン(変換パイプライン付き)へ
+  // この文件だけ mpv で再生できない → WebView2 エンジン(変換パイプライン付き)へ
   useEffect(() => {
     const unlisten = listenEvents((e) => {
       if (e.event === 'end-file' && e.reason === 'error') {
-        console.warn('mpv がファイルを再生できません。WebView2 プレイヤーへ切り替えます');
+        console.warn('mpv 无法播放该文件。将切换为 WebView2 播放器');
         onFail();
       }
     });
@@ -185,7 +185,7 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
     };
   }, [onFail]);
 
-  // マウスが 2.5 秒止まったらコントロールを隠す(一時停止中は常時表示)
+  // マウスが 2.5 秒止まったらコントロール隐藏(一時停止中は常時表示)
   const wake = useCallback(() => {
     setControlsVisible(true);
     window.clearTimeout(hideTimer.current);
@@ -197,30 +197,30 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
   }, [wake]);
 
   const onEscape = useCallback(() => {
-    // チャプター一覧・キューが開いていれば、まずそれだけ閉じる(v1.29 / v1.40)。
+    // 章节一覧·队列が開いていれば、まずそれだけ关闭(v1.29 / v1.40)。
     // 字幕パネルのように全キーを譲る(suspended)必要は無い —— 入力欄が無いので、
-    // 開いたまま Space で再生・停止できる方が使いやすい
+    // 開いたまま Space で再生·停止できる方が使いやすい
     if (queueOpen) setQueueOpen(false);
     else if (chaptersOpen) setChaptersOpen(false);
     else if (isFullscreen) toggleFullscreen();
     else close();
   }, [queueOpen, chaptersOpen, isFullscreen, toggleFullscreen, close]);
 
-  // 今見ているコマをサムネイルにする(10% 固定で暗転を引いたときの手当て)
+  // 今見ているコマを缩略图にする(10% 固定で暗転を引いたときの手当て)
   const setThumbnail = useCallback(() => {
     const ms = Math.floor(stateRef.current.currentTime * 1000);
     api.setThumbTime(video.id, ms).then(() => {
-      pushToast('この位置をサムネイルにしました', 'info');
+      pushToast('已将此处设为缩略图', 'info');
       bumpVersion();
     });
   }, [video.id, pushToast, bumpVersion]);
 
-  // 今見ているコマを画像として保存する(v1.26)。サムネイル指定とは別物で、
-  // 出るのはユーザーのフォルダの PNG。**DB は変わらないので bumpVersion は呼ばない**
+  // 今見ているコマを画像として保存する(v1.26)。缩略图指定とは別物で、
+  // 出るのはユーザーの文件夹の PNG。**DB は変わらないので bumpVersion は呼ばない**
   const saveFrame = useCallback(() => {
     const ms = Math.floor(stateRef.current.currentTime * 1000);
     api.saveFrame(video.id, ms).then((path) => {
-      pushToast(`画像を保存しました: ${path}`, 'info');
+      pushToast(`已保存图片: ${path}`, 'info');
     });
   }, [video.id, pushToast]);
 
@@ -236,7 +236,7 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
       wake();
       setQueueOpen((v) => !v);
     },
-    // パネルは入力欄だらけなので、開いている間はキーをすべてパネルに譲る
+    // パネルは入力欄だらけなので、開いている間はキーを全部パネルに譲る
     suspended: styleOpen,
   });
 
@@ -245,7 +245,7 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
 
   // パネルを開いている間はバーを消さない(アンカーのボタンごと消えるうえ、
   // .mpv-overlay.controls-hidden の cursor:none でカーソルまで見えなくなる)。
-  // チャプター一覧もボタンにぶら下がっているので同じ扱い(v1.29)
+  // 章节一覧もボタンにぶら下がっているので同じ扱い(v1.29)
   const visible =
     controlsVisible || player.state.paused || styleOpen || chaptersOpen || queueOpen;
 
@@ -265,7 +265,7 @@ export function MpvPlayerView({ video, onFail }: { video: VideoRow; onFail: () =
         <div className="player-title" title={video.path}>
           {video.title ?? video.filename}
         </div>
-        <button className="player-close" onClick={close} title="閉じる (Esc)">
+        <button className="player-close" onClick={close} title="关闭 (Esc)">
           <X />
         </button>
       </div>

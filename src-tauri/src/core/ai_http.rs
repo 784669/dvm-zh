@@ -62,9 +62,9 @@ where
     let mut headers = reqwest::header::HeaderMap::new();
     for (k, v) in &req.headers {
         let name = reqwest::header::HeaderName::from_bytes(k.as_bytes())
-            .with_context(|| format!("ヘッダ名が不正です: {k}"))?;
+            .with_context(|| format!("表头名称非法：{k}"))?;
         let value = reqwest::header::HeaderValue::from_str(v)
-            .with_context(|| format!("ヘッダの値が不正です: {k}"))?;
+            .with_context(|| format!("表头值非法：{k}"))?;
         headers.insert(name, value);
     }
 
@@ -74,7 +74,7 @@ where
         .body(req.body)
         .send()
         .await
-        .with_context(|| format!("接続できませんでした: {}", req.url))?;
+        .with_context(|| format!("连接失败：{}", req.url))?;
 
     let status = res.status();
     if !status.is_success() {
@@ -96,7 +96,7 @@ where
         if cancel.load(Ordering::Relaxed) {
             return Ok(());
         }
-        buf.extend_from_slice(&chunk.context("受信中に接続が切れました")?);
+        buf.extend_from_slice(&chunk.context("接收时连接中断")?);
         while let Some(pos) = buf.iter().position(|&b| b == b'\n') {
             let mut line: Vec<u8> = buf.drain(..=pos).collect();
             line.pop(); // \n

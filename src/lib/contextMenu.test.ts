@@ -125,14 +125,14 @@ describe('buildVideoMenu', () => {
     for (const id of ['rating', 'queue', 'openFolder', 'copyPath', 'removeFromLibrary']) {
       expect(isDisabled(menu, id)).toBe(false);
     }
-    expect(item(menu, 'play').hint).toBe('ドライブが未接続です');
+    expect(item(menu, 'play').hint).toBe('驱动器未连接');
   });
 
   it('見つからない動画も同じ扱いで、理由の文言だけ変わる', () => {
     const v = row({ isMissing: true });
     const menu = buildVideoMenu([v], v);
     expect(isDisabled(menu, 'play')).toBe(true);
-    expect(item(menu, 'play').hint).toBe('ファイルが見つかりません');
+    expect(item(menu, 'play').hint).toBe('找不到文件');
     expect(isDisabled(menu, 'removeFromLibrary')).toBe(false);
   });
 
@@ -157,12 +157,12 @@ describe('buildVideoMenu', () => {
   it('削除系のラベルに選択件数が入る', () => {
     const rows = [row({ id: 1 }), row({ id: 2 }), row({ id: 3 })];
     const menu = buildVideoMenu(rows, rows[0]);
-    expect(item(menu, 'removeFromLibrary').label).toBe('3 件をライブラリから削除');
-    expect(item(menu, 'trash').label).toBe('3 件をごみ箱へ');
-    expect(item(menu, 'copyPath').label).toBe('3 件のフルパスをコピー');
+    expect(item(menu, 'removeFromLibrary').label).toBe('3 个从媒体库删除');
+    expect(item(menu, 'trash').label).toBe('3 个送入回收站');
+    expect(item(menu, 'copyPath').label).toBe('复制 3 个完整路径');
     // 1 件のときは件数を出さない
     const one = buildVideoMenu([rows[0]], rows[0]);
-    expect(item(one, 'trash').label).toBe('ごみ箱へ');
+    expect(item(one, 'trash').label).toBe('送入回收站');
   });
 
   it('削除系には danger が立つ', () => {
@@ -222,11 +222,11 @@ describe('buildTagMenu', () => {
 
   it('絞り込み中かどうかでラベルとチェックが入れ替わる', () => {
     const off = buildTagMenu(tagRow(), [], []);
-    expect(item(off, 'tag:filter').label).toBe('絞り込みに追加');
+    expect(item(off, 'tag:filter').label).toBe('添加到筛选');
     expect(item(off, 'tag:filter').checked).toBe(false);
 
     const on = buildTagMenu(tagRow(), [], [1]);
-    expect(item(on, 'tag:filter').label).toBe('絞り込みから外す');
+    expect(item(on, 'tag:filter').label).toBe('从筛选中移除');
     expect(item(on, 'tag:filter').checked).toBe(true);
   });
 
@@ -277,14 +277,14 @@ describe('buildTagMenu', () => {
     it('グループが 1 つも無ければ無効になる', () => {
       const menu = buildTagMenu(tagRow(), [], []);
       expect(isDisabled(menu, 'tag:group')).toBe(true);
-      expect(item(menu, 'tag:group').hint).toBe('タググループがまだありません');
+      expect(item(menu, 'tag:group').hint).toBe('还没有标签群组');
     });
   });
 
   it('削除は danger で、件数を添える', () => {
     const menu = buildTagMenu(tagRow({ videoCount: 7 }), [], []);
     expect(item(menu, 'tag:delete').danger).toBe(true);
-    expect(item(menu, 'tag:delete').hint).toContain('7 件');
+    expect(item(menu, 'tag:delete').hint).toContain('7 个');
   });
 });
 
@@ -311,39 +311,39 @@ describe('buildTagGroupMenu', () => {
   it('端では動かせない方向だけが無効になる', () => {
     const first = buildTagGroupMenu(groupRow(), 0, 3, 1, false, false);
     expect(isDisabled(first, 'group:moveUp')).toBe(true);
-    expect(item(first, 'group:moveUp').hint).toBe('すでに先頭です');
+    expect(item(first, 'group:moveUp').hint).toBe('已在最前');
     expect(isDisabled(first, 'group:moveDown')).toBe(false);
 
     const last = buildTagGroupMenu(groupRow(), 2, 3, 1, false, false);
     expect(isDisabled(last, 'group:moveUp')).toBe(false);
     expect(isDisabled(last, 'group:moveDown')).toBe(true);
-    expect(item(last, 'group:moveDown').hint).toBe('すでに末尾です');
+    expect(item(last, 'group:moveDown').hint).toBe('已在最后');
   });
 
   it('タグが 0 個なら絞り込みと開閉が無効になる', () => {
     const menu = buildTagGroupMenu(groupRow(), 0, 1, 0, false, false);
     expect(isDisabled(menu, 'group:filter')).toBe(true);
     expect(isDisabled(menu, 'group:toggle')).toBe(true);
-    expect(item(menu, 'group:toggle').hint).toBe('タグがまだありません');
+    expect(item(menu, 'group:toggle').hint).toBe('还没有标签');
   });
 
   it('畳んでいるかでラベルが入れ替わる', () => {
     expect(item(buildTagGroupMenu(groupRow(), 0, 1, 2, false, true), 'group:toggle').label)
-      .toBe('タグを表示');
+      .toBe('显示标签');
     expect(item(buildTagGroupMenu(groupRow(), 0, 1, 2, false, false), 'group:toggle').label)
-      .toBe('タグを隠す');
+      .toBe('隐藏标签');
   });
 
   it('配下タグが全部選ばれていれば絞り込みにチェックが付く', () => {
     const menu = buildTagGroupMenu(groupRow(), 0, 1, 2, true, false);
     expect(item(menu, 'group:filter').checked).toBe(true);
-    expect(item(menu, 'group:filter').label).toBe('このグループの絞り込みを解除');
+    expect(item(menu, 'group:filter').label).toBe('解除此群组的筛选');
   });
 
   it('削除は danger で、未分類に移るタグの数を添える', () => {
     const menu = buildTagGroupMenu(groupRow({ tagCount: 4 }), 0, 1, 4, false, false);
     expect(item(menu, 'group:delete').danger).toBe(true);
-    expect(item(menu, 'group:delete').hint).toContain('4 個');
+    expect(item(menu, 'group:delete').hint).toContain('4 个');
   });
 });
 
@@ -357,7 +357,7 @@ describe('buildWatchedFolderMenu', () => {
   it('オフラインでもドライブに触らない項目は押せる', () => {
     const menu = buildWatchedFolderMenu(watchedRow({ online: false }), false);
     expect(isDisabled(menu, 'wf:reveal')).toBe(true);
-    expect(item(menu, 'wf:reveal').hint).toBe('ドライブが未接続です');
+    expect(item(menu, 'wf:reveal').hint).toBe('驱动器未连接');
     for (const id of ['wf:open', 'wf:openDirect', 'wf:copyPath', 'wf:remove']) {
       expect(isDisabled(menu, id)).toBe(false);
     }
@@ -398,7 +398,7 @@ describe('buildSmartFolderMenu', () => {
     const menu = buildSmartFolderMenu(smartRow(), 1, 3, true);
     expect(isDisabled(menu, 'sf:moveUp')).toBe(true);
     expect(isDisabled(menu, 'sf:moveDown')).toBe(true);
-    expect(item(menu, 'sf:moveUp').hint).toBe('絞り込み中は並べ替えられません');
+    expect(item(menu, 'sf:moveUp').hint).toBe('筛选中无法排序');
     // 並べ替え以外は絞り込み中でも押せる
     for (const id of ['sf:open', 'sf:rename', 'sf:overwrite', 'sf:delete']) {
       expect(isDisabled(menu, id)).toBe(false);
@@ -415,16 +415,16 @@ describe('buildSeriesMenu', () => {
 
   it('絞り込み中かどうかでラベルとチェックが入れ替わる', () => {
     expect(item(buildSeriesMenu(seriesRow(), false), 'series:filter').label)
-      .toBe('このシリーズで絞り込む');
+      .toBe('按此系列筛选');
     const on = buildSeriesMenu(seriesRow(), true);
-    expect(item(on, 'series:filter').label).toBe('絞り込みを解除');
+    expect(item(on, 'series:filter').label).toBe('解除筛选');
     expect(item(on, 'series:filter').checked).toBe(true);
   });
 
   it('削除は danger で、件数を添える', () => {
     const menu = buildSeriesMenu(seriesRow({ videoCount: 9 }), false);
     expect(item(menu, 'series:delete').danger).toBe(true);
-    expect(item(menu, 'series:delete').hint).toContain('9 件');
+    expect(item(menu, 'series:delete').hint).toContain('9 个');
   });
 });
 
@@ -439,20 +439,20 @@ describe('buildFolderTreeMenu', () => {
   it('サブフォルダが無ければ開閉できない', () => {
     const menu = buildFolderTreeMenu(nodeRow(), false, false, false);
     expect(isDisabled(menu, 'tree:expand')).toBe(true);
-    expect(item(menu, 'tree:expand').hint).toBe('サブフォルダーはありません');
+    expect(item(menu, 'tree:expand').hint).toBe('没有子文件夹');
   });
 
   it('展開しているかでラベルが入れ替わる', () => {
     expect(item(buildFolderTreeMenu(nodeRow(), true, true, false), 'tree:expand').label)
-      .toBe('サブフォルダーを隠す');
+      .toBe('隐藏子文件夹');
     expect(item(buildFolderTreeMenu(nodeRow(), true, false, false), 'tree:expand').label)
-      .toBe('サブフォルダーを表示');
+      .toBe('显示子文件夹');
   });
 
   it('すでに監視フォルダなら追加は無効', () => {
     const menu = buildFolderTreeMenu(nodeRow({ watchedFolderId: 3 }), true, false, false);
     expect(isDisabled(menu, 'tree:watch')).toBe(true);
-    expect(item(menu, 'tree:watch').hint).toBe('すでに監視フォルダです');
+    expect(item(menu, 'tree:watch').hint).toBe('已经是监控文件夹');
   });
 
   it('オフラインで無効になるのはエクスプローラー表示だけ', () => {
@@ -499,7 +499,7 @@ describe('buildGridBlankMenu', () => {
     const menu = buildGridBlankMenu(blank());
     expect(isDisabled(menu, 'blank:up')).toBe(true);
     expect(isDisabled(menu, 'blank:reveal')).toBe(true);
-    expect(item(menu, 'blank:up').hint).toBe('フォルダーで絞り込んでいるときに使えます');
+    expect(item(menu, 'blank:up').hint).toBe('仅在使用文件夹筛选时可用');
   });
 
   it('フォルダーの一番上では「上へ」だけが無効', () => {
@@ -507,7 +507,7 @@ describe('buildGridBlankMenu', () => {
     const menu = buildGridBlankMenu(s);
     expect(isDisabled(menu, 'blank:reveal')).toBe(false);
     expect(isDisabled(menu, 'blank:up')).toBe(true);
-    expect(item(menu, 'blank:up').hint).toBe('これ以上、上のフォルダーはありません');
+    expect(item(menu, 'blank:up').hint).toBe('没有更上层的文件夹了');
   });
 
   it('表示モードの現在値にチェックが付く', () => {
@@ -535,7 +535,7 @@ describe('buildGridBlankMenu', () => {
     it('何も絞っていなければ無効', () => {
       const menu = buildGridBlankMenu(blank());
       expect(isDisabled(menu, 'blank:clearFilters')).toBe(true);
-      expect(item(menu, 'blank:clearFilters').hint).toBe('いま絞り込んでいる条件はありません');
+      expect(item(menu, 'blank:clearFilters').hint).toBe('当前没有筛选条件');
     });
 
     // 1 つでも効いていれば押せる。条件を足したらここにも足すこと
@@ -585,7 +585,7 @@ describe('buildPlayerMenu', () => {
     const menu = buildPlayerMenu(row({ isOffline: true }));
     for (const id of ['player:reveal', 'player:saveFrame']) {
       expect(isDisabled(menu, id)).toBe(true);
-      expect(item(menu, id).hint).toBe('ドライブが未接続です');
+      expect(item(menu, id).hint).toBe('驱动器未连接');
     }
     for (const id of ['player:rating', 'player:setThumb', 'player:copyPath', 'player:close']) {
       expect(isDisabled(menu, id)).toBe(false);
@@ -596,7 +596,7 @@ describe('buildPlayerMenu', () => {
     const menu = buildPlayerMenu(row({ isMissing: true }));
     for (const id of ['player:reveal', 'player:saveFrame']) {
       expect(isDisabled(menu, id)).toBe(true);
-      expect(item(menu, id).hint).toBe('ファイルが見つかりません');
+      expect(item(menu, id).hint).toBe('找不到文件');
     }
   });
 });
@@ -632,7 +632,7 @@ describe('buildLibraryMenu', () => {
     const m = buildLibraryMenu(libs, 'aaaa1111');
     const offline = item(m, 'lib:switch:bbbb2222');
     expect(offline.disabled).toBeUndefined();
-    expect(offline.label).toContain('未接続');
+    expect(offline.label).toContain('未连接');
     expect(offline.hint).toContain('E:\\');
   });
 

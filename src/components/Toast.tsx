@@ -14,7 +14,7 @@ function ToastItem({ toast }: { toast: Toast }) {
   return (
     <div className={`toast ${toast.kind}`}>
       <span className="toast-msg">{toast.message}</span>
-      <button className="toast-close" title="閉じる" onClick={() => dismissToast(toast.id)}>
+      <button className="toast-close" title="关闭" onClick={() => dismissToast(toast.id)}>
         ×
       </button>
     </div>

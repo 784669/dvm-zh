@@ -9,12 +9,12 @@ import { EMPTY_ADVANCED, type AdvancedFilter } from '../types';
 import { DedupeDialog } from './DedupeDialog';
 
 /**
- * 絞り込み帯(v1.28)。ツールバーと一覧の間に常駐する 1 行。
+ * 筛选帯(v1.28)。ツールバーと一覧の間に常駐する 1 行。
  *
  * 狙いは 2 つ。
- * 1. **タグの OR / AND を目で分かるようにする**。同じ箱の中は「または」、箱と箱は「かつ」。
+ * 1. **标签の OR / AND を目で分かるようにする**。同じ箱の中は「 或 」、箱と箱は「并且」。
  *    箱の分け方は Rust 側の軸(core/query.rs)と同じ規則(lib/filterChips.ts)
- * 2. **いまの条件に何件マッチしているかを出す**。件数は VideoGrid が使っているものを
+ * 2. **いまの条个何件マッチしているかを出す**。件数は VideoGrid が使っているものを
  *    そのまま受け取る —— ここで数え直すと count_videos が 2 回走り、
  *    しかも帯とグリッドで数字が食い違う瞬間ができる
  *
@@ -24,7 +24,7 @@ import { DedupeDialog } from './DedupeDialog';
 export function FilterBar({
   filters, total, counted,
 }: {
-  /** VideoGrid が buildQuery に渡したものと同じ絞り込み一式 */
+  /** VideoGrid が buildQuery に渡したものと同じ筛选一式 */
   filters: FilterState;
   total: number;
   /** 一度でも数え終わったか。false の間は 0 を「0 件」と読ませない */
@@ -70,7 +70,7 @@ export function FilterBar({
   /*
    * 右端のフェードは**本当に溢れているときだけ**出す。出しっぱなしにすると、
    * 端に来ただけのチップが薄くなって「まだ続きがある」と誤解させる。
-   * 幅(窓のリサイズ)とチップの中身の両方で測り直す
+   * 幅(窓のリ大小)とチップの中身の両方で測り直す
    */
   const [overflowing, setOverflowing] = useState(false);
   const shape = terms.map((t) => t.chips.map((c) => c.label).join()).join('|');
@@ -125,11 +125,11 @@ export function FilterBar({
   return (
     <div className="filterbar">
       <div className={`fb-terms${overflowing ? ' overflowing' : ''}`} ref={termsRef}>
-        {terms.length === 0 && <span className="fb-empty">絞り込みなし</span>}
+        {terms.length === 0 && <span className="fb-empty">无筛选</span>}
         {terms.map((term, i) => (
           <Fragment key={term.key}>
-            {i > 0 && <span className="fb-join">かつ</span>}
-            {/* 箱の枠は 2 つ以上のとき(= 実際に「または」が起きているとき)だけ付ける */}
+            {i > 0 && <span className="fb-join">并且</span>}
+            {/* 箱の枠は 2 つ以上のとき(= 実際に「 或 」が起きているとき)だけ付ける */}
             <span className={`fb-term${term.chips.length > 1 ? ' or' : ''}`}>
               {term.caption !== null && (
                 <span className="fb-caption">
@@ -141,7 +141,7 @@ export function FilterBar({
                   {term.clearAll !== null && (
                     <button
                       className="fb-term-clear"
-                      title={`「${term.caption}」の条件をまとめて外す`}
+                      title={`「${term.caption}」的条件一并移除`}
                       onClick={() => clear(term.clearAll!)}
                     >
                       ×
@@ -151,15 +151,15 @@ export function FilterBar({
               )}
               {term.chips.map((chip, j) => (
                 <Fragment key={chip.key}>
-                  {j > 0 && <span className="fb-or">または</span>}
+                  {j > 0 && <span className="fb-or"> 或 </span>}
                   <span
                     className={`chip${chip.unresolved ? ' unresolved' : ''}`}
-                    // 色付きタグは枠と文字色で示す(Inspector と同じ作法)
+                    // 色付き标签は枠と文字色で示す(Inspector と同じ作法)
                     style={chip.color ? { borderColor: chip.color, color: chip.color } : undefined}
-                    title={chip.unresolved ? '名前を読み込み中、または削除された項目です' : chip.label}
+                    title={chip.unresolved ? '名称读取中，或该项已被删除' : chip.label}
                   >
                     {chip.label}
-                    <button title="この条件を外す" onClick={() => clear(chip.clear)}>×</button>
+                    <button title="移除此条件" onClick={() => clear(chip.clear)}>×</button>
                   </span>
                 </Fragment>
               ))}
@@ -171,10 +171,10 @@ export function FilterBar({
       <span className="fb-count">
         {counted
           ? <>{terms.length > 0 ? '' : '全 '}<b>{total.toLocaleString()}</b> 件</>
-          : '集計中…'}
+          : '统计中…'}
       </span>
       {/*
-        フォルダで絞っているときだけ出すトグル(v1.35)。ここに置くのは
+        文件夹で絞っているときだけ出すトグル(v1.35)。ここに置くのは
         「いま出ている一覧の範囲を変える」操作で、対象が目の前にあると分かるから
         (ツールバーに置くと畳み込みの幅計算に条件付きの項目が混ざる)。
         潜っても効き続けるので「この下ぜんぶを見ながら歩く」ができる
@@ -184,39 +184,39 @@ export function FilterBar({
           className={`fb-toggle${filters.dirPathRecursive ? ' on' : ''}`}
           title={
             filters.dirPathRecursive
-              ? 'サブフォルダを含めるのをやめる(このフォルダ直下だけにする)'
-              : 'サブフォルダの中の動画も一覧に含める'
+              ? '不再包含子文件夹（仅限此文件夹直属）'
+              : '将子文件夹中的视频也加入列表'
           }
           onClick={toggleDirPathRecursive}
         >
-          サブフォルダも含める
+          包含子文件夹
         </button>
       )}
       {/*
         重複を見ているときだけ出す作業ボタン(v1.33)。ツールバーではなくここに置くのは、
         「いま画面に出ている重複」が対象だと分かる場所だから。
-        フォルダで絞り込んでいれば、そのフォルダ配下だけが対象になる
+        文件夹で絞り込んでいれば、その文件夹配下だけが対象になる
       */}
       {filters.duplicatesOnly && (
         <button
           className="fb-dedupe"
           title={
             filters.dirPath !== null
-              ? `${filters.dirPath} の配下で、同じ内容の動画を 1 本だけ残す(ファイルは消しません)`
-              : 'ライブラリ全体で、同じ内容の動画を 1 本だけ残す(ファイルは消しません)'
+              ? `${filters.dirPath} 的范围内，内容相同的视频只保留 1 个（不删除文件）`
+              : '在整个媒体库中，内容相同的视频只保留 1 个（不删除文件）'
           }
           onClick={() => setShowDedupe(true)}
         >
-          重複を解消
+          消除重复
         </button>
       )}
       {terms.length > 0 && (
         <button
           className="fb-clear"
-          title="絞り込みをすべて解除する(並び順はそのまま)"
+          title="清除全部筛选条件（排序保持不变）"
           onClick={() => applyFilter({})}
         >
-          すべて解除
+          全部清除
         </button>
       )}
 

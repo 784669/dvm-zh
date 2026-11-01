@@ -1,21 +1,21 @@
 import { parentDir } from './paths';
 import type { VideoRow } from '../types';
 
-/** 削除しようとしている動画のうち、監視フォルダ由来のもの(= 消しても再登録されるもの) */
+/** 削除しようとしている動画のうち、监视文件夹由来のもの(= 消しても再登録されるもの) */
 export interface ExcludeTargets {
-  /** 監視フォルダ由来の動画のパス。これがファイル単位で除外する対象 */
+  /** 监视文件夹由来の動画のパス。これが文件単位で除外する対象 */
   files: string[];
-  /** その動画たちの親フォルダ(重複なし・昇順) */
+  /** その動画たちの親文件夹(重複なし·昇順) */
   folders: string[];
 }
 
 /**
  * 削除の前に監視除外を勧めるかどうかを決める(v1.33)。
  *
- * **監視フォルダ由来のものだけを対象にする**。個別登録(`watchedFolderId === null`)は
+ * **监视文件夹由来のものだけを対象にする**。個別登録(`watchedFolderId === null`)は
  * 消しても再登録されないので、勧めても意味が無く、問いかけが騒がしくなるだけ。
  *
- * 親フォルダは `lib/paths.ts` の `parentDir` で出す —— フォルダーツリーや
+ * 親文件夹は `lib/paths.ts` の `parentDir` で出す —— 文件夹ツリーや
  * `VideoQuery.dirPath` と同じ表記でないと、件数を数えるときに突き合わせられない
  */
 export function excludeTargets(selection: VideoRow[]): ExcludeTargets {
@@ -28,10 +28,10 @@ export function excludeTargets(selection: VideoRow[]): ExcludeTargets {
 }
 
 /**
- * 「親フォルダごと」を選んだときに、選択していない動画を何件巻き込むか。
+ * 「親文件夹ごと」を選んだときに、選択していない動画を何件巻き込むか。
  *
- * `folderCounts` はそのフォルダ直下にある登録数(小文字のパスをキーにする)。
- * 分からないフォルダは 0 として扱うので、**数え終わる前に 0 を「巻き込み無し」と
+ * `folderCounts` はその文件夹直下にある登録数(小文字のパスをキーにする)。
+ * 分からない文件夹は 0 として扱うので、**数え終わる前に 0 を「巻き込み無し」と
  * 見せないこと** —— 呼び出し側は数え終わるまで件数を出さない
  */
 export function collateralCount(

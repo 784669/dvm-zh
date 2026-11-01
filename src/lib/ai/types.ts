@@ -1,11 +1,11 @@
 /*
- * アプリ内 AI アシスタントの、プロバイダに依存しない共通型(v1.43)。
+ * アプリ内 AI 助手の、プロバイダに依存しない共通型(v1.43)。
  *
  * v1.42 までは `@anthropic-ai/sdk` の型をそのまま使っていたが、OpenAI / Gemini /
  * OpenAI 互換エンドポイントを足すにあたって、ここに中立な形を 1 つ置いて
  * 各アダプタが自社形式との変換を受け持つ形にした。
  *
- * **このファイルは実装を持たない。** アダプタ(anthropic.ts / openai.ts / gemini.ts)が
+ * **この文件は実装を持たない。** アダプタ(anthropic.ts / openai.ts / gemini.ts)が
  * この型に正規化し、runner.ts と AiPanel.tsx はここしか知らない。
  */
 
@@ -28,7 +28,7 @@ export type AiWireEvent =
  * DVM のツール 7 本が実際に使っているのは下記の 8 キーワードだけで、
  * `$ref` / `oneOf` / `anyOf` / `nullable` / `additionalProperties` / ネストした
  * オブジェクトは 1 つも使っていない。**この狭さが 3 社への素通しを可能にしている**ので、
- * 条件を足すときもここから外れないようにすること
+ * 条个足すときもここから外れないようにすること
  */
 export interface JsonSchemaProp {
   type: 'string' | 'integer' | 'number' | 'boolean' | 'array';
@@ -96,13 +96,13 @@ export type AiMessage =
     }
   | { role: 'tool'; results: ToolResult[] };
 
-// ---------------------------------------------------------------- ストリーム
+// ---------------------------------------------------------------- 流
 
 export type StopReason = 'end' | 'tool_use' | 'max_tokens' | 'refusal' | 'other';
 
 export type StreamEvent =
   | { type: 'text'; text: string }
-  /** 思考が始まった合図。**中身は出さない**(表示するのは「考え中…」だけ) */
+  /** 思考が始まった合図。**中身は出さない**(表示するのは「思考中…」だけ) */
   | { type: 'thinking' }
   /** ツール呼び出しが 1 本確定した時点で 1 回 */
   | { type: 'tool_call'; call: ToolCall }

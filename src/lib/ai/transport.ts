@@ -35,7 +35,7 @@ export async function* streamLines(
   req: WireRequest,
   signal: AbortSignal,
 ): AsyncGenerator<string> {
-  if (signal.aborted) throw new AiError('aborted', '中断しました');
+  if (signal.aborted) throw new AiError('aborted', '已中断');
 
   const requestId = nextRequestId++;
   const queue: string[] = [];
@@ -70,11 +70,11 @@ export async function* streamLines(
   void api
     .aiStream(requestId, req.url, req.headers, req.body, channel)
     .catch((e: unknown) => {
-      // HTTP エラーは http_error で来るので、ここに来るのは接続断・DNS・中断
+      // HTTP エラーは http_error で来るので、ここに来るのは接続断·DNS·中断
       if (!failure) {
         failure = signal.aborted
-          ? new AiError('aborted', '中断しました')
-          : new AiError('network', `接続できませんでした: ${e instanceof Error ? e.message : String(e)}`);
+          ? new AiError('aborted', '已中断')
+          : new AiError('network', `连接失败: ${e instanceof Error ? e.message : String(e)}`);
       }
     })
     .finally(() => {
@@ -84,11 +84,11 @@ export async function* streamLines(
 
   try {
     for (;;) {
-      // 溜まっている行を先に吐き切る(終了フラグより優先。取りこぼさないため)
+      // 溜まっている行を先に吐き切る(終了标志より優先。取りこぼさないため)
       while (queue.length > 0) yield queue.shift() as string;
       if (failure) throw failure;
       // 中断は正常終了と区別する。Rust 側は中断でも Ok(()) を返すのでここで判定する
-      if (signal.aborted) throw new AiError('aborted', '中断しました');
+      if (signal.aborted) throw new AiError('aborted', '已中断');
       if (finished) return;
       await new Promise<void>((resolve) => {
         wake = resolve;

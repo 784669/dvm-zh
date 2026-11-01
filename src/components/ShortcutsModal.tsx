@@ -3,10 +3,10 @@ import { chordLabel, SHORTCUTS } from '../lib/shortcuts';
 import { useLibrary } from '../store';
 
 /**
- * キー操作の一覧(v1.39)。
+ * 快捷键の一覧(v1.39)。
  *
  * **キーは変更できない。見るだけ。** リバインドを作らなかった理由は
- * DESIGN.md「キー操作の一覧」節を参照。中身は `lib/shortcuts.ts` が唯一の出所で、
+ * DESIGN.md「快捷键の一覧」節を参照。中身は `lib/shortcuts.ts` が唯一の出所で、
  * ここは受け取った配列を描くだけにする(ContextMenu と lib/contextMenu.ts と同じ作法)。
  *
  * **汎用の Modal 部品は作らない**(DESIGN.md「汎用 UI 部品を作らない方針は維持」)。
@@ -14,14 +14,14 @@ import { useLibrary } from '../store';
  *
  * **再生中は開かない。** `.app` は再生中 `html.mpv-active` で丸ごと消えるので、
  * 出すには `.mpv-overlay` の内側にもマウントする必要がある(SubtitleStylePanel と
- * 同じ制約)。今は開く側(App.tsx)が `playingVideo` を見て弾いている
+ * 同じ制約)。今は打开側(App.tsx)が `playingVideo` を見て弾いている
  */
 export function ShortcutsModal() {
   const showShortcuts = useLibrary((s) => s.showShortcuts);
   const setShowShortcuts = useLibrary((s) => s.setShowShortcuts);
 
   /*
-   * Escape で閉じる。**window ではなく document に張って stopPropagation する** ——
+   * Escape で关闭。**window ではなく document に張って stopPropagation する** ——
    * App.tsx の Escape(選択解除)は window にいるので、ここで止めれば届かない
    * (SettingsModal と同じ理由)。IME の変換中は「変換の取り消し」なので拾わない
    */
@@ -43,9 +43,9 @@ export function ShortcutsModal() {
   return (
     <div className="modal-overlay" onClick={close}>
       <div className="modal shortcuts-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-title">キー操作</div>
+        <div className="modal-title">快捷键</div>
 
-        {/* 45 項目を 1 列に積むと長すぎるので、グループ単位で 2 段組みにする(CSS の grid) */}
+        {/* 45 項目を 1 列に積むと長すぎるので、群组単位で 2 段組みにする(CSS の grid) */}
         <div className="shortcuts-body">
           {SHORTCUTS.map((g) => (
             <div key={g.key} className="shortcuts-group">
@@ -77,7 +77,7 @@ export function ShortcutsModal() {
         </div>
 
         <div className="modal-actions">
-          <button onClick={close}>閉じる</button>
+          <button onClick={close}>关闭</button>
         </div>
       </div>
     </div>

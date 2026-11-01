@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import type { MenuEntry } from '../lib/contextMenu';
 
 /**
- * 右クリックメニューの開閉状態(v1.20)。
+ * 右键菜单の開閉状態(v1.20)。
  * `T` には「何に対するメニューか」を入れる — 対象が複数種類ある画面では
  * 判別可能ユニオン(`{ kind: 'video'; ... } | { kind: 'folder'; ... }`)を渡す
  */
@@ -14,7 +14,7 @@ export interface ContextMenuState<T> {
 }
 
 /**
- * 右クリックメニューを開くためのフック(v1.20)。
+ * 右键菜单を打开ためのフック(v1.20)。
  *
  * 項目の中身は `lib/contextMenu.ts` の純関数が決め、実行は呼び出し側が持つ。
  * ここが受け持つのは「どこに、何を出しているか」だけ。
@@ -28,15 +28,15 @@ export function useContextMenu<T>() {
   const [menu, setMenu] = useState<ContextMenuState<T> | null>(null);
 
   /**
-   * 座標を直接指定して開く(v1.27)。
-   * ボタンの真下に出したいとき(ライブラリ切り替えのようなドロップダウン)に使う —
-   * クリック位置に出すと、押した場所によってメニューの位置が毎回ずれる
+   * 座標を直接指定して打开(v1.27)。
+   * ボタンの真下に出したいとき(媒体库切り替えのようなドロップダウン)に使う —
+   * 点击位置に出すと、押した場所によってメニューの位置が毎回ずれる
    */
   const openAt = useCallback((x: number, y: number, entries: MenuEntry[], target: T) => {
     setMenu({ x, y, entries, target });
   }, []);
 
-  /** 右クリックのイベントからメニューを開く。WebView2 の既定メニューはここで止める */
+  /** 右点击のイベントからメニューを打开。WebView2 の既定メニューはここで止める */
   const open = useCallback(
     (e: React.MouseEvent, entries: MenuEntry[], target: T) => {
       e.preventDefault();

@@ -1,7 +1,7 @@
 /**
- * バイト数を人が読める形にする(カード・設定画面・詳細ペインで共用)。
+ * バイト数を人が読める形にする(カード·設定画面·详情面板で共用)。
  *
- * 詳細リスト(VideoListRow)と統計(StatsModal)は表示幅と桁の都合で
+ * 详细列表(VideoListRow)と統計(StatsModal)は表示幅と桁の都合で
  * わざと別の丸め方をしているので、そちらはここに寄せていない
  */
 export function fmtSize(bytes: number): string {
@@ -12,7 +12,7 @@ export function fmtSize(bytes: number): string {
   return `${Math.round(bytes / 1024)} KB`;
 }
 
-/** 秒を "m:ss" / "h:mm:ss" に整形する(プレイヤー・カード・ホバープレビューで共用) */
+/** 秒を "m:ss" / "h:mm:ss" に整形する(プレイヤー·カード·ホバープレビューで共用) */
 export function fmtTime(sec: number): string {
   if (!Number.isFinite(sec) || sec < 0) return '0:00';
   const s = Math.floor(sec);

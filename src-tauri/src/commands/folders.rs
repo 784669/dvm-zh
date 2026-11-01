@@ -127,6 +127,7 @@ pub fn remove_watched_folder(app: AppHandle, id: i64, remove_videos: bool) -> Re
         for vid in &removed_ids {
             let _ = std::fs::remove_file(state.thumbs_dir.join(format!("{vid}.jpg")));
             crate::core::playback::remove_cache_for(&state.transcode_dir, *vid);
+            crate::core::playback::remove_preview_for(&state.preview_dir, *vid);
         }
     }
     crate::core::watcher::rebuild(&app);
@@ -183,6 +184,7 @@ pub fn add_excluded_paths(
         for id in &ids {
             let _ = std::fs::remove_file(state.thumbs_dir.join(format!("{id}.jpg")));
             core::playback::remove_cache_for(&state.transcode_dir, *id);
+            core::playback::remove_preview_for(&state.preview_dir, *id);
         }
         ids.len()
     };

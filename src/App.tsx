@@ -41,13 +41,13 @@ export default function App() {
     'sidebarWidth', 'inspectorWidth', 'sidebarCollapsed', 'selection', 'showAiPanel',
     'aiPanelWidth', 'queueTabOpen', 'version',
   )));
-  // キューの引き直しと、閉じるときの保存確認(v1.40)
+  // 队列の引き直しと、关闭ときの保存確認(v1.40)
   useQueueLifecycle(version);
   const debounceTimer = useRef<number | undefined>(undefined);
   /** 字幕スタイルのロードが済んだか。済むまでは保存側を動かさない(下の effect 参照) */
   const subStyleLoaded = useRef(false);
   /**
-   * ライブラリを開けたか(v1.27)。null は判定前。
+   * 媒体库を開けたか(v1.27)。null は判定前。
    * 起動時に 1 回だけ聞く —— 結果が変わるのは再起動したときだけなので、購読はしない
    */
   const [libState, setLibState] = useState<LibraryState | null>(null);
@@ -55,12 +55,12 @@ export default function App() {
   useEffect(() => {
     void api.getLibraryState().then((s) => {
       setLibState(s);
-      // localStorage をライブラリごとに分けるために store にも入れる(TagTree が使う)
+      // localStorage を媒体库ごとに分けるために store にも入れる(TagTree が使う)
       useLibrary.getState().setLibraryId(s.current?.id ?? '');
     });
   }, []);
 
-  // 詳細ペインは「固定表示」か「何か選択中」か「キュータブを開いている」ときに出す。
+  // 详情面板は「固定表示」か「何か選択中」か「队列タブを開いている」ときに出す。
   // 幅を変える帯もペインと一緒に出し入れするので、判定はここに置く
   const showInspector = inspectorPinned || selection.length > 0 || queueTabOpen;
 
@@ -68,9 +68,9 @@ export default function App() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
       const s = useLibrary.getState();
-      // プレイヤー表示中のキー操作は PlayerOverlay 側で一元管理する
+      // プレイヤー表示中の快捷键は PlayerOverlay 側で一元管理する
       if (s.playingVideo) return;
-      // 右クリックメニュー中の Esc はメニューを閉じるだけ(選択は残す)
+      // 右键菜单中の Esc はメニューを关闭だけ(選択は残す)
       if (s.contextMenuOpen) return;
       s.clearSelection();
     };
@@ -79,7 +79,7 @@ export default function App() {
   }, []);
 
   /**
-   * Alt+← / Alt+→ で絞り込みの履歴を行き来する(v1.41、C-8)。
+   * Alt+← / Alt+→ で筛选の履歴を行き来する(v1.41、C-8)。
    * ブラウザの戻る / 進むと同じ操法。素の ←→ は一覧の選択移動が使っているので Alt を付ける。
    * VideoGrid のキー処理は Alt 付きを素通しする(`e.altKey` で return)ので衝突しない
    */
@@ -89,7 +89,7 @@ export default function App() {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       if (isTypingTarget(e)) return;
       const s = useLibrary.getState();
-      // プレイヤー表示中と右クリックメニュー中は拾わない(Escape と同じ扱い)
+      // プレイヤー表示中と右键菜单中は拾わない(Escape と同じ扱い)
       if (s.playingVideo || s.contextMenuOpen) return;
       e.preventDefault();
       if (e.key === 'ArrowLeft') s.filterBack();
@@ -100,10 +100,10 @@ export default function App() {
   }, []);
 
   /**
-   * `?` でキー操作の一覧を開く / 閉じる(v1.39)。
+   * `?` で快捷键の一覧を打开 / 关闭(v1.39)。
    *
    * **修飾キー付きのショートカットとして足している** —— 素の 1 文字キーは空きが少なく、
-   * `A` / `R` / `U` で既に修飾キーの手当てが要った経緯がある(DESIGN.md「字幕の見た目」節)。
+   * `A` / `R` / `U` で既に修飾キーの手当てが要った経緯がある(DESIGN.md「字幕样式」節)。
    * `?` は JIS でも US でも Shift+/ で、`e.key` は生成された文字なので配列に依存しない。
    * `/` はどの系統でも未使用で、既存の switch には case が無いので default に落ちる。
    *
@@ -117,11 +117,11 @@ export default function App() {
       if (isTypingTarget(e)) return;
       const s = useLibrary.getState();
       if (s.playingVideo) return;
-      // 右クリックメニュー中のキーはメニュー側が処理する
+      // 右键菜单中のキーはメニュー側が処理する
       if (s.contextMenuOpen) return;
       /*
        * 他のモーダルが開いている間は拾わない。重ねて出すと、Escape が
-       * (どちらも document で受けるので)両方に届いて 2 枚同時に閉じる。
+       * (どちらも document で受けるので)両方に届いて 2 枚同時に关闭。
        * 開いているモーダルを数える state は無いので DOM を 1 回読む ——
        * 下の contextmenu ハンドラで closest() を使っているのと同じ扱い。
        *
@@ -140,11 +140,11 @@ export default function App() {
    * WebView2 の既定メニューを画面全体で止める(v1.20)。
    *
    * 自前のメニューを付けた場所は各ハンドラが preventDefault するが、
-   * ツールバー・詳細ペイン・モーダルなど付けていない場所では
-   * 「再読み込み」「ページのソースを表示」といったブラウザのメニューが出てしまい、
+   * ツールバー·详情面板·モーダルなど付けていない場所では
+   * 「重新加载」「ページのソース显示」といったブラウザのメニューが出てしまい、
    * デスクトップアプリとして明らかに異物になる。
    *
-   * **入力欄だけは残す** — コピー・貼り付けと IME の変換候補が要るため。
+   * **入力欄だけは残す** — 复制·貼り付けと IME の変換候補が要るため。
    * 自前のメニューで置き換えるほどの中身も無い
    */
   useEffect(() => {
@@ -156,7 +156,7 @@ export default function App() {
     return () => document.removeEventListener('contextmenu', onContextMenu);
   }, []);
 
-  // 外部プレイヤー設定(再生分岐)・ホバープレビュー・表示設定をロード
+  // 外部プレイヤー設定(再生分岐)·ホバープレビュー·表示設定をロード
   useEffect(() => {
     api.getSetting('player_path').then((v) => setPlayerPath(v ?? ''));
     // 既定は ON。明示的に '0' のときだけ OFF
@@ -176,20 +176,20 @@ export default function App() {
       const n = Number(v);
       if (Number.isFinite(n) && n > 0) setCardWidth(n);
     });
-    // カードのタグ行は既定 ON、シリーズ行は既定 OFF(付いている動画が限られるため)
+    // カードの标签行は既定 ON、系列行は既定 OFF(付いている動画が限られるため)
     api.getSetting('card_tags').then((v) => setCardTags(v !== '0'));
     api.getSetting('card_series').then((v) => setCardSeries(v === '1'));
     // 連続再生は既定 OFF(勝手に次が始まると驚くため)
     api.getSetting('autoplay_next').then((v) => setAutoplayNext(v === '1'));
-    // 詳細ペインの固定は既定 OFF(従来どおり選択中だけ出る)
+    // 详情面板の固定は既定 OFF(従来どおり選択中だけ出る)
     api.getSetting('inspector_pinned').then((v) => setInspectorPinned(v === '1'));
-    // メディア情報も既定 OFF(開いていると選択のたびに ffprobe が走る)
+    // 媒体信息も既定 OFF(開いていると選択のたびに ffprobe が走る)
     api.getSetting('media_info_open').then((v) => setMediaInfoOpen(v === '1'));
-    // 詳細リストの列構成。壊れた値は parseColumns がすべて既定に落とす
+    // 详细列表の列構成。壊れた値は parseColumns が全部既定に落とす
     api.getSetting('list_columns').then((v) => setListColumns(parseColumns(v)));
     // 1 行おきの濃淡(v1.25)は既定 OFF。既存の見た目を勝手に変えない
     api.getSetting('list_zebra').then((v) => setListZebra(v === '1'));
-    // サイドバーは既定で開く
+    // 侧边栏は既定で打开
     api.getSetting('sidebar_collapsed').then((v) => setSidebarCollapsed(v === '1'));
     // 幅は setter 側で上下限に丸められる
     api.getSetting('sidebar_width').then((v) => {
@@ -207,10 +207,10 @@ export default function App() {
     /*
      * 設定モーダルの大きさ(v1.38)。**モーダル側では読まない** ——
      * 開いてから読むと既定の大きさで一瞬描いてから跳ねる。
-     * 壊れた値は parseModalSize がすべて既定に落とす
+     * 壊れた値は parseModalSize が全部既定に落とす
      */
     api.getSetting(SETTINGS_SIZE_KEY).then((v) => setSettingsModalSize(parseModalSize(v)));
-    // 字幕の見た目(v1.24)。壊れた値は parseSubStyle がすべて既定に落とす
+    // 字幕样式(v1.24)。壊れた値は parseSubStyle が全部既定に落とす
     api.getSetting(SUB_STYLE_KEY)
       .then((v) => setSubStyle(parseSubStyle(v)))
       .finally(() => {
@@ -226,13 +226,13 @@ export default function App() {
   ]);
 
   /**
-   * 字幕の見た目を保存する(v1.24)。
+   * 字幕样式を保存する(v1.24)。
    *
    * **スライダーの onChange から直接 setSetting を呼ばない** — set_setting は書き込み
    * コネクションを使うので、ドラッグ中に毎フレーム叩くと取り込みワーカーとロックを
    * 取り合う。ここで 400ms まとめてから 1 回だけ書く。
    *
-   * **App に置く**理由: プレイヤーのパネルや設定モーダルは閉じると unmount するので、
+   * **App に置く**理由: プレイヤーのパネルや設定モーダルは关闭と unmount するので、
    * そちらにタイマーを置くと「値をいじって即閉じ」で最後の 1 手が消える。
    * App は一度 mount したら畳まれないのでタイマーが生き残る
    */
@@ -246,8 +246,8 @@ export default function App() {
   }, [subStyle]);
 
   /**
-   * ドロップされたパスを取り込む。フォルダが混ざっていたら扱いを尋ねる(v1.9)。
-   * 「監視フォルダ」にすると以後の追加も自動で拾うが、フォルダごと登録したくない
+   * ドロップされたパスを取り込む。文件夹が混ざっていたら扱いを尋ねる(v1.9)。
+   * 「监视文件夹」にすると以後の追加も自動で拾うが、文件夹ごと登録したくない
    * ケース(一度きりの取り込み)もあるので選ばせる
    */
   const handleDrop = useCallback(
@@ -257,10 +257,10 @@ export default function App() {
 
       if (dirs.length > 0) {
         const watch = await ask(
-          `フォルダが ${dirs.length} 件あります。監視フォルダとして登録しますか?\n\n` +
-            'はい = 監視フォルダにする(以後の追加も自動で取り込みます)\n' +
-            'いいえ = 中の動画を個別登録する(このときの分だけ)',
-          { title: 'フォルダの扱い' },
+          `共有 ${dirs.length} 个文件夹。要登记为监视文件夹吗？\n\n` +
+            '是 = 设为监视文件夹（以后新增的内容也会自动导入）\n' +
+            '否 = 将其中的视频逐个登记（仅本次）',
+          { title: '文件夹处理方式' },
         );
         for (const dir of dirs) {
           if (watch) await api.addWatchedFolder(dir);
@@ -295,7 +295,7 @@ export default function App() {
       setStatus(e.payload.scanning, e.payload.message);
     }).then(track);
 
-    // 中身が変わったサムネイルを読み直させる(URL は {id}.jpg のままなので lib/thumbs.ts 参照)
+    // 中身が変わった缩略图を読み直させる(URL は {id}.jpg のままなので lib/thumbs.ts 参照)
     listen('thumbs:changed', () => bumpThumbVersion()).then(track);
 
     getCurrentWebview()
@@ -312,9 +312,9 @@ export default function App() {
     };
   }, [bumpVersion, bumpThumbVersion, setStatus, handleDrop]);
 
-  // ライブラリを開けていないときは通常の UI を出さない(v1.27)。
+  // 媒体库を開けていないときは通常の UI を出さない(v1.27)。
   // 空の placeholder で起動しているので、そのまま操作させると
-  // 「ライブラリが消えた」と誤解して作り直しにかかってしまう
+  // 「媒体库が消えた」と誤解して作り直しにかかってしまう
   if (libState && libState.status !== 'ok') {
     return (
       <>
@@ -328,12 +328,12 @@ export default function App() {
     <>
       {/* mpv 再生中は .app ごと非表示にするため、プレイヤーは .app の外に置く */}
       <div className="app">
-        {/* 畳んだら幅を変える帯も一緒に消す(詳細ペインと同じ扱い) */}
+        {/* 畳んだら幅を変える帯も一緒に消す(详情面板と同じ扱い) */}
         {!sidebarCollapsed && (
           <>
             <Sidebar />
             <PaneResizer
-              label="サイドバー"
+              label="侧边栏"
               edge="left"
               width={sidebarWidth}
               min={SIDEBAR_WIDTH.min}
@@ -354,7 +354,7 @@ export default function App() {
         </main>
         {showInspector && (
           <PaneResizer
-            label="詳細ペイン"
+            label="详情面板"
             edge="right"
             width={inspectorWidth}
             min={INSPECTOR_WIDTH.min}
@@ -369,7 +369,7 @@ export default function App() {
         <Inspector />
         {showAiPanel && (
           <PaneResizer
-            label="AI パネル"
+            label="AI 面板"
             edge="right"
             width={aiPanelWidth}
             min={AI_PANEL_WIDTH.min}

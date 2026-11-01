@@ -4,7 +4,7 @@ import type { ColumnKey } from './lib/listColumns';
 import { EMPTY_FILTER } from './lib/query';
 import type { FilterState } from './lib/query';
 
-/** 絞り込み履歴(C-8)に積める上限。超えたら古いものから捨てる */
+/** 筛选履歴(C-8)に積める上限。超えたら古いものから捨てる */
 const FILTER_HISTORY_LIMIT = 50;
 import { SETTINGS_SIZE_DEFAULT, clampModalSize } from './lib/settings';
 import type { ModalSize } from './lib/settings';
@@ -36,12 +36,12 @@ export function pickState<K extends keyof LibraryState>(...keys: K[]) {
 /** シャッフル種。0 は使わない(Rust 側で 1 に丸められる) */
 const newSeed = () => Math.floor(Math.random() * 999_000) + 1;
 
-/** カード幅の下限・上限(px)。ツールバーのスライダーの範囲 */
+/** カード幅の下限·上限(px)。ツールバーのスライダーの範囲 */
 export const CARD_WIDTH_MIN = 140;
 export const CARD_WIDTH_MAX = 400;
 export const CARD_WIDTH_DEFAULT = 224;
 
-/** サイドバー / 詳細ペイン / AI パネルの幅(px)。ドラッグの上下限と初期値 */
+/** 侧边栏 / 详情面板 / AI 面板の幅(px)。ドラッグの上下限と初期値 */
 export const SIDEBAR_WIDTH = { min: 180, max: 480, default: 240 };
 export const INSPECTOR_WIDTH = { min: 220, max: 520, default: 260 };
 export const AI_PANEL_WIDTH = { min: 260, max: 560, default: 320 };
@@ -50,7 +50,7 @@ const clamp = (v: number, { min, max }: { min: number; max: number }) =>
   Math.min(Math.max(Math.round(v), min), max);
 
 /**
- * いまの絞り込み一式を写し取る(v1.41、C-8)。
+ * いまの筛选一式を写し取る(v1.41、C-8)。
  * 戻り値の型が FilterState なので、条件が増えてここに書き忘れるとコンパイルで落ちる
  */
 function snapshotFilter(s: LibraryState): FilterState {
@@ -71,11 +71,11 @@ function snapshotFilter(s: LibraryState): FilterState {
 }
 
 /**
- * 手動順(シリーズ / プレイリスト)を選んだときの並び。`applyFilter` の sort 決定に使う。
+ * 手動順(系列 / 播放列表)を選んだときの並び。`applyFilter` の sort 決定に使う。
  *
  * 選んだらその手動順に切り替え、**外したら追加日順へ戻す**。戻さないと
  * `playlist_asc` のまま絞りだけが消え、Rust 側で意味を失った ORDER BY が
- * 素通しされて「並べ替えたはずなのに既定順」に見える
+ * 素通しされて「排列たはずなのに既定順」に見える
  */
 function manualSort(current: SortKey, seriesId: number | null, playlistId: number | null): SortKey {
   if (playlistId != null) return 'playlist_asc';
@@ -85,8 +85,8 @@ function manualSort(current: SortKey, seriesId: number | null, playlistId: numbe
 }
 
 /**
- * 絞り込みが変わったら選択は無効になる(一覧の中身も通し番号も別物になるため)。
- * 選択だけ消して anchor / focus が残ると、次の Shift+クリックが的外れな範囲を選ぶ。
+ * 筛选が変わったら選択は無効になる(一覧の中身も通し番号も別物になるため)。
+ * 選択だけ消して anchor / focus が残ると、次の Shift+点击が的外れな範囲を選ぶ。
  *
  * **並び替えはこれを使わない**。中身は変わらず順番だけが変わるので、選んだものは残す
  * (v1.16。列ヘッダを付けて並び替えが頻繁な操作になったため)
@@ -107,84 +107,84 @@ export type FilterPatch =
 interface LibraryState {
   text: string;
   sort: SortKey;
-  /** 監視フォルダで絞る(配下すべて)。サイドバー「ライブラリ」タブの監視フォルダ一覧から */
+  /** 监视文件夹で絞る(配下全部)。侧边栏「媒体库」タブの监视文件夹一覧から */
   folderId: number | null;
-  /** フォルダ直下だけで絞る(サブフォルダは含まない)。サイドバー「フォルダー」タブのツリーから */
+  /** 文件夹直下だけで絞る(サブ文件夹は含まない)。侧边栏「文件夹」タブのツリーから */
   dirPath: string | null;
-  /** 選択中のタグフィルタ。同じグループ同士は OR、グループをまたぐと AND(v1.19。組み立ては Rust) */
+  /** 選択中の标签フィルタ。同じ群组同士は OR、群组をまたぐと AND(v1.19。組み立ては Rust) */
   tagIds: number[];
-  /** 選択中のシリーズフィルタ */
+  /** 選択中の系列フィルタ */
   seriesId: number | null;
-  /** 選択中の保存プレイリストフィルタ(v1.40。サイドバーの「プレイリスト」から) */
+  /** 選択中の保存播放列表フィルタ(v1.40。侧边栏の「播放列表」起) */
   playlistId: number | null;
-  /** dirPath をサブフォルダ込みで見る(絞り込み帯のトグル。v1.35) */
+  /** dirPath をサブ文件夹込みで見る(筛选帯のトグル。v1.35) */
   dirPathRecursive: boolean;
-  /** true のとき「見つからないファイル」だけを表示 */
+  /** true のとき「找不到的文件」だけ显示 */
   missingOnly: boolean;
-  /** true のとき内容が同一の動画だけを表示する(重複整理) */
+  /** true のとき内容が同一の動画だけ显示する(重複整理) */
   duplicatesOnly: boolean;
-  /** 詳細検索ポップオーバーの中身ぜんぶ(v1.35。★・長さもここに入った) */
+  /** 詳細検索ポップオーバーの中身ぜんぶ(v1.35。★·时长もここに入った) */
   advanced: AdvancedFilter;
   /** sort='random' のシャッフル種。ページングしても順序を保つために固定値を持つ */
   randomSeed: number;
-  /** ライブラリ内容の変更通知。増えると各所が再取得する */
+  /** 媒体库内容の変更通知。増えると各所が再取得する */
   version: number;
   /**
-   * サムネイルの中身の変更通知。`{id}.jpg` という名前は変わらないので、
+   * 缩略图の中身の変更通知。`{id}.jpg` という名前は変わらないので、
    * これを URL に足さないと WebView2 が古い絵を出し続ける(lib/thumbs.ts)。
-   * version と分けてあるのは、タグ付けのたびに全サムネイルを読み直させないため
+   * version と分けてあるのは、标签付けのたびに全缩略图を読み直させないため
    */
   thumbVersion: number;
   /**
-   * いま開いているライブラリの id(v1.27)。起動直後は空。
-   * **localStorage のキーを分けるのに使う** —— タググループの折りたたみ状態は
-   * `tag_groups.id` の配列で、id はライブラリごとに別物なので、共有すると
-   * 「ジャンル(id=3)」を畳んだ状態が別ライブラリの「出演者(id=3)」に効いてしまう
+   * いま開いている媒体库の id(v1.27)。起動直後は空。
+   * **localStorage のキーを分けるのに使う** —— 标签群组の折りたたみ状態は
+   * `tag_groups.id` の配列で、id は媒体库ごとに別物なので、共有すると
+   * 「ジャンル(id=3)」を畳んだ状態が別媒体库の「出演者(id=3)」に効いてしまう
    */
   libraryId: string;
   status: string;
   scanning: boolean;
   /** グリッドで選択中の動画(行データごと保持) */
   selection: VideoRow[];
-  /** Shift+クリックの起点。範囲選択はここから現在位置まで */
+  /** Shift+点击の起点。範囲選択はここから現在位置まで */
   anchorIndex: number | null;
   /** キーボード操作のフォーカス位置(一覧内の通し番号) */
   focusIndex: number | null;
-  /** サムネイルグリッドか詳細リストか(設定に永続化) */
+  /** 缩略图グリッドか详细列表か(設定に永続化) */
   viewMode: ViewMode;
   /** グリッドのカード幅 px(設定に永続化) */
   cardWidth: number;
-  /** 選択が空でも詳細ペインを出したままにする(設定に永続化) */
+  /** 選択が空でも详情面板を出したままにする(設定に永続化) */
   inspectorPinned: boolean;
   /**
-   * 詳細リストに出す列と、その並び(設定 `list_columns` に JSON で永続化)。
-   * 名前列は固定なのでここには入らない。サムネイルは先頭固定
+   * 详细列表に出す列と、その並び(設定 `list_columns` に JSON で永続化)。
+   * 名前列は固定なのでここには入らない。缩略图は先頭固定
    */
   listColumns: ColumnKey[];
   /**
-   * 詳細リストの行を 1 行おきに濃くするか(v1.25。設定 `list_zebra` に永続化)。
+   * 详细列表の行を 1 行おきに濃くするか(v1.25。設定 `list_zebra` に永続化)。
    * 既定 OFF —— 既存の見た目を勝手に変えないため。切り替えは列ピッカーの中にある
    */
   listZebra: boolean;
   /**
-   * 詳細ペインの「メディア情報」を開いているか(設定に永続化)。
-   * 開いている間は選択を変えるたびに ffprobe が走るので既定は閉じる
+   * 详情面板の「媒体信息」を開いているか(設定に永続化)。
+   * 開いている間は選択を変えるたびに ffprobe が走るので既定は关闭
    */
   mediaInfoOpen: boolean;
-  /** 左サイドバー / 右詳細ペインの幅 px(ドラッグで伸縮。設定に永続化) */
+  /** 左侧边栏 / 右详情面板の幅 px(ドラッグで伸縮。設定に永続化) */
   sidebarWidth: number;
   inspectorWidth: number;
   /**
-   * サイドバーを畳んでいるか(設定に永続化)。
+   * 侧边栏を畳んでいるか(設定に永続化)。
    * 畳むと幅を変える帯ごと消えるので、戻す手段はツールバーのボタンだけ
    */
   sidebarCollapsed: boolean;
-  /** AI パネルの幅 px(ドラッグで伸縮。設定に永続化) */
+  /** AI 面板の幅 px(ドラッグで伸縮。設定に永続化) */
   aiPanelWidth: number;
   /**
    * 設定モーダルの大きさ(v1.38。右下を掴んで伸縮。設定に永続化)。
    * **起動時に読む**のがポイント —— モーダルが開いてから読むと、既定の大きさで
-   * 一瞬描いてから保存した大きさへ跳ねる。サイドバーや詳細ペインの幅と同じ扱い
+   * 一瞬描いてから保存した大きさへ跳ねる。侧边栏や详情面板の幅と同じ扱い
    */
   settingsModalSize: ModalSize;
   /** 再生が終わったら次の動画へ進むか(設定に永続化) */
@@ -200,24 +200,24 @@ interface LibraryState {
   /** 連続再生の位置(null = 単発再生。⏭ が無効になる) */
   playQueue: PlayQueue | null;
   /**
-   * 再生キュー(v1.40)。**DB には保存しない** —— 名前を付けて保存したものだけが残る、
+   * 再生队列(v1.40)。**DB には保存しない** —— 命名并保存したものだけが残る、
    * という線引きにしてある(終了時に中身があれば保存するか尋ねる)。
    *
-   * `playQueue`(クエリ + 位置)とは**排他**。キューから再生を始めると playQueue が
-   * null になり、グリッドのダブルクリックで再生するとキューモードを抜ける。
+   * `playQueue`(クエリ + 位置)とは**排他**。队列から再生を始めると playQueue が
+   * null になり、グリッドのダブル点击で播放と队列モードを抜ける。
    * ただし**モードを抜けても中身は消さない** —— ちょっと別の動画を見に戻っただけで
    * 並べたものが消えるのは、終了時に確認する方針より弱い扱いになってしまう
    */
   queue: QueueState;
-  /** 右ペインでキュータブを開いているか(v1.40)。開いている間は選択が空でもペインを出す */
+  /** 右ペインで队列タブを開いているか(v1.40)。開いている間は選択が空でもペインを出す */
   queueTabOpen: boolean;
-  /** 外部プレイヤーのパス設定(起動時ロード・設定保存時更新) */
+  /** 外部プレイヤーのパス設定(起動時ロード·設定保存時更新) */
   playerPath: string;
   /** カードのホバープレビューを有効にするか(設定で切り替え。既定 ON) */
   previewOnHover: boolean;
   /**
-   * グリッドのカード下にタグ行 / シリーズ行を出すか(v1.23。設定で切り替え)。
-   * 詳細リストは列ピッカー(listColumns)で切り替えるのでここは使わない。
+   * グリッドのカード下に标签行 / 系列行を出すか(v1.23。設定で切り替え)。
+   * 详细列表は列ピッカー(listColumns)で切り替えるのでここは使わない。
    *
    * **行の高さが変わる**(lib/grid.ts の CARD_CHIP_ROW_H)。切り替えたら
    * gridMetrics に渡す chipRows も一緒に変えること
@@ -227,7 +227,7 @@ interface LibraryState {
   /**
    * プレイヤーのシークバーにカーソルを合わせたときコマを出すか(v1.14。設定で切り替え。既定 ON)。
    * カードのプレビューとは別設定にしている — こちらは再生中に**同じ動画をもう 1 本デコード**
-   * するので、外付け HDD の大きいファイルで本編がカクつくなら単独で切りたい
+   * するので、外付け HDD の大きい文件で本編がカクつくなら単独で切りたい
    */
   seekPreview: boolean;
   /**
@@ -240,17 +240,17 @@ interface LibraryState {
    */
   hdrPassthrough: boolean;
   /**
-   * 字幕の見た目(v1.24、mpv のみ)。設定 `subtitle_style` に永続化する。
-   * プレイヤーのパネル・設定モーダル・useMpvPlayer の 3 か所が同じ値を見るので store に置く。
+   * 字幕样式(v1.24、mpv のみ)。設定 `subtitle_style` に永続化する。
+   * プレイヤーのパネル·設定モーダル·useMpvPlayer の 3 か所が同じ値を見るので store に置く。
    *
    * **DB への書き込みはここではしない** — スライダーのドラッグ中に set_setting を
    * 叩かないよう、App.tsx がデバウンスして保存する
    */
   subStyle: SubStyle;
   /**
-   * 右クリックメニューを開いているか(v1.14)。メニューの中身は**開いた側の**
+   * 右键菜单を開いているか(v1.14)。メニューの中身は**開いた側の**
    * ローカル state(hooks/useContextMenu.ts)で持ち、ここには開閉だけを置く。
-   * 開いている間はグリッドの矢印キー・App の Esc(選択解除)・
+   * 開いている間はグリッドの矢印キー·App の Esc(選択解除)·
    * プレイヤーのショートカットを止めるため、複数の場所から見える必要がある
    */
   contextMenuOpen: boolean;
@@ -258,23 +258,23 @@ interface LibraryState {
    * 開いているメニューの数(v1.20)。**contextMenuOpen を直接 false にしない**ための内部値。
    *
    * 別のホストのメニューへ移ると「新しい方の mount → 古い方の unmount」の順で
-   * 呼ばれることがあり、素直に true/false を書くとそこでフラグが落ちる。
+   * 呼ばれることがあり、素直に true/false を書くとそこで标志が落ちる。
    * 落ちた瞬間、メニューが出ているのに裏のグリッドが矢印キーを拾い始める
    */
   contextMenuDepth: number;
-  /** AI アシスタントパネルの表示状態 */
+  /** AI 助手パネルの表示状態 */
   showAiPanel: boolean;
   /** 統計ダッシュボードの表示状態 */
   showStats: boolean;
   /**
-   * キー操作一覧の表示状態(v1.39)。**設定には保存しない** ——
+   * 快捷键一覧の表示状態(v1.39)。**設定には保存しない** ——
    * 開いたまま次の起動に持ち越しても意味が無い(統計ダッシュボードと同じ扱い)
    */
   showShortcuts: boolean;
   /**
-   * 絞り込みの「戻る / 進む」(v1.41、C-8)。`applyFilter`(条件が丸ごと変わる操作:
-   * AI 検索・スマートフォルダ・統計からのジャンプ・全解除)のたびに直前の条件一式を
-   * past へ積む。**個別のトグル(タグの付け外し・検索語の編集)は積まない** ——
+   * 筛选の「戻る / 進む」(v1.41、C-8)。`applyFilter`(条件が丸ごと変わる操作:
+   * AI 検索·智能文件夹·統計からのジャンプ·全解除)のたびに直前の条件一式を
+   * past へ積む。**個別のトグル(标签の付け外し·検索語の編集)は積まない** ——
    * 「大きく変わったときに 1 手で戻れる」が目的で、全操作の undo ではない
    */
   filterPast: FilterState[];
@@ -286,17 +286,17 @@ interface LibraryState {
   setText: (text: string) => void;
   setSort: (sort: SortKey) => void;
   setFolderId: (folderId: number | null) => void;
-  /** 同じフォルダをもう一度渡すと解除する。null で明示的に解除 */
+  /** 同じ文件夹をもう一度渡すと解除する。null で明示的に解除 */
   toggleDirPath: (dirPath: string | null) => void;
   toggleTagFilter: (tagId: number) => void;
   setTagFilter: (tagIds: number[]) => void;
   clearTagFilter: () => void;
   toggleSeriesFilter: (seriesId: number) => void;
-  /** 保存プレイリストで絞る(v1.40)。同じ id をもう一度渡すと解除 */
+  /** 保存播放列表で絞る(v1.40)。同じ id をもう一度渡すと解除 */
   togglePlaylistFilter: (playlistId: number) => void;
   toggleMissingOnly: () => void;
   toggleDuplicatesOnly: () => void;
-  /** サブフォルダも含めるかを切り替える(フォルダで絞っているときだけ意味を持つ) */
+  /** 包含子文件夹かを切り替える(文件夹で絞っているときだけ意味を持つ) */
   toggleDirPathRecursive: () => void;
   setAdvanced: (patch: Partial<AdvancedFilter>) => void;
   clearAdvanced: () => void;
@@ -305,14 +305,14 @@ interface LibraryState {
   setLibraryId: (id: string) => void;
   setStatus: (scanning: boolean, status: string) => void;
   setPlayingVideo: (video: VideoRow | null) => void;
-  /** 一覧から再生を始める(⏭ で次へ進めるようにキュー情報も持つ) */
+  /** 一覧から再生を始める(⏭ で次へ進めるように队列情報も持つ) */
   playFromList: (video: VideoRow, queue: PlayQueue) => void;
   /**
-   * キューを差し替える(v1.40)。`lib/queue.ts` の純関数が返した状態をそのまま入れる。
+   * 队列を差し替える(v1.40)。`lib/queue.ts` の純関数が返した状態をそのまま入れる。
    * store 側で中身の判断はしない
    */
   setQueue: (queue: QueueState) => void;
-  /** キューから 1 件を再生する。playQueue を捨ててキューモードへ入る */
+  /** 队列から 1 个播放。playQueue を捨てて队列モードへ入る */
   playFromQueue: (video: VideoRow) => void;
   setQueueTabOpen: (open: boolean) => void;
   setViewMode: (viewMode: ViewMode) => void;
@@ -334,9 +334,9 @@ interface LibraryState {
   setCardSeries: (cardSeries: boolean) => void;
   setSeekPreview: (seekPreview: boolean) => void;
   setHdrPassthrough: (hdrPassthrough: boolean) => void;
-  /** 字幕の見た目を部分更新する(スライダー 1 本ぶんの patch を渡す) */
+  /** 字幕样式を部分更新する(スライダー 1 本ぶんの patch を渡す) */
   setSubStyle: (patch: Partial<SubStyle>) => void;
-  /** 字幕の見た目を mpv 素の状態に戻す(保存される JSON も '{}' になる) */
+  /** 字幕样式を mpv 素の状態に戻す(保存される JSON も '{}' になる) */
   resetSubStyle: () => void;
   /** メニューの mount で true、unmount で false。呼び出し側は入れ子を意識しなくてよい */
   setContextMenuOpen: (open: boolean) => void;
@@ -344,24 +344,24 @@ interface LibraryState {
   setShowStats: (showStats: boolean) => void;
   setShowShortcuts: (showShortcuts: boolean) => void;
   /**
-   * フィルタ一式をまとめて置き換える(AI アシスタントの apply_filter・
-   * スマートフォルダの復元・統計からのジャンプで共用)。
+   * フィルタ一式をまとめて置き換える(AI 助手の apply_filter·
+   * 智能文件夹の復元·統計からのジャンプで共用)。
    * **省略項目は EMPTY_FILTER の値に戻る**。
    *
    * 引数を FilterState の Partial にしてあるので、条件が増えてもこの型は増えない。
    * 呼ぶ側は `toFilterState(query)` の結果をそのまま渡せばよい
    */
   applyFilter: (filter: FilterPatch) => void;
-  /** 1 つ前の絞り込みへ戻る(Alt+←)。履歴が無ければ何もしない */
+  /** 1 つ前の筛选へ戻る(Alt+←)。履歴が無ければ何もしない */
   filterBack: () => void;
-  /** 戻る前の絞り込みへ進む(Alt+→) */
+  /** 戻る前の筛选へ進む(Alt+→) */
   filterForward: () => void;
   /** index は一覧内の通し番号。省略すると範囲選択の起点を持たない選択になる */
   selectOnly: (video: VideoRow, index?: number | null) => void;
   toggleSelect: (video: VideoRow, index?: number | null) => void;
   /**
-   * 範囲選択・全選択の結果をまとめて反映する。
-   * `anchorIndex` は**省略すると据え置き** —— Shift+クリックや Shift+矢印は
+   * 範囲選択·全選択の結果をまとめて反映する。
+   * `anchorIndex` は**省略すると据え置き** —— Shift+点击や Shift+矢印は
    * 起点を動かさずに範囲を伸ばすため。矩形選択(v1.42)のように
    * 「ここが次の起点」と決まる操作だけが明示的に渡す
    */
@@ -370,12 +370,12 @@ interface LibraryState {
   ) => void;
   setFocusIndex: (focusIndex: number | null) => void;
   clearSelection: () => void;
-  /** 選択中の全行に部分更新を適用する(例: レーティング変更の即時反映) */
+  /** 選択中の全行に部分更新を適用する(例: 评分変更の即時反映) */
   patchSelection: (patch: Partial<VideoRow>) => void;
 }
 
 export const useLibrary = create<LibraryState>((set) => ({
-  // 絞り込みの初期値は 1 か所(lib/query.ts)から取る。条件が増えてもここは増えない
+  // 筛选の初期値は 1 か所(lib/query.ts)から取る。条件が増えてもここは増えない
   ...EMPTY_FILTER,
   // 種だけは起動ごとに引き直す(EMPTY_FILTER の 1 は「種を持たない」を表す固定値)
   randomSeed: newSeed(),
@@ -404,7 +404,7 @@ export const useLibrary = create<LibraryState>((set) => ({
   queueTabOpen: false,
   playerPath: '',
   previewOnHover: true,
-  // タグは付いている動画が多いので既定 ON、シリーズは限られるので既定 OFF
+  // 标签は付いている動画が多いので既定 ON、系列は限られるので既定 OFF
   cardTags: true,
   cardSeries: false,
   seekPreview: true,
@@ -425,18 +425,18 @@ export const useLibrary = create<LibraryState>((set) => ({
       return { toasts: [...s.toasts, { id: ++toastSeq, message, kind }].slice(-4) };
     }),
   dismissToast: (id) => set((s) => ({ toasts: s.toasts.filter((t) => t.id !== id) })),
-  // 単発再生。プレイヤーを閉じたらキューも捨てる
+  // 単発再生。プレイヤーを閉じたら队列も捨てる
   setPlayingVideo: (playingVideo) =>
     set(playingVideo === null ? { playingVideo: null, playQueue: null } : { playingVideo }),
   /*
    * クエリ方式で再生を始める。**playQueue が非 null であることがそのままクエリモードの印**
-   * (キューモードは playQueue === null かつ再生中の動画が queue.currentId と一致。
+   * (队列モードは playQueue === null 并且再生中の動画が queue.currentId と一致。
    * 判定は usePlayQueue に集約)。
    * queue は触らない —— 別の動画を見に戻っただけで並べたものを捨てないため
    */
   playFromList: (playingVideo, playQueue) => set({ playingVideo, playQueue }),
   setQueue: (queue) => set({ queue }),
-  // キューから再生 = クエリモードを抜ける(2 つのモードは排他)
+  // 队列から再生 = クエリモードを抜ける(2 つのモードは排他)
   playFromQueue: (video) =>
     set((s) => ({
       playingVideo: video,
@@ -483,11 +483,11 @@ export const useLibrary = create<LibraryState>((set) => ({
         ...EMPTY_FILTER,
         ...f,
         advanced: { ...EMPTY_ADVANCED, ...f.advanced },
-        // 並び順だけは既定に戻さない。指定が無ければ今の並びを引き継ぐ
-        // (シリーズを選んだらシリーズ順、外したら追加日順に戻すのは従来どおり。
-        //  v1.40 のプレイリストもまったく同じ扱いにしてある)
+        // 排序だけは既定に戻さない。指定が無ければ今の並びを引き継ぐ
+        // (系列を選んだら按系列顺序、外したら追加日順に戻すのは従来どおり。
+        //  v1.40 の播放列表もまったく同じ扱いにしてある)
         sort: f.sort ?? manualSort(s.sort, f.seriesId ?? null, f.playlistId ?? null),
-        // 種も同じ。指定が無ければ今の種のまま(ランダム並びが勝手に組み変わらないように)
+        // 種も同じ。指定が無ければ今の種のまま(随机並びが勝手に組み変わらないように)
         randomSeed: f.randomSeed ?? s.randomSeed,
       };
       // 同じ条件の適用は履歴に積まない —— 「戻る」を押しても見た目が変わらない段が増えるだけ
@@ -500,7 +500,7 @@ export const useLibrary = create<LibraryState>((set) => ({
         ...CLEARED,
       };
     }),
-  // 戻る = いまの条件を future へ退避して、past の末尾を丸ごと復元する(C-8)。
+  // 戻る = いまの条个 future へ退避して、past の末尾を丸ごと復元する(C-8)。
   // applyFilter を経由しない(履歴を積む側と消費する側を分ける)
   filterBack: () =>
     set((s) => {
@@ -525,18 +525,18 @@ export const useLibrary = create<LibraryState>((set) => ({
       };
     }),
   setText: (text) => set({ text, ...CLEARED }),
-  // 選択の照合は id の Set なので、並べ替えても正しい行がハイライトされ続ける。
-  // 「ランダム」は**選ぶたびに引き直す**(v1.20)。種を据え置くと 2 回目以降が
+  // 選択の照合は id の Set なので、排列ても正しい行がハイライトされ続ける。
+  // 「随机」は**選ぶたびに引き直す**(v1.20)。種を据え置くと 2 回目以降が
   // 同じ並びになり「シャッフルされない」と見える。専用のシャッフルボタンはこれで畳んだ
   setSort: (sort) =>
     set(sort === 'random' ? { sort, randomSeed: newSeed(), ...REORDERED } : { sort, ...REORDERED }),
-  // フォルダの 2 系統(監視フォルダ配下すべて / フォルダ直下だけ)は同時に使わない。
-  // 片方を選んだらもう片方を外す(AND で 0 件になるのを避ける)
+  // 文件夹の 2 系統(监视文件夹配下全部 / 文件夹直下だけ)は同時に使わない。
+  // 片方を選んだらもう片方を外す(AND で 0 个なるのを避ける)
   setFolderId: (folderId) => set({ folderId, dirPath: null, ...CLEARED }),
   toggleDirPath: (dirPath) =>
     set((s) => ({
-      // Windows のパスは大文字小文字を区別しない。保存した条件から復元したときも
-      // 同じフォルダなら 2 回目のクリックで外れるようにする
+      // Windows のパスは大文字小文字を区別しない。保存した条个起復元したときも
+      // 同じ文件夹なら 2 回目の点击で外れるようにする
       dirPath:
         dirPath !== null && s.dirPath?.toLowerCase() === dirPath.toLowerCase() ? null : dirPath,
       folderId: null,
@@ -549,8 +549,8 @@ export const useLibrary = create<LibraryState>((set) => ({
         : [...s.tagIds, tagId],
       ...CLEARED,
     })),
-  // グループ見出しのクリック用。配下タグをまとめて入れ替える
-  // (同じグループのタグ同士は Rust 側で OR になるので、これで「このグループの何か」が出る)
+  // 群组見出しの点击用。配下标签をまとめて入れ替える
+  // (同じ群组の标签同士は Rust 側で OR になるので、これで「この群组の何か」が出る)
   setTagFilter: (tagIds) => set({ tagIds, ...CLEARED }),
   clearTagFilter: () => set({ tagIds: [], ...CLEARED }),
   toggleMissingOnly: () => set((s) => ({ missingOnly: !s.missingOnly, ...CLEARED })),
@@ -559,7 +559,7 @@ export const useLibrary = create<LibraryState>((set) => ({
       const next = !s.duplicatesOnly;
       return {
         duplicatesOnly: next,
-        // 重複表示では同じファイルが隣り合う並びにする。外したら追加日順に戻す
+        // 重複表示では同じ文件が隣り合う並びにする。外したら追加日順に戻す
         sort: next ? 'dup' : s.sort === 'dup' ? 'added_desc' : s.sort,
         ...CLEARED,
       };
@@ -574,12 +574,12 @@ export const useLibrary = create<LibraryState>((set) => ({
       const next = s.seriesId === seriesId ? null : seriesId;
       return {
         seriesId: next,
-        // シリーズを選んだらシリーズ順、外したら追加日順に戻す
+        // 系列を選んだら按系列顺序、外したら追加日順に戻す
         sort: manualSort(s.sort, next, s.playlistId),
         ...CLEARED,
       };
     }),
-  // シリーズとまったく同じ扱い(選んだら手動順、外したら追加日順)
+  // 系列とまったく同じ扱い(選んだら手動順、外したら追加日順)
   togglePlaylistFilter: (playlistId) =>
     set((s) => {
       const next = s.playlistId === playlistId ? null : playlistId;
@@ -600,7 +600,7 @@ export const useLibrary = create<LibraryState>((set) => ({
       selection: s.selection.some((v) => v.id === video.id)
         ? s.selection.filter((v) => v.id !== video.id)
         : [...s.selection, video],
-      // Ctrl+クリックした位置が次の Shift+クリックの起点になる
+      // Ctrl+点击した位置が次の Shift+点击の起点になる
       anchorIndex: index,
       focusIndex: index,
     })),

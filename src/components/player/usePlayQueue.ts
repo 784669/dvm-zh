@@ -4,27 +4,27 @@ import { playingInQueue, queueIndex, queueStep } from '../../lib/queue';
 import { useLibrary } from '../../store';
 
 /**
- * 連続再生(v1.8)と再生キュー(v1.40)。**プレイヤーの送りはこの 1 か所に集める**。
+ * 連続再生(v1.8)と再生队列(v1.40)。**プレイヤーの送りはこの 1 か所に集める**。
  *
  * モードは 2 つあり、**排他**:
  *
  * - **クエリモード**(v1.8)。`playQueue = { query, index, total }` を持ち、
  *   次の 1 件は `query_videos(query, 1, index+1)` で Rust から都度引く。
  *   グリッドのページキャッシュに依存しないので、再生中にソートを変えても
- *   次は新しい並びで来る。10 万件の絞り込みでもオブジェクト 1 個で済む
- * - **キューモード**(v1.40)。手で並べた `queue.items` の中を進む。
- *   `playQueue === null` かつ**再生中の動画がキューの現在位置と一致する**のがその印。
- *   `currentId !== null` だけで判定すると、キューから一度再生した後に
- *   履歴などから単発再生したものまでキューモード扱いになり、
- *   その動画が終わった瞬間に無関係なキューの続きが流れてしまう
+ *   次は新しい並びで来る。10 万件の筛选でもオブジェクト 1 個で済む
+ * - **队列モード**(v1.40)。手で並べた `queue.items` の中を進む。
+ *   `playQueue === null` 并且**再生中の動画が队列の現在位置と一致する**のがその印。
+ *   `currentId !== null` だけで判定すると、队列から一度再生した後に
+ *   履歴などから単発再生したものまで队列モード扱いになり、
+ *   その動画が終わった瞬間に無関係な队列の続きが流れてしまう
  *   (`currentId` はプレイヤーを閉じても意図的に残しているため)
  *
- * **キューモードは `autoplayNext` を見ない**(`autoAdvance` を参照)。
+ * **队列モードは `autoplayNext` を見ない**(`autoAdvance` を参照)。
  */
 /**
- * いまキューモードで再生しているか。**判定はこの 1 か所に置く** ——
- * usePlayQueue の表示・送りのほか、連続再生トグル(ボタンの無効化と A キーの無視)も
- * 同じ判定を見る。3 条件のコピーが増えると「片方だけ currentId で判定」の
+ * いま队列モードで再生しているか。**判定はこの 1 か所に置く** ——
+ * usePlayQueue の表示·送りのほか、連続再生トグル(ボタンの無効化と A キーの無視)も
+ * 同じ判定を見る。3 条件の复制が増えると「片方だけ currentId で判定」の
  * A-5 と同種のずれが再発しやすい
  */
 export function isQueuePlayback(s: {
@@ -53,7 +53,7 @@ export function usePlayQueue() {
     ? queueStep(queue, 1) !== null
     : playQueue != null && playQueue.index + 1 < playQueue.total;
 
-  // 状態は毎回 getState() から読む(キューは編集で頻繁に変わるので、
+  // 状態は毎回 getState() から読む(队列は編集で頻繁に変わるので、
   // 参照を deps に入れるとハンドラが張り替わり続ける)
   /*
    * ⏭ のツールチップに出す「次の 1 件」(v1.40)。
@@ -64,7 +64,7 @@ export function usePlayQueue() {
    *
    * **silent で引く** —— 失敗してもツールチップが出ないだけなのに、
    * 全画面で観ている最中にトーストが浮くほうが害が大きい。
-   * キューモードは行が手元にあるので先読みは要らない(下の useMemo で同期に求める)
+   * 队列モードは行が手元にあるので先読みは要らない(下の useMemo で同期に求める)
    */
   const [prefetched, setPrefetched] = useState<string | null>(null);
   useEffect(() => {
@@ -88,17 +88,17 @@ export function usePlayQueue() {
   const go = useCallback(
     async function step(delta: 1 | -1): Promise<void> {
       const s = useLibrary.getState();
-      // キューモード。行はすでに手元にあるので Rust には聞かない
+      // 队列モード。行はすでに手元にあるので Rust には聞かない
       if (isQueuePlayback(s)) {
         /*
-         * 見つからない / オフラインは**飛ばして先へ進む**(v1.40)。キューは
+         * 找不到 / 离线は**飛ばして先へ進む**(v1.40)。队列は
          * 「並べて放っておく」ための道具なので、1 本の欠損で列が止まると目的を果たさない。
          * 飛ばしたことは黙らず断る。
          *
          * 探索は**状態を変えずに**仮の QueueState 上で行う。以前は 1 件ずつ
-         * playFromQueue してから再帰していたが、キューの端が missing のときに
-         * 再帰だけ止まって欠損ファイルが再生対象のまま残り、mpv → WebView2 と
-         * 失敗が連鎖していた(オフラインの外付け HDD で現実に踏む)
+         * playFromQueue してから再帰していたが、队列の端が missing のときに
+         * 再帰だけ止まって欠損文件が再生対象のまま残り、mpv → WebView2 と
+         * 失敗が連鎖していた(离线の外付け HDD で現実に踏む)
          */
         let probe = s.queue;
         let next = queueStep(probe, delta);
@@ -111,8 +111,8 @@ export function usePlayQueue() {
         if (skipped.length > 0) {
           pushToast(
             skipped.length === 1
-              ? `${skipped[0]} は見つからないため飛ばしました`
-              : `${skipped.length} 件は見つからない / オフラインのため飛ばしました`,
+              ? `${skipped[0]} 未找到，已跳过`
+              : `${skipped.length} 项未找到 / 因离线已跳过`,
             'info',
           );
         }
@@ -128,8 +128,8 @@ export function usePlayQueue() {
       try {
         const rows = await api.queryVideos(q.query, 1, nextIndex);
         if (rows.length === 0) {
-          // 再生中に絞り込み対象から外れた(タグを消した等)。端に着いたのと同じ扱い
-          pushToast('次の動画が見つかりませんでした', 'info');
+          // 再生中に筛选対象から外れた(标签を消した等)。端に着いたのと同じ扱い
+          pushToast('找不到下一个视频', 'info');
           return;
         }
         playFromList(rows[0], { ...q, index: nextIndex });
@@ -149,18 +149,18 @@ export function usePlayQueue() {
       next: () => go(1),
       prev: () => go(-1),
       /**
-       * 次に再生される動画の名前。分からなければ null(端・単発再生・先読み前)。
+       * 接着播放される動画の名前。分からなければ null(端·単発再生·先読み前)。
        * ⏭ のツールチップに出す —— 位置(`3 / 128`)だけでは
        * 「あと何本あるか」は分かっても「次が何か」が分からない
        */
       nextTitle: inQueue ? (upNext ? upNext.title || upNext.filename : null) : prefetched,
-      /** キューの中を進んでいるか。位置表示にアイコンを添える判断に使う */
+      /** 队列の中を進んでいるか。位置表示にアイコンを添える判断に使う */
       inQueue,
       /**
        * 終端に着いたとき自動で次へ送るか。
        *
-       * **キューモードでは設定を見ない**(v1.40) —— `autoplay_next` は
-       * 「絞り込み結果を延々流し続けるか」への答えで既定 OFF。手で 10 本選んで
+       * **队列モードでは設定を見ない**(v1.40) —— `autoplay_next` は
+       * 「筛选結果を延々流し続けるか」への答えで既定 OFF。手で 10 本選んで
        * 並べた人が「次に進まないでほしい」と思うことはまずない
        */
       autoAdvance: inQueue || autoplayNext,
@@ -168,7 +168,7 @@ export function usePlayQueue() {
       position: inQueue
         ? at >= 0
           ? `${at + 1} / ${queue.items.length}`
-          : // 再生中の 1 件をキューから外した状態。位置は無いが総数は出す
+          : // 再生中の 1 个队列から外した状態。位置は無いが総数は出す
             `- / ${queue.items.length}`
         : playQueue
           ? `${playQueue.index + 1} / ${playQueue.total}`
@@ -182,7 +182,7 @@ export type PlayQueueControls = ReturnType<typeof usePlayQueue>;
 /**
  * 連続再生設定のトグル(v1.12)。プレイヤーのボタンと A キーで共用する。
  * 押した瞬間に settings へ書くので、次に設定モーダルを開いてもチェックが一致する
- * (モーダルは開くたびに getSetting でロードする)
+ * (モーダルは打开たびに getSetting でロードする)
  */
 export function useAutoplayToggle() {
   const autoplayNext = useLibrary((s) => s.autoplayNext);

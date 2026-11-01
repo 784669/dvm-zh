@@ -17,36 +17,36 @@ type Tab = 'views' | 'ops';
 
 /** action を日本語の見出しにする(未知の action はそのまま出す) */
 const ACTION_LABEL: Record<string, string> = {
-  tag_videos: 'タグを付けた',
-  untag_videos: 'タグを外した',
-  add_to_series: 'シリーズに追加した',
-  remove_from_series: 'シリーズから外した',
-  set_rating: 'レーティングを変更した',
-  set_video_info: 'タイトル・コメントを変更した',
-  create_tag: 'タグを作成した',
-  rename_tag: 'タグ名を変更した',
-  delete_tag: 'タグを削除した',
-  delete_series: 'シリーズを削除した',
-  set_tag_color: 'タグの色を変更した',
-  set_tag_group: 'タグのグループを変更した',
-  create_tag_group: 'タググループを作成した',
-  rename_tag_group: 'タググループ名を変更した',
-  delete_tag_group: 'タググループを削除した',
-  remove_videos: 'ライブラリから削除した',
-  trash_file: 'ファイルをごみ箱へ送った',
-  move_file: 'ファイルを移動した',
-  rename_file: 'ファイル名を変更した',
-  relink: 'パスを再リンクした',
-  undo: '操作を取り消した',
-  drive_remap: 'ドライブレターを再マップした',
-  move_detected: '移動を検出した',
-  backup_db: 'バックアップを作成した',
-  request_restore: '復元を予約した',
-  regenerate_thumbnails: 'サムネイルを再生成した',
-  purge_orphan_thumbnails: '孤児サムネイルを掃除した',
-  create_smart_folder: 'スマートフォルダを作成した',
-  update_smart_folder: 'スマートフォルダを更新した',
-  delete_smart_folder: 'スマートフォルダを削除した',
+  tag_videos: '已添加标签',
+  untag_videos: '已移除标签',
+  add_to_series: '添加到系列',
+  remove_from_series: '从系列中移除',
+  set_rating: '修改了评分',
+  set_video_info: '修改了标题·备注',
+  create_tag: '创建了标签',
+  rename_tag: '修改了标签名',
+  delete_tag: '删除了标签',
+  delete_series: '删除了系列',
+  set_tag_color: '修改了标签颜色',
+  set_tag_group: '修改了标签分组',
+  create_tag_group: '创建了标签分组',
+  rename_tag_group: '修改了标签分组名',
+  delete_tag_group: '删除了标签分组',
+  remove_videos: '从媒体库删除',
+  trash_file: '将文件送入回收站',
+  move_file: '移动了文件',
+  rename_file: '重命名了文件',
+  relink: '重新链接了路径',
+  undo: '撤销了操作',
+  drive_remap: '重新映射了驱动器盘符',
+  move_detected: '检测到移动',
+  backup_db: '创建了备份',
+  request_restore: '已预约还原',
+  regenerate_thumbnails: '重新生成了缩略图',
+  purge_orphan_thumbnails: '清理了孤立缩略图',
+  create_smart_folder: '创建了智能文件夹',
+  update_smart_folder: '更新了智能文件夹',
+  delete_smart_folder: '删除了智能文件夹',
 };
 
 /** payload の JSON から一行の要約を作る。読めなければそのまま返す */
@@ -61,15 +61,15 @@ function summarize(entry: OpEntry): string {
   const count = (key: string) => (Array.isArray(p[key]) ? (p[key] as unknown[]).length : 0);
   switch (entry.action) {
     case 'tag_videos':
-      return `「${p.tag}」を ${count('added')} 件に`;
+      return `给 ${count('added')} 个添加「${p.tag}」`;
     case 'untag_videos':
-      return `「${p.tag}」を ${count('removed')} 件から`;
+      return `从 ${count('removed')} 个移除「${p.tag}」`;
     case 'add_to_series':
-      return `「${p.series}」に ${count('added')} 件`;
+      return `将 ${count('added')} 个加入「${p.series}」`;
     case 'remove_from_series':
-      return `「${p.series}」から ${count('removed')} 件`;
+      return `将 ${count('removed')} 个移出「${p.series}」`;
     case 'set_rating':
-      return `★${p.rating} を ${count('before')} 件に`;
+      return `将 ${count('before')} 个的评分改为 ★${p.rating}`;
     case 'rename_tag':
     case 'rename_tag_group':
       return `${p.before} → ${p.after}`;
@@ -80,7 +80,7 @@ function summarize(entry: OpEntry): string {
     case 'delete_tag_group':
       return String(p.group ?? '');
     case 'relink':
-      return `${count('items')} 件のパス`;
+      return `${count('items')} 个的路径`;
     case 'move_file':
     case 'rename_file':
     case 'trash_file':
@@ -101,7 +101,7 @@ export function HistoryModal({ onClose }: { onClose: () => void }) {
   const [tab, setTab] = useState<Tab>('views');
 
   /*
-   * Escape で閉じる。**window ではなく document に張って stopPropagation する** ——
+   * Escape で关闭。**window ではなく document に張って stopPropagation する** ——
    * App.tsx の Escape(選択解除)は window にいるので、ここで止めれば届かない
    * (SettingsModal と同じ理由)。IME の変換中は「変換の取り消し」なので拾わない
    */
@@ -118,19 +118,19 @@ export function HistoryModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal history-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-title">履歴</div>
+        <div className="modal-title">历史</div>
         <div className="sidebar-tabs">
           <button
             className={`sidebar-tab ${tab === 'views' ? 'active' : ''}`}
             onClick={() => setTab('views')}
-            title="いつ何を観たかの記録"
+            title="何时看过什么的记录"
           >
-            視聴
+            观看
           </button>
           <button
             className={`sidebar-tab ${tab === 'ops' ? 'active' : ''}`}
             onClick={() => setTab('ops')}
-            title="タグ・レーティング・ファイル操作の記録(取り消せるものもあります)"
+            title="标签·评分·文件操作的记录（部分可撤销）"
           >
             操作
           </button>
@@ -139,7 +139,7 @@ export function HistoryModal({ onClose }: { onClose: () => void }) {
         {tab === 'views' ? <ViewTab onClose={onClose} /> : <OpsTab />}
 
         <div className="modal-actions">
-          <button onClick={onClose}>閉じる</button>
+          <button onClick={onClose}>关闭</button>
         </div>
       </div>
     </div>
@@ -163,7 +163,7 @@ function ViewTab({ onClose }: { onClose: () => void }) {
   const genRef = useRef(0);
   const [stats, setStats] = useState<ViewStats | null>(null);
   const [period, setPeriod] = useState<ViewPeriod>('all');
-  /** 「期間を指定」で使う入力値。プリセットに戻しても消さない(往復しやすいように) */
+  /** 「指定期间」で使う入力値。プリセットに戻しても消さない(往復しやすいように) */
   const [custom, setCustom] = useState<ViewRange>({ after: '', before: '' });
   // 「今日 / 昨日」と期間プリセットの基準。純関数に現在時刻を持ち込まないよう 1 回だけ求める
   const [today] = useState(() => {
@@ -204,7 +204,7 @@ function ViewTab({ onClose }: { onClose: () => void }) {
     return () => { alive = false; };
   }, [load, range.after, range.before]);
 
-  /** 履歴からその動画を再生する。外部プレイヤー設定時は一覧と同じく外部起動 */
+  /** 履歴からその動画を播放。外部プレイヤー設定時は一覧と同じく外部起動 */
   const play = async (entry: ViewEntry) => {
     if (entry.isMissing) return;
     if (playerPath.trim() !== '') {
@@ -214,11 +214,11 @@ function ViewTab({ onClose }: { onClose: () => void }) {
     try {
       const row = await api.getVideo(entry.videoId);
       if (!row) {
-        pushToast('この動画はライブラリにありません');
+        pushToast('此视频不在媒体库中');
         return;
       }
       onClose();
-      // 履歴からの再生は単発。連続再生のキューは持たせない(何の続きか決められないため)
+      // 履歴からの再生は単発。連続再生の队列は持たせない(何の続きか決められないため)
       setPlayingVideo(row);
     } catch {
       // api 側でトースト済み
@@ -230,18 +230,18 @@ function ViewTab({ onClose }: { onClose: () => void }) {
   return (
     <>
       <div className="settings-note">
-        観るたびに 1 行ずつ記録します。同じ動画を何度も観ればその回数ぶん並びます
+        每次观看记录 1 行。同一个视频看多次就会按次数排列
       </div>
 
       {/*
         期間の指定と、その期間の集計(v1.36)。期間を絞る動機は「どれだけ観たか」なので、
-        数字が無いと半分しか答えられない。集計は一覧と同じ条件を Rust 側で共有している
+        数字が無いと半分しか答えられない。集計は一覧と同じ条个 Rust 側で共有している
       */}
       <div className="view-period">
         <select
           value={period}
           onChange={(e) => setPeriod(e.target.value as ViewPeriod)}
-          title="集計と一覧の期間"
+          title="统计与列表的期间"
         >
           {(Object.keys(PERIOD_LABELS) as ViewPeriod[]).map((k) => (
             <option key={k} value={k}>{PERIOD_LABELS[k]}</option>
@@ -262,13 +262,13 @@ function ViewTab({ onClose }: { onClose: () => void }) {
             />
           </>
         )}
-        <span className="view-stats">{stats ? statsLabel(stats) : '集計中…'}</span>
+        <span className="view-stats">{stats ? statsLabel(stats) : '统计中…'}</span>
       </div>
 
       <div className="history-list">
         {/* 期間を絞っているときは右上の集計が同じことを言うので、ここでは繰り返さない */}
         {entries.length === 0 && !loading && period === 'all' && !range.after && !range.before && (
-          <div className="stats-empty">まだ記録がありません</div>
+          <div className="stats-empty">还没有记录</div>
         )}
         {groups.map((g) => (
           <div key={g.date}>
@@ -278,7 +278,7 @@ function ViewTab({ onClose }: { onClose: () => void }) {
                 key={e.id}
                 className={`history-row view-row ${e.isMissing ? 'missing' : ''}`}
                 onDoubleClick={() => void play(e)}
-                title={e.isMissing ? 'ファイルが見つかりません' : `${e.filename}(ダブルクリックで再生)`}
+                title={e.isMissing ? '找不到文件' : `${e.filename}（双击播放）`}
               >
                 <span className="history-time">{timeOf(e.viewedAt)}</span>
                 {e.thumbPath ? (
@@ -309,7 +309,7 @@ function ViewTab({ onClose }: { onClose: () => void }) {
       {hasMore && (
         <div className="modal-actions">
           <button onClick={() => load(offset, range)} disabled={loading}>
-            さらに読み込む
+            加载更多
           </button>
         </div>
       )}
@@ -319,7 +319,7 @@ function ViewTab({ onClose }: { onClose: () => void }) {
 
 /**
  * 操作履歴(v1.9)。operations_log を読んで表示し、可逆な操作だけ取り消せる。
- * ファイルを動かす操作は履歴には出すが取り消しは拒否する(理由を出す)
+ * 文个動かす操作は履歴には出すが取り消しは拒否する(理由を出す)
  */
 function OpsTab() {
   const { bumpVersion, pushToast } = useLibrary(useShallow(pickState('bumpVersion', 'pushToast')));
@@ -367,12 +367,12 @@ function OpsTab() {
   return (
     <>
       <div className="settings-note">
-        タグ・レーティング・シリーズ・再リンクは取り消せます。ファイルを動かした操作
-        (ごみ箱送り・移動・リネーム)と登録削除は取り消せません
+        标签、评分、系列、重新链接可以撤销。移动文件的操作
+        （送入回收站·移动·重命名）与删除注册无法撤销
       </div>
 
       <div className="history-list">
-        {entries.length === 0 && !loading && <div className="stats-empty">履歴がありません</div>}
+        {entries.length === 0 && !loading && <div className="stats-empty">没有历史记录</div>}
         {entries.map((e) => (
           <div key={e.id} className={`history-row ${e.undoneAt ? 'undone' : ''}`}>
             <span className="history-time">{e.timestamp}</span>
@@ -381,11 +381,11 @@ function OpsTab() {
             <span className="history-detail" title={e.payload ?? ''}>{summarize(e)}</span>
             {e.undoable ? (
               <button className="history-undo" onClick={() => undo(e)}>
-                取り消す
+                撤销
               </button>
             ) : (
               <span className="history-reason" title={e.reason ?? ''}>
-                {e.undoneAt ? '取り消し済み' : ''}
+                {e.undoneAt ? '已撤销' : ''}
               </span>
             )}
           </div>
@@ -395,7 +395,7 @@ function OpsTab() {
       {hasMore && (
         <div className="modal-actions">
           <button onClick={() => load(offset)} disabled={loading}>
-            さらに読み込む
+            加载更多
           </button>
         </div>
       )}

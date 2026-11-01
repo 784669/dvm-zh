@@ -3,16 +3,16 @@
  *
  * **DOM を測らない**。一覧は仮想化されていて DOM に載るのは可視分だけなので、
  * `getBoundingClientRect` で拾う実装は自動スクロールで流れていく「まだ描かれていない行」を
- * 取りこぼす。行の高さ・列数・カードの実寸はどれも `lib/grid.ts` が決めているので、
+ * 取りこぼす。行の高さ·列数·カードの実寸はどれも `lib/grid.ts` が決めているので、
  * 矩形 → セル → 通し番号も同じ寸法から算術で出す。
  *
- * `grid.ts` に混ぜず別ファイルにしてあるのは、あちらを「カード 1 枚の寸法」に閉じた
+ * `grid.ts` に混ぜず別文个してあるのは、あちらを「カード 1 枚の寸法」に閉じた
  * モジュールのままにするため。**定数は必ず grid.ts から import する**(再宣言しないこと)。
  */
 
 import { GRID_GAP, GRID_PAD } from './grid';
 
-/** 仮想化コンテナ(高さ = getTotalSize() の div)の左上を原点とする内容座標(px) */
+/** 仮想化容器(高さ = getTotalSize() の div)の左上を原点とする内容座標(px) */
 export interface Rect {
   left: number;
   top: number;
@@ -33,7 +33,7 @@ export function rectFrom(ax: number, ay: number, bx: number, by: number): Rect {
 /** 当たり判定に要る一覧のかたち。`gridMetrics()` の結果 + 一覧の状態 */
 export interface MarqueeLayout {
   /**
-   * 詳細リストか。true なら**横方向を見ない** —— 行は `max(100%, 列幅の合計)` の
+   * 详细列表か。true なら**横方向を見ない** —— 行は `max(100%, 列幅の合計)` の
    * 全幅で、どの列に触れたかに選択上の意味が無い(エクスプローラーの詳細表示と同じ)。
    * 横スクロールした状態で x が可視域の外にあっても行選択が壊れないようにする狙いもある
    */
@@ -42,7 +42,7 @@ export interface MarqueeLayout {
   /** カードの実寸(`gridMetrics().cardW`)。list では使わない */
   cardW: number;
   rowHeight: number;
-  /** 先頭に並ぶフォルダ行の数。フォルダは選択の対象外なので判定前に落とす */
+  /** 先頭に並ぶ文件夹行の数。文件夹は選択の対象外なので判定前に落とす */
   folderRows: number;
   /** 動画の総数。最終行の余ったセルを落とすのに使う */
   total: number;
@@ -73,7 +73,7 @@ export interface MarqueeHit {
 export function marqueeCells(rect: Rect, l: MarqueeLayout, limit: number): MarqueeHit | null {
   if (l.total <= 0 || l.cols <= 0 || l.rowHeight <= 0) return null;
 
-  // 高さ 0 / 幅 0 のドラッグは何も選ばない(クリックと同じ扱いにする)
+  // 高さ 0 / 幅 0 のドラッグは何も選ばない(点击と同じ扱いにする)
   if (rect.bottom <= rect.top || (!l.list && rect.right <= rect.left)) return null;
 
   const lastRow = l.folderRows + Math.ceil(l.total / l.cols) - 1;

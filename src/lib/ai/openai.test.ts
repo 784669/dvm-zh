@@ -190,7 +190,7 @@ describe('parseChunk — tool_calls の断片を index で結合する', () => {
       delta({}, 'tool_calls'),
     ]);
     const call = events.filter((e) => e.type === 'tool_call')[0] as { call: { parseError?: string } };
-    expect(call.call.parseError).toMatch(/壊れています/);
+    expect(call.call.parseError).toMatch(/已损坏/);
   });
 
   it('**finish_reason が来ないまま切れても**確定させる(互換サーバーへの保険)', () => {

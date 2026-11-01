@@ -2,8 +2,8 @@
  * Windows パスの小道具(v1.14)。
  *
  * **Rust 側 `core/folders.rs` の `normalize_dir` / `parent_dir` と同じ結果になること**。
- * 右クリックの「このフォルダーを開く」は、ここで出したパスを `VideoQuery.dirPath` に渡し、
- * Rust 側が組み立てたフォルダーツリーのキーと突き合わせる。表記が 1 文字でもずれると
+ * 右点击の「打开此文件夹」は、ここで出したパスを `VideoQuery.dirPath` に渡し、
+ * Rust 側が組み立てた文件夹ツリーのキーと突き合わせる。表記が 1 文字でもずれると
  * 「絞り込んだのに 0 件」になる
  */
 
@@ -23,7 +23,7 @@ export function baseName(path: string): string {
   return parts[parts.length - 1] || path;
 }
 
-/** 親フォルダを返す。`C:\v\a.mp4` → `C:\v`、`C:\a.mp4` → `C:\`。取れなければ null */
+/** 親文件夹を返す。`C:\v\a.mp4` → `C:\v`、`C:\a.mp4` → `C:\`。取れなければ null */
 export function parentDir(path: string): string | null {
   const p = path.replace(/\//g, '\\').replace(/\\+$/, '');
   const i = p.lastIndexOf('\\');

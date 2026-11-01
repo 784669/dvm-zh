@@ -7,9 +7,9 @@ import { CACHE_GB_DEFAULT, CACHE_GB_MAX, CACHE_GB_MIN, parseCacheGb } from '../.
 import type { AppInfo, BackupInfo } from '../../types';
 
 /**
- * データの保存場所とバックアップ(v1.38 で 1 カテゴリにまとめた)。
+ * 数据存储位置と备份(v1.38 で 1 カテゴリにまとめた)。
  *
- * どちらも「ライブラリの中身がディスクのどこにどれだけあるか」の話で、
+ * どちらも「媒体库の中身がディスクのどこにどれだけあるか」の話で、
  * 見せる情報(AppInfo)も共通している。
  */
 export function DataSection({
@@ -21,6 +21,7 @@ export function DataSection({
 }) {
   const [backups, setBackups] = useState<BackupInfo[]>([]);
   const [busy, setBusy] = useState(false);
+  const [preview, setPreview] = useState<[number, number]>([0, 0]);
   /**
    * 変換キャッシュの上限 GB(v1.38。それまでは読み手だけで UI が無かった)。
    * 確定時に parseCacheGb を通すので、**0 や壊れた値が DB に入らない** ——
@@ -36,6 +37,10 @@ export function DataSection({
     api.listDbBackups().then(setBackups).catch(() => {});
   }, []);
 
+  useEffect(() => {
+    api.previewCacheSize().then(setPreview).catch(() => {});
+  }, []);
+
   /** 上限を超えているぶんを古い順に削る。減った量は AppInfo を取り直して見せる */
   const purgeCache = async () => {
     setBusy(true);
@@ -47,23 +52,34 @@ export function DataSection({
     }
   };
 
+  /** プレビューキャッシュを全削除する(設定の「削除」ボタン用) */
+  const purgePreview = async () => {
+    setBusy(true);
+    try {
+      await api.purgePreviewCache();
+      setPreview(await api.previewCacheSize());
+    } finally {
+      setBusy(false);
+    }
+  };
+
   /** 復元を予約する。実際の差し替えは次回起動時 */
   const restore = async (b: BackupInfo) => {
     const yes = await ask(
-      `「${b.fileName}」(${b.createdAt})から復元しますか?\n\n` +
-        '現在のライブラリ(タグ・レーティング・視聴履歴を含む)はこのバックアップの内容で置き換わります。\n' +
-        '動画ファイル自体には影響しません。\n\n' +
-        '復元はアプリを再起動したときに適用されます。',
-      { title: 'バックアップから復元' },
+      `要从「${b.fileName}」（${b.createdAt}）还原吗？\n\n` +
+        '当前媒体库（含标签·评分·观看历史）将替换为该备份的内容。\n' +
+        '视频文件本身不受影响。\n\n' +
+        '还原将在应用重启后生效。',
+      { title: '从备份还原' },
     );
     if (!yes) return;
     setBusy(true);
     try {
       const safety = await api.restoreBackup(b.path);
       await message(
-        `復元を予約しました。アプリを再起動すると適用されます。\n\n` +
-          `現在のデータは ${safety} として保存しました。`,
-        { title: 'バックアップから復元' },
+        `已预约还原。重启应用后生效。\n\n` +
+          `当前数据已保存为 ${safety}。`,
+        { title: '从备份还原' },
       );
       setBackups(await api.listDbBackups());
     } finally {
@@ -85,23 +101,23 @@ export function DataSection({
   return (
     <>
       <div className="settings-section">
-        <div className="settings-heading">データの保存場所</div>
+        <div className="settings-heading">数据存储位置</div>
         {info && (
           <div className="settings-info">
             <div className="settings-info-row">
-              <span>ライブラリ「{info.libraryName}」</span>
+              <span>媒体库「{info.libraryName}」</span>
               <span className="settings-path" title={info.libraryRoot}>{info.libraryRoot}</span>
             </div>
             <div className="settings-info-row">
-              <span>データフォルダ(アプリ全体)</span>
+              <span>数据文件夹(整个应用)</span>
               <span className="settings-path" title={info.dataDir}>{info.dataDir}</span>
             </div>
             <div className="settings-info-row">
-              <span>データベース</span>
+              <span>数据库</span>
               <span>{fmtSize(info.dbSize)}</span>
             </div>
             <div className="settings-info-row">
-              <span>サムネイルキャッシュ</span>
+              <span>缩略图缓存</span>
               <span>
                 {info.thumbCount} 件 / {fmtSize(info.thumbCacheSize)}
               </span>
@@ -109,21 +125,21 @@ export function DataSection({
           </div>
         )}
         <div className="settings-note">
-          動画・タグ・サムネイル・バックアップはライブラリフォルダの中にあります。
-          設定と再生用の変換キャッシュだけがアプリ全体のデータフォルダに入ります
+          视频·标签·缩略图·备份都在媒体库文件夹内。
+          只有设置和播放用的转换缓存位于应用全局数据文件夹
         </div>
         <div className="modal-row">
-          <button onClick={() => api.openLibraryDir()}>ライブラリフォルダを開く</button>
-          <button onClick={() => api.openDataDir()}>データフォルダを開く</button>
+          <button onClick={() => api.openLibraryDir()}>打开媒体库文件夹</button>
+          <button onClick={() => api.openDataDir()}>打开数据文件夹</button>
         </div>
       </div>
 
       <div className="settings-section">
-        <div className="settings-heading">再生用の変換キャッシュ</div>
+        <div className="settings-heading">播放用转码缓存</div>
         {info && (
           <div className="settings-info">
             <div className="settings-info-row">
-              <span>今の使用量(すべてのライブラリの合計)</span>
+              <span>当前用量(所有媒体库合计)</span>
               <span>
                 {info.transcodeCount} 件 / {fmtSize(info.transcodeSize)}
               </span>
@@ -142,22 +158,41 @@ export function DataSection({
             onBlur={cacheGb.commit}
           />
           <span className="settings-unit">GB</span>
-          <button onClick={purgeCache} disabled={busy}>今すぐ掃除</button>
+          <button onClick={purgeCache} disabled={busy}>立即清理</button>
         </div>
         <div className="settings-note">
-          mpv でそのまま再生できない形式は、mp4 に変換してから再生します。その変換結果を
-          貯めておく上限です。超えたぶんは古い順に消え、消えても再生し直せば作り直されるので、
-          減らしても失われるものはありません(次に変換したときかアプリを起動したときに効きます)
+          mpv 无法直接播放的格式会先转换为 mp4 再播放。此处是这些转换结果的
+          缓存上限。超出部分按最旧优先删除，删除后重新播放即可重建，
+          因此调小也不会丢失任何东西（在下次转换或应用启动时生效）
         </div>
       </div>
 
       <div className="settings-section">
-        <div className="settings-heading">バックアップ</div>
+        <div className="settings-heading">预览缓存</div>
+        <div className="settings-info">
+          <div className="settings-info-row">
+            <span>当前用量</span>
+            <span>
+              {preview[0]} 件 / {fmtSize(preview[1])}
+            </span>
+          </div>
+        </div>
+        <div className="modal-row">
+          <button onClick={purgePreview} disabled={busy}>清理预览缓存</button>
+        </div>
+        <div className="settings-note">
+          在卡片上点击「播放降码预览」后生成的低码率预览文件。不会自动删除，
+          仅在点击「清理预览缓存」时清除。切换预览画质后产生的旧画质文件也会一并清除
+        </div>
+      </div>
+
+      <div className="settings-section">
+        <div className="settings-heading">备份</div>
         <div className="modal-row">
           <button onClick={backupNow} disabled={busy}>
-            {busy ? 'バックアップ中...' : '今すぐバックアップ'}
+            {busy ? '正在备份...' : '立即备份'}
           </button>
-          <button onClick={() => api.openBackupsDir()}>バックアップフォルダを開く</button>
+          <button onClick={() => api.openBackupsDir()}>打开备份文件夹</button>
         </div>
         {backups.length > 0 && (
           <div className="settings-backup-list">
@@ -165,18 +200,18 @@ export function DataSection({
               <div key={b.fileName} className="settings-info-row">
                 <span className="settings-path" title={b.path}>{b.fileName}</span>
                 <span>
-                  {fmtSize(b.size)} ・ {b.createdAt}
+                  {fmtSize(b.size)} · {b.createdAt}
                 </span>
                 <button className="backup-restore" onClick={() => restore(b)}>
-                  復元
+                  还原
                 </button>
               </div>
             ))}
           </div>
         )}
         <div className="settings-note">
-          復元はアプリの再起動時に適用されます(起動中に library.db を差し替えると壊れるため)。
-          復元の直前に現在のデータも pre-restore-... として自動でバックアップします
+          还原将在应用重启时生效（运行中替换 library.db 会损坏数据）。
+          还原前会自动将当前数据备份为 pre-restore-...
         </div>
       </div>
     </>

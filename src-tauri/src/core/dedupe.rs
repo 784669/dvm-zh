@@ -237,7 +237,7 @@ pub fn finish(
         actor,
         "dedupe",
         &serde_json::json!({
-            "scope": scope.unwrap_or("(ライブラリ全体)"),
+            "scope": scope.unwrap_or("（整个媒体库）"),
             "groups": plan.groups,
             "removed": to_remove.len(),
             "trashed": trashed,

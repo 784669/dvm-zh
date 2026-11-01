@@ -25,7 +25,7 @@ export function AiProviderFields({ provider }: { provider: ProviderId }) {
     <>
       {isCompat && (
         <>
-          <label className="modal-label">ベース URL</label>
+          <label className="modal-label">基础 URL</label>
           <div className="modal-row">
             <input
               value={baseUrl.value}
@@ -45,7 +45,7 @@ export function AiProviderFields({ provider }: { provider: ProviderId }) {
       )}
 
       <label className="modal-label">
-        API キー{isCompat ? '(ローカル LLM なら空欄のままで動きます)' : ''}
+        API 密钥{isCompat ? '（使用本地 LLM 时可留空）' : ''}
       </label>
       <div className="modal-row">
         <input
@@ -58,13 +58,13 @@ export function AiProviderFields({ provider }: { provider: ProviderId }) {
       </div>
 
       <label className="modal-label">
-        モデル{info.defaultModel ? `(空欄なら ${info.defaultModel})` : ''}
+        模型{info.defaultModel ? `（留空则为 ${info.defaultModel}）` : ''}
       </label>
       <div className="modal-row">
         <input
           value={model.value}
           list={listId}
-          placeholder={info.defaultModel || 'モデル名を入力'}
+          placeholder={info.defaultModel || '输入模型名称'}
           onChange={(e) => model.edit(e.target.value)}
           onBlur={model.commit}
         />

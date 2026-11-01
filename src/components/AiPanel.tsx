@@ -11,7 +11,7 @@ import { pickState, useLibrary } from '../store';
 interface ChatItem {
   role: 'user' | 'assistant';
   text: string;
-  /** ツール実行カード(「3 件にタグを付けました」など) */
+  /** ツール実行カード(「3 个标签を付けました」など) */
   cards: string[];
 }
 
@@ -117,7 +117,7 @@ export function AiPanel() {
       history.current.push({ role: 'user', content: text });
       history.current.push({
         role: 'assistant',
-        content: finalText || '(ツールを実行しました)',
+        content: finalText || '(已执行工具)',
       });
     } catch (e) {
       // 中断は失敗ではない。出かかっていた文字はそのまま残し、履歴にも積まない
@@ -134,9 +134,9 @@ export function AiPanel() {
     // 幅はドラッグで変えられる。min-width も同じ値にして flex に縮められないようにする
     <aside className="ai-panel" style={{ width: aiPanelWidth, minWidth: aiPanelWidth }}>
       <div className="ai-header">
-        <span>AI アシスタント</span>
+        <span>AI 助手</span>
         <button
-          title={busy ? '応答中はクリアできません' : '会話をクリア'}
+          title={busy ? '回复过程中无法清空' : '清空对话'}
           disabled={busy}
           onClick={() => {
             setChat([]);
@@ -151,9 +151,9 @@ export function AiPanel() {
         {chat.length === 0 && (
           <div className="ai-hint">
             例:
-            <br />「★4 以上で 10 分以内の動画を見せて」
-            <br />「この動画にタグを提案して」(動画を選択して)
-            <br />「最近追加した動画を教えて」
+            <br />「显示 4 星以上、10 分钟以内的视频」
+            <br />「为这个视频推荐标签」（请先选择视频）
+            <br />「告诉我最近添加的视频」
           </div>
         )}
         {chat.map((m, i) => (
@@ -165,7 +165,7 @@ export function AiPanel() {
               </div>
             ))}
             {m.role === 'assistant' && !m.text && m.cards.length === 0 && busy && i === chat.length - 1 && (
-              <div className="ai-text ai-thinking">考え中…</div>
+              <div className="ai-text ai-thinking">思考中…</div>
             )}
           </div>
         ))}
@@ -176,13 +176,13 @@ export function AiPanel() {
         <>
           {usage && (
             <div className="ai-usage">
-              入力 {usage.input.toLocaleString()} / 出力 {usage.output.toLocaleString()} トークン
+              输入 {usage.input.toLocaleString()} / 输出 {usage.output.toLocaleString()} tokens
             </div>
           )}
           <div className="ai-input-row">
             <textarea
               value={input}
-              placeholder="ライブラリについて質問…"
+              placeholder="询问关于媒体库的问题…"
               rows={2}
               disabled={busy}
               onChange={(e) => setInput(e.target.value)}
@@ -195,7 +195,7 @@ export function AiPanel() {
             />
             {busy ? (
               // 応答中は「停止」に差し替える(受信の途中でも止まる)
-              <button onClick={() => abort.current?.abort()} title="応答を止める">
+              <button onClick={() => abort.current?.abort()} title="停止回复">
                 停止
               </button>
             ) : (

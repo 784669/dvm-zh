@@ -94,8 +94,8 @@ fn owning_folder(conn: &Connection, path: &str) -> Option<i64> {
 pub fn plan_relink(conn: &Connection, from_prefix: &str, to_prefix: &str) -> Result<Vec<PlanItem>> {
     let from_prefix = from_prefix.trim_end_matches(['\\', '/']);
     let to_prefix = to_prefix.trim_end_matches(['\\', '/']);
-    anyhow::ensure!(!from_prefix.is_empty(), "変更前のフォルダを指定してください");
-    anyhow::ensure!(!to_prefix.is_empty(), "変更後のフォルダを指定してください");
+    anyhow::ensure!(!from_prefix.is_empty(), "请指定变更前的文件夹");
+    anyhow::ensure!(!to_prefix.is_empty(), "请指定变更后的文件夹");
 
     let mut stmt = conn.prepare("SELECT id, path FROM videos ORDER BY path")?;
     let rows: Vec<(i64, String)> = stmt
@@ -121,10 +121,10 @@ pub fn plan_relink(conn: &Connection, from_prefix: &str, to_prefix: &str) -> Res
         } else if !roots.is_online(&to) {
             (
                 PlanStatus::Offline,
-                Some(format!("{} が未接続です", offline::root_of(&to))),
+                Some(format!("{} 未连接", offline::root_of(&to))),
             )
         } else if !Path::new(&to).exists() {
-            (PlanStatus::SourceMissing, Some("変更後の場所にファイルがありません".into()))
+            (PlanStatus::SourceMissing, Some("变更后的位置没有文件".into()))
         } else {
             (PlanStatus::Ok, None)
         };
@@ -196,13 +196,13 @@ fn plan_one_move(roots: &mut RootCache, video_id: i64, from: &str, to: &str) -> 
     let (status, note) = if to == from {
         (PlanStatus::Unchanged, None)
     } else if !roots.is_online(from) || !roots.is_online(to) {
-        (PlanStatus::Offline, Some("ドライブが未接続です".into()))
+        (PlanStatus::Offline, Some("驱动器未连接".into()))
     } else if !Path::new(from).exists() {
-        (PlanStatus::SourceMissing, Some("元のファイルが見つかりません".into()))
+        (PlanStatus::SourceMissing, Some("找不到原文件".into()))
     } else if Path::new(to).exists() {
-        (PlanStatus::Conflict, Some("移動先に同名のファイルがあります".into()))
+        (PlanStatus::Conflict, Some("目标位置已存在同名文件".into()))
     } else if !Path::new(to).parent().map(|p| p.exists()).unwrap_or(false) {
-        (PlanStatus::SourceMissing, Some("移動先のフォルダがありません".into()))
+        (PlanStatus::SourceMissing, Some("目标文件夹不存在".into()))
     } else {
         (PlanStatus::Ok, None)
     };
@@ -227,7 +227,7 @@ fn paths_of(conn: &Connection, video_ids: &[i64]) -> Result<Vec<(i64, String)>> 
 /// 指定した動画を dest_dir へ移動する計画
 pub fn plan_move(conn: &Connection, video_ids: &[i64], dest_dir: &str) -> Result<Vec<PlanItem>> {
     let dest = dest_dir.trim_end_matches(['\\', '/']);
-    anyhow::ensure!(!dest.is_empty(), "移動先フォルダを指定してください");
+    anyhow::ensure!(!dest.is_empty(), "请指定目标文件夹");
     let mut roots = RootCache::default();
     let items = paths_of(conn, video_ids)?
         .into_iter()
@@ -242,10 +242,10 @@ pub fn plan_move(conn: &Connection, video_ids: &[i64], dest_dir: &str) -> Result
 /// 1 件のファイル名を変更する計画(フォルダは変えない)
 pub fn plan_rename(conn: &Connection, video_id: i64, new_name: &str) -> Result<PlanItem> {
     let new_name = new_name.trim();
-    anyhow::ensure!(!new_name.is_empty(), "新しいファイル名を入力してください");
+    anyhow::ensure!(!new_name.is_empty(), "请输入新文件名");
     anyhow::ensure!(
         !new_name.contains(['\\', '/', ':', '*', '?', '"', '<', '>', '|']),
-        r#"ファイル名に \ / : * ? " < > | は使えません"#
+        r#"文件名不能包含 \ / : * ? " < > |"#
     );
 
     let path: String = conn.query_row(
@@ -256,7 +256,7 @@ pub fn plan_rename(conn: &Connection, video_id: i64, new_name: &str) -> Result<P
     let parent: PathBuf = Path::new(&path)
         .parent()
         .map(|p| p.to_path_buf())
-        .ok_or_else(|| anyhow::anyhow!("親フォルダを特定できません: {path}"))?;
+        .ok_or_else(|| anyhow::anyhow!("无法确定上级文件夹: {path}"))?;
     let to = parent.join(new_name).to_string_lossy().to_string();
 
     let mut roots = RootCache::default();
@@ -288,7 +288,7 @@ pub fn move_files(
                 from: item.from.clone(),
                 to: item.to.clone(),
                 ok: false,
-                error: Some("移動先に同名のファイルがあります".into()),
+                error: Some("目标位置已存在同名文件".into()),
             });
             continue;
         }

@@ -89,7 +89,7 @@ export function Toolbar() {
     setMenuOpen(false);
   }, [avail]);
 
-  // 開くたびにボタンの位置を測り直す。ポップオーバーは画面基準で描くため。
+  // 打开たびにボタンの位置を測り直す。ポップオーバーは画面基準で描くため。
   // 幅が変わると検索欄が伸縮してボタンの x が動くので avail も見る
   useLayoutEffect(() => {
     if (!showAdvanced) return;
@@ -103,7 +103,7 @@ export function Toolbar() {
     return () => clearTimeout(t);
   }, [input, setText]);
 
-  // AI の apply_filter やスマートフォルダで text が外から変わったら入力欄も追従させる
+  // AI の apply_filter や智能文件夹で text が外から変わったら入力欄も追従させる
   useEffect(() => {
     setInput((cur) => (cur === text ? cur : text));
   }, [text]);
@@ -113,10 +113,10 @@ export function Toolbar() {
     ((cardWidth - CARD_WIDTH_MIN) / (CARD_WIDTH_MAX - CARD_WIDTH_MIN)) * 100;
 
   const saveCurrentAsSmartFolder = async () => {
-    const name = window.prompt('この検索条件に名前を付けて保存します');
+    const name = window.prompt('为当前搜索条件命名并保存');
     if (name === null) return;
     if (!name.trim()) {
-      pushToast('名前を入力してください', 'info');
+      pushToast('请输入名称', 'info');
       return;
     }
     await api.createSmartFolder(name, buildQuery(useLibrary.getState()));
@@ -130,9 +130,9 @@ export function Toolbar() {
   const renderItem = (key: ToolbarItemKey, place: Place): ReactNode => {
     const { label } = TOOLBAR_ITEMS[key];
     /*
-     * メニューの項目を押したら閉じてから実行する。「条件を保存」の window.prompt は
-     * 同期的にスレッドを止めるので、閉じる描画を先に済ませないとメニューが
-     * 出たままダイアログが開く(右クリックメニューと同じ理由)
+     * メニューの項目を押したら閉じてから実行する。「保存条件」の window.prompt は
+     * 同期的にスレッドを止めるので、关闭描画を先に済ませないとメニューが
+     * 出たままダイアログが打开(右键菜单と同じ理由)
      */
     const act = (fn: () => void) => () => {
       if (place !== 'menu') {
@@ -146,15 +146,15 @@ export function Toolbar() {
     switch (key) {
       case 'sidebarToggle':
         /*
-          サイドバーを畳むと幅を変える帯ごと消えるので、戻す手段はこのボタンだけ。
-          サイドバー側に置くと畳んだあとに押せなくなる。だから畳まない項目にしてある
+          侧边栏を畳むと幅を変える帯ごと消えるので、戻す手段はこのボタンだけ。
+          侧边栏側に置くと畳んだあとに押せなくなる。だから畳まない項目にしてある
         */
         return (
           <ToolButton
             key={key}
             place={place}
             icon={PanelLeft}
-            label={sidebarCollapsed ? 'サイドバーを表示' : 'サイドバーを隠す'}
+            label={sidebarCollapsed ? '显示侧边栏' : '隐藏侧边栏'}
             onClick={act(() => {
               const next = !sidebarCollapsed;
               setSidebarCollapsed(next);
@@ -171,8 +171,8 @@ export function Toolbar() {
             className="search"
             type="search"
             // 狭いと切れるので短くし、説明は title に回す
-            placeholder="検索(空白区切りで AND)"
-            title="ファイル名・タイトルで検索(空白区切りで AND)"
+            placeholder="搜索（空格分隔为 AND）"
+            title="按文件名·标题搜索（空格分隔为 AND）"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
@@ -180,8 +180,8 @@ export function Toolbar() {
 
       case 'advanced':
         /*
-          畳まない。ポップオーバーを ≫ メニューの中から開くと、互いの
-          「外側クリックで閉じる」が食い合って開いた瞬間に閉じる。
+          畳まない。ポップオーバーを ≫ メニューの中から打开と、互いの
+          「外側点击で关闭」が食い合って開いた瞬間に关闭。
           件数はアイコンの右上にバッジで重ねる(文字を並べる場所が無いため)
         */
         return (
@@ -189,7 +189,7 @@ export function Toolbar() {
             key={key}
             ref={advBtnRef}
             className={`tb-icon${advCount > 0 ? ' active' : ''}`}
-            title={advCount > 0 ? `詳細検索(${advCount} 件の条件)` : '詳細検索'}
+            title={advCount > 0 ? `详细搜索(${advCount} 项条件）` : '详细搜索'}
             onClick={() => setShowAdvanced((v) => !v)}
           >
             <Funnel />
@@ -198,14 +198,14 @@ export function Toolbar() {
         );
 
       case 'filterBack':
-        // 絞り込み履歴(v1.41、C-8)。押せるかどうかがそのまま「履歴があるか」
+        // 筛选履歴(v1.41、C-8)。押せるかどうかがそのまま「履歴があるか」
         return (
           <ToolButton
             key={key}
             place={place}
             icon={Undo2}
             label={label}
-            title="絞り込みを戻す (Alt+←)"
+            title="后退筛选 (Alt+←)"
             disabled={filterPast.length === 0}
             onClick={act(filterBack)}
           />
@@ -218,7 +218,7 @@ export function Toolbar() {
             place={place}
             icon={Redo2}
             label={label}
-            title="絞り込みを進める (Alt+→)"
+            title="前进筛选 (Alt+→)"
             disabled={filterFuture.length === 0}
             onClick={act(filterForward)}
           />
@@ -226,10 +226,10 @@ export function Toolbar() {
 
       case 'sort':
         /*
-          並び順はグリッドとリストで共有の 1 つ。詳細リストの列ヘッダで選べる並びは
+          排序はグリッドとリストで共有の 1 つ。详细列表の列ヘッダで選べる並びは
           26 種あり全部は並べられないので、ここは代表的なものだけを常設し、
           列ヘッダで選ばれた並びは「今それが選ばれている間だけ」項目を足して見せる
-          (シリーズ順・重複まとめと同じ作法)
+          (按系列顺序·重複まとめと同じ作法)
         */
         return (
           <ToolSelect
@@ -240,7 +240,7 @@ export function Toolbar() {
             value={sort}
             onChange={(v) => setSort(v as SortKey)}
           >
-            {/* 選択肢の組み立ては余白の右クリックメニューと共有する(片方だけ増えるのを防ぐ) */}
+            {/* 選択肢の組み立ては余白の右键菜单と共有する(片方だけ増えるのを防ぐ) */}
             {sortOptions({ sort, seriesId, duplicatesOnly }).map((k) => (
               <option key={k} value={k}>{sortLabel(k)}</option>
             ))}
@@ -254,7 +254,7 @@ export function Toolbar() {
             place={place}
             icon={BookmarkPlus}
             label={label}
-            title="今の検索条件をスマートフォルダとして保存"
+            title="将当前搜索条件保存为智能文件夹"
             onClick={act(() => void saveCurrentAsSmartFolder())}
           />
         );
@@ -265,8 +265,8 @@ export function Toolbar() {
             key={key}
             place={place}
             icon={viewMode === 'grid' ? List : LayoutGrid}
-            label={viewMode === 'grid' ? '詳細リスト表示' : 'サムネイル表示'}
-            title={viewMode === 'grid' ? '詳細リスト表示に切り替え' : 'サムネイル表示に切り替え'}
+            label={viewMode === 'grid' ? '详细列表视图' : '缩略图视图'}
+            title={viewMode === 'grid' ? '切换为详细列表视图' : '切换为缩略图视图'}
             onClick={act(() => {
               const next = viewMode === 'grid' ? 'list' : 'grid';
               setViewMode(next);
@@ -329,11 +329,11 @@ export function Toolbar() {
             place={place}
             icon={PanelRight}
             active={inspectorPinned}
-            label="詳細ペインを常に表示"
+            label="始终显示详情面板"
             title={
               inspectorPinned
-                ? '詳細ペインの固定を解除(選択中だけ表示に戻す)'
-                : '詳細ペインを常に表示する'
+                ? '解除详情面板固定（恢复为仅选中时显示）'
+                : '始终显示详情面板'
             }
             onClick={act(() => {
               const next = !inspectorPinned;
@@ -374,7 +374,7 @@ export function Toolbar() {
             icon={Keyboard}
             label={label}
             // キーで開けることを、キーを知らない人に教える唯一の場所
-            title="キー操作の一覧 (?)"
+            title="快捷键一览 (?)"
             onClick={act(() => setShowShortcuts(true))}
           />
         );
@@ -383,10 +383,10 @@ export function Toolbar() {
 
   const { bar, menu } = splitToolbar(toolbarKeys(viewMode), avail);
   /*
-   * かつてここには「畳んだ中に効いている絞り込みがあれば ≫ を光らせる」判定があった。
-   * v1.28 の絞り込み帯が★も長さも常にチップで出すようになったので、
+   * 并且てここには「畳んだ中に効いている筛选があれば ≫ を光らせる」判定があった。
+   * v1.28 の筛选帯が★も时长も常にチップで出すようになったので、
    * 「件数が少ない理由が分からない」事故はそちらで防がれている。
-   * 条件を足すたびにこの式にも足す必要があり(足し忘れても静かに動く)、
+   * 条个足すたびにこの式にも足す必要があり(足し忘れても静かに動く)、
    * 帯と二重に持つ意味が無くなったので消した
    */
 
@@ -483,7 +483,7 @@ function ToolSelect({
   );
 }
 
-/** サムネイルの大きさ。グリッド表示のときだけ出る */
+/** 缩略图大小。グリッド表示のときだけ出る */
 function ToolSlider({
   place, label, value, pct, onChange, onCommit,
 }: {

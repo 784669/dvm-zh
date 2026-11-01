@@ -61,7 +61,7 @@ pub fn save_frame(ff: &FfmpegPaths, video_path: &str, at_ms: i64, out: &Path) ->
     let output = command(&ff.ffmpeg)
         .args(frame_args(video_path, at_ms, out))
         .output()
-        .map_err(|e| anyhow!("ffmpeg を起動できませんでした: {e}"))?;
+        .map_err(|e| anyhow!("无法启动 ffmpeg：{e}"))?;
 
     // 尺を超えた位置を指定すると 0 フレーム出力で正常終了することがあるので、
     // 終了コードだけでなく中身のあるファイルができたかどうかまで見る
@@ -76,9 +76,9 @@ pub fn save_frame(ff: &FfmpegPaths, video_path: &str, at_ms: i64, out: &Path) ->
     let detail = detail.trim();
     let _ = std::fs::remove_file(out); // 0 バイトのファイルを残さない
     Err(if detail.is_empty() {
-        anyhow!("コマを取り出せませんでした(再生位置が動画の終わりを超えているかもしれません)")
+        anyhow!("无法提取帧（播放位置可能已超出视频结尾）")
     } else {
-        anyhow!("コマを取り出せませんでした: {}", tail(detail, 200))
+        anyhow!("无法提取帧：{}", tail(detail, 200))
     })
 }
 
@@ -167,7 +167,7 @@ pub fn unique_path(dir: &Path, stem: &str, ext: &str) -> Result<PathBuf> {
             return Ok(candidate);
         }
     }
-    Err(anyhow!("同じ名前の画像が多すぎます: {stem}"))
+    Err(anyhow!("同名图片过多：{stem}"))
 }
 
 /// 既定の保存先(v1.26)。「ピクチャ\DVM」。
@@ -206,10 +206,10 @@ pub fn resolve_dir(configured: Option<&str>, default_dir: &Path) -> PathBuf {
 pub fn prepare_dir(dir: &Path) -> Result<()> {
     let root = crate::core::offline::root_of(&dir.to_string_lossy());
     if !Path::new(&root).exists() {
-        return Err(anyhow!("保存先のドライブに接続できません: {root}"));
+        return Err(anyhow!("无法连接到保存位置驱动器：{root}"));
     }
     std::fs::create_dir_all(dir)
-        .map_err(|e| anyhow!("保存先フォルダを作れません: {}({e})", dir.display()))
+        .map_err(|e| anyhow!("无法创建保存位置文件夹：{}({e})", dir.display()))
 }
 
 #[cfg(test)]
@@ -337,7 +337,7 @@ mod tests {
             .unwrap_err()
             .to_string();
         // 「繋げば直る話」だと分かる文言になっていること
-        assert!(err.contains("接続できません"), "{err}");
+        assert!(err.contains("无法连接"), "{err}");
     }
 
     #[test]

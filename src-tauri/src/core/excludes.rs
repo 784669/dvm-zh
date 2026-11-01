@@ -87,7 +87,7 @@ fn count_videos_under(conn: &Connection, path: &str) -> Result<i64> {
 
 pub fn add(conn: &Connection, path: &str) -> Result<i64> {
     let trimmed = path.trim_end_matches(['\\', '/']).to_string();
-    anyhow::ensure!(!trimmed.is_empty(), "除外パスが空です");
+    anyhow::ensure!(!trimmed.is_empty(), "排除路径为空");
     conn.execute(
         "INSERT OR IGNORE INTO excluded_paths (path) VALUES (?1)",
         params![trimmed],

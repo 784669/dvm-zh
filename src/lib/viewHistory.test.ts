@@ -133,19 +133,19 @@ describe('statsLabel(v1.36)', () => {
     ({ count: 0, videoCount: 0, watchedMs: 0, unknownCount: 0, ...patch });
 
   it('記録が無ければそう言う', () => {
-    expect(statsLabel(stats())).toBe('この期間の記録はありません');
+    expect(statsLabel(stats())).toBe('此期间没有记录');
   });
 
   it('1 時間以上は時間、未満は分で出す', () => {
     expect(statsLabel(stats({ count: 3, videoCount: 2, watchedMs: 5_400_000 })))
-      .toBe('3 回 / 2 本 ・ 合計 1.5 時間');
+      .toBe('3 次 / 2 个 · 合计 1.5 小时');
     expect(statsLabel(stats({ count: 1, videoCount: 1, watchedMs: 720_000 })))
-      .toBe('1 回 / 1 本 ・ 合計 12 分');
+      .toBe('1 次 / 1 个 · 合计 12 分');
   });
 
   // 合計に入っていない行があることを黙らない(「間違った数字を出すくらいなら」の系)
   it('位置が不明な行があれば断る', () => {
     expect(statsLabel(stats({ count: 5, videoCount: 3, watchedMs: 3_600_000, unknownCount: 2 })))
-      .toBe('5 回 / 3 本 ・ 合計 1.0 時間(うち 2 回は位置不明)');
+      .toBe('5 次 / 3 个 · 合计 1.0 小时（其中 2 次位置未知）');
   });
 });

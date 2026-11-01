@@ -11,10 +11,10 @@ const EDGE = 8;
  *
  * 器だけを持ち、中身は呼び出し側が渡す。**メニューは画面基準(fixed)で描く** ——
  * ツールバーは overflow: hidden なので、中に absolute で置くと切られる
- * (列選択ポップオーバー・右クリックメニューと同じ扱い)。
+ * (列選択ポップオーバー·右键菜单と同じ扱い)。
  *
  * 開閉は呼び出し側が持つ。幅が変わるとバーとメニューの中身が入れ替わるので、
- * そのときに閉じる責任は呼び出し側にある
+ * そのときに关闭責任は呼び出し側にある
  */
 export function ToolbarOverflow({
   open, onOpenChange, children,
@@ -27,14 +27,14 @@ export function ToolbarOverflow({
   const menuRef = useRef<HTMLDivElement>(null);
   const [at, setAt] = useState({ x: 0, y: 0 });
 
-  // 開くたびにボタンの位置を測り直す(右端揃え)
+  // 打开たびにボタンの位置を測り直す(右端揃え)
   useLayoutEffect(() => {
     if (!open) return;
     const r = btnRef.current?.getBoundingClientRect();
     if (r) setAt({ x: r.right - MENU_W, y: r.bottom + 6 });
   }, [open]);
 
-  // 外側クリックと Esc で閉じる(列選択ポップオーバーと同じ作法)
+  // 外側点击と Esc で关闭(列選択ポップオーバーと同じ作法)
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {
@@ -48,7 +48,7 @@ export function ToolbarOverflow({
       e.stopPropagation();
       onOpenChange(false);
     };
-    // 開いた直後の同じクリックで閉じないよう、次のフレームから拾う
+    // 開いた直後の同じ点击で閉じないよう、次のフレームから拾う
     const t = window.setTimeout(() => document.addEventListener('mousedown', onDown), 0);
     document.addEventListener('keydown', onKey);
     return () => {
@@ -66,7 +66,7 @@ export function ToolbarOverflow({
       <button
         ref={btnRef}
         className="tb-icon"
-        title="入りきらない操作"
+        title="放不下的操作"
         onClick={() => onOpenChange(!open)}
       >
         <ChevronsRight />

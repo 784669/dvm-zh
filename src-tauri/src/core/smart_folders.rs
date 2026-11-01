@@ -19,7 +19,7 @@ pub struct SmartFolder {
 /// 壊れた JSON を貯めるとサイドバーのクリックが毎回失敗するようになるため
 fn validate(query_json: &str) -> Result<()> {
     serde_json::from_str::<VideoQuery>(query_json)
-        .map_err(|e| anyhow::anyhow!("検索条件の形式が不正です: {e}"))?;
+        .map_err(|e| anyhow::anyhow!("搜索条件格式非法：{e}"))?;
     Ok(())
 }
 
@@ -44,7 +44,7 @@ pub fn list(conn: &Connection) -> Result<Vec<SmartFolder>> {
 
 pub fn create(conn: &Connection, actor: &str, name: &str, query_json: &str) -> Result<i64> {
     let name = name.trim();
-    anyhow::ensure!(!name.is_empty(), "名前が空です");
+    anyhow::ensure!(!name.is_empty(), "名称为空");
     validate(query_json)?;
     // 末尾に追加する
     let next: i64 = conn.query_row(
@@ -71,7 +71,7 @@ pub fn update(
 ) -> Result<()> {
     if let Some(n) = name {
         let n = n.trim();
-        anyhow::ensure!(!n.is_empty(), "名前が空です");
+        anyhow::ensure!(!n.is_empty(), "名称为空");
         conn.execute("UPDATE smart_folders SET name = ?1 WHERE id = ?2", params![n, id])?;
     }
     if let Some(q) = query_json {
@@ -115,15 +115,15 @@ mod tests {
     fn rejects_broken_query_json() {
         let conn = setup();
         assert!(create(&conn, "user", "壊れた", "{ not json").is_err());
-        // 空の条件("すべて")は有効
-        assert!(create(&conn, "user", "すべて", "{}").is_ok());
+        // 空の条件("全部")は有効
+        assert!(create(&conn, "user", "全部", "{}").is_ok());
         assert!(create(&conn, "user", "", "{}").is_err(), "名前が空なら拒否する");
     }
 
     #[test]
     fn keeps_insertion_order_and_reorders() {
         let conn = setup();
-        let a = create(&conn, "user", "未視聴", r#"{"unwatched":true}"#).unwrap();
+        let a = create(&conn, "user", "未观看", r#"{"unwatched":true}"#).unwrap();
         let b = create(&conn, "user", "高評価", r#"{"minRating":4}"#).unwrap();
         assert_eq!(list(&conn).unwrap().iter().map(|s| s.id).collect::<Vec<_>>(), vec![a, b]);
 
@@ -134,10 +134,10 @@ mod tests {
     #[test]
     fn update_validates_and_delete_removes() {
         let conn = setup();
-        let id = create(&conn, "user", "未視聴", r#"{"unwatched":true}"#).unwrap();
+        let id = create(&conn, "user", "未观看", r#"{"unwatched":true}"#).unwrap();
         assert!(update(&conn, "user", id, None, Some("{ broken")).is_err());
-        update(&conn, "user", id, Some("見てない"), Some(r#"{"unwatched":true,"minRating":3}"#)).unwrap();
-        assert_eq!(list(&conn).unwrap()[0].name, "見てない");
+        update(&conn, "user", id, Some("未看"), Some(r#"{"unwatched":true,"minRating":3}"#)).unwrap();
+        assert_eq!(list(&conn).unwrap()[0].name, "未看");
 
         delete(&conn, "user", id).unwrap();
         assert!(list(&conn).unwrap().is_empty());

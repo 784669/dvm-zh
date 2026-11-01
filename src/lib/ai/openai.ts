@@ -96,7 +96,7 @@ interface PartialCall {
 
 export interface OpenAiState {
   text: string;
-  /** index ごとに断片を貯める。**確定は finish_reason かストリーム終了時** */
+  /** index ごとに断片を貯める。**確定は finish_reason か流終了時** */
   partial: Map<number, PartialCall>;
   toolCalls: ToolCall[];
   stopReason: StopReason;
@@ -117,7 +117,7 @@ function settle(state: OpenAiState): StreamEvent[] {
     try {
       call.input = p.args.trim() === '' ? {} : (JSON.parse(p.args) as Record<string, unknown>);
     } catch (e) {
-      call.parseError = `引数の JSON が壊れています: ${e instanceof Error ? e.message : String(e)}`;
+      call.parseError = `参数的 JSON 已损坏: ${e instanceof Error ? e.message : String(e)}`;
     }
     state.toolCalls.push(call);
     out.push({ type: 'tool_call', call });

@@ -29,7 +29,7 @@ pub fn list_series(conn: &Connection) -> Result<Vec<Series>> {
 /// 名前からシリーズ id を取得。無ければ作る
 pub fn ensure_series(conn: &Connection, name: &str) -> Result<i64> {
     let name = name.trim();
-    anyhow::ensure!(!name.is_empty(), "シリーズ名が空です");
+    anyhow::ensure!(!name.is_empty(), "系列名为空");
     let existing: Option<i64> = conn
         .query_row(
             "SELECT id FROM series WHERE name = ?1 COLLATE NOCASE",
@@ -114,7 +114,7 @@ pub fn remove_videos_from_series(conn: &Connection, actor: &str, video_ids: &[i6
 /// 素通しすると同名のシリーズが 2 つ並び、以後 ensure_series は片方しか掴めなくなる
 pub fn rename_series(conn: &Connection, actor: &str, series_id: i64, new_name: &str) -> Result<()> {
     let new_name = new_name.trim();
-    anyhow::ensure!(!new_name.is_empty(), "シリーズ名が空です");
+    anyhow::ensure!(!new_name.is_empty(), "系列名为空");
     let taken: Option<i64> = conn
         .query_row(
             "SELECT id FROM series WHERE name = ?1 COLLATE NOCASE AND id <> ?2",
@@ -122,7 +122,7 @@ pub fn rename_series(conn: &Connection, actor: &str, series_id: i64, new_name: &
             |r| r.get(0),
         )
         .ok();
-    anyhow::ensure!(taken.is_none(), "同じ名前のシリーズがすでにあります");
+    anyhow::ensure!(taken.is_none(), "已存在同名系列");
     let before: String = conn
         .query_row("SELECT name FROM series WHERE id = ?1", params![series_id], |r| r.get(0))
         .unwrap_or_default();

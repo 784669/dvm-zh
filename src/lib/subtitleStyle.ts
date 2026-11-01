@@ -1,7 +1,7 @@
 /**
- * 字幕の見た目(v1.24、mpv のみ)。
+ * 字幕样式(v1.24、mpv のみ)。
  *
- * 字幕に関する知識はすべてここに置き、UI は `SUB_STYLE_FIELDS` を描くだけにする
+ * 字幕に関する知識は全部ここに置き、UI は `SUB_STYLE_FIELDS` を描くだけにする
  * (listColumns.ts の COLUMNS と ColumnPicker の関係と同じ)。
  *
  * 値は mpv の `sub-*` プロパティに 1 対 1 で対応する。これらは loadfile を跨いで残る
@@ -16,10 +16,10 @@
 export const SUB_STYLE_KEY = 'subtitle_style';
 
 export interface SubStyle {
-  // ---- すべての字幕に効く(ASS/SSA を含む) ----
+  // ---- 全部字幕に効く(ASS/SSA を含む) ----
   /** sub-scale。1 = 等倍 */
   scale: number;
-  /** sub-pos。100 = 画面下端、小さいほど上へ */
+  /** sub-pos。100 = 画面下端、小さいほど上移 */
   pos: number;
 
   // ---- 装飾を持たない字幕(SRT など)にだけ効く ----
@@ -50,7 +50,7 @@ export interface SubStyle {
   // ---- ASS/SSA の扱い ----
   /**
    * sub-ass-override。false = `scale`(制作者のスタイルを尊重し、拡大率と縦位置だけ効く)、
-   * true = `force`(色やフォントも上書きする)
+   * true = `force`(色や字体も上書きする)
    */
   assOverride: boolean;
 }
@@ -114,51 +114,51 @@ export type SubStyleField =
  */
 export const SUB_STYLE_FIELDS: SubStyleField[] = [
   {
-    kind: 'slider', group: 'all', key: 'scale', label: '拡大率',
+    kind: 'slider', group: 'all', key: 'scale', label: '缩放比例',
     min: 0.5, max: 3, step: 0.05, format: (v) => `${Math.round(v * 100)}%`,
   },
   {
-    kind: 'slider', group: 'all', key: 'pos', label: '縦位置',
+    kind: 'slider', group: 'all', key: 'pos', label: '纵向位置',
     min: 0, max: 150, step: 1, format: (v) => String(Math.round(v)),
-    hint: '大きいほど下。100 が既定の位置',
+    hint: '数值越大越靠下。100 为默认位置',
   },
   {
-    kind: 'font', group: 'plain', key: 'font', label: 'フォント',
-    hint: '反映されないときは英語名(例: Meiryo)を入れてください',
+    kind: 'font', group: 'plain', key: 'font', label: '字体',
+    hint: '若未生效，请输入英文名(例: Meiryo)',
   },
   {
-    kind: 'slider', group: 'plain', key: 'fontSize', label: '文字サイズ',
+    kind: 'slider', group: 'plain', key: 'fontSize', label: '文字大小',
     min: 20, max: 120, step: 1, format: (v) => String(Math.round(v)),
-    hint: '高さ 720px の画面を基準にした大きさ。ウィンドウの大きさで見え方が変わります',
+    hint: '以 720px 高度画面为基准的大小。随窗口大小不同显示效果会变化',
   },
-  { kind: 'check', group: 'plain', key: 'bold', label: '太字にする' },
-  { kind: 'color', group: 'plain', key: 'color', alphaKey: 'colorAlpha', label: '文字の色' },
+  { kind: 'check', group: 'plain', key: 'bold', label: '加粗' },
+  { kind: 'color', group: 'plain', key: 'color', alphaKey: 'colorAlpha', label: '文字颜色' },
   {
     kind: 'color', group: 'plain', key: 'outlineColor', alphaKey: 'outlineAlpha',
-    label: '縁取りの色',
+    label: '描边颜色',
   },
   {
-    kind: 'slider', group: 'plain', key: 'outlineSize', label: '縁取りの太さ',
+    kind: 'slider', group: 'plain', key: 'outlineSize', label: '描边粗细',
     min: 0, max: 10, step: 0.5, format: (v) => v.toFixed(1),
   },
   {
     kind: 'color', group: 'plain', key: 'shadowColor', alphaKey: 'shadowAlpha',
-    label: '影の色',
+    label: '阴影颜色',
   },
   {
-    kind: 'slider', group: 'plain', key: 'shadowOffset', label: '影の距離',
+    kind: 'slider', group: 'plain', key: 'shadowOffset', label: '阴影距离',
     min: 0, max: 10, step: 0.5, format: (v) => v.toFixed(1),
-    hint: '0 で影なし',
+    hint: '0 显示无阴影',
   },
   {
     kind: 'color', group: 'plain', key: 'backColor', alphaKey: 'backAlpha',
-    label: '背景の帯',
-    hint: '不透明度を上げると文字の後ろに帯が敷かれます(明るい映像で読みやすくなります)',
+    label: '背景色带',
+    hint: '提高不透明度会在文字后铺设色带(在明亮画面上更易阅读)',
   },
   {
     kind: 'check', group: 'ass', key: 'assOverride',
-    label: 'ASS/SSA 字幕にもこの見た目を適用する',
-    hint: 'アニメなどで制作者が付けた色・位置・タイミング演出は失われます',
+    label: '此样式也应用于 ASS/SSA 字幕',
+    hint: '将丢失动画等作品中作者设置的颜色、位置、时间演出',
   },
 ];
 
@@ -183,7 +183,7 @@ function normalizeHex(value: unknown, fallback: string): string {
  * 色 + 不透明度 → mpv の色表記 `#AARRGGBB`(**FF = 不透明、00 = 透明**)。
  *
  * <input type="color"> が返すのは #rrggbb だけなので、不透明度は別のスライダーで持ち、
- * mpv へ渡す直前にここで合成する。アルファの向きの前提はこの 1 関数に閉じている
+ * mpv へ渡す直前にここで合成する。アルファの方向の前提はこの 1 関数に閉じている
  */
 export function toMpvColor(hex: string, alpha: number): string {
   const rgb = normalizeHex(hex, '#000000').slice(1);
@@ -264,7 +264,7 @@ export function parseSubStyle(json: string | null | undefined): SubStyle {
 
 /**
  * 保存する JSON。**既定と違うフィールドだけ**を書く。
- * こうすると「既定に戻す」は '{}' を書くだけで済み(settings には削除コマンドが無い)、
+ * こうすると「恢复默认」は '{}' を書くだけで済み(settings には削除コマンドが無い)、
  * 将来アプリ側の既定を変えたとき、明示的に触っていないユーザーは新しい既定に乗る
  */
 export function serializeSubStyle(s: SubStyle): string {
@@ -275,7 +275,7 @@ export function serializeSubStyle(s: SubStyle): string {
   return JSON.stringify(diff);
 }
 
-/** 「既定に戻す」ボタンを disabled にしてよいか */
+/** 「恢复默认」ボタンを disabled にしてよいか */
 export function isDefaultSubStyle(s: SubStyle): boolean {
   return serializeSubStyle(s) === '{}';
 }
@@ -289,7 +289,7 @@ export function mpvSubProps(s: SubStyle): Record<string, string | number> {
   return {
     'sub-scale': s.scale,
     'sub-pos': s.pos,
-    // 空欄は mpv の既定に戻す(''を渡すとフォント解決が壊れる)
+    // 空欄は mpv の恢复默认(''を渡すと字体解決が壊れる)
     'sub-font': s.font.trim() || 'sans-serif',
     'sub-font-size': s.fontSize,
     'sub-bold': s.bold ? 'yes' : 'no',

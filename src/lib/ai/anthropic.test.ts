@@ -147,7 +147,7 @@ describe('parseChunk', () => {
       { type: 'content_block_stop', index: 0 },
     ]);
     const call = events.filter((e) => e.type === 'tool_call')[0] as { call: { parseError?: string } };
-    expect(call.call.parseError).toMatch(/壊れています/);
+    expect(call.call.parseError).toMatch(/已损坏/);
   });
 
   it('usage を message_start と message_delta の両方から拾う', () => {

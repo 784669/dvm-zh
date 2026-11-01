@@ -11,10 +11,10 @@ import { McpSettings } from './McpSettings';
 const ORDER: ProviderId[] = ['anthropic', 'openai', 'gemini', 'openai_compat'];
 
 /**
- * AI 連携(v1.38 で「AI アシスタント」と「MCP 連携」を 1 カテゴリにまとめた)。
+ * AI 連携(v1.38 で「AI 助手」と「MCP 連携」を 1 カテゴリにまとめた)。
  *
  * **2 つを並べたままにする** —— アプリ内のアシスタント(自分の API キーで動く)と
- * MCP(外部の AI アプリからライブラリを触らせる)は別物なので、隣に置いて
+ * MCP(外部の AI アプリから媒体库を触らせる)は別物なので、隣に置いて
  * 違いが分かるようにする、というのが v1.21 からの判断(DESIGN.md 参照)。
  *
  * v1.43 でアシスタント側が複数プロバイダに対応した。**2 つの違いは「課金形態」ではなく
@@ -43,10 +43,10 @@ export function AiSection({ info }: { info: AppInfo | null }) {
   return (
     <>
       <div className="settings-section">
-        <div className="settings-heading">AI アシスタント</div>
+        <div className="settings-heading">AI 助手</div>
         <div className="settings-note">
-          DVM の中で AI に話しかけて、ライブラリを検索したり画面を絞り込んだりできます。
-          使う AI を選んで、その API キーを入れてください
+          在 DVM 中与 AI 对话，即可搜索媒体库、筛选画面。
+          请选择要使用的 AI，并填入其 API 密钥
         </div>
         <div className="mcp-tabs">
           {ORDER.map((id) => (
@@ -62,14 +62,14 @@ export function AiSection({ info }: { info: AppInfo | null }) {
         {/* key で mount し直す(理由は AiProviderFields の doc コメント) */}
         {provider && <AiProviderFields key={provider} provider={provider} />}
         <div className="settings-note">
-          キーは app.db に平文で保存されます(アプリ全体の設定なので、ライブラリを切り替えても
-          入れ直す必要はありません)。プロバイダごとに別々に覚えるので、切り替えても消えません。
-          利用量に応じて各社の API 料金が発生します(ローカル LLM なら無料です)
+          密钥以明文保存在 app.db 中（属于应用全局设置，切换媒体库也无需
+          重新输入）。按服务商分别记忆，切换后不会消失。
+          将根据用量产生各家的 API 费用（本地 LLM 免费）
         </div>
         {provider === 'anthropic' && (
           <div className="settings-note">
-            Claude Pro / Max のサブスクリプションでは使えません(API は従量課金の別契約です)。
-            サブスクのまま使いたい場合は、下の MCP 連携をお使いください
+            无法使用 Claude Pro / Max 订阅（API 是按量计费的独立合约）。
+            若想继续用订阅，请使用下方的 MCP 联动
           </div>
         )}
       </div>

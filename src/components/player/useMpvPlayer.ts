@@ -22,13 +22,13 @@ import {
 } from './types';
 import type { MediaTrack, PlayerState, VideoPlayer } from './types';
 
-/** mpv の track-list を UI 用に整形する(音声・字幕だけ拾う) */
+/** mpv の track-list を UI 用に整形する(音声·字幕だけ拾う) */
 function toTracks(data: unknown): MediaTrack[] {
   if (!Array.isArray(data)) return [];
   return (data as MpvTrackEntry[])
     .filter((t) => t && (t.type === 'audio' || t.type === 'sub'))
     .map((t) => {
-      // 「日本語」「Commentary」など人が読める名前を優先し、無ければコーデック名で代用する
+      // 「日本語」「Commentary」など人が読める名前を優先し、無ければ编解码器名で代用する
       const parts = [t.lang, t.title, t.codec].filter(Boolean);
       return {
         id: t.id,
@@ -40,7 +40,7 @@ function toTracks(data: unknown): MediaTrack[] {
     });
 }
 
-/** IPC コマンドの失敗(ファイル未ロード中の seek 等)は無害なので握りつぶす */
+/** IPC コマンドの失敗(文件未ロード中の seek 等)は無害なので握りつぶす */
 const run = (p: Promise<unknown>) => {
   p.catch(() => {});
 };
@@ -51,14 +51,14 @@ const run = (p: Promise<unknown>) => {
  * 黙って消えると原因に辿り着けない。トーストは出さない(再生を邪魔しないため)
  */
 const runSub = (name: string, p: Promise<unknown>) => {
-  p.catch((e) => console.warn('字幕プロパティを設定できません:', name, e));
+  p.catch((e) => console.warn('无法设置字幕属性:', name, e));
 };
 
 /**
- * 表示サイズ → mpv の video-unscaled。
+ * 表示大小 → mpv の video-unscaled。
  * フィット = 'no'、等倍 = 'downscale-big'(拡大はしないが、ウィンドウより大きい動画は
  * 縮小して収める)。'yes' は「ウィンドウより大きい動画を切り取る」挙動なので使わない
- * (4K を開くと画面外が切れる)
+ * (4K を打开と画面外が切れる)
  */
 const unscaledValue = (unscaled: boolean) => (unscaled ? 'downscale-big' : 'no');
 
@@ -85,11 +85,11 @@ export function useMpvPlayer(): VideoPlayer {
   const [displayHdr, setDisplayHdr] = useState(false);
   // リピートは engine をまたぐ設定なので store に置いている(v1.13)
   const repeatOne = useLibrary((s) => s.repeatOne);
-  // 字幕の見た目(v1.24)。mpv 専用だが、設定モーダルからも触るので store 経由
+  // 字幕样式(v1.24)。mpv 専用だが、設定モーダルからも触るので store 経由
   const subStyle = useLibrary((s) => s.subStyle);
   // HDR パススルー(v1.30)。同じく設定モーダルから変わるので store 経由
   const hdrPassthrough = useLibrary((s) => s.hdrPassthrough);
-  // 表示サイズ(v1.12)。mpv 側は購読しない — 変更できるのはこの UI だけなので手元が真実
+  // 表示大小(v1.12)。mpv 側は購読しない — 変更できるのはこの UI だけなので手元が真実
   const [unscaled, setUnscaled] = useState(savedUnscaled);
   // 操作コールバックから最新状態を読むための ref(stale closure 回避)
   const stateRef = useRef(state);
@@ -106,12 +106,12 @@ export function useMpvPlayer(): VideoPlayer {
         return;
       }
       if (name === 'video-params') {
-        // stop / ロード中は null。前のファイルのバッジを残さないよう素直に消す
+        // stop / ロード中は null。前の文件のバッジを残さないよう素直に消す
         setHdr(hdrFromParams(data));
         return;
       }
       if (name === 'chapter-list') {
-        // stop / 別ファイルへの切り替えでは null が来る。前のファイルの目盛りを
+        // stop / 別文件への切り替えでは null が来る。前の文件の目盛りを
         // 残さないよう、ここは time-pos と違って素直に空へ倒す
         setChapters(toChapters(data));
         return;
@@ -121,7 +121,7 @@ export function useMpvPlayer(): VideoPlayer {
           case 'pause':
             return { ...s, paused: data as boolean };
           case 'time-pos':
-            // idle・ロード中は null が来る → 前値を維持
+            // idle·ロード中は null が来る → 前値を維持
             return data == null ? s : { ...s, currentTime: data as number };
           case 'duration':
             return { ...s, duration: (data as number | null) ?? 0 };
@@ -145,11 +145,11 @@ export function useMpvPlayer(): VideoPlayer {
 
   /**
    * video-unscaled は loadfile を跨いで残るが、セッション最初の再生では mpv の既定(no)
-   * なので、mount のたびに localStorage の値を流し込む(音量・ミュートと同じ考え方)。
-   * ファイルに依存しないオプションなので loadfile の前後は問わない。
+   * なので、mount のたびに localStorage の値を流し込む(音量·ミュートと同じ考え方)。
+   * 文个依存しないオプションなので loadfile の前後は問わない。
    * MpvPlayerView の再生開始 effect に await で混ぜないこと —
    * あの chain の失敗は onFail() に繋がっており、表示オプションが古い libmpv で
-   * 通らなかっただけでファイルが WebView2 の再エンコード経路に落ちてしまう
+   * 通らなかっただけで文件が WebView2 の再エンコード経路に落ちてしまう
    */
   useEffect(() => {
     run(setProperty('video-unscaled', unscaledValue(savedUnscaled())));
@@ -165,7 +165,7 @@ export function useMpvPlayer(): VideoPlayer {
   }, [repeatOne]);
 
   /**
-   * 字幕の見た目(v1.24)。sub-* も loadfile を跨いで残るグローバルプロパティなので、
+   * 字幕样式(v1.24)。sub-* も loadfile を跨いで残るグローバルプロパティなので、
    * 上の 2 つと同じく「変わるたび全部押し込む」だけでよい(mount 時にも走る)。
    *
    * 差分だけ送るような小細工はしない —— 12 個の setProperty は一瞬で終わるし、
@@ -201,7 +201,7 @@ export function useMpvPlayer(): VideoPlayer {
 
   /*
    * 聞き直す機会は 3 つ: mount(= 再生開始)、パススルー設定の変更、
-   * そして **video-params が届いたとき**(ファイル切替や vo の再構成)。
+   * そして **video-params が届いたとき**(文件切替や vo の再構成)。
    * `hdr` を deps に入れているのがその 3 つ目。
    *
    * ポーリングはしない。再生中に Windows 側の HDR を切り替えた場合だけは
@@ -269,8 +269,8 @@ export function useMpvPlayer(): VideoPlayer {
   }, []);
 
   /**
-   * 次(1)/前(-1)のチャプターへ(v1.29)。飛び先の計算は純関数に任せ、
-   * **端では何もしない** —— mpv の `add chapter 1` に任せると最後のチャプターで
+   * 次(1)/前(-1)の章节へ(v1.29)。飛び先の計算は純関数に任せ、
+   * **端では何もしない** —— mpv の `add chapter 1` に任せると最後の章节で
    * 終端に到達し、連続再生が次の動画を始めてしまう
    */
   const jumpChapter = useCallback((dir: 1 | -1) => {
@@ -282,7 +282,7 @@ export function useMpvPlayer(): VideoPlayer {
   return {
     state, togglePlay, seekTo, seekBy, setVolume, changeVolume, toggleMute, setRate, cycleRate,
     tracks, setTrack, unscaled, toggleUnscaled, chapters, jumpChapter, hdr,
-    // 実際に HDR で出ている = パススルーがオン **かつ** ディスプレイが HDR モード。
+    // 実際に HDR で出ている = パススルーがオン **并且** ディスプレイが HDR モード。
     // hint は `auto` なので、片方でも欠けたら mpv は SDR にトーンマップしている
     hdrOutput: hdrPassthrough && displayHdr,
   };

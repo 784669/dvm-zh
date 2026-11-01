@@ -7,7 +7,7 @@ import { useLibrary } from '../../store';
 import type { VideoRow } from '../../types';
 
 /**
- * プレイヤーの右クリックメニュー(v1.20)。2 つのエンジンで中身が同じなので
+ * プレイヤーの右键菜单(v1.20)。2 つのエンジンで中身が同じなので
  * `usePlayerShortcuts` と同じ作法で共有する。
  *
  * **描く場所だけはエンジンごとに違う**。返した `menu` を使って
@@ -57,15 +57,15 @@ export function usePlayerMenu(
           try {
             await revealItemInDir(video.path);
           } catch {
-            s.pushToast('エクスプローラーで表示できませんでした');
+            s.pushToast('无法在资源管理器中显示');
           }
           break;
         case 'player:copyPath':
           try {
             await navigator.clipboard.writeText(video.path);
-            s.pushToast('パスをコピーしました', 'info');
+            s.pushToast('已复制路径', 'info');
           } catch {
-            s.pushToast('クリップボードにコピーできませんでした');
+            s.pushToast('无法复制到剪贴板');
           }
           break;
         case 'player:close':

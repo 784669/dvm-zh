@@ -9,13 +9,13 @@ import type { DedupePlan, DedupeResult } from '../types';
  *
  * **下見を見せてからでないと実行させない。** 開いた時点で `plan_dedupe` を呼び、
  * 何本外れて何が残るのかを出してからボタンを押させる。
- * 実行してもファイルには触らない(ライブラリの登録を外すだけ)ので、
+ * 実行しても文个は触らない(媒体库の登録を外すだけ)ので、
  * ごみ箱送りのような二段構えの警告までは出していない。
  */
 export function DedupeDialog({
   scope, onDone, onClose,
 }: {
-  /** 対象フォルダ。未指定ならライブラリ全体 */
+  /** 対象文件夹。未指定なら媒体库全体 */
   scope?: string;
   onDone: (result: DedupeResult, trashed: boolean) => void;
   onClose: () => void;
@@ -33,16 +33,16 @@ export function DedupeDialog({
 
   /**
    * ごみ箱送りは**もう一段確認する**。下見は見せてあるが、登録を外すのと違って
-   * ファイルが動くので、押し間違いで通り抜けないようにする
+   * 文件が動くので、押し間違いで通り抜けないようにする
    */
   const run = async (trashFiles: boolean) => {
     if (trashFiles) {
       const yes = await ask(
-        `重複した ${plan?.removeCount.toLocaleString()} 件のファイルを Windows のごみ箱へ送ります。\n\n` +
-          '各グループで残す 1 本には手を付けません。\n' +
-          'ごみ箱から戻して再スキャンすれば元に戻せます。\n\n' +
-          '実行しますか?',
-        { title: 'ファイルをごみ箱へ送る', kind: 'warning' },
+        `将 ${plan?.removeCount.toLocaleString()} 个重复文件送入 Windows 回收站。\n\n` +
+          '每个分组中要保留的那 1 个不会被改动。\n' +
+          '从回收站恢复后重新扫描即可还原。\n\n' +
+          '确定执行吗？',
+        { title: '将文件送入回收站', kind: 'warning' },
       );
       if (!yes) return;
     }
@@ -60,14 +60,14 @@ export function DedupeDialog({
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal dedupe-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-title">
-          <CopyMinus size={18} /> 重複を解消
+          <CopyMinus size={18} /> 消除重复
         </div>
         <div className="settings-note">
-          {scope ? <>対象: <code>{scope}</code> の配下</> : 'ライブラリ全体が対象です'}
+          {scope ? <>对象: <code>{scope}</code>  的下级</> : '对象为整个媒体库'}
         </div>
 
         {plan === null && (
-          <div className="dedupe-loading"><Loader2 className="spin" /> 重複を数えています…</div>
+          <div className="dedupe-loading"><Loader2 className="spin" />  正在统计重复…</div>
         )}
 
         {plan !== null && (
@@ -75,32 +75,32 @@ export function DedupeDialog({
             <div className="dedupe-summary">
               <div className="dedupe-stat">
                 <span className="dedupe-num">{plan.removeCount.toLocaleString()}</span>
-                <span className="dedupe-label">ライブラリから外す</span>
+                <span className="dedupe-label">移出媒体库</span>
               </div>
               <div className="dedupe-stat">
                 <span className="dedupe-num">{plan.groups.toLocaleString()}</span>
-                <span className="dedupe-label">残る本数(1 グループ 1 本)</span>
+                <span className="dedupe-label">保留数量(每组 1 个)</span>
               </div>
             </div>
 
             <div className="settings-note">
-              同じ内容(サイズと先頭ハッシュが一致)の動画を 1 本だけ残します。
-              タグ・レーティング・視聴履歴が付いた動画は優先して残します。
-              下のどちらのボタンを押すかで、ファイルを残すか捨てるかが決まります。
+              内容相同（大小与首部哈希一致）的视频只保留 1 个。
+              带标签、评分、观看历史的视频优先保留。
+              按下方哪一个按钮，决定保留还是丢弃文件。
             </div>
 
             {(plan.skippedOutside > 0 || plan.skippedZeroSize > 0) && (
               <div className="settings-note dedupe-skipped">
                 {plan.skippedOutside > 0 && (
                   <div>
-                    {plan.skippedOutside.toLocaleString()} グループは、同じ内容がこのフォルダーの
-                    外にもあるため触りません
+                    {plan.skippedOutside.toLocaleString()} 个分组，相同内容在此文件夹
+                    之外也存在，故不处理
                   </div>
                 )}
                 {plan.skippedZeroSize > 0 && (
                   <div>
-                    {plan.skippedZeroSize.toLocaleString()} グループは 0 バイトのファイルなので
-                    対象外です(中身が同じとは限りません)
+                    {plan.skippedZeroSize.toLocaleString()} 个分组是 0 字节文件，
+                    不在处理范围（内容未必相同）
                   </div>
                 )}
               </div>
@@ -108,7 +108,7 @@ export function DedupeDialog({
 
             {plan.byFolder.length > 0 && (
               <div className="dedupe-breakdown">
-                <div className="dedupe-breakdown-title">外す動画のあるフォルダー</div>
+                <div className="dedupe-breakdown-title">包含待移出视频的文件夹</div>
                 <ul>
                   {plan.byFolder.map((f) => (
                     <li key={f.path}>
@@ -122,12 +122,12 @@ export function DedupeDialog({
 
             {plan.samples.length > 0 && (
               <details className="dedupe-samples">
-                <summary>残すものと外すものの例({plan.samples.length} 組)</summary>
+                <summary>保留与移除的示例（共 {plan.samples.length} 组）</summary>
                 {plan.samples.map((s) => (
                   <div className="dedupe-sample" key={s.keep}>
-                    <div className="dedupe-keep" title={s.keep}>残す: {s.keep}</div>
+                    <div className="dedupe-keep" title={s.keep}>保留: {s.keep}</div>
                     {s.remove.map((r) => (
-                      <div className="dedupe-remove" key={r} title={r}>外す: {r}</div>
+                      <div className="dedupe-remove" key={r} title={r}>移除: {r}</div>
                     ))}
                   </div>
                 ))}
@@ -146,10 +146,10 @@ export function DedupeDialog({
               <ListX />
               <span>
                 <span className="delete-choice-title">
-                  {plan.removeCount.toLocaleString()} 件をライブラリから外す
+                  将 {plan.removeCount.toLocaleString()} 个从媒体库移除
                 </span>
                 <span className="delete-choice-note">
-                  登録だけを消します。ファイルは元の場所に残ります
+                  只删除注册信息。文件仍留在原位置
                 </span>
               </span>
             </button>
@@ -158,10 +158,10 @@ export function DedupeDialog({
               <Trash2 />
               <span>
                 <span className="delete-choice-title">
-                  {plan.removeCount.toLocaleString()} 件のファイルをごみ箱へ
+                  将 {plan.removeCount.toLocaleString()} 个文件送入回收站
                 </span>
                 <span className="delete-choice-note">
-                  重複したファイルをごみ箱へ送り、登録も消します(残す 1 本には触れません)
+                  将重复文件送入回收站，并删除注册（不触碰保留的那 1 个）
                 </span>
               </span>
             </button>
@@ -169,8 +169,8 @@ export function DedupeDialog({
         )}
 
         <div className="modal-actions">
-          {busy && <span className="settings-note">実行中…</span>}
-          <button onClick={onClose}>{nothing ? '閉じる' : 'キャンセル'}</button>
+          {busy && <span className="settings-note">执行中…</span>}
+          <button onClick={onClose}>{nothing ? '关闭' : '取消'}</button>
         </div>
       </div>
     </div>

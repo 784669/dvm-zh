@@ -16,7 +16,7 @@ export interface SseMessage {
 /**
  * 行を渡すと、イベントが 1 つ確定したときだけ返す状態機械。
  *
- * SSE は**空行でイベントが確定する**。`:` で始まる行はコメント(keep-alive)なので捨てる。
+ * SSE は**空行でイベントが确定**。`:` で始まる行はコメント(keep-alive)なので捨てる。
  * 純粋な状態機械にしてあるのでテストしやすい
  */
 export class SseAssembler {
@@ -51,7 +51,7 @@ export class SseAssembler {
 
   /**
    * 最後の空行が来ないまま切れたときの取りこぼしを回収する。
-   * Gemini は `[DONE]` を送らずにストリームを閉じるので、これが無いと最終イベントが落ちる
+   * Gemini は `[DONE]` を送らずに流を关闭ので、これが無いと最終イベントが落ちる
    */
   flush(): SseMessage | null {
     if (this.dataLines.length === 0) return null;

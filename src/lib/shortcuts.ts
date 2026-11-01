@@ -1,9 +1,9 @@
 /*
- * キー操作の一覧(v1.39)。
+ * 快捷键の一覧(v1.39)。
  *
  * **ここが一覧の唯一の出所**。キー処理そのものは各ハンドラの switch が持ったままで、
  * この表は「何が割り当てられているか」だけを持つ(リバインドは作らないと決めた。
- * 理由は DESIGN.md「キー操作の一覧」節)。
+ * 理由は DESIGN.md「快捷键の一覧」節)。
  *
  * 表とハンドラが二重管理になるのは承知のうえで、**ずれは shortcuts.test.ts が見張る** ——
  * usePlayerShortcuts.ts と VideoGrid.tsx のソースから `case '…':` を抜き出して、
@@ -23,12 +23,12 @@ export interface ShortcutDef {
    */
   keys: string[];
   /**
-   * `e.key` を持たない項目の表記(マウスと組み合わせる操作)。
+   * `e.key` を持たない項目の表記(配合鼠标使用操作)。
    * **`keys` が空のときだけ使う**。ソースとの突き合わせからも外れる
    */
   display?: string;
   label: string;
-  /** 「mpv のみ」「先頭 1000 件まで」などの補足 */
+  /** 「mpv のみ」「最多前 1000 个」などの補足 */
   note?: string;
 }
 
@@ -37,7 +37,7 @@ export type ShortcutGroupKey = 'grid' | 'player' | 'menu' | 'input' | 'mouse' | 
 export interface ShortcutGroup {
   key: ShortcutGroupKey;
   title: string;
-  /** この系統がいつ効くか。見出しの直下に出す */
+  /** この系統がいつ効くか。見出し的直接下级に出す */
   when: string;
   items: ShortcutDef[];
 }
@@ -67,7 +67,7 @@ export function keyLabel(key: string): string {
  * `{ mods: ['Ctrl'], keys: ['ArrowLeft', 'ArrowRight'] }` → `['Ctrl', '←', '→']`
  */
 export function chordLabel(def: ShortcutDef): string[] {
-  // 修飾キーは keys が空でも前に付ける(Ctrl+クリック / Shift+クリック)
+  // 修飾キーは keys が空でも前に付ける(Ctrl+点击 / Shift+点击)
   const tail = def.keys.length > 0 ? def.keys.map(keyLabel) : def.display ? [def.display] : [];
   return [...(def.mods ?? []), ...tail];
 }
@@ -87,96 +87,96 @@ export function isTypingTarget(e: Event): boolean {
 export const SHORTCUTS: ShortcutGroup[] = [
   {
     key: 'grid',
-    title: '一覧',
-    when: 'サムネイル表示・詳細リスト表示のとき',
+    title: '列表',
+    when: '在缩略图视图或详细列表视图时',
     items: [
-      { keys: ['ArrowLeft', 'ArrowRight'], label: '前後の動画へ' },
-      { keys: ['ArrowUp', 'ArrowDown'], label: '1 行ぶん上下へ' },
-      { mods: ['Shift'], keys: ['ArrowLeft'], label: '選んだまま移動して範囲を広げる', note: '矢印・Home・End のどれでも' },
-      { keys: ['Home', 'End'], label: '先頭 / 末尾へ' },
-      { keys: ['Enter'], label: '再生する' },
-      { mods: ['Ctrl'], keys: ['a'], label: 'すべて選択', note: '先頭 1000 件まで' },
-      { keys: ['q'], label: '選択を再生キューに追加', note: '右クリックの「キュー」からは「次に再生」も選べます' },
-      { keys: ['Delete'], label: '削除する', note: 'ライブラリからか、ごみ箱かをダイアログで選びます' },
+      { keys: ['ArrowLeft', 'ArrowRight'], label: '上一个 / 下一个视频' },
+      { keys: ['ArrowUp', 'ArrowDown'], label: '上下移动一行' },
+      { mods: ['Shift'], keys: ['ArrowLeft'], label: '保持选中并移动以扩大范围', note: '箭头键·Home·End 中任意一个' },
+      { keys: ['Home', 'End'], label: '到开头 / 末尾' },
+      { keys: ['Enter'], label: '播放' },
+      { mods: ['Ctrl'], keys: ['a'], label: '全选', note: '最多前 1000 个' },
+      { keys: ['q'], label: '将选择添加到播放队列', note: '右键菜单的「队列」中也可选择「下次播放」' },
+      { keys: ['Delete'], label: '删除', note: '在对话框中选择从媒体库删除，还是送入回收站' },
       // 処理は App.tsx(Escape と同じく、VideoGrid のソース突き合わせの対象外)
-      { mods: ['Alt'], keys: ['ArrowLeft', 'ArrowRight'], label: '絞り込みを 戻す / 進む', note: 'スマートフォルダ・AI 検索・統計から変えた条件を行き来します' },
-      { keys: ['Escape'], label: '選択を解除' },
+      { mods: ['Alt'], keys: ['ArrowLeft', 'ArrowRight'], label: '筛选 后退 / 前进', note: '在智能文件夹、AI 搜索、统计之间切换所改的条件' },
+      { keys: ['Escape'], label: '取消选择' },
     ],
   },
   {
     key: 'player',
-    title: '再生中',
-    when: 'アプリ内プレイヤーで再生しているとき',
+    title: '播放中',
+    when: '在使用应用内播放器播放时',
     items: [
-      { keys: [' ', 'k'], label: '再生 ⇄ 一時停止' },
-      { keys: ['ArrowLeft', 'ArrowRight'], label: '10 秒 戻す / 進める' },
-      { mods: ['Ctrl'], keys: ['ArrowLeft', 'ArrowRight'], label: '前 / 次のチャプターへ', note: 'mpv で再生しているときだけ' },
-      { keys: ['PageUp', 'PageDown'], label: '前 / 次のチャプターへ', note: 'mpv で再生しているときだけ' },
+      { keys: [' ', 'k'], label: '播放 ⇄ 暂停' },
+      { keys: ['ArrowLeft', 'ArrowRight'], label: '后退 / 前进 10 秒' },
+      { mods: ['Ctrl'], keys: ['ArrowLeft', 'ArrowRight'], label: '上一个 / 下一章节', note: '仅在使用 mpv 播放时' },
+      { keys: ['PageUp', 'PageDown'], label: '上一个 / 下一章节', note: '仅在使用 mpv 播放时' },
       { keys: ['ArrowUp', 'ArrowDown'], label: '音量 ±10%' },
-      { keys: ['m'], label: 'ミュート ⇄ 解除' },
-      { keys: ['f'], label: 'フルスクリーン ⇄ 解除' },
-      { keys: ['<', '>'], label: '再生速度を 下げる / 上げる' },
-      { keys: ['n', 'p'], label: '次 / 前の動画へ', note: '連続再生・再生キューで開いたときだけ' },
-      { keys: ['q'], label: '再生キューを開く / 閉じる', note: '再生中でも並べ替え・削除ができます' },
-      { keys: ['t'], label: 'この位置をサムネイルにする' },
-      { keys: ['s'], label: 'このコマを画像として保存' },
-      { keys: ['u'], label: '表示サイズ 等倍 ⇄ フィット', note: 'mpv で再生しているときだけ' },
-      { keys: ['a'], label: '連続再生の切り替え' },
-      { keys: ['r'], label: 'リピート再生の切り替え' },
-      { keys: ['Escape'], label: '閉じる', note: 'フルスクリーン中は解除だけ' },
+      { keys: ['m'], label: '静音 ⇄ 取消静音' },
+      { keys: ['f'], label: '全屏 ⇄ 退出' },
+      { keys: ['<', '>'], label: '降低 / 提高播放速度' },
+      { keys: ['n', 'p'], label: '到下一 / 上一个视频', note: '仅在使用连续播放·播放队列打开时' },
+      { keys: ['q'], label: '打开 / 关闭播放队列', note: '播放中也可排列·删除' },
+      { keys: ['t'], label: '将此位置设为缩略图' },
+      { keys: ['s'], label: '将此帧保存为图片' },
+      { keys: ['u'], label: '显示尺寸 原始大小 ⇄ 适应', note: '仅在使用 mpv 播放时' },
+      { keys: ['a'], label: '切换连续播放' },
+      { keys: ['r'], label: '切换循环播放' },
+      { keys: ['Escape'], label: '关闭', note: '全屏时仅可退出' },
     ],
   },
   {
     key: 'menu',
-    title: '右クリックメニュー',
-    when: 'メニューが開いている間(裏の一覧・再生の操作は止まります)',
+    title: '右键菜单',
+    when: '菜单打开期间(背后的列表·播放操作将暂停)',
     items: [
-      { keys: ['ArrowUp', 'ArrowDown'], label: '項目を選ぶ' },
-      { keys: ['ArrowRight'], label: 'サブメニューを開く' },
-      { keys: ['ArrowLeft'], label: 'サブメニューを閉じる' },
-      { keys: ['Enter', ' '], label: '選んだ項目を実行' },
-      { keys: ['Escape'], label: '閉じる', note: 'サブメニューが開いていれば、それだけ閉じます' },
+      { keys: ['ArrowUp', 'ArrowDown'], label: '选择项目' },
+      { keys: ['ArrowRight'], label: '打开子菜单' },
+      { keys: ['ArrowLeft'], label: '关闭子菜单' },
+      { keys: ['Enter', ' '], label: '执行所选项' },
+      { keys: ['Escape'], label: '关闭', note: '若已打开子菜单，则仅关闭它' },
     ],
   },
   {
     key: 'input',
-    title: '入力中',
-    when: 'タイトル・メモ・タグ・シリーズ・AI アシスタントの入力欄',
+    title: '输入中',
+    when: '标题、备注、标签、系列、AI 助手的输入框',
     items: [
-      { keys: ['Enter'], label: '確定する', note: 'AI アシスタントでは送信' },
-      { mods: ['Shift'], keys: ['Enter'], label: 'AI アシスタントで改行' },
-      { keys: ['Escape'], label: '編集を取り消す', note: 'タイトル・メモ・タグ名の変更' },
+      { keys: ['Enter'], label: '确定', note: '在 AI 助手中为发送' },
+      { mods: ['Shift'], keys: ['Enter'], label: '在 AI 助手中为换行' },
+      { keys: ['Escape'], label: '撤销编辑', note: '标题、备注、标签名的修改' },
     ],
   },
   {
     key: 'mouse',
-    title: 'マウスと組み合わせる',
-    when: '一覧のカード・行と、その余白',
+    title: '配合鼠标使用',
+    when: '列表的卡片·行及其空白区域',
     items: [
-      { keys: [], display: 'クリック', label: 'その 1 件だけを選ぶ' },
-      { mods: ['Ctrl'], keys: [], display: 'クリック', label: '選択に足す / 外す' },
-      { mods: ['Shift'], keys: [], display: 'クリック', label: '直前に選んだ位置からの範囲を選ぶ' },
+      { keys: [], display: '点击', label: '仅选择那 1 个' },
+      { mods: ['Ctrl'], keys: [], display: '点击', label: '加入 / 移出选择' },
+      { mods: ['Shift'], keys: [], display: '点击', label: '从刚选中的位置开始选择范围' },
       {
         keys: [],
-        display: '余白からドラッグ',
-        label: '囲んだ範囲をまとめて選ぶ',
-        note: 'カードの上から掴むとキューパネルへの追加',
+        display: '从空白区域拖拽',
+        label: '选中框选范围',
+        note: '从卡片上方抓取可添加到队列面板',
       },
       {
         mods: ['Ctrl'],
         keys: [],
-        display: '余白からドラッグ',
-        label: '囲んだ範囲を選択に足す',
+        display: '从空白区域拖拽',
+        label: '将框选范围加入选择',
       },
     ],
   },
   {
     key: 'common',
-    title: 'ウィンドウ共通',
-    when: 'どこでも',
+    title: '窗口通用',
+    when: '任意位置',
     items: [
-      { keys: ['?'], label: 'このキー操作の一覧を開く / 閉じる' },
-      { keys: ['Escape'], label: '開いているモーダル・メニューを閉じる' },
+      { keys: ['?'], label: '打开 / 关闭此快捷键列表' },
+      { keys: ['Escape'], label: '关闭已打开的弹窗·菜单' },
     ],
   },
 ];

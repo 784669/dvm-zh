@@ -67,8 +67,8 @@ export function useFlagSetting(key: string, def: boolean): [boolean, (v: boolean
 /**
  * テキストの設定。**打っている途中では書かず**、フォーカスが外れたとき(commit)に書く。
  *
- * **unmount でも書き切る** —— Escape やオーバーレイのクリックで閉じても blur は
- * 起きないので、これが無いと「API キーを打って即閉じる」で最後の入力が消える。
+ * **unmount でも書き切る** —— Escape やオーバーレイの点击で閉じても blur は
+ * 起きないので、これが無いと「API キーを打って即关闭」で最後の入力が消える。
  * App.tsx の字幕(400ms デバウンス)と違ってタイマーではなく cleanup で同期的に
  * 呼ぶので、モーダルが消えても取りこぼさない。
  */
@@ -82,7 +82,7 @@ export function useTextSetting(
     initial?: string;
     /**
      * DB に値が無いときに**欄へ出す**文字列。空欄のままで意味が通る欄
-     * (パス・API キー。placeholder が既定を説明する)では指定しない。
+     * (パス·API キー。placeholder が既定を説明する)では指定しない。
      * 表示するだけで DB には書かないので、触らずに閉じても行は増えない
      */
     defaultValue?: string;
@@ -97,7 +97,7 @@ export function useTextSetting(
   edit: (v: string) => void;
   /** 変化していれば DB に書く(onBlur 用) */
   commit: () => void;
-  /** edit + commit。ダイアログで選んだ値や「既定に戻す」など、確定済みの変更用 */
+  /** edit + commit。ダイアログで選んだ値や「恢复默认」など、確定済みの変更用 */
   save: (v: string) => void;
 } {
   const [value, setValue] = useState(opts.initial ?? opts.defaultValue ?? '');
@@ -147,7 +147,7 @@ export function useTextSetting(
     (raw: string) => {
       const normalize = optsRef.current.normalize ?? ((s: string) => s.trim());
       const next = normalize(raw);
-      // 「既定に戻す」のように正規化しても値が変わらない場合があるので、必ず反映する
+      // 「恢复默认」のように正規化しても値が変わらない場合があるので、必ず反映する
       valueRef.current = next;
       setValue(next);
       if (next === saved.current) return;

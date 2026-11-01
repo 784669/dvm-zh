@@ -259,7 +259,7 @@ pub fn trash_paths(items: Vec<(i64, String)>) -> Vec<TrashResult> {
                 id,
                 path,
                 trashed: false,
-                error: Some("ドライブが未接続です".into()),
+                error: Some("驱动器未连接".into()),
             });
             continue;
         }
@@ -268,7 +268,7 @@ pub fn trash_paths(items: Vec<(i64, String)>) -> Vec<TrashResult> {
                 id,
                 path,
                 trashed: false,
-                error: Some("ファイルが見つかりません".into()),
+                error: Some("找不到文件".into()),
             });
             continue;
         }

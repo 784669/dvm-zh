@@ -17,7 +17,7 @@ export type RunnerEvent =
   | { type: 'text'; text: string }
   /** ツール実行を挟むターンの区切り(表示上の改行) */
   | { type: 'turn_break' }
-  /** チャット内に出すカード(ツールの実行結果・エラー) */
+  /** チャット内に出すカード(ツールの実行結果·エラー) */
   | { type: 'card'; text: string }
   | { type: 'usage'; inputTokens: number; outputTokens: number }
   | { type: 'done'; finalText: string };
@@ -25,7 +25,7 @@ export type RunnerEvent =
 export interface RunOptions {
   provider: Provider;
   system: string;
-  /** ターンをまたぐ履歴(テキストのみ)。呼び出し側が持つ配列のコピーを渡す */
+  /** ターンをまたぐ履歴(テキストのみ)。呼び出し側が持つ配列の复制を渡す */
   history: AiMessage[];
   userText: string;
   tools: AiTool[];
@@ -45,7 +45,7 @@ export async function* runToolLoop(opts: RunOptions): AsyncGenerator<RunnerEvent
   let outputTokens = 0;
 
   for (let i = 0; i < maxIterations; i++) {
-    if (signal.aborted) throw new AiError('aborted', '中断しました');
+    if (signal.aborted) throw new AiError('aborted', '已中断');
 
     let assistant: Extract<AiMessage, { role: 'assistant' }> | null = null;
 
@@ -64,14 +64,14 @@ export async function* runToolLoop(opts: RunOptions): AsyncGenerator<RunnerEvent
         assistant = ev.assistant;
         // Gemini の安全フィルタなどで本文が空のまま終わることがある。無反応にしない
         if (ev.stopReason === 'refusal') {
-          yield { type: 'card', text: 'モデルが応答を拒否しました' };
+          yield { type: 'card', text: '模型拒绝了响应' };
         } else if (ev.stopReason === 'max_tokens' && !ev.assistant.toolCalls?.length) {
-          yield { type: 'card', text: '応答が長すぎて途中で切れました' };
+          yield { type: 'card', text: '响应过长，中途被截断' };
         }
       }
     }
 
-    if (!assistant) throw new AiError('parse', '応答が空のまま終わりました');
+    if (!assistant) throw new AiError('parse', '响应在为空时结束了');
     if (assistant.content) finalText += (finalText ? '\n' : '') + assistant.content;
     working.push(assistant);
 
@@ -79,11 +79,11 @@ export async function* runToolLoop(opts: RunOptions): AsyncGenerator<RunnerEvent
     if (calls.length === 0) break;
 
     yield { type: 'turn_break' };
-    if (signal.aborted) throw new AiError('aborted', '中断しました');
+    if (signal.aborted) throw new AiError('aborted', '已中断');
 
     /*
      * **失敗をループの外へ投げない。** ツールが throw しても is_error として結果に載せ、
-     * モデルに見せる。タグ名の解決に失敗したときなど、モデルは言い直せることが多い
+     * モデルに見せる。标签名の解決に失敗したときなど、モデルは言い直せることが多い
      * (投げてしまうと会話ごと落ちる)
      */
     const results: ToolResult[] = await Promise.all(
@@ -96,7 +96,7 @@ export async function* runToolLoop(opts: RunOptions): AsyncGenerator<RunnerEvent
           return {
             id: call.id,
             name: call.name,
-            content: `そのツールはありません: ${call.name}`,
+            content: `没有该工具: ${call.name}`,
             isError: true,
           };
         }
@@ -106,7 +106,7 @@ export async function* runToolLoop(opts: RunOptions): AsyncGenerator<RunnerEvent
           return {
             id: call.id,
             name: call.name,
-            content: `エラー: ${e instanceof Error ? e.message : String(e)}`,
+            content: `错误: ${e instanceof Error ? e.message : String(e)}`,
             isError: true,
           };
         }
@@ -119,7 +119,7 @@ export async function* runToolLoop(opts: RunOptions): AsyncGenerator<RunnerEvent
     working.push({ role: 'tool', results });
 
     if (i === maxIterations - 1) {
-      yield { type: 'card', text: `ツールの実行が上限(${maxIterations} 回)に達しました` };
+      yield { type: 'card', text: `工具执行已达上限（${maxIterations} 次）` };
     }
   }
 

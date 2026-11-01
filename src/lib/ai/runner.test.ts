@@ -108,7 +108,7 @@ describe('runToolLoop', () => {
     const events = await collect(runToolLoop({ ...base, provider, tools }));
 
     // エラーはカードとして出る(会話は続く)
-    expect(events).toContainEqual({ type: 'card', text: 'エラー: タグ「ほげ」が見つかりません' });
+    expect(events).toContainEqual({ type: 'card', text: '错误: タグ「ほげ」が見つかりません' });
     expect(events.slice(-1)[0]).toEqual({ type: 'done', finalText: '言い直します' });
     const toolMsg = provider.seen[1].find((m) => m.role === 'tool');
     expect(toolMsg).toMatchObject({ results: [{ isError: true }] });
@@ -128,7 +128,7 @@ describe('runToolLoop', () => {
   it('存在しないツールを呼ばれても落ちない', async () => {
     const provider = fakeProvider([[endWith('', [call('nope')])], [endWith('ごめん')]]);
     const events = await collect(runToolLoop({ ...base, provider, tools: [] }));
-    expect(events).toContainEqual({ type: 'card', text: 'そのツールはありません: nope' });
+    expect(events).toContainEqual({ type: 'card', text: '没有该工具: nope' });
   });
 
   it('反復上限で打ち切り、そのことをカードで知らせる', async () => {
@@ -139,7 +139,7 @@ describe('runToolLoop', () => {
     const events = await collect(runToolLoop({ ...base, provider, tools, maxIterations: 3 }));
 
     expect(provider.seen).toHaveLength(3);
-    expect(events).toContainEqual({ type: 'card', text: 'ツールの実行が上限(3 回)に達しました' });
+    expect(events).toContainEqual({ type: 'card', text: '工具执行已达上限（3 次）' });
   });
 
   it('中断されたら aborted で投げる', async () => {
@@ -182,7 +182,7 @@ describe('runToolLoop', () => {
       [{ type: 'end', stopReason: 'refusal', assistant: { role: 'assistant', content: '' } }],
     ]);
     const events = await collect(runToolLoop({ ...base, provider, tools: [] }));
-    expect(events).toContainEqual({ type: 'card', text: 'モデルが応答を拒否しました' });
+    expect(events).toContainEqual({ type: 'card', text: '模型拒绝了响应' });
   });
 
   it('渡した履歴を書き換えない(呼び出し側の配列を壊さない)', async () => {

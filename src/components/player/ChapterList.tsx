@@ -5,10 +5,10 @@ import type { Chapter } from '../../lib/chapters';
 import { fmtTime } from '../../lib/format';
 
 /**
- * チャプター一覧(v1.29、mpv のみ)。コントロールバーのボタンから開く。
+ * 章节一覧(v1.29、mpv のみ)。コントロールバーのボタンから打开。
  *
- * **コマ(サムネイル)は出さない**。開くたびにチャプター数だけシークデコードが走り、
- * mpv で本編を再生している最中に同じファイルをもう一度読みに行くことになる
+ * **コマ(缩略图)は出さない**。打开たびに章节数だけシークデコードが走り、
+ * mpv で本編を再生している最中に同じ文个もう一度読みに行くことになる
  * (シークバーのコマ出しを別設定にしたのと同じ懸念)
  */
 export function ChapterList({
@@ -24,7 +24,7 @@ export function ChapterList({
   onToggle: () => void;
   onSeek: (sec: number) => void;
 }) {
-  // 1 つだけのチャプターは飛び先が無いので、ボタンごと出さない
+  // 1 つだけの章节は飛び先が無いので、ボタンごと出さない
   if (!hasChapters(chapters)) return null;
 
   return (
@@ -33,7 +33,7 @@ export function ChapterList({
         className={open ? 'active' : ''}
         onMouseDown={(e) => e.preventDefault()}
         onClick={onToggle}
-        title={`チャプター(${chapters.length})(Ctrl+← / Ctrl+→ で前後へ)`}
+        title={`章节（${chapters.length}）（Ctrl+← / Ctrl+→ 切换前后）`}
       >
         <ListOrdered />
       </button>
@@ -51,8 +51,8 @@ export function ChapterList({
 
 /**
  * 一覧の中身。**Esc は拾わない** —— プレイヤーの `onEscape` 側で
- * 「開いていれば先に一覧を閉じる」と分岐している(window のハンドラと取り合うと、
- * 一覧を閉じるつもりの Esc でプレイヤーごと閉じる)
+ * 「開いていれば先に一覧を关闭」と分岐している(window のハンドラと取り合うと、
+ * 一覧を关闭つもりの Esc でプレイヤーごと关闭)
  */
 function ChapterPopover({
   chapters,
@@ -69,11 +69,11 @@ function ChapterPopover({
   const currentRef = useRef<HTMLButtonElement>(null);
   const current = chapterIndexAt(chapters, currentTime);
 
-  // 外側のクリックで閉じる(ColumnPicker と同じ作法)。
-  // 開いた直後のクリックで閉じないよう、次のフレームから拾う
+  // 外側の点击で关闭(ColumnPicker と同じ作法)。
+  // 開いた直後の点击で閉じないよう、次のフレームから拾う
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
-      // アンカー(ボタンごと)の外だけを見る。ボタン自身の onClick が閉じる担当
+      // アンカー(ボタンごと)の外だけを見る。ボタン自身の onClick が关闭担当
       if (!ref.current?.parentElement?.contains(e.target as Node)) onClose();
     };
     const timer = window.setTimeout(() => document.addEventListener('mousedown', onDown), 0);
@@ -83,7 +83,7 @@ function ChapterPopover({
     };
   }, [onClose]);
 
-  // 長い一覧では、開いた時点で今いるチャプターが見えている必要がある
+  // 長い一覧では、開いた時点で今いる章节が見えている必要がある
   useEffect(() => {
     currentRef.current?.scrollIntoView({ block: 'nearest' });
   }, []);

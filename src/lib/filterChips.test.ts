@@ -108,12 +108,12 @@ describe('タグ以外の条件', () => {
     label({ advanced: { ...EMPTY_ADVANCED, ...patch } });
 
   it.each([
-    ['テキスト', { text: 'アニメ' }, '「アニメ」を含む'],
-    ['フォルダー', { folderId: 5 }, 'フォルダー: アニメ'],
-    ['フォルダー直下', { dirPath: 'D:\\動画\\2026\\' }, '2026 の直下'],
-    ['シリーズ', { seriesId: 7 }, 'シリーズ: 名作劇場'],
-    ['見つからない', { missingOnly: true }, '見つからないファイル'],
-    ['重複', { duplicatesOnly: true }, '重複のみ'],
+    ['テキスト', { text: 'アニメ' }, '包含「アニメ」'],
+    ['フォルダー', { folderId: 5 }, '文件夹: アニメ'],
+    ['フォルダー直下', { dirPath: 'D:\\動画\\2026\\' }, '2026 的直接下级'],
+    ['シリーズ', { seriesId: 7 }, '系列: 名作劇場'],
+    ['見つからない', { missingOnly: true }, '找不到的文件'],
+    ['重複', { duplicatesOnly: true }, '仅重复项'],
   ])('%s', (_name, patch, expected) => {
     expect(label(patch)).toEqual([expected]);
   });
@@ -121,49 +121,49 @@ describe('タグ以外の条件', () => {
   // 配下モードは文言を変える。ここが変わらないと「件数が急に増えた理由」が読めない
   it('サブフォルダも含めるときは「配下すべて」と出る', () => {
     expect(label({ dirPath: 'D:\\動画\\2026', dirPathRecursive: true }))
-      .toEqual(['2026 の配下すべて']);
+      .toEqual(['2026 及其所有下级']);
     // フォルダで絞っていなければトグルは何も出さない
     expect(label({ dirPathRecursive: true })).toEqual([]);
   });
 
   it.each([
-    ['パスも検索', { searchPath: true }, 'パスも検索'],
-    ['メモも検索', { searchComment: true }, 'メモも検索'],
+    ['也搜索路径', { searchPath: true }, '也搜索路径'],
+    ['也搜索备注', { searchComment: true }, '也搜索备注'],
     ['レーティング', { minRating: 3 }, '★3 以上'],
-    ['★なし', { unrated: true }, '★なし'],
-    ['長さ(プリセット)', { maxDurationMs: 300_000 }, '5 分未満'],
+    ['无星级', { unrated: true }, '无星级'],
+    ['長さ(プリセット)', { maxDurationMs: 300_000 }, '5 分以下'],
     // プリセットに無い範囲でもチップになる(自由入力・MCP・保存した条件で起きる)
     ['長さ(カスタム)', { minDurationMs: 120_000, maxDurationMs: 480_000 }, '2〜8 分'],
     ['サイズ(GB)', { minSizeBytes: 2 * 1024 ** 3 }, '2 GB 以上'],
-    ['サイズ(MB)', { maxSizeBytes: 500 * 1024 ** 2 }, '500 MB 未満'],
+    ['サイズ(MB)', { maxSizeBytes: 500 * 1024 ** 2 }, '500 MB 以下'],
     ['サイズ(範囲)', { minSizeBytes: 100 * 1024 ** 2, maxSizeBytes: 500 * 1024 ** 2 }, '100〜500 MB'],
-    ['タグなし', { untagged: true }, 'タグなし'],
-    ['未視聴', { unwatched: true }, '未視聴'],
-    ['途中まで観た', { resumedOnly: true }, '途中まで観た'],
-    ['再生回数(下限)', { minViewCount: 3 }, '3 回以上'],
-    ['再生回数(0 回)', { maxViewCount: 0 }, '未視聴'],
+    ['无标签', { untagged: true }, '无标签'],
+    ['未观看', { unwatched: true }, '未观看'],
+    ['观看了一部分', { resumedOnly: true }, '观看了一部分'],
+    ['再生回数(下限)', { minViewCount: 3 }, '3 次以上'],
+    ['再生回数(0 回)', { maxViewCount: 0 }, '未观看'],
     ['解像度(下限)', { minHeight: 1080 }, '1080p 以上'],
-    ['解像度(上限)', { maxHeight: 720 }, '720p 未満'],
-    ['向き', { orientation: 'portrait' as const }, '縦長'],
-    ['追加日(以降)', { addedAfter: '2026-01-01' }, '2026-01-01 以降に追加'],
-    ['追加日(以前)', { addedBefore: '2026-06-30' }, '2026-06-30 以前に追加'],
-    ['追加日(範囲)', { addedAfter: '2026-01-01', addedBefore: '2026-06-30' }, '2026-01-01〜2026-06-30 に追加'],
-    ['追加(相対)', { addedWithinDays: 7 }, '過去 7 日に追加'],
-    ['更新(相対)', { modifiedWithinDays: 30 }, '過去 30 日に更新'],
-    ['更新日(範囲)', { modifiedAfter: '2025-01-01', modifiedBefore: '2025-12-31' }, '2025-01-01〜2025-12-31 に更新'],
+    ['解像度(上限)', { maxHeight: 720 }, '720p 以下'],
+    ['向き', { orientation: 'portrait' as const }, '纵向长'],
+    ['追加日(以降)', { addedAfter: '2026-01-01' }, '2026-01-01 之后添加'],
+    ['追加日(以前)', { addedBefore: '2026-06-30' }, '2026-06-30 之前添加'],
+    ['追加日(範囲)', { addedAfter: '2026-01-01', addedBefore: '2026-06-30' }, '2026-01-01〜2026-06-30 之间添加'],
+    ['追加(相対)', { addedWithinDays: 7 }, '最近 7 天内添加'],
+    ['更新(相対)', { modifiedWithinDays: 30 }, '最近 30 天内更新'],
+    ['更新日(範囲)', { modifiedAfter: '2025-01-01', modifiedBefore: '2025-12-31' }, '2025-01-01〜2025-12-31 之间更新'],
   ])('詳細検索: %s', (_name, patch, expected) => {
     expect(adv(patch)).toEqual([expected]);
   });
 
   it('プリセットに無い解像度でもラベルになる', () => {
     expect(adv({ minHeight: 900 })).toEqual(['900p 以上']);
-    expect(adv({ maxHeight: 900 })).toEqual(['900p 未満']);
+    expect(adv({ maxHeight: 900 })).toEqual(['900p 以下']);
   });
 
   // コーデック・拡張子の複数指定も OR。タグと同じ「箱」で見せる
   it.each([
-    ['コーデック', 'videoCodecs', ['h264', 'hevc']],
-    ['拡張子', 'extensions', ['mp4', 'mkv']],
+    ['编解码器', 'videoCodecs', ['h264', 'hevc']],
+    ['扩展名', 'extensions', ['mp4', 'mkv']],
   ] as const)('%s の複数指定は 1 つの箱(= または)', (caption, key, values) => {
     const terms = describeFilter(
       { ...base, advanced: { ...EMPTY_ADVANCED, [key]: values } },

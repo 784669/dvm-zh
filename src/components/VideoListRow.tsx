@@ -7,14 +7,14 @@ import { useLibrary } from '../store';
 import type { VideoRowProps } from './rowProps';
 
 /**
- * 詳細リスト表示の 1 行(v1.8、列可変は v1.16)。グリッドと同じ仮想化に乗るので、
+ * 详细列表视图の 1 行(v1.8、列可変は v1.16)。グリッドと同じ仮想化に乗るので、
  * 数万件でも DOM に載るのは可視分だけ。
  *
  * どの列をどの順で出すかは lib/listColumns.ts が持ち、ここは受け取った定義を描くだけ。
- * 列幅は親が流す CSS 変数 --list-cols で決まる(ヘッダ行・フォルダ行と共有)。
+ * 列幅は親が流す CSS 変数 --list-cols で決まる(ヘッダ行·文件夹行と共有)。
  *
  * ホバープレビューは付けない — 行が細く、マウスが横切るだけで次々に
- * 元動画を開くことになるため(グリッドのカードは面積が大きいので誤爆しにくい)
+ * 元動画を打开ことになるため(グリッドのカードは面積が大きいので誤爆しにくい)
  */
 export const VideoListRow = memo(function VideoListRow({
   video, labels, index, selected, focused, onPick, onPlay, onContextMenu, height, columns,
@@ -29,7 +29,7 @@ export const VideoListRow = memo(function VideoListRow({
       className={`list-row ${selected ? 'selected' : ''} ${focused ? 'focused' : ''}`}
       style={{ height }}
       title={video.path}
-      // キューパネルへの D&D の掴み先(v1.41、C-5)。VideoGrid が委譲で拾う
+      // 队列パネルへの D&D の掴み先(v1.41、C-5)。VideoGrid が委譲で拾う
       data-grid-index={index}
       onClick={(e) => onPick(video, index, e)}
       onDoubleClick={() => onPlay(video, index)}
@@ -56,14 +56,14 @@ export const VideoListRow = memo(function VideoListRow({
       )}
       <div className="list-name">
         <span className="list-title">{video.title ?? video.filename}</span>
-        {video.isOffline && <span className="list-flag offline">オフライン</span>}
+        {video.isOffline && <span className="list-flag offline">离线</span>}
         {video.isMissing && !video.isOffline && (
-          <span className="list-flag missing">見つかりません</span>
+          <span className="list-flag missing">未找到</span>
         )}
       </div>
       {rest.map((key) => {
         const col = COLUMNS[key];
-        // タグ・シリーズは別便なので未取得がある。null は '—'、'' はそのまま空欄
+        // 标签·系列は別便なので未取得がある。null は '—'、'' はそのまま空欄
         const text = col.text(video, labels);
         return (
           <div

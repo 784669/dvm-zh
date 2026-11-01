@@ -185,7 +185,7 @@ mod tests {
     fn workspace(name: &str) -> PathBuf {
         let data_dir = std::env::temp_dir().join(format!("dvm-test-backup-{name}"));
         let _ = std::fs::remove_dir_all(&data_dir);
-        let lib_root = data_dir.join("libraries").join("マイライブラリ");
+        let lib_root = data_dir.join("libraries").join("我的媒体库");
         std::fs::create_dir_all(lib_root.join("backups")).unwrap();
         lib_root
     }

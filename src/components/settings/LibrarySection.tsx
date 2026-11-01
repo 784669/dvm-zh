@@ -5,12 +5,12 @@ import { useLibrary } from '../../store';
 import type { AppInfo, ExcludedPath, LibraryEntry } from '../../types';
 
 /**
- * ライブラリの管理(v1.27)と、監視フォルダの中で取り込まない場所(v1.33)。
+ * 媒体库の管理(v1.27)と、监视文件夹の中で取り込まない場所(v1.33)。
  *
- * どちらも「ライブラリに何が入るか」の管理で、どちらも**ファイルは消さない**ことを
+ * どちらも「媒体库に何が入るか」の管理で、どちらも**文件は消さない**ことを
  * 文言で言い切る必要がある操作なので、同じカテゴリに置いている。
  *
- * ここが持つのは**名前の変更と一覧からの削除**だけ。切り替えの入口はサイドバーの
+ * ここが持つのは**名前の変更と一覧からの削除**だけ。切り替えの入口は侧边栏の
  * 上部に固定する(同じ操作の入口を 2 か所に置かない)。
  */
 export function LibrarySection({ info }: { info: AppInfo | null }) {
@@ -23,23 +23,23 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
     api.listExcludedPaths().then(setExcluded).catch(() => {});
   }, []);
 
-  /** 名前を変える。フォルダ名は変えない(開いている最中に動かせないため) */
+  /** 名前を変える。文件夹名は変えない(開いている最中に動かせないため) */
   const renameLibrary = async (lib: LibraryEntry) => {
-    const name = window.prompt('新しいライブラリ名', lib.name);
+    const name = window.prompt('新媒体库名称', lib.name);
     if (name === null || name.trim() === '' || name.trim() === lib.name) return;
     await api.renameLibrary(lib.id, name.trim());
     setLibraries(await api.listLibraries());
-    // サイドバーのボタンの表示を追従させる
+    // 侧边栏のボタンの表示を追従させる
     useLibrary.getState().bumpVersion();
   };
 
-  /** 一覧から外す。**ファイルは消さない**ことを文言で必ず言い切る */
+  /** 从列表移除。**文件は消さない**ことを文言で必ず言い切る */
   const forgetLibrary = async (lib: LibraryEntry) => {
     const yes = await ask(
-      `「${lib.name}」を一覧から外しますか?\n\n`
-        + 'フォルダとファイルは削除されません。\n'
-        + `${lib.root} はそのまま残るので、あとで「既存のライブラリを開く」から戻せます。`,
-      { title: '一覧から外す' },
+      `要将「${lib.name}」从列表中移除吗？\n\n`
+        + '文件夹与文件不会被删除。\n'
+        + `${lib.root} 会原样保留，之后可通过「打开现有媒体库」恢复。`,
+      { title: '从列表移除' },
     );
     if (!yes) return;
     await api.forgetLibrary(lib.id);
@@ -48,22 +48,22 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
   };
 
   /**
-   * 監視除外フォルダを足す。監視フォルダの中のフォルダを選ぶのが本来の使い方なので、
-   * ここでは監視フォルダかどうかの検査はしない(外を選んでも害は無い)
+   * 监控排除文件夹を足す。监视文件夹の中の文件夹を選ぶのが本来の使い方なので、
+   * ここでは监视文件夹かどうかの検査はしない(外を選んでも害は無い)
    */
   const addExclude = async () => {
     const selected = await open({
       directory: true,
       multiple: false,
-      title: '監視除外フォルダを選ぶ',
+      title: '选择监视排除文件夹',
     });
     if (typeof selected !== 'string') return;
     const alsoRemove = await ask(
-      `${selected} の配下を、次のスキャンから取り込まないようにします。\n\n` +
-        '今ライブラリに入っている配下の動画も外しますか?\n' +
-        '「いいえ」を選ぶと一覧には残ったまま、今後増えなくなります。\n\n' +
-        'どちらを選んでも動画ファイルは削除しません。',
-      { title: '監視除外フォルダに登録' },
+      `${selected} 的下级将不再从后续扫描中导入。\n\n` +
+        '是否同时移除当前已在媒体库中的其下视频？\n' +
+        '选择「否」则保留在列表中，但今后不再新增。\n\n' +
+        '无论选择哪一项，都不会删除视频文件。',
+      { title: '注册到监控排除文件夹' },
     );
     setBusy(true);
     try {
@@ -71,8 +71,8 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
       setExcluded(await api.listExcludedPaths());
       useLibrary.getState().bumpVersion();
       if (removed > 0) {
-        await message(`${removed.toLocaleString()} 件をライブラリから外しました(ファイルは残っています)`, {
-          title: '監視除外フォルダに登録',
+        await message(`${removed.toLocaleString()} 项已从媒体库移除（文件仍保留）`, {
+          title: '注册到监控排除文件夹',
         });
       }
     } finally {
@@ -80,11 +80,11 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
     }
   };
 
-  /** 監視除外を解除する。該当ファイルは次のスキャンで取り込まれる */
+  /** 取消监视排除する。該当文件は次のスキャンで取り込まれる */
   const removeExclude = async (id: number, path: string) => {
     const yes = await ask(
-      `${path} を監視除外から外しますか?\n\n次のスキャンで該当する動画がライブラリに再登録されます。`,
-      { title: '監視除外を解除' },
+      `要将 ${path} 从监视排除中取消吗？\n\n下次扫描时相关视频将重新登记到媒体库。`,
+      { title: '取消监视排除' },
     );
     if (!yes) return;
     await api.removeExcludedPath(id);
@@ -94,11 +94,11 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
   return (
     <>
       <div className="settings-section">
-        <div className="settings-heading">ライブラリ</div>
+        <div className="settings-heading">媒体库</div>
         <div className="settings-note">
-          ライブラリごとに動画・タグ・シリーズ・監視フォルダが分かれます。
-          見た目や API キーなどの設定は切り替えても変わりません。
-          切り替えはサイドバー上部のライブラリ名から行います
+          每个媒体库分别管理视频·标签·系列·监视文件夹。
+          外观与 API 密钥等设置不会随切换而改变。
+          请通过侧边栏上方的媒体库名进行切换
         </div>
         <ul className="library-list">
           {libraries.map((lib) => {
@@ -108,26 +108,26 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
                 <div className="library-list-main">
                   <span className="library-list-name">
                     {lib.name}
-                    {isCurrent && <span className="library-badge">開いています</span>}
+                    {isCurrent && <span className="library-badge">已打开</span>}
                     {!lib.online && <span className="library-badge warn">未接続</span>}
                   </span>
                   <span className="library-list-root" title={lib.root}>{lib.root}</span>
                 </div>
                 <div className="library-list-actions">
-                  <button onClick={() => renameLibrary(lib)}>名前を変更...</button>
+                  <button onClick={() => renameLibrary(lib)}>重命名...</button>
                   <button onClick={() => api.openLibraryDir(lib.id)} disabled={!lib.online}>
-                    フォルダを開く
+                    打开文件夹
                   </button>
                   <button
                     onClick={() => forgetLibrary(lib)}
                     disabled={isCurrent}
                     title={
                       isCurrent
-                        ? '開いているライブラリは外せません(別のライブラリに切り替えてから)'
-                        : 'フォルダとファイルは削除されません'
+                        ? '无法移除当前打开的媒体库（请先切换到其他媒体库）'
+                        : '文件夹与文件不会被删除'
                     }
                   >
-                    一覧から外す
+                    从列表移除
                   </button>
                 </div>
               </li>
@@ -137,12 +137,12 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
       </div>
 
       <div className="settings-section">
-        <div className="settings-heading">監視除外フォルダ</div>
+        <div className="settings-heading">监控排除文件夹</div>
         <div className="settings-note">
-          監視フォルダの中でも、ここに入れたフォルダの配下はスキャンで取り込みません。
-          世代ごとのバックアップや作業用の書き出し先など、ライブラリに出したくない場所に使います。
-          動画を削除するときに登録したファイル 1 個だけの行も、ここに並びます。
-          <strong>動画ファイルは削除しません。</strong>
+          即使在监视文件夹内，此处添加的文件夹及其下级也不会被扫描导入。
+          可用于按代备份、临时导出目录等不想出现在媒体库中的位置。
+          删除视频时登记的单个文件行也会列在这里。
+          <strong>不会删除视频文件。</strong>
         </div>
         {excluded.length > 0 && (
           <ul className="excluded-list">
@@ -153,9 +153,9 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
                 {e.videoCount > 0 && (
                   <span
                     className="excluded-count"
-                    title="除外したあとも一覧に残っている登録数。除外したときに外さなかったぶんです"
+                    title="排除后仍留在列表中的注册数量。即排除时未移除的部分"
                   >
-                    {e.videoCount.toLocaleString()} 件が一覧に残っています
+                    列表中还剩 {e.videoCount.toLocaleString()} 项
                   </span>
                 )}
                 <button onClick={() => removeExclude(e.id, e.path)}>解除</button>
@@ -164,10 +164,10 @@ export function LibrarySection({ info }: { info: AppInfo | null }) {
           </ul>
         )}
         <div className="modal-row">
-          <button onClick={addExclude} disabled={busy}>フォルダを選んで追加...</button>
+          <button onClick={addExclude} disabled={busy}>选择文件夹并添加...</button>
         </div>
         <div className="settings-note">
-          サイドバーのフォルダーツリーを右クリックしても追加できます
+          也可右键侧边栏的文件夹树添加
         </div>
       </div>
     </>

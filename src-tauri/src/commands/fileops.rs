@@ -5,7 +5,7 @@ use serde::Serialize;
 use tauri::{AppHandle, Emitter, Manager, State};
 
 /// ごみ箱送りの PlanItem で「移動先」として見せる文字列(実際のパスは持たない)
-const TRASH_LABEL: &str = "ごみ箱";
+const TRASH_LABEL: &str = "回收站";
 
 /// 移動・リネームの進捗(大きいファイルを別ドライブへ動かすと時間がかかるため)
 #[derive(Clone, Serialize)]
@@ -72,7 +72,7 @@ pub async fn apply_move(
     let actor = super::validate_actor(actor)?;
     let action = match action.as_str() {
         "move_file" | "rename_file" => action,
-        other => return Err(format!("不正な操作です: {other}")),
+        other => return Err(format!("无效的操作: {other}")),
     };
     // ファイル I/O で UI を止めないようワーカーで実行する
     tauri::async_runtime::spawn_blocking(move || {
@@ -181,6 +181,7 @@ pub async fn apply_trash(
         for id in &trashed {
             let _ = std::fs::remove_file(state.thumbs_dir.join(format!("{id}.jpg")));
             crate::core::playback::remove_cache_for(&state.transcode_dir, *id);
+            crate::core::playback::remove_preview_for(&state.preview_dir, *id);
         }
 
         Ok(results

@@ -22,35 +22,35 @@ type Cat = 'display' | 'playback' | 'subtitle' | 'ai' | 'library' | 'thumbnail' 
 /**
  * 左レールの並び(v1.38)。
  *
- * **「設定」と「管理」の 2 グループに割る。** 好みを決める設定と、破壊的に見える
+ * **「設定」と「管理」の 2 群组に割る。** 好みを決める設定と、破壊的に見える
  * 操作を含む管理メニューがここに同居しているのは v1.14 からの基準どおりだが、
  * 10 セクションを縦に積むと同じ重さに見えてしまっていた。混在を解消するのではなく、
  * 混ざっていることを見えるようにするのが狙い。
  */
-const CATS: { key: Cat; label: string; group: '設定' | '管理' }[] = [
-  { key: 'display', label: '表示', group: '設定' },
-  { key: 'playback', label: '再生', group: '設定' },
-  { key: 'subtitle', label: '字幕', group: '設定' },
-  { key: 'ai', label: 'AI 連携', group: '設定' },
-  { key: 'library', label: 'ライブラリ', group: '管理' },
-  { key: 'thumbnail', label: 'サムネイルとコマ', group: '管理' },
-  { key: 'data', label: 'データとバックアップ', group: '管理' },
+const CATS: { key: Cat; label: string; group: '设置' | '管理' }[] = [
+  { key: 'display', label: '显示', group: '设置' },
+  { key: 'playback', label: '播放', group: '设置' },
+  { key: 'subtitle', label: '字幕', group: '设置' },
+  { key: 'ai', label: 'AI 联动', group: '设置' },
+  { key: 'library', label: '媒体库', group: '管理' },
+  { key: 'thumbnail', label: '缩略图与帧', group: '管理' },
+  { key: 'data', label: '数据与备份', group: '管理' },
 ];
 
 /**
  * 設定モーダル(v1.38 で 2 ペイン化)。
  *
  * ここが持つのは外枠だけ —— 選択中のカテゴリ、複数カテゴリが見る `AppInfo`、
- * そして閉じ方の 3 経路(Escape / オーバーレイのクリック /「閉じる」)。
+ * そして閉じ方の 3 経路(Escape / オーバーレイの点击 /「关闭」)。
  * 設定の中身と、そのカテゴリでしか使わない一覧の取得は各セクションが自分で持つ。
  *
- * - 設定は**すべてその場保存**。「保存」ボタンは無い(hooks/useSetting.ts の説明を参照)
- * - **`get_app_info` はここで 1 回だけ呼ぶ** —— サムネイルフォルダを全走査するので、
+ * - 設定は**全部その場保存**。「保存」ボタンは無い(hooks/useSetting.ts の説明を参照)
+ * - **`get_app_info` はここで 1 回だけ呼ぶ** —— 缩略图文件夹を全走査するので、
  *   カテゴリごとに呼ばせるとタブを切り替えるたびに走ってしまう
- * - 逆にバックアップ一覧・ライブラリ一覧・除外一覧は各セクションが取る。選んだ
+ * - 逆に备份一覧·媒体库一覧·除外一覧は各セクションが取る。選んだ
  *   カテゴリしか mount しないので、開かないカテゴリぶんの IPC が飛ばなくなる
- * - 選択中のカテゴリは**永続化しない**。モーダルは開くたび同じ場所から始まるほうが
- *   予測しやすい(常設のサイドバーと違って `sidebar_tab` のような記憶は要らない)
+ * - 選択中のカテゴリは**永続化しない**。モーダルは打开たび同じ場所から始まるほうが
+ *   予測しやすい(常設の侧边栏と違って `sidebar_tab` のような記憶は要らない)
  */
 export function SettingsModal({ onClose }: { onClose: () => void }) {
   const [cat, setCat] = useState<Cat>('display');
@@ -103,7 +103,7 @@ export function SettingsModal({ onClose }: { onClose: () => void }) {
   };
 
   /*
-   * Escape で閉じる。**window ではなく document に張って stopPropagation する** ——
+   * Escape で关闭。**window ではなく document に張って stopPropagation する** ——
    * App.tsx の Escape(選択解除)は window にいるので、ここで止めれば届かない。
    * IME の変換中は「変換の取り消し」なので拾わない(入力欄が 5 個ある)
    */
@@ -124,13 +124,13 @@ export function SettingsModal({ onClose }: { onClose: () => void }) {
         style={{ width: size.w, height: size.h }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="modal-title">設定</div>
+        <div className="modal-title">设置</div>
 
         <div className="settings-panes">
           <div className="settings-nav">
             {CATS.map((c, i) => (
               <div key={c.key}>
-                {/* グループの見出しは、そのグループの先頭でだけ出す */}
+                {/* 群组の見出しは、その群组の先頭でだけ出す */}
                 {(i === 0 || CATS[i - 1].group !== c.group) && (
                   <div className="settings-nav-group">{c.group}</div>
                 )}
@@ -157,14 +157,14 @@ export function SettingsModal({ onClose }: { onClose: () => void }) {
           </div>
         </div>
 
-        {/* 設定はその場で保存済みなので「閉じる」だけ。primary にはしない(押さないと確定しない、と読ませないため) */}
+        {/* 設定はその場で保存済みなので「关闭」だけ。primary にはしない(押さないと確定しない、と読ませないため) */}
         <div className="modal-actions">
-          <button onClick={onClose}>閉じる</button>
+          <button onClick={onClose}>关闭</button>
         </div>
 
         <div
           className="settings-resize"
-          title="大きさを変更(ダブルクリックで既定に戻す)"
+          title="调整大小（双击恢复默认）"
           onPointerDown={(e) => {
             e.currentTarget.setPointerCapture(e.pointerId);
             drag.current = { x: e.clientX, y: e.clientY, w: size.w, h: size.h };

@@ -15,7 +15,7 @@ import type { ProviderConfig, ProviderId } from './types';
 
 export const PROVIDER_KEY = 'ai_provider';
 export const MAX_TOKENS_KEY = 'ai_max_tokens';
-/** ベース URL を持つのは openai_compat だけ(他は PROVIDERS の既定で足りる) */
+/** 基础 URL を持つのは openai_compat だけ(他は PROVIDERS の既定で足りる) */
 export const BASE_URL_KEY = 'ai_base_url_openai_compat';
 
 /** v1.42 までのキー。**消さない** —— 切り戻しても動くようにしておく */
@@ -102,13 +102,13 @@ export async function loadAiConfig(): Promise<ProviderConfig> {
 export function missingSettingMessage(config: ProviderConfig): string | null {
   const label = PROVIDERS[config.id].label;
   if (config.id === 'openai_compat') {
-    if (!config.baseUrl) return 'ベース URL が未設定です。設定 > AI 連携 で入力してください';
-    if (!config.model) return 'モデル名が未設定です。設定 > AI 連携 で入力してください';
+    if (!config.baseUrl) return '基础 URL 未设置。请在 设置 > AI 联动 中输入';
+    if (!config.model) return '模型名未设置。请在 设置 > AI 联动 中输入';
     return null;
   }
   // 互換サーバー以外はキーが要る
   if (!config.apiKey) {
-    return `${label} の API キーが未設定です。ツールバーの設定ボタンから「AI 連携」で保存してください`;
+    return `${label} 的 API 密钥未设置。请通过工具栏的设置按钮在「AI 联动」中保存`;
   }
   return null;
 }

@@ -134,7 +134,7 @@ fn import_m3u8_inner(app: &AppHandle, path: &str) -> anyhow::Result<M3u8Import> 
     let file = std::path::Path::new(path);
     let content = std::fs::read_to_string(file)?;
     let paths = m3u8::parse(&content, file.parent());
-    anyhow::ensure!(!paths.is_empty(), "M3U8 に動画ファイルのパスがありませんでした");
+    anyhow::ensure!(!paths.is_empty(), "M3U8 中未包含视频文件路径");
 
     // 既存の個別登録に載せる(登録済み・監視除外・実在しないものはここで自然に落ちる)。
     // register_paths は内部で DB ロックを取るので、こちらのロックより先に済ませる
@@ -161,14 +161,14 @@ fn import_m3u8_inner(app: &AppHandle, path: &str) -> anyhow::Result<M3u8Import> 
     }
     anyhow::ensure!(
         !ids.is_empty(),
-        "M3U8 の動画を 1 件も登録できませんでした(ファイルが見つからないか、対応形式ではありません)"
+        "未能注册 M3U8 中的任何视频（找不到文件，或格式不受支持）"
     );
 
     let base = file
         .file_stem()
         .map(|s| s.to_string_lossy().trim().to_string())
         .filter(|s| !s.is_empty())
-        .unwrap_or_else(|| "インポート".to_string());
+        .unwrap_or_else(|| "导入".to_string());
     let name = free_name(&conn, &base)?;
     let playlist_id = playlists::create(&conn, "user", &name, &ids)?;
     // write_entries が重複を畳むので、件数は作ったあとの実数を返す
@@ -188,5 +188,5 @@ fn free_name(conn: &rusqlite::Connection, base: &str) -> anyhow::Result<String> 
             return Ok(cand);
         }
     }
-    anyhow::bail!("プレイリスト名の空きが見つかりませんでした")
+    anyhow::bail!("未找到可用的播放列表名")
 }

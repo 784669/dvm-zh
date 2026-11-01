@@ -1,7 +1,7 @@
 /**
- * クリップボードへコピーする。
+ * クリップボードへ复制する。
  * WebView2 では navigator.clipboard が使えるが、権限やフォーカスの都合で失敗することがあるので
- * 旧 API での書き込みにフォールバックする(コピーボタンが無反応に見えるのを防ぐ)。
+ * 旧 API での書き込みにフォールバックする(复制ボタンが無反応に見えるのを防ぐ)。
  */
 export async function copyText(text: string): Promise<boolean> {
   try {

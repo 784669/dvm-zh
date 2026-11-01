@@ -23,7 +23,7 @@ pub fn export(conn: &Connection, playlist_id: i64, dest: &Path) -> Result<usize>
     conn.query_row("SELECT name FROM playlists WHERE id = ?1", params![playlist_id], |r| {
         r.get::<_, String>(0)
     })
-    .map_err(|_| anyhow::anyhow!("プレイリストが見つかりません"))?;
+    .map_err(|_| anyhow::anyhow!("找不到播放列表"))?;
     let mut stmt = conn.prepare(
         "SELECT v.path, COALESCE(v.title, v.filename), v.duration_ms
          FROM playlist_entries pe JOIN videos v ON v.id = pe.video_id

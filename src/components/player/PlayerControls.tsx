@@ -38,7 +38,7 @@ const PREVIEW_DELAY_MS = 80;
 const clamp = (v: number, lo: number, hi: number) => Math.min(Math.max(v, lo), hi);
 
 /**
- * バッファ帯付きシークバー。ドラッグ中はプレビュー位置を表示し、離した時にシークする。
+ * バッファ帯付きシークバー。ドラッグ中はプレビュー位置显示し、離した時にシークする。
  * カーソルを合わせるとその位置の時刻と**コマ**を出す(v1.14)
  */
 function SeekBar({ player, previewSrc }: { player: VideoPlayer; previewSrc?: string }) {
@@ -81,7 +81,7 @@ function SeekBar({ player, previewSrc }: { player: VideoPlayer; previewSrc?: str
   const playedPct = state.duration > 0 ? (pos / state.duration) * 100 : 0;
   const bufferedPct = state.duration > 0 ? (state.bufferedEnd / state.duration) * 100 : 0;
 
-  // チャプター(v1.29、mpv のみ)。0:00 の目盛りは左端に埋もれるだけなので出さない
+  // 章节（v1.29、mpv のみ)。0:00 の目盛りは左端に埋もれるだけなので出さない
   const chapters = player.chapters ?? [];
   const marks = hasChapters(chapters) && state.duration > 0 ? chapters.filter((c) => c.time > 0) : [];
   const hoverChapter = hover && hasChapters(chapters) ? chapterLabelAt(chapters, hover.time) : null;
@@ -117,7 +117,7 @@ function SeekBar({ player, previewSrc }: { player: VideoPlayer; previewSrc?: str
     >
       {hover && state.duration > 0 && (
         <div className="seek-preview" style={{ left: hover.left }}>
-          {/* 設定オフ・src 無し・読み込み前は時刻だけ出す(枠は出さない) */}
+          {/* 設定オフ·src 無し·読み込み前は時刻だけ出す(枠は出さない) */}
           {seekPreview && previewSrc && loadPreview && (
             <SeekPreview src={previewSrc} time={hover.time} />
           )}
@@ -142,7 +142,7 @@ function SeekBar({ player, previewSrc }: { player: VideoPlayer; previewSrc?: str
   );
 }
 
-/** mpv のときだけ出る音声・字幕トラックの選択 */
+/** mpv のときだけ出る音声·字幕トラックの選択 */
 function TrackSelect({
   kind,
   label,
@@ -166,7 +166,7 @@ function TrackSelect({
       onChange={(e) => onChange(e.target.value === '' ? null : Number(e.target.value))}
       title={label}
     >
-      {kind === 'sub' && <option value="">字幕オフ</option>}
+      {kind === 'sub' && <option value="">字幕关闭</option>}
       {mine.map((t) => (
         <option key={t.id} value={t.id}>
           {t.label}
@@ -195,7 +195,7 @@ export function PlayerControls({
   player: VideoPlayer;
   isFullscreen: boolean;
   onToggleFullscreen: () => void;
-  /** 今見ているコマをサムネイルにする。上のバーに置くと ✕ の誤爆が起きるのでここに置く */
+  /** 今見ているコマを缩略图にする。上のバーに置くと ✕ の誤爆が起きるのでここに置く */
   onSetThumbnail?: () => void;
   /** 今見ているコマを画像として保存する(v1.26)。撮影系なので隣に並べる */
   onSaveFrame?: () => void;
@@ -207,19 +207,19 @@ export function PlayerControls({
   previewSrc?: string;
   queue?: PlayQueueControls;
   /**
-   * 字幕の見た目パネルの開閉(v1.24)。mpv 経路だけが渡す —
+   * 字幕样式パネルの開閉(v1.24)。mpv 経路だけが渡す —
    * WebView2 側は変換で字幕を落とすので、そもそも出す意味がない
    */
   onOpenSubtitleStyle?: () => void;
   subtitleStyleOpen?: boolean;
   /**
-   * チャプター一覧の開閉(v1.29)。字幕パネルと同じく**状態は呼び出し側が持つ** ——
+   * 章节一覧の開閉(v1.29)。字幕パネルと同じく**状態は呼び出し側が持つ** ——
    * 開いている間はコントロールバーを隠せないし、Esc は一覧だけを閉じたいため
    */
   chaptersOpen?: boolean;
   onToggleChapters?: () => void;
   /**
-   * 再生キューの開閉(v1.40)。チャプター・字幕パネルと同じく**状態は呼び出し側が持つ**。
+   * 再生队列の開閉(v1.40)。章节·字幕パネルと同じく**状態は呼び出し側が持つ**。
    * 開いている間はコントロールバーを隠せないし、Esc はパネルだけを閉じたい
    */
   queueOpen?: boolean;
@@ -244,7 +244,7 @@ export function PlayerControls({
             onMouseDown={noFocus}
             onClick={queue.prev}
             disabled={!queue.hasPrev}
-            title="前の動画 (P)"
+            title="上一个视频 (P)"
           >
             <SkipBack />
           </button>
@@ -252,7 +252,7 @@ export function PlayerControls({
         <button
           onMouseDown={noFocus}
           onClick={player.togglePlay}
-          title={state.paused ? '再生 (Space)' : '一時停止 (Space)'}
+          title={state.paused ? '播放 (Space)' : '暂停 (Space)'}
         >
           {state.paused ? <Play /> : <Pause />}
         </button>
@@ -264,21 +264,21 @@ export function PlayerControls({
             /*
               名前が分かっているなら出す(v1.40)。位置(`3 / 128`)だけでは
               「あと何本あるか」は分かっても「次が何か」が分からない。
-              先読みが済んでいない・端にいるときは従来の文言に落ちる
+              先読みが済んでいない·端にいるときは従来の文言に落ちる
             */
-            title={queue.nextTitle ? `次の動画: ${queue.nextTitle} (N)` : '次の動画 (N)'}
+            title={queue.nextTitle ? `下一个视频: ${queue.nextTitle} (N)` : '下一个视频 (N)'}
           >
             <SkipForward />
           </button>
         )}
         {/*
           連続再生の切替。設定 autoplay_next をその場で書き換える(engine 非依存なので
-          両エンジンで出す)。単発再生でも隠さない — ⏮⏭ は「今のキューに前後があるか」
+          両エンジンで出す)。単発再生でも隠さない — ⏮⏭ は「今の队列に前後があるか」
           という一時的な状態だから disabled にするが、こちらは永続設定なので
           消えると設定の在り処が分からなくなる。
-          **キューモード中は隠さず disabled にする**(同じ理由 + 位置が動くと押し間違える)——
-          キューは設定に関係なく常に次へ進むので、押しても何も変わらないように見えていた。
-          アイコンはプレイリスト(ListVideo)。以前はループ記号を使っていて、
+          **队列モード中は隠さず disabled にする**(同じ理由 + 位置が動くと押し間違える)——
+          队列は設定に関係なく常に次へ進むので、押しても何も変わらないように見えていた。
+          アイコンは播放列表(ListVideo)。以前はループ記号を使っていて、
           隣のリピートと見分けが付かなかった(v1.13)
         */}
         <button
@@ -288,10 +288,10 @@ export function PlayerControls({
           disabled={queue?.inQueue}
           title={
             queue?.inQueue
-              ? 'キュー再生中は設定に関係なく、常に次の動画へ進みます'
+              ? '队列播放时无论设置如何，都会自动切到下一个视频'
               : autoplayNext
-                ? '連続再生をオフにする (A)'
-                : '連続再生をオンにする(最後まで再生したら次の動画へ)(A)'
+                ? '关闭连续播放 (A)'
+                : '开启连续播放（播完即切到下一个视频）(A)'
           }
         >
           <ListVideo />
@@ -306,8 +306,8 @@ export function PlayerControls({
           onClick={toggleRepeat}
           title={
             repeatOne
-              ? 'リピート再生をオフにする (R)'
-              : 'リピート再生をオンにする(この動画を繰り返す)(R)'
+              ? '关闭循环播放 (R)'
+              : '开启循环播放（重复此视频）(R)'
           }
         >
           <Repeat1 />
@@ -316,9 +316,9 @@ export function PlayerControls({
           {fmtTime(state.currentTime)} / {fmtTime(state.duration)}
         </span>
         {/*
-          位置表示。**キューモードではアイコンを添える**(v1.40) ——
-          数字だけだと「絞り込み結果の中の 3 / 12」なのか
-          「手で並べたキューの 3 / 12」なのかが読み取れない
+          位置表示。**队列モードではアイコンを添える**(v1.40) ——
+          数字だけだと「筛选結果の中の 3 / 12」なのか
+          「手で並べた队列の 3 / 12」なのかが読み取れない
         */}
         {queue?.position && (
           <span className={`player-position ${queue.inQueue ? 'in-queue' : ''}`}>
@@ -345,9 +345,9 @@ export function PlayerControls({
         )}
         <div className="player-spacer" />
         {/*
-          再生キュー(v1.40)。**再生中は `.app` ごと消える**ので、再生中に並べ替え・削除を
-          するにはここから開くしかない(ChapterList と同じ制約・同じ作法)。
-          中身は右ペインのキュータブとまったく同じコンポーネント
+          再生队列(v1.40)。**再生中は `.app` ごと消える**ので、再生中に排列·削除を
+          するにはここから打开しかない(ChapterList と同じ制約·同じ作法)。
+          中身は右ペインの队列タブとまったく同じコンポーネント
         */}
         {onToggleQueue && (
           <div className="queue-anchor">
@@ -355,7 +355,7 @@ export function PlayerControls({
               className={queueOpen ? 'active' : ''}
               onMouseDown={noFocus}
               onClick={onToggleQueue}
-              title="再生キュー(並べ替え・削除)(Q)"
+              title="播放队列（排序·删除）(Q)"
             >
               <ListVideo />
               {queueCount > 0 && <span className="queue-badge">{queueCount}</span>}
@@ -368,8 +368,8 @@ export function PlayerControls({
           </div>
         )}
         {/*
-          チャプター(v1.29)。音声・字幕の選択と同じ「この動画の中身から選ぶもの」の
-          一角に置く。チャプターが 2 つ未満のファイルでは ChapterList 側が何も描かない
+          章节（v1.29)。音声·字幕の選択と同じ「この動画の中身から選ぶもの」の
+          一角に置く。章节が 2 つ未満の文件では ChapterList 側が何も描かない
         */}
         {player.chapters && onToggleChapters && (
           <ChapterList
@@ -384,7 +384,7 @@ export function PlayerControls({
           <>
             <TrackSelect
               kind="audio"
-              label="音声トラック"
+              label="音轨"
               tracks={player.tracks}
               onChange={(id) => player.setTrack!('audio', id)}
             />
@@ -397,7 +397,7 @@ export function PlayerControls({
           </>
         )}
         {/*
-          字幕の見た目(v1.24)。字幕トラックの select の隣に置く —
+          字幕样式(v1.24)。字幕トラックの select の隣に置く —
           「字幕まわりの操作はこの一角にある」と一目で分かるようにするため
         */}
         {onOpenSubtitleStyle && (
@@ -405,7 +405,7 @@ export function PlayerControls({
             className={subtitleStyleOpen ? 'active' : ''}
             onMouseDown={noFocus}
             onClick={onOpenSubtitleStyle}
-            title="字幕の見た目(フォント・サイズ・色・縁取り)を変える"
+            title="更改字幕外观（字体·大小·颜色·描边）"
           >
             <Subtitles />
           </button>
@@ -414,7 +414,7 @@ export function PlayerControls({
           className="player-rate"
           value={state.rate}
           onChange={(e) => player.setRate(Number(e.target.value))}
-          title="再生速度 (< >)"
+          title="播放速度 (< >)"
         >
           {RATE_OPTIONS.map((r) => (
             <option key={r} value={r}>
@@ -422,7 +422,7 @@ export function PlayerControls({
             </option>
           ))}
         </select>
-        <button onMouseDown={noFocus} onClick={player.toggleMute} title="ミュート (M)">
+        <button onMouseDown={noFocus} onClick={player.toggleMute} title="静音 (M)">
           {state.muted || state.volume === 0 ? <VolumeX /> : <Volume2 />}
         </button>
         <input
@@ -438,24 +438,24 @@ export function PlayerControls({
           title="音量 (↑↓)"
         />
         {/*
-          「この位置をサムネイルにする」。上のバーに置くと閉じるボタンの誤爆が起きるので
+          「将此位置设为缩略图」。上のバーに置くと关闭ボタンの誤爆が起きるので
           こちら側に置いている(v1.11)
         */}
         {onSetThumbnail && (
           <button
             onMouseDown={noFocus}
             onClick={onSetThumbnail}
-            title="この位置をサムネイルにする (T)"
+            title="将此处设为缩略图 (T)"
           >
             {/*
               カメラは隣の「画像として保存」(v1.26)が使う。
-              こちらは一覧に出る絵を決める操作なので、サムネイル一覧の形にしている
+              こちらは一覧に出る絵を決める操作なので、缩略图一覧の形にしている
             */}
             <GalleryThumbnails />
           </button>
         )}
         {/*
-          「このコマを画像として保存」(v1.26)。サムネイル指定の隣に置いて
+          「将此帧保存为图片」(v1.26)。缩略图指定の隣に置いて
           「この一角は絵まわり」と読めるようにしている。輪郭が全く違うアイコンなので
           隣り合っていても取り違えない
         */}
@@ -463,12 +463,12 @@ export function PlayerControls({
           <button
             onMouseDown={noFocus}
             onClick={onSaveFrame}
-            title="このコマを画像として保存する (S)"
+            title="将此帧保存为图片 (S)"
           >
             <Camera />
           </button>
         )}
-        {/* 表示サイズ(mpv のみ)。両状態で同じアイコンを使うのでバーの幅が揺れない */}
+        {/* 表示大小(mpv のみ)。両状態で同じアイコンを使うのでバーの幅が揺れない */}
         {player.toggleUnscaled && (
           <button
             className={player.unscaled ? 'active' : ''}
@@ -476,14 +476,14 @@ export function PlayerControls({
             onClick={player.toggleUnscaled}
             title={
               player.unscaled
-                ? 'ウィンドウにフィットさせる (U)'
-                : '元のサイズ(等倍)で表示する — 小さい動画を拡大しない (U)'
+                ? '适配窗口 (U)'
+                : '以原始尺寸（1:1）显示 — 不放大较小视频 (U)'
             }
           >
             <Scaling />
           </button>
         )}
-        <button onMouseDown={noFocus} onClick={onToggleFullscreen} title="フルスクリーン (F)">
+        <button onMouseDown={noFocus} onClick={onToggleFullscreen} title="全屏 (F)">
           {isFullscreen ? <Minimize /> : <Maximize />}
         </button>
       </div>

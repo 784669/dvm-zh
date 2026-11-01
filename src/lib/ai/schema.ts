@@ -20,7 +20,7 @@ export function toAnthropicTools(defs: ToolDef[]): unknown[] {
 /**
  * OpenAI(と互換サーバー): `{type:'function', function:{...}}`。
  *
- * **strict は使わない。** strict は「properties の全キーが required」かつ
+ * **strict は使わない。** strict は「properties の全キーが required」并且
  * 「未指定を表すには型を nullable にする」ことを要求するが、DVM の `search_videos` は
  * プロパティ 31 個で required が 0 個(全条件が任意)なので相性が悪い。
  * 引数の検証は実装側(toQuery / Rust の clamp)で既にやっている

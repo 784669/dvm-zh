@@ -38,8 +38,8 @@ describe('hdrTooltip', () => {
   const info = { short: 'HDR10', full: 'HDR10 (PQ)' };
 
   it('HDR で出ているときだけ「HDR のまま出力」と言う', () => {
-    expect(hdrTooltip(info, true, true)).toContain('HDR のまま出力');
-    expect(hdrTooltip(info, true, true)).not.toContain('SDR に変換');
+    expect(hdrTooltip(info, true, true)).toContain('HDR 原样输出');
+    expect(hdrTooltip(info, true, true)).not.toContain('已转换为 SDR 显示');
   });
 
   /*
@@ -49,13 +49,13 @@ describe('hdrTooltip', () => {
    */
   it('設定がオンでも SDR 出力なら、そう言ったうえで理由を出す', () => {
     const t = hdrTooltip(info, false, true);
-    expect(t).toContain('SDR に変換');
-    expect(t).toContain('ディスプレイが HDR モードではありません');
+    expect(t).toContain('已转换为 SDR 显示');
+    expect(t).toContain('显示器未处于 HDR 模式');
   });
 
   it('設定がオフなら、その旨を出す', () => {
     const t = hdrTooltip(info, false, false);
-    expect(t).toContain('SDR に変換');
-    expect(t).toContain('HDR パススルー: オフ');
+    expect(t).toContain('已转换为 SDR 显示');
+    expect(t).toContain('HDR 直通: 关');
   });
 });

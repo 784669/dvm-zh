@@ -56,6 +56,7 @@ pub async fn apply_dedupe(
         for id in &removed_ids {
             let _ = std::fs::remove_file(state.thumbs_dir.join(format!("{id}.jpg")));
             crate::core::playback::remove_cache_for(&state.transcode_dir, *id);
+            crate::core::playback::remove_preview_for(&state.preview_dir, *id);
         }
         Ok(result)
     })
@@ -84,7 +85,7 @@ pub fn backup_db(state: State<AppState>) -> Result<BackupInfo, String> {
         .map_err(|e| e.to_string())?
         .into_iter()
         .find(|b| b.path == dest.to_string_lossy())
-        .ok_or_else(|| "バックアップファイルが見つかりません".to_string())
+        .ok_or_else(|| "找不到备份文件".to_string())
 }
 
 #[tauri::command]
@@ -131,7 +132,7 @@ pub fn open_library_dir(state: State<AppState>, id: Option<String>) -> Result<()
             let conn = state.app_db.lock().unwrap();
             let entry = libraries::get(&conn, &id)
                 .map_err(|e| e.to_string())?
-                .ok_or_else(|| "そのライブラリは一覧にありません".to_string())?;
+                .ok_or_else(|| "该媒体库不在列表中".to_string())?;
             std::path::PathBuf::from(entry.root)
         }
         None => state.library_root.clone(),

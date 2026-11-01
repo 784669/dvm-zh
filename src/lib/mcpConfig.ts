@@ -1,29 +1,29 @@
 /**
  * 外部 AI クライアントに貼り付ける MCP 設定を組み立てる(設定画面の「MCP 連携」で使う)。
  *
- * DB の場所は dvm-mcp.exe 自身が %APPDATA%\jp.demo2.dvm\library.db を既定で開くので、
- * 通常は実行ファイルのパスだけ渡せばよい(別の場所を見せたいときは環境変数 DVM_DB)。
+ * DB の場所は dvm-mcp.exe 自身が %APPDATA%\jp.demo2.dvm\library.db を既定で打开ので、
+ * 通常は可执行文个的路径だけ渡せばよい(別の場所を見せたいときは環境変数 DVM_DB)。
  */
 
 /** クライアント側の設定に載るサーバー名。ユーザーが AI に「dvm で」と言えるよう短くしておく */
 export const SERVER_NAME = 'dvm';
 
-/** Claude Desktop の設定ファイル(Windows) */
+/** Claude Desktop の設定文件(Windows) */
 export const CLAUDE_DESKTOP_CONFIG = '%APPDATA%\\Claude\\claude_desktop_config.json';
 
-/** Codex CLI の設定ファイル(Windows) */
+/** Codex CLI の設定文件(Windows) */
 export const CODEX_CONFIG = '%USERPROFILE%\\.codex\\config.toml';
 
-/** Gemini CLI の設定ファイル(Windows) */
+/** Gemini CLI の設定文件(Windows) */
 export const GEMINI_CLI_CONFIG = '%USERPROFILE%\\.gemini\\settings.json';
 
-/** VS Code の MCP 設定ファイル(Windows) */
+/** VS Code の MCP 設定文件(Windows) */
 export const VSCODE_MCP_CONFIG = '%APPDATA%\\Code\\User\\mcp.json';
 
 export interface McpConfigInput {
   /** dvm-mcp.exe の絶対パス */
   exePath: string;
-  /** true なら書き込みツール(タグ・レーティング・シリーズ等)を有効にする */
+  /** true なら書き込みツール(标签·评分·系列等)を有効にする */
   allowWrite: boolean;
 }
 
@@ -42,7 +42,7 @@ export function mcpServersJson({ exePath, allowWrite }: McpConfigInput): string 
 
 /**
  * Claude Code の登録コマンド。
- * -s user を付けてどのフォルダから起動しても使えるようにする(既定の local はプロジェクト単位)
+ * -s user を付けてどの文件夹から起動しても使えるようにする(既定の local はプロジェクト単位)
  */
 export function claudeCodeCommand({ exePath, allowWrite }: McpConfigInput): string {
   const env = allowWrite ? ' -e DVM_ALLOW_WRITE=1' : '';

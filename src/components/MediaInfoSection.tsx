@@ -16,16 +16,16 @@ type State =
   | { kind: 'loading' }
   | { kind: 'ok'; info: MediaInfo }
   | { kind: 'error'; message: string }
-  /** ドライブ未接続 / ファイル欠落。ffprobe を起動するまでもない */
+  /** 驱动器未连接 / 文件欠落。ffprobe を起動するまでもない */
   | { kind: 'unavailable'; message: string };
 
 /**
- * 詳細ペインの「メディア情報」(v1.15)。MediaInfo 相当の内容を ffprobe から出す。
+ * 详情面板の「媒体信息」(v1.15)。MediaInfo 相当の内容を ffprobe から出す。
  *
  * **展開したときに初めて ffprobe を叩く**。閉じている間は元動画に一切触らない
  * (CLAUDE.md パフォーマンス原則 2)。
  * 結果はキャッシュしない — ヘッダを読むだけで速く、鮮度管理のほうが高くつくため
- * (判断の理由は DESIGN.md「メディア情報の表示」)
+ * (判断の理由は DESIGN.md「媒体信息の表示」)
  */
 export function MediaInfoSection({ video }: { video: VideoRow }) {
   const open = useLibrary((s) => s.mediaInfoOpen);
@@ -35,13 +35,13 @@ export function MediaInfoSection({ video }: { video: VideoRow }) {
 
   useEffect(() => {
     if (!open) return;
-    // DB のフラグは古いことがあるので Rust 側でも同じガードをしている
+    // DB の标志は古いことがあるので Rust 側でも同じガードをしている
     if (video.isOffline) {
-      setState({ kind: 'unavailable', message: 'ドライブが接続されていません' });
+      setState({ kind: 'unavailable', message: '驱动器未连接' });
       return;
     }
     if (video.isMissing) {
-      setState({ kind: 'unavailable', message: 'ファイルが見つかりません' });
+      setState({ kind: 'unavailable', message: '找不到文件' });
       return;
     }
     let alive = true;
@@ -73,9 +73,9 @@ export function MediaInfoSection({ video }: { video: VideoRow }) {
     const header = `${video.title ?? video.filename}\n${video.path}`;
     try {
       await navigator.clipboard.writeText(mediaSectionsToText(header, sections));
-      pushToast('メディア情報をコピーしました', 'info');
+      pushToast('已复制媒体信息', 'info');
     } catch {
-      pushToast('クリップボードにコピーできませんでした');
+      pushToast('无法复制到剪贴板');
     }
   };
 
@@ -85,14 +85,14 @@ export function MediaInfoSection({ video }: { video: VideoRow }) {
         <button
           className={`section-toggle ${open ? 'open' : ''}`}
           onClick={toggle}
-          title={open ? 'メディア情報を隠す' : 'ffprobe で調べて表示する'}
+          title={open ? '隐藏媒体信息' : '用 ffprobe 分析并显示'}
         >
           {/* 開閉でアイコンを変えず CSS で回す(形が変わると大きさが違って見える) */}
           <ChevronDown className="section-chevron" />
-          メディア情報
+          媒体信息
         </button>
         {open && sections.length > 0 && (
-          <button className="section-copy" onClick={copy} title="表示中の内容をテキストでコピー">
+          <button className="section-copy" onClick={copy} title="以文本复制当前显示的内容">
             <Copy />
           </button>
         )}
@@ -100,13 +100,13 @@ export function MediaInfoSection({ video }: { video: VideoRow }) {
 
       {open && (
         <div className="media-info">
-          {state.kind === 'loading' && <div className="media-note">読み込み中...</div>}
+          {state.kind === 'loading' && <div className="media-note">加载中...</div>}
           {state.kind === 'unavailable' && <div className="media-note">{state.message}</div>}
           {state.kind === 'error' && (
-            <div className="media-note warn">メディア情報を取得できませんでした: {state.message}</div>
+            <div className="media-note warn">无法获取媒体信息: {state.message}</div>
           )}
           {state.kind === 'ok' && sections.length === 0 && (
-            <div className="media-note">読み取れる情報がありませんでした</div>
+            <div className="media-note">没有可读取的信息</div>
           )}
           {sections.map((s) => (
             <div key={s.title} className="media-block">

@@ -2,11 +2,11 @@ import type { SortKey, VideoLabels, VideoRow } from '../types';
 import { fmtTime } from './format';
 
 /**
- * 詳細リスト表示の列定義(v1.16)。列に関する知識はすべてここに置き、
+ * 详细列表视图の列定義(v1.16)。列に関する知識は全部ここに置き、
  * コンポーネントは受け取った定義を描くだけにする。
  *
  * ソート状態はグリッドと共有の 1 つ(store の `sort`)。列ヘッダはそれを
- * 書き換えるだけで、リスト専用の並び順は持たない
+ * 書き換えるだけで、リスト専用の排序は持たない
  */
 
 export type ColumnKey =
@@ -36,21 +36,21 @@ export interface ColumnDef {
   width: number;
   align: 'left' | 'right';
   /**
-   * この列で並べ替えるときのキー。null = 並べ替えできない列(タグ・シリーズ)。
-   * 動画は**タグの集合**を持つので「タグ順」に自然な定義が無い(先頭のタグ名? 個数?)。
+   * この列排序方式るときのキー。null = 排列できない列(标签·系列)。
+   * 動画は**标签の集合**を持つので「标签順」に自然な定義が無い(先頭の标签名? 個数?)。
    * どちらを選んでも期待と食い違うので、ヘッダをボタンにしない
    */
   sort: { asc: SortKey; desc: SortKey } | null;
   /**
-   * ヘッダを最初に押したときの向き。
-   * 追加日を古い順から見たい場面はまず無いので、日付・数量系は降順から始める
+   * ヘッダを最初に押したときの方向。
+   * 追加日を古い順から見たい場面はまず無いので、日付·数量系は降順から始める
    */
   first: 'asc' | 'desc';
   /**
    * セルに出す文字列。値が無ければ null(呼び出し側が '—' にする)。
    * thumb だけは画像なのでこれを使わず、コンポーネントが特別扱いする。
    *
-   * タグ・シリーズは行と別便で届く(v1.23)ので `labels` を見る。
+   * 标签·系列は行と別便で届く(v1.23)ので `labels` を見る。
    * 未取得は null(= '—')、取得済みで 0 件は '' (= 空欄)と区別すること
    */
   text: (v: VideoRow, labels?: VideoLabels) => string | null;
@@ -58,7 +58,7 @@ export interface ColumnDef {
 
 /**
  * lib/format.ts の fmtSize とはわざと別実装。
- * サイズ列が狭いので KB を出さず、MB も小数を落として桁を短く保つ
+ * 大小列が狭いので KB を出さず、MB も小数を落として桁を短く保つ
  */
 function fmtListSize(bytes: number): string {
   const GB = 1024 ** 3;
@@ -72,89 +72,89 @@ function dateOnly(v: string | null): string | null {
   return v ? v.slice(0, 10) : null;
 }
 
-/** ファイル名から拡張子を取り出す(ドットなし小文字)。Rust の ext_expr() と同じ規則 */
+/** 文件名から拡張子を取り出す(ドットなし小文字)。Rust の ext_expr() と同じ規則 */
 export function extensionOf(filename: string): string | null {
   const dot = filename.lastIndexOf('.');
   if (dot < 0) return null;
   return filename.slice(dot + 1).toLowerCase() || null;
 }
 
-/** パスから親フォルダ名だけを取り出す(フルパスは列に収まらない) */
+/** パスから親文件夹名だけを取り出す(フルパスは列に収まらない) */
 export function folderOf(path: string): string | null {
   const parts = path.replace(/\//g, '\\').split('\\').filter(Boolean);
-  // 末尾はファイル名なので 1 つ手前
+  // 末尾は文件名なので 1 つ手前
   return parts.length >= 2 ? parts[parts.length - 2] : null;
 }
 
 export const COLUMNS: Record<ColumnKey, ColumnDef> = {
   thumb: {
-    key: 'thumb', label: 'サムネイル', width: 64, align: 'left',
+    key: 'thumb', label: '缩略图', width: 64, align: 'left',
     sort: { asc: 'name_asc', desc: 'name_desc' }, first: 'asc',
     text: () => null,
   },
   duration: {
-    key: 'duration', label: '長さ', width: 60, align: 'right',
+    key: 'duration', label: '时长', width: 60, align: 'right',
     sort: { asc: 'duration_asc', desc: 'duration_desc' }, first: 'desc',
     text: (v) => (v.durationMs != null ? fmtTime(v.durationMs / 1000) : null),
   },
   size: {
-    key: 'size', label: 'サイズ', width: 70, align: 'right',
+    key: 'size', label: '大小', width: 70, align: 'right',
     sort: { asc: 'size_asc', desc: 'size_desc' }, first: 'desc',
     text: (v) => fmtListSize(v.size),
   },
   resolution: {
-    key: 'resolution', label: '解像度', width: 84, align: 'right',
+    key: 'resolution', label: '分辨率', width: 84, align: 'right',
     sort: { asc: 'res_asc', desc: 'res_desc' }, first: 'desc',
     text: (v) => (v.width && v.height ? `${v.width}×${v.height}` : null),
   },
   rating: {
-    key: 'rating', label: '評価', width: 70, align: 'left',
+    key: 'rating', label: '评分', width: 70, align: 'left',
     sort: { asc: 'rating_asc', desc: 'rating_desc' }, first: 'desc',
     // 0 は空欄。'☆☆☆☆☆' を並べると列がうるさくなる
     text: (v) => (v.rating > 0 ? '★'.repeat(v.rating) : ''),
   },
   added: {
-    key: 'added', label: '追加日', width: 82, align: 'right',
+    key: 'added', label: '添加日期', width: 82, align: 'right',
     sort: { asc: 'added_asc', desc: 'added_desc' }, first: 'desc',
     text: (v) => dateOnly(v.addedAt),
   },
   views: {
-    key: 'views', label: '視聴', width: 44, align: 'right',
+    key: 'views', label: '观看', width: 44, align: 'right',
     sort: { asc: 'views_asc', desc: 'views_desc' }, first: 'desc',
     text: (v) => String(v.viewCount),
   },
   lastViewed: {
-    key: 'lastViewed', label: '最終視聴', width: 82, align: 'right',
+    key: 'lastViewed', label: '最近观看', width: 82, align: 'right',
     sort: { asc: 'viewed_asc', desc: 'viewed_desc' }, first: 'desc',
     text: (v) => dateOnly(v.lastViewedAt),
   },
   ext: {
-    key: 'ext', label: '拡張子', width: 56, align: 'left',
+    key: 'ext', label: '扩展名', width: 56, align: 'left',
     sort: { asc: 'ext_asc', desc: 'ext_desc' }, first: 'asc',
     text: (v) => extensionOf(v.filename),
   },
   videoCodec: {
-    key: 'videoCodec', label: '映像', width: 64, align: 'left',
+    key: 'videoCodec', label: '视频', width: 64, align: 'left',
     sort: { asc: 'codec_asc', desc: 'codec_desc' }, first: 'asc',
     text: (v) => v.videoCodec,
   },
   audioCodec: {
-    key: 'audioCodec', label: '音声', width: 64, align: 'left',
+    key: 'audioCodec', label: '音频', width: 64, align: 'left',
     sort: { asc: 'acodec_asc', desc: 'acodec_desc' }, first: 'asc',
     text: (v) => v.audioCodec,
   },
   folder: {
-    key: 'folder', label: 'フォルダ', width: 120, align: 'left',
+    key: 'folder', label: '文件夹', width: 120, align: 'left',
     sort: { asc: 'folder_asc', desc: 'folder_desc' }, first: 'asc',
     text: (v) => folderOf(v.path),
   },
   fileModified: {
-    key: 'fileModified', label: 'ファイル更新日', width: 96, align: 'right',
+    key: 'fileModified', label: '文件更新日期', width: 96, align: 'right',
     sort: { asc: 'fmodified_asc', desc: 'fmodified_desc' }, first: 'desc',
     text: (v) => dateOnly(v.fileModifiedAt),
   },
   fileCreated: {
-    key: 'fileCreated', label: 'ファイル作成日', width: 96, align: 'right',
+    key: 'fileCreated', label: '文件创建日期', width: 96, align: 'right',
     sort: { asc: 'fcreated_asc', desc: 'fcreated_desc' }, first: 'desc',
     text: (v) => dateOnly(v.fileCreatedAt),
   },
@@ -166,7 +166,7 @@ export const COLUMNS: Record<ColumnKey, ColumnDef> = {
       v.fps == null ? null : Number.isInteger(v.fps) ? String(v.fps) : v.fps.toFixed(2),
   },
   bitrate: {
-    key: 'bitrate', label: 'ビットレート', width: 84, align: 'right',
+    key: 'bitrate', label: '比特率', width: 84, align: 'right',
     sort: { asc: 'bitrate_asc', desc: 'bitrate_desc' }, first: 'desc',
     text: (v) =>
       v.bitrate == null
@@ -175,15 +175,15 @@ export const COLUMNS: Record<ColumnKey, ColumnDef> = {
           ? `${(v.bitrate / 1_000_000).toFixed(2)} Mbps`
           : `${Math.round(v.bitrate / 1000)} kbps`,
   },
-  // タグ・シリーズはチップではなくカンマ区切りのテキストで出す(v1.23)。
+  // 标签·系列はチップではなくカンマ区切りのテキストで出す(v1.23)。
   // 行が 28〜44px と細いので、チップを並べるより読める文字数が多い
   tags: {
-    key: 'tags', label: 'タグ', width: 160, align: 'left',
+    key: 'tags', label: '标签', width: 160, align: 'left',
     sort: null, first: 'asc',
     text: (_v, labels) => (labels ? labels.tags.map((t) => t.name).join(', ') : null),
   },
   series: {
-    key: 'series', label: 'シリーズ', width: 120, align: 'left',
+    key: 'series', label: '系列', width: 120, align: 'left',
     sort: null, first: 'asc',
     text: (_v, labels) => (labels ? labels.series.map((s) => s.name).join(', ') : null),
   },
@@ -197,7 +197,7 @@ export const COLUMN_ORDER: ColumnKey[] = [
 ];
 
 /**
- * この構成でタグ・シリーズの別便(api.videoLabels)が要るか。
+ * この構成で标签·系列の別便(api.videoLabels)が要るか。
  * 出さない列のために毎ページ問い合わせを投げないため
  */
 export function needsLabels(cols: ColumnKey[]): boolean {
@@ -233,8 +233,8 @@ export function parseColumns(json: string | null): ColumnKey[] {
 }
 
 /**
- * サムネイルは必ず先頭に寄せる。エクスプローラーと同じく
- * 「アイコン → 名前 → 残り」の並びを崩さないため(並べ替えの対象外)
+ * 缩略图は必ず先頭に寄せる。エクスプローラーと同じく
+ * 「アイコン → 名前 → 残り」の並びを崩さないため(排列の対象外)
  */
 function normalize(cols: ColumnKey[]): ColumnKey[] {
   const { thumb, rest } = layout(cols);
@@ -242,7 +242,7 @@ function normalize(cols: ColumnKey[]): ColumnKey[] {
 }
 
 /**
- * 描画順の分解。サムネイルは常に先頭、名前はその次。
+ * 描画順の分解。缩略图は常に先頭、名前はその次。
  * 名前は固定列なので `cols` には含まれない
  */
 export function layout(cols: ColumnKey[]): { thumb: boolean; rest: ColumnKey[] } {
@@ -264,7 +264,7 @@ export const NAME_MIN_W = 160;
 
 /**
  * grid-template-columns の値。名前列だけが伸縮する。
- * ヘッダ行・動画行・フォルダ行がこれを共有するので列がずれない
+ * ヘッダ行·動画行·文件夹行がこれを共有するので列がずれない
  */
 export function gridTemplate(cols: ColumnKey[]): string {
   return trackWidths(cols)
@@ -272,7 +272,7 @@ export function gridTemplate(cols: ColumnKey[]): string {
     .join(' ');
 }
 
-/** 名前列は「サムネイルがあればその次」に入る */
+/** 名前列は「缩略图があればその次」に入る */
 function nameTrackIndex(cols: ColumnKey[]): number {
   return layout(cols).thumb ? 1 : 0;
 }
@@ -295,7 +295,7 @@ const ROW_PADDING_W = 16;
  * 名前列が下限まで縮んだときの行の幅(px)。
  *
  * 可視幅がこれを下回ると横スクロールになる。**行の幅は max-content で決めてはいけない** —
- * ファイル名の長さで行ごとに幅が変わり、スクロールしたとき列が揃わなくなる
+ * 文件名の时长で行ごとに幅が変わり、スクロールしたとき列が揃わなくなる
  */
 export function totalWidth(cols: ColumnKey[]): number {
   const tracks = trackWidths(cols);
@@ -303,8 +303,8 @@ export function totalWidth(cols: ColumnKey[]): number {
 }
 
 /**
- * ヘッダを押したときの遷移。同じ列なら反転、別の列ならその列の既定の向き。
- * 並べ替えできない列(sort === null)は今の並び順をそのまま返す
+ * ヘッダを押したときの遷移。同じ列なら反転、別の列ならその列の既定の方向。
+ * 排列できない列(sort === null)は今の排序をそのまま返す
  */
 export function nextSort(col: ColumnDef, current: SortKey): SortKey {
   if (!col.sort) return current;
@@ -313,7 +313,7 @@ export function nextSort(col: ColumnDef, current: SortKey): SortKey {
   return col.sort[col.first];
 }
 
-/** 今の並び順がこの列によるものなら向きを返す。違う列なら null(矢印を出さない) */
+/** 今の排序がこの列によるものなら方向を返す。違う列なら null(矢印を出さない) */
 export function sortDirOf(col: ColumnDef, current: SortKey): 'asc' | 'desc' | null {
   if (!col.sort) return null;
   if (current === col.sort.asc) return 'asc';
@@ -322,7 +322,7 @@ export function sortDirOf(col: ColumnDef, current: SortKey): 'asc' | 'desc' | nu
 }
 
 /**
- * ツールバーの select に常に並べる並び順。
+ * ツールバーの select に常に並べる排序。
  * ここに無いキーは列ヘッダからしか選べないが、選ばれている間だけ option を注入する
  */
 export const CURATED_SORTS: SortKey[] = [
@@ -331,42 +331,42 @@ export const CURATED_SORTS: SortKey[] = [
 ];
 
 const SORT_LABELS: Record<SortKey, string> = {
-  added_desc: '追加日時(新しい順)',
-  added_asc: '追加日時(古い順)',
-  name_asc: '名前(昇順)',
-  name_desc: '名前(降順)',
-  size_asc: 'サイズ(小さい順)',
-  size_desc: 'サイズ(大きい順)',
-  duration_asc: '長さ(短い順)',
-  duration_desc: '長さ(長い順)',
-  rating_asc: 'レーティング(低い順)',
-  rating_desc: 'レーティング順',
-  viewed_asc: '最終視聴(古い順)',
-  viewed_desc: '最近見た順',
-  views_asc: '視聴回数(少ない順)',
-  views_desc: 'よく見た順',
-  res_asc: '解像度(低い順)',
-  res_desc: '解像度(高い順)',
-  ext_asc: '拡張子(昇順)',
-  ext_desc: '拡張子(降順)',
-  codec_asc: '映像コーデック(昇順)',
-  codec_desc: '映像コーデック(降順)',
-  acodec_asc: '音声コーデック(昇順)',
-  acodec_desc: '音声コーデック(降順)',
-  folder_asc: 'フォルダ(昇順)',
-  folder_desc: 'フォルダ(降順)',
-  fmodified_asc: 'ファイル更新日(古い順)',
-  fmodified_desc: 'ファイル更新日(新しい順)',
-  fcreated_asc: 'ファイル作成日(古い順)',
-  fcreated_desc: 'ファイル作成日(新しい順)',
-  fps_asc: 'fps(低い順)',
-  fps_desc: 'fps(高い順)',
-  bitrate_asc: 'ビットレート(低い順)',
-  bitrate_desc: 'ビットレート(高い順)',
-  series_asc: 'シリーズ順',
-  playlist_asc: 'プレイリスト順',
-  dup: '重複をまとめる',
-  random: 'ランダム',
+  added_desc: '添加时间(降序)',
+  added_asc: '添加时间(升序)',
+  name_asc: '名称(升序)',
+  name_desc: '名称(降序)',
+  size_asc: '大小(升序)',
+  size_desc: '大小(降序)',
+  duration_asc: '时长(升序)',
+  duration_desc: '时长(降序)',
+  rating_asc: '评分(升序)',
+  rating_desc: '按评分顺序',
+  viewed_asc: '最后观看(升序)',
+  viewed_desc: '最近观看顺序',
+  views_asc: '观看次数(升序)',
+  views_desc: '最常观看顺序',
+  res_asc: '分辨率(升序)',
+  res_desc: '分辨率(降序)',
+  ext_asc: '扩展名(升序)',
+  ext_desc: '扩展名(降序)',
+  codec_asc: '视频编解码器(升序)',
+  codec_desc: '视频编解码器(降序)',
+  acodec_asc: '音频编解码器(升序)',
+  acodec_desc: '音频编解码器(降序)',
+  folder_asc: '文件夹(升序)',
+  folder_desc: '文件夹(降序)',
+  fmodified_asc: '文件更新日期(升序)',
+  fmodified_desc: '文件更新日期(降序)',
+  fcreated_asc: '文件创建日期(升序)',
+  fcreated_desc: '文件创建日期(降序)',
+  fps_asc: 'fps(升序)',
+  fps_desc: 'fps(降序)',
+  bitrate_asc: '比特率(升序)',
+  bitrate_desc: '比特率(降序)',
+  series_asc: '按系列顺序',
+  playlist_asc: '按播放列表顺序',
+  dup: '合并重复项',
+  random: '随机',
 };
 
 export function sortLabel(key: SortKey): string {
@@ -374,9 +374,9 @@ export function sortLabel(key: SortKey): string {
 }
 
 /**
- * 並び順の選択肢。ツールバーの select と、グリッド余白の右クリックメニュー(v1.20)で共有する。
+ * 排序の選択肢。ツールバーの select と、グリッド余白の右键菜单(v1.20)で共有する。
  *
- * シリーズ順・重複順はその絞り込みが効いている間だけ意味を持つので、そのときだけ足す。
+ * 按系列顺序·重複順はその筛选が効いている間だけ意味を持つので、そのときだけ足す。
  * CURATED_SORTS に無いキー(列ヘッダから選んだもの)は、選ばれている間だけ末尾に足す —
  * 足さないと select / メニューが現在値を表現できず、開いた瞬間に別の並びへ飛ぶ
  */

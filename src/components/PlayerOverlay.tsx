@@ -22,13 +22,13 @@ import type { TranscodeProgress, VideoRow } from '../types';
  * アプリ内プレイヤー(全画面オーバーレイ)。
  * エンジンは 2 系統:
  * - mpv(優先): ほぼ全フォーマットを変換なしで直接再生
- * - WebView2 <video>(フォールバック): mpv init 失敗・再生エラー時。
+ * - WebView2 <video>(フォールバック): mpv init 失敗·再生エラー時。
  *   v1.4 の 3 段判定(native / remux / transcode)+ FFmpeg 変換パイプラインで再生
  */
 export function PlayerOverlay() {
   const playingVideo = useLibrary((s) => s.playingVideo);
   if (!playingVideo) return null;
-  // key で動画切替時に内部状態(視聴カウント・コントロール類)をリセットする
+  // key で動画切替時に内部状態(視聴カウント·コントロール類)をリセットする
   return <PlayerView key={playingVideo.id} video={playingVideo} />;
 }
 
@@ -52,7 +52,7 @@ function PlayerView({ video }: { video: VideoRow }) {
 
 /**
  * WebView2 <video> エンジン(v1.4 実装)。
- * WebView2 で直接再生できない形式(mkv/HEVC 等)は FFmpeg で mp4 に変換してから再生する。
+ * WebView2 で直接再生できない形式(mkv/HEVC 等)は FFmpeg で mp4 に変換してから播放。
  * ネイティブ再生に失敗したら transcode へ切り替え、それでも失敗したら外部プレイヤーへ。
  */
 function Html5PlayerView({ video }: { video: VideoRow }) {
@@ -69,7 +69,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
   const hideTimer = useRef<number | undefined>(undefined);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [controlsVisible, setControlsVisible] = useState(true);
-  // 再生キュー(v1.40)。mpv 側と同じくバーの自動非表示と Esc の分岐に関わる
+  // 再生队列(v1.40)。mpv 側と同じくバーの自動非表示と Esc の分岐に関わる
   const [queueOpen, setQueueOpen] = useState(false);
   const queueCount = useLibrary((s) => s.queue.items.length);
 
@@ -80,18 +80,18 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
     decidePlayback(video) === 'native' ? convertFileSrc(video.path) : null,
   );
   const [progress, setProgress] = useState<number | null>(null);
-  const [prepareMsg, setPrepareMsg] = useState('変換の準備中…');
+  const [prepareMsg, setPrepareMsg] = useState('正在准备转换…');
 
   const player = useVideoPlayer(videoRef, src ?? '');
 
-  // remux/transcode: 変換を実行し、完了したらキャッシュ mp4 を再生する
+  // remux/transcode: 変換を実行し、完了したらキャッシュ mp4 を播放
   useEffect(() => {
     if (mode === 'native') return;
     let aborted = false;
     let done = false;
     setSrc(null);
     setProgress(null);
-    setPrepareMsg(mode === 'remux' ? '再生の準備中…' : '動画を変換中…');
+    setPrepareMsg(mode === 'remux' ? '正在准备播放…' : '正在转换视频…');
 
     const unlisten = listen<TranscodeProgress>('transcode:progress', (e) => {
       if (e.payload.videoId !== video.id) return;
@@ -108,7 +108,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
         done = true;
         if (aborted) return;
         if (mode === 'remux') {
-          // コンテナ詰め替えで通らないファイル → 再エンコードで再試行
+          // 容器詰め替えで通らない文件 → 再エンコードで再試行
           setMode('transcode');
           return;
         }
@@ -140,7 +140,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
     return () => document.removeEventListener('fullscreenchange', onChange);
   }, []);
 
-  // マウスが 2.5 秒止まったらコントロールを隠す(一時停止中は常時表示)
+  // マウスが 2.5 秒止まったらコントロール隐藏(一時停止中は常時表示)
   const wake = useCallback(() => {
     setControlsVisible(true);
     window.clearTimeout(hideTimer.current);
@@ -151,20 +151,20 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
     return () => window.clearTimeout(hideTimer.current);
   }, [wake]);
 
-  // フルスクリーン中の Esc はブラウザが解除するので、通常時のみ閉じる。
-  // キューが開いていればそれだけ閉じる(mpv 側と同じ分岐。v1.40)
+  // フルスクリーン中の Esc はブラウザが解除するので、通常時のみ关闭。
+  // 队列が開いていればそれだけ关闭(mpv 側と同じ分岐。v1.40)
   const onEscape = useCallback(() => {
     if (queueOpen) setQueueOpen(false);
     else if (!document.fullscreenElement) close();
   }, [queueOpen, close]);
 
-  // 今見ているコマをサムネイルにする(10% 固定で暗転を引いたときの手当て)。
+  // 今見ているコマを缩略图にする(10% 固定で暗転を引いたときの手当て)。
   // 変換キャッシュを再生している場合も尺は同じなので位置はそのまま使える
   const setThumbnail = useCallback(() => {
     const el = videoRef.current;
     if (!el) return;
     api.setThumbTime(video.id, Math.floor(el.currentTime * 1000)).then(() => {
-      pushToast('この位置をサムネイルにしました', 'info');
+      pushToast('已将此处设为缩略图', 'info');
       bumpVersion();
     });
   }, [video.id, pushToast, bumpVersion]);
@@ -176,7 +176,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
     const el = videoRef.current;
     if (!el) return;
     api.saveFrame(video.id, Math.floor(el.currentTime * 1000)).then((path) => {
-      pushToast(`画像を保存しました: ${path}`, 'info');
+      pushToast(`已保存图片: ${path}`, 'info');
     });
   }, [video.id, pushToast]);
 
@@ -197,7 +197,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
   const { menu, onContextMenu, close: closeMenu, run: runMenu } =
     usePlayerMenu(video, { wake, onSetThumbnail: setThumbnail, onSaveFrame: saveFrame, onClose: close });
 
-  // レジューム保存: 5 秒ごと + 一時停止・終了時
+  // レジューム保存: 5 秒ごと + 一時停止·終了時
   const lastSavedSec = useRef(0);
   useEffect(() => {
     const el = videoRef.current;
@@ -218,7 +218,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
       el.removeEventListener('timeupdate', onTime);
       el.removeEventListener('pause', save);
       el.removeEventListener('ended', save);
-      // 閉じる時は必ず保存し、保存完了後にカードの進捗バーを更新する
+      // 关闭時は必ず保存し、保存完了後にカードの進捗バーを更新する
       if (ready()) {
         api.setResume(video.id, resumeValueMs(el.currentTime, el.duration)).then(() => bumpVersion());
       }
@@ -273,7 +273,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
               api.markViewed(video.id).then(() => bumpVersion());
             }}
             onEnded={() => {
-              // キューモードでは autoplayNext を見ない(判断は usePlayQueue.autoAdvance)
+              // 队列モードでは autoplayNext を見ない(判断は usePlayQueue.autoAdvance)
               if (queue.autoAdvance && queue.hasNext) void queue.next();
             }}
             onError={() => {
@@ -303,7 +303,7 @@ function Html5PlayerView({ video }: { video: VideoRow }) {
           <div className="player-title" title={video.path}>
             {video.title ?? video.filename}
           </div>
-          <button className="player-close" onClick={close} title="閉じる (Esc)">
+          <button className="player-close" onClick={close} title="关闭 (Esc)">
             <X />
           </button>
         </div>

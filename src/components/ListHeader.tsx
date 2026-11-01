@@ -6,7 +6,7 @@ import { useLibrary } from '../store';
 import { ColumnPicker } from './ColumnPicker';
 
 /**
- * 詳細リストの列ヘッダ(v1.16)。
+ * 详细列表の列ヘッダ(v1.16)。
  *
  * `.grid-scroll` の**内側**に sticky で置く。外に出すとスクロールバーの幅ぶん
  * 列がずれる。仮想化アイテムとして入れないのは、先頭の folderRows を数える
@@ -33,11 +33,11 @@ export function ListHeader({ columns }: { columns: ColumnKey[] }) {
         <div />
         {rest.map((key) => {
           const col = COLUMNS[key];
-          // タグ・シリーズは並べ替えできない(listColumns.ts の sort: null 参照)。
+          // 标签·系列は排列できない(listColumns.ts の sort: null 参照)。
           // ボタンにすると押せそうに見えて何も起きないので、見出しだけを描く
           if (!col.sort) {
             return (
-              <div key={key} className="head-static" title={`${col.label}では並べ替えできません`}>
+              <div key={key} className="head-static" title={`${col.label}无法排序`}>
                 <span className="head-label">{col.label}</span>
               </div>
             );
@@ -47,7 +47,7 @@ export function ListHeader({ columns }: { columns: ColumnKey[] }) {
             <button
               key={key}
               className={`${col.align === 'right' ? 'right' : ''} ${dir ? 'sorted' : ''}`}
-              title={`${col.label}で並べ替え`}
+              title={`${col.label}排序方式`}
               onClick={() => setSort(nextSort(col, sort))}
             >
               <span className="head-label">{col.label}</span>
@@ -57,7 +57,7 @@ export function ListHeader({ columns }: { columns: ColumnKey[] }) {
           );
         })}
         {/* 名前セルの右端に重ねる。列を 1 つ潰さずに済ませるため */}
-        <button className="col-menu" title="表示する列を選ぶ" onClick={openPicker}>
+        <button className="col-menu" title="选择要显示的列" onClick={openPicker}>
           <SlidersHorizontal />
         </button>
       </div>

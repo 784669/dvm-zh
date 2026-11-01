@@ -10,7 +10,7 @@ import type { ProviderId } from './types';
 export interface ProviderInfo {
   id: ProviderId;
   label: string;
-  /** 既定のベース URL。openai_compat だけはユーザーが入れる(ここは空) */
+  /** 既定の基础 URL。openai_compat だけはユーザーが入れる(ここは空) */
   baseUrl: string;
   defaultModel: string;
   /** 設定画面の datalist に出す候補 */
@@ -28,7 +28,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     defaultModel: 'claude-opus-5',
     models: ['claude-opus-5', 'claude-sonnet-5', 'claude-haiku-4-5-20251001'],
     keyPlaceholder: 'sk-ant-...',
-    keyHint: 'console.anthropic.com で発行できます(Claude Pro / Max のサブスクリプションとは別契約です)',
+    keyHint: '可在 console.anthropic.com 申请（与 Claude Pro / Max 订阅是独立合约）',
   },
   openai: {
     id: 'openai',
@@ -37,7 +37,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     defaultModel: 'gpt-5',
     models: ['gpt-5', 'gpt-5-mini', 'gpt-4.1', 'gpt-4o', 'gpt-4o-mini'],
     keyPlaceholder: 'sk-...',
-    keyHint: 'platform.openai.com で発行できます(ChatGPT Plus のサブスクリプションとは別契約です)',
+    keyHint: '可在 platform.openai.com 申请(与 ChatGPT Plus 订阅为不同合同)',
   },
   gemini: {
     id: 'gemini',
@@ -46,7 +46,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     defaultModel: 'gemini-2.5-pro',
     models: ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash'],
     keyPlaceholder: 'AIza...',
-    keyHint: 'aistudio.google.com の「Get API key」で発行できます',
+    keyHint: '可在 aistudio.google.com 的「Get API key」中申请',
   },
   openai_compat: {
     id: 'openai_compat',
@@ -54,20 +54,20 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     baseUrl: '',
     defaultModel: '',
     models: [],
-    keyPlaceholder: '(不要なら空欄)',
+    keyPlaceholder: '(不需要则留空)',
     keyHint:
-      'OpenRouter・Ollama・LM Studio など、OpenAI 互換の API を持つサービスやローカル LLM に繋げます',
+      '可连接到 OpenRouter、Ollama、LM Studio 等具有 OpenAI 兼容 API 的服务或本地 LLM',
   },
 };
 
-/** openai_compat 用のベース URL プリセット */
+/** openai_compat 用の基础 URL プリセット */
 export const COMPAT_PRESETS: { label: string; baseUrl: string }[] = [
   { label: 'Ollama', baseUrl: 'http://localhost:11434/v1' },
   { label: 'LM Studio', baseUrl: 'http://localhost:1234/v1' },
   { label: 'OpenRouter', baseUrl: 'https://openrouter.ai/api/v1' },
 ];
 
-/** 未知の文字列(手で DB を書いた値・将来消したプロバイダの残骸)は anthropic に落とす */
+/** 未知の文字列(手で DB を書いた値·将来消したプロバイダの残骸)は anthropic に落とす */
 export function parseProviderId(raw: string | null): ProviderId {
   if (raw && raw in PROVIDERS) return raw as ProviderId;
   return 'anthropic';

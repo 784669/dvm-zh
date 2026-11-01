@@ -3,7 +3,7 @@ import type { HdrInfo } from '../../lib/hdrInfo';
 
 /**
  * プレイヤーが選べる再生速度(< > キーはこの並びを移動する)。
- * 上限 4x / 下限 0.25x は WebView2 エンジンの都合(Chromium は 0.5 未満・4 超で音を切る)。
+ * 上限 4x / 下限 0.25x は WebView2 エンジンの都合(Chromium は 0.5 未満·4 超で音を切る)。
  * mpv はもっと広い速度を出せるが、エンジンで挙動が変わると分かりにくいので並びは共通にする
  */
 export const RATE_OPTIONS = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4];
@@ -25,7 +25,7 @@ export interface PlayerState {
   bufferedEnd: number;
 }
 
-/** mpv の音声・字幕トラック 1 本(WebView2 エンジンでは扱えないので mpv 専用) */
+/** mpv の音声·字幕トラック 1 本(WebView2 エンジンでは扱えないので mpv 専用) */
 export interface MediaTrack {
   id: number;
   kind: 'audio' | 'sub';
@@ -38,7 +38,7 @@ export interface MediaTrack {
   codec?: string;
 }
 
-/** PlayerControls・ショートカットが両エンジンで共用するインターフェイス */
+/** PlayerControls·ショートカットが両エンジンで共用するインターフェイス */
 export interface VideoPlayer {
   state: PlayerState;
   togglePlay: () => void;
@@ -51,29 +51,29 @@ export interface VideoPlayer {
   cycleRate: (dir: 1 | -1) => void;
   /** mpv のみ。未対応エンジンでは undefined(UI 側は出さない) */
   tracks?: MediaTrack[];
-  /** id に null を渡すとそのトラックを無効にする(字幕オフ) */
+  /** id に null を渡すとそのトラックを無効にする(字幕关闭) */
   setTrack?: (kind: 'audio' | 'sub', id: number | null) => void;
   /**
-   * mpv のみ。true = 元のピクセルサイズで表示(ウィンドウが大きくても拡大しない)。
+   * mpv のみ。true = 元のピクセル大小で表示(ウィンドウが大きくても拡大しない)。
    * ウィンドウより大きい動画は true でも従来どおり縮小して収める
    */
   unscaled?: boolean;
   toggleUnscaled?: () => void;
   /**
-   * mpv のみ。チャプター(v1.29)。ファイルに無ければ空。
+   * mpv のみ。章节（v1.29)。文个無ければ空。
    * **1 つだけのときも UI は出さない**(`hasChapters` を通して判定すること)
    */
   chapters?: Chapter[];
-  /** 次(1)/前(-1)のチャプターへ。端では何もしない(動画の移動は N / P の役割) */
+  /** 次(1)/前(-1)の章节へ。端では何もしない(動画の移動は N / P の役割) */
   jumpChapter?: (dir: 1 | -1) => void;
   /**
    * 今再生している映像の HDR 方式(v1.31)。SDR なら null。
-   * ファイルではなく mpv がデコードしている映像から取る
+   * 文件ではなく mpv がデコードしている映像から取る
    */
   hdr?: HdrInfo | null;
   /**
    * **実際に HDR のまま画面へ出しているか**(v1.31)。設定ではなく結果 ——
-   * パススルー設定がオン **かつ** ウィンドウの乗っているモニタが HDR モードのとき真。
+   * パススルー設定がオン **并且** ウィンドウの乗っているモニタが HDR モードのとき真。
    * 後者は Windows に直接聞いている(`is_hdr_display`)
    */
   hdrOutput?: boolean;
@@ -100,7 +100,7 @@ export function saveMutedPref(muted: boolean): void {
 }
 
 /**
- * 前回の表示サイズモード(mpv のみ)。true = 元のピクセルサイズで表示し、
+ * 前回の表示大小モード(mpv のみ)。true = 元のピクセル大小で表示し、
  * ウィンドウが大きくても拡大しない。既定は false = 従来どおりウィンドウにフィット
  */
 export function savedUnscaled(): boolean {
@@ -113,7 +113,7 @@ export function saveUnscaledPref(unscaled: boolean): void {
 
 /**
  * レジューム保存値(ミリ秒)。
- * 位置が尺の 90% 以上、または残り 30 秒未満なら 0(最後まで観た扱い)
+ * 位置が尺の 90% 以上、 或 残り 30 秒未満なら 0(最後まで観た扱い)
  */
 export function resumeValueMs(currentSec: number, durationSec: number): number {
   const finished = currentSec >= durationSec * 0.9 || durationSec - currentSec < 30;
@@ -122,7 +122,7 @@ export function resumeValueMs(currentSec: number, durationSec: number): number {
 
 /**
  * 視聴カウント(view_count)を 1 増やしてよいか。
- * 尺の 5% 以上、または 30 秒以上まで再生されたら「観た」とみなす(v1.8)。
+ * 尺の 5% 以上、 或  30 秒以上まで再生されたら「観た」とみなす(v1.8)。
  * それまでは「開いてすぐ閉じた」扱いでカウントしない。
  * 尺が取れていない場合は 30 秒だけで判断する
  */

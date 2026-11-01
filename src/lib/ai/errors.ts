@@ -37,12 +37,12 @@ export function classifyHttpError(status: number, body: string): AiError {
   const lower = detail.toLowerCase();
 
   if (status === 401 || status === 403) {
-    return new AiError('auth', 'API キーが無効です。設定 > AI 連携 を確認してください', status, body);
+    return new AiError('auth', 'API 密钥无效。请检查 设置 > AI 联动', status, body);
   }
   if (status === 429) {
     return new AiError(
       'rate_limit',
-      `レート制限に達しました。少し待ってから試してください${detail ? `(${detail})` : ''}`,
+      `已达到速率限制。请稍后重试${detail ?  `(${detail})` : ''}`,
       status,
       body,
     );
@@ -51,7 +51,7 @@ export function classifyHttpError(status: number, body: string): AiError {
   if (status === 404 || (status === 400 && /model/.test(lower))) {
     return new AiError(
       'model_not_found',
-      `モデルが見つかりません。設定 > AI 連携 のモデル名を確認してください(${detail || status})`,
+      `找不到模型。请检查 设置 > AI 联动 中的模型名（${detail || status})`,
       status,
       body,
     );
@@ -59,10 +59,10 @@ export function classifyHttpError(status: number, body: string): AiError {
   if (/context length|too many tokens|maximum context|token count/.test(lower)) {
     return new AiError(
       'context_length',
-      `会話が長くなりすぎました。ゴミ箱ボタンで会話をクリアしてください(${detail})`,
+      `对话过长。请用垃圾桶按钮清空对话（${detail})`,
       status,
       body,
     );
   }
-  return new AiError('api', `API エラー (${status})${detail ? `: ${detail}` : ''}`, status, body);
+  return new AiError('api', `API 错误（${status})${detail ? `: ${detail}` : ''}`, status, body);
 }

@@ -14,7 +14,7 @@ pub fn validate_actor(actor: Option<String>) -> Result<String, String> {
     match actor.as_deref() {
         None => Ok("user".into()),
         Some("user") | Some("ai") => Ok(actor.unwrap()),
-        Some(other) => Err(format!("不正な actor です: {other}")),
+        Some(other) => Err(format!("无效的 actor: {other}")),
     }
 }
 pub mod series;

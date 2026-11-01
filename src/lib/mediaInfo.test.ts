@@ -134,7 +134,7 @@ describe('buildMediaSections', () => {
   it('種別ごとにセクションを作る', () => {
     const titles = buildMediaSections(sampleMkv()).map((s) => s.title);
     // 音声は 2 本なので番号が付き、映像・字幕は 1 本なので付かない
-    expect(titles).toEqual(['全般', '映像', '音声 #1', '音声 #2', '字幕']);
+    expect(titles).toEqual(['常规', '视频', '音频 #1', '音频 #2', '字幕']);
   });
 
   // YouTube 由来の mp4 はサムネイルが PNG の映像ストリームとして入っている。
@@ -147,74 +147,74 @@ describe('buildMediaSections', () => {
         stream({ kind: 'audio', codecName: 'aac' }),
       ],
     }));
-    expect(sections.map((s) => s.title)).toEqual(['全般', '映像', '音声', 'カバー画像']);
-    expect(sections[0].rows).toContainEqual({ label: 'ストリーム', value: '映像 1 / 音声 1' });
-    expect(sections[0].rows).toContainEqual({ label: 'カバー画像', value: '1 個' });
+    expect(sections.map((s) => s.title)).toEqual(['常规', '视频', '音频', '封面图']);
+    expect(sections[0].rows).toContainEqual({ label: '流', value: '视频 1 / 音频 1' });
+    expect(sections[0].rows).toContainEqual({ label: '封面图', value: '1 个' });
   });
 
   it('添付ファイルは個別セクションにせず全般の 1 行にまとめる', () => {
     const general = buildMediaSections(sampleMkv())[0];
-    expect(general.rows).toContainEqual({ label: '添付ファイル', value: '1 個' });
-    expect(general.rows).toContainEqual({ label: 'ストリーム', value: '映像 1 / 音声 2 / 字幕 1' });
+    expect(general.rows).toContainEqual({ label: '附件', value: '1 个' });
+    expect(general.rows).toContainEqual({ label: '流', value: '视频 1 / 音频 2 / 字幕 1' });
   });
 
   it('全般に単位を付けて出す', () => {
     const rows = buildMediaSections(sampleMkv())[0].rows;
-    expect(rows).toContainEqual({ label: 'コンテナ', value: 'Matroska / WebM (matroska,webm)' });
-    expect(rows).toContainEqual({ label: '再生時間', value: '23:40' });
-    expect(rows).toContainEqual({ label: 'ファイルサイズ', value: '1.42 GB' });
-    expect(rows).toContainEqual({ label: '総ビットレート', value: '8.58 Mbps' });
+    expect(rows).toContainEqual({ label: '容器', value: 'Matroska / WebM (matroska,webm)' });
+    expect(rows).toContainEqual({ label: '播放时长', value: '23:40' });
+    expect(rows).toContainEqual({ label: '文件大小', value: '1.42 GB' });
+    expect(rows).toContainEqual({ label: '总比特率', value: '8.58 Mbps' });
   });
 
   it('映像のコーデック行に profile と level をまとめる', () => {
     const video = buildMediaSections(sampleMkv())[1];
-    expect(video.rows).toContainEqual({ label: 'コーデック', value: 'h264 (High) @ L4.0' });
-    expect(video.rows).toContainEqual({ label: '解像度', value: '1920×1080' });
-    expect(video.rows).toContainEqual({ label: 'フレームレート', value: '23.976 fps' });
-    expect(video.rows).toContainEqual({ label: 'ビット深度', value: '8 bit' });
-    expect(video.rows).toContainEqual({ label: '色範囲', value: '制限 (tv)' });
-    expect(video.rows).toContainEqual({ label: '走査方式', value: 'プログレッシブ' });
-    expect(video.rows).toContainEqual({ label: 'フラグ', value: '既定' });
+    expect(video.rows).toContainEqual({ label: '编解码器', value: 'h264 (High) @ L4.0' });
+    expect(video.rows).toContainEqual({ label: '分辨率', value: '1920×1080' });
+    expect(video.rows).toContainEqual({ label: '帧率', value: '23.976 fps' });
+    expect(video.rows).toContainEqual({ label: '位深度', value: '8 bit' });
+    expect(video.rows).toContainEqual({ label: '色域范围', value: '制限 (tv)' });
+    expect(video.rows).toContainEqual({ label: '扫描方式', value: '逐行扫描' });
+    expect(video.rows).toContainEqual({ label: '标志', value: '默认' });
   });
 
   it('音声のチャンネル数とレイアウトを 1 行にまとめる', () => {
     const [, , first, second] = buildMediaSections(sampleMkv());
-    expect(first.rows).toContainEqual({ label: 'チャンネル', value: '2 ch (stereo)' });
-    expect(first.rows).toContainEqual({ label: 'サンプルレート', value: '48.0 kHz' });
-    expect(first.rows).toContainEqual({ label: 'タイトル', value: '本編' });
-    expect(second.rows).toContainEqual({ label: 'チャンネル', value: '6 ch (5.1(side))' });
+    expect(first.rows).toContainEqual({ label: '声道', value: '2 ch (stereo)' });
+    expect(first.rows).toContainEqual({ label: '采样率', value: '48.0 kHz' });
+    expect(first.rows).toContainEqual({ label: '标题', value: '本編' });
+    expect(second.rows).toContainEqual({ label: '声道', value: '6 ch (5.1(side))' });
   });
 
   it('強制字幕のフラグを出す', () => {
     const subtitle = buildMediaSections(sampleMkv())[4];
-    expect(subtitle.rows).toContainEqual({ label: 'フラグ', value: '強制' });
-    expect(subtitle.rows).toContainEqual({ label: '言語', value: '英語 (eng)' });
+    expect(subtitle.rows).toContainEqual({ label: '标志', value: '强制' });
+    expect(subtitle.rows).toContainEqual({ label: '语言', value: '英語 (eng)' });
   });
 
   // コンテナと同じ尺を全ストリームに並べても読む意味が無い
   it('ストリームの尺はコンテナとズレているときだけ出す', () => {
     const same = buildMediaSections(sampleMkv())[1];
-    expect(same.rows.some((r) => r.label === '長さ')).toBe(false);
+    expect(same.rows.some((r) => r.label === '时长')).toBe(false);
 
     const short = buildMediaSections(info({
       format: { ...info().format, durationMs: 1_420_500 },
       streams: [stream({ kind: 'audio', codecName: 'aac', durationMs: 900_000 })],
     }));
-    expect(short[1].rows).toContainEqual({ label: '長さ', value: '15:00' });
+    expect(short[1].rows).toContainEqual({ label: '时长', value: '15:00' });
   });
 
   it('可変フレームレートを書き添える', () => {
     const vfr = buildMediaSections(info({
       streams: [stream({ kind: 'video', codecName: 'h264', avgFrameRate: 23.976, rFrameRate: 30 })],
     }));
-    expect(vfr[1].rows).toContainEqual({ label: 'フレームレート', value: '23.976 fps(可変)' });
+    expect(vfr[1].rows).toContainEqual({ label: '帧率', value: '23.976 fps(可変)' });
   });
 
   it('値が無いフィールドは行を作らない', () => {
     // 何も読めなかったストリームは空セクションになるので丸ごと消える。
     // 全般に残るのは本数の行だけ(枠だけのブロックを並べない)
     const bare = buildMediaSections(info({ streams: [stream({ kind: 'video' })] }));
-    expect(bare).toEqual([{ title: '全般', rows: [{ label: 'ストリーム', value: '映像 1' }] }]);
+    expect(bare).toEqual([{ title: '常规', rows: [{ label: '流', value: '视频 1' }] }]);
   });
 
   it('空のメディア情報でもセクションを作らない', () => {
@@ -229,10 +229,10 @@ describe('buildMediaSections', () => {
       ],
     }));
     expect(sections[0]).toEqual({
-      title: 'チャプター',
+      title: '章节',
       rows: [
         { label: '0:00', value: 'オープニング' },
-        { label: '1:30', value: 'チャプター 2' },
+        { label: '1:30', value: '章节 2' },
       ],
     });
   });
@@ -241,11 +241,11 @@ describe('buildMediaSections', () => {
 describe('mediaSectionsToText', () => {
   it('見出しと ラベル: 値 の形にする', () => {
     const text = mediaSectionsToText('sample.mkv\nD:\\動画\\sample.mkv', [
-      { title: '全般', rows: [{ label: 'コンテナ', value: 'Matroska' }] },
-      { title: '映像', rows: [{ label: 'コーデック', value: 'h264' }] },
+      { title: '常规', rows: [{ label: '容器', value: 'Matroska' }] },
+      { title: '视频', rows: [{ label: '编解码器', value: 'h264' }] },
     ]);
     expect(text).toBe(
-      'sample.mkv\nD:\\動画\\sample.mkv\n\n[全般]\nコンテナ: Matroska\n\n[映像]\nコーデック: h264\n',
+      'sample.mkv\nD:\\動画\\sample.mkv\n\n[常规]\n容器: Matroska\n\n[视频]\n编解码器: h264\n',
     );
   });
 

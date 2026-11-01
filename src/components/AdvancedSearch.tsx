@@ -23,13 +23,13 @@ const MIN = 60_000;
 /**
  * ツールバーの「詳細検索」ポップオーバー(v1.35 で 2 カラムに拡張)。
  *
- * **絞り込みの入口はここ 1 つ**。v1.34 までツールバー本体にあった★と長さもここに移した
+ * **筛选の入口はここ 1 つ**。v1.34 までツールバー本体にあった★と时长もここに移した
  * (理由は DESIGN.md「ツールバー」節)。頻繁に使う条件の組み合わせは
- * スマートフォルダに名前を付けてサイドバーに置くほうが速い。
+ * 智能文件夹に名前を付けて侧边栏に置くほうが速い。
  *
  * **位置はボタンの座標を受け取って画面基準(fixed)で決める**。ツールバーは
  * overflow: hidden なので、中に absolute で置くとそこで切られてしまう。
- * 列選択ポップオーバー・右クリックメニューと同じ扱い
+ * 列選択ポップオーバー·右键菜单と同じ扱い
  */
 export function AdvancedSearch({
   at, onClose,
@@ -58,7 +58,7 @@ export function AdvancedSearch({
     return () => { alive = false; };
   }, []);
 
-  // 外側クリックと Esc で閉じる
+  // 外側点击と Esc で关闭
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
       if (!ref.current?.contains(e.target as Node)) onClose();
@@ -69,7 +69,7 @@ export function AdvancedSearch({
         onClose();
       }
     };
-    // クリックで開いた直後の同じイベントで閉じないよう次のフレームから拾う
+    // 点击で開いた直後の同じイベントで閉じないよう次のフレームから拾う
     const t = setTimeout(() => document.addEventListener('mousedown', onDown), 0);
     document.addEventListener('keydown', onKey);
     return () => {
@@ -86,11 +86,11 @@ export function AdvancedSearch({
   const width = Math.min(POPOVER_W, window.innerWidth - EDGE * 2);
   const oneCol = width < POPOVER_W && width < ONE_COL_W * 1.6;
   const left = Math.max(EDGE, Math.min(at.x, window.innerWidth - width - EDGE));
-  // 縦は画面に収める。溢れたぶんは中でスクロールする(タグパレットと同じ作法)
+  // 縦は画面に収める。溢れたぶんは中でスクロールする(标签パレットと同じ作法)
   const maxHeight = Math.max(200, window.innerHeight - at.y - V_MARGIN);
 
   const set = (patch: Partial<AdvancedFilter>) => setAdvanced(patch);
-  /** 空欄は null(= 指定なし)。0 に意味がある欄があるので 0 と空欄を混ぜない */
+  /** 空欄は null(= 未指定)。0 に意味がある欄があるので 0 と空欄を混ぜない */
   const num = (v: string): number | null => (v.trim() === '' ? null : Number(v));
   /** ミリ秒 → 分の表示。端数は出さない(入力欄が分単位なので) */
   const toMin = (ms: number | null) => (ms === null ? '' : String(Math.round(ms / MIN)));
@@ -119,19 +119,19 @@ export function AdvancedSearch({
       ref={ref}
       style={{ left, top: at.y, width, maxHeight }}
     >
-      <div className="adv-title">詳細検索</div>
+      <div className="adv-title">详细搜索</div>
 
       <div className="adv-cols">
-        {/* ---- 左: 探し方 / 評価・視聴 ---------------------------------- */}
+        {/* ---- 左: 搜索方式 / 评分·观看 ---------------------------------- */}
         <div className="adv-col-box">
-          <div className="adv-group">探し方</div>
+          <div className="adv-group">搜索方式</div>
           <label className="adv-check">
             <input
               type="checkbox"
               checked={advanced.searchPath}
               onChange={(e) => set({ searchPath: e.target.checked })}
             />
-            フォルダのパスも検索対象にする
+            将文件夹路径也纳入搜索范围
           </label>
           <label className="adv-check">
             <input
@@ -139,24 +139,24 @@ export function AdvancedSearch({
               checked={advanced.searchComment}
               onChange={(e) => set({ searchComment: e.target.checked })}
             />
-            メモも検索対象にする
+            将备注也纳入搜索范围
           </label>
 
-          <div className="adv-group">評価・視聴</div>
+          <div className="adv-group">评分·观看</div>
           <div className="adv-row">
-            <span className="adv-label">評価</span>
+            <span className="adv-label">评分</span>
             <select
               value={advanced.unrated ? 'none' : String(advanced.minRating)}
               onChange={(e) => {
                 const v = e.target.value;
-                // ★なしと「★N 以上」は同時に成り立たないので、セレクト 1 つで排他にする
+                // 无星级と「★N 以上」は同時に成り立たないので、セレクト 1 つで排他にする
                 set(v === 'none'
                   ? { unrated: true, minRating: 0 }
                   : { unrated: false, minRating: Number(v) });
               }}
             >
-              <option value="0">指定なし</option>
-              <option value="none">★なし(未評価)</option>
+              <option value="0">未指定</option>
+              <option value="none">无星级(未评分)</option>
               <option value="1">★1 以上</option>
               <option value="2">★2 以上</option>
               <option value="3">★3 以上</option>
@@ -170,7 +170,7 @@ export function AdvancedSearch({
               checked={advanced.untagged}
               onChange={(e) => set({ untagged: e.target.checked })}
             />
-            タグが付いていないものだけ
+            仅限未添加标签的
           </label>
           <label className="adv-check">
             <input
@@ -178,7 +178,7 @@ export function AdvancedSearch({
               checked={advanced.unwatched}
               onChange={(e) => set({ unwatched: e.target.checked })}
             />
-            まだ観ていないものだけ
+            仅限尚未观看的
           </label>
           <label className="adv-check">
             <input
@@ -186,10 +186,10 @@ export function AdvancedSearch({
               checked={advanced.resumedOnly}
               onChange={(e) => set({ resumedOnly: e.target.checked })}
             />
-            途中まで観たものだけ
+            仅限看到一半的
           </label>
           <div className="adv-row">
-            <span className="adv-label">再生回数</span>
+            <span className="adv-label">播放次数</span>
             <input
               type="number" min={0} className="adv-num"
               value={advanced.minViewCount ?? ''}
@@ -204,7 +204,7 @@ export function AdvancedSearch({
             <span className="adv-unit">回</span>
           </div>
 
-          <div className="adv-group">長さ</div>
+          <div className="adv-group">时长</div>
           <div className="adv-row">
             <input
               type="number" min={0} className="adv-num"
@@ -241,11 +241,11 @@ export function AdvancedSearch({
           </div>
         </div>
 
-        {/* ---- 右: ファイル / 日付 -------------------------------------- */}
+        {/* ---- 右: 文件 / 日付 -------------------------------------- */}
         <div className="adv-col-box">
-          <div className="adv-group">ファイル</div>
+          <div className="adv-group">文件</div>
           <div className="adv-row">
-            <span className="adv-label">サイズ</span>
+            <span className="adv-label">大小</span>
             <input
               type="number" min={0} className="adv-num"
               value={toUnit(advanced.minSizeBytes)}
@@ -268,10 +268,10 @@ export function AdvancedSearch({
           </div>
 
           <div className="adv-row adv-col">
-            <span className="adv-label">拡張子</span>
+            <span className="adv-label">扩展名</span>
             <div className="adv-chips">
-              {exts === null && <span className="adv-hint">読み込み中…</span>}
-              {exts?.length === 0 && <span className="adv-hint">動画がありません</span>}
+              {exts === null && <span className="adv-hint">加载中…</span>}
+              {exts?.length === 0 && <span className="adv-hint">没有视频</span>}
               {exts?.map((e) => (
                 <button
                   key={e.ext}
@@ -287,7 +287,7 @@ export function AdvancedSearch({
           </div>
 
           <div className="adv-row">
-            <span className="adv-label">解像度</span>
+            分辨率
             <select
               value={advanced.minHeight}
               onChange={(e) => set({ minHeight: Number(e.target.value) })}
@@ -307,7 +307,7 @@ export function AdvancedSearch({
           </div>
 
           <div className="adv-row">
-            <span className="adv-label">向き</span>
+            <span className="adv-label">方向</span>
             <select
               value={advanced.orientation}
               onChange={(e) => set({ orientation: e.target.value as Orientation })}
@@ -319,7 +319,7 @@ export function AdvancedSearch({
           </div>
 
           <div className="adv-row adv-col">
-            <span className="adv-label">コーデック</span>
+            <span className="adv-label">编解码器</span>
             <div className="adv-chips">
               {CODEC_OPTIONS.map((c) => (
                 <button
@@ -334,13 +334,13 @@ export function AdvancedSearch({
             </div>
           </div>
 
-          <div className="adv-group">日付</div>
+          <div className="adv-group">日期</div>
           {/*
             相対指定を絶対日付より上に置く。**保存しても腐らない**のはこちらだけなので、
-            スマートフォルダに入れるならこちらを選んでほしい
+            智能文件夹に入れるならこちらを選んでほしい
           */}
           <div className="adv-row">
-            <span className="adv-label">追加</span>
+            <span className="adv-label">添加</span>
             <select
               value={advanced.addedWithinDays}
               onChange={(e) => set({ addedWithinDays: Number(e.target.value) })}
@@ -394,9 +394,9 @@ export function AdvancedSearch({
 
       <div className="adv-actions">
         <button onClick={clearAdvanced} disabled={advancedCount(advanced) === 0}>
-          条件をクリア
+          清空条件
         </button>
-        <button onClick={onClose}>閉じる</button>
+        <button onClick={onClose}>关闭</button>
       </div>
     </div>
   );

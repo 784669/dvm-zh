@@ -1,11 +1,11 @@
 import type { QueueState, VideoRow } from '../types';
 
 /**
- * キューの自動保存(v1.41、C-2)の直列化。**判断はここに置き、
+ * 队列の自動保存(v1.41、C-2)の直列化。**判断はここに置き、
  * useQueueLifecycle は読んで書くだけ**にする(lib/queue.ts と同じ作法)。
  *
- * 保存先は library.db の `session_state`(key = 'queue')。キューは video_id を
- * 含むのでライブラリに紐づき、切り替えれば別のキューが復元される。
+ * 保存先は library.db の `session_state`(key = 'queue')。队列は video_id を
+ * 含むので媒体库に紐づき、切り替えれば別の队列が復元される。
  */
 
 /**
@@ -31,7 +31,7 @@ export function serializeQueue(q: QueueState): string {
   return JSON.stringify(snap);
 }
 
-/** 保存値を読む。壊れた JSON・形の違う値は null(= 復元しない)に落とす */
+/** 保存値を読む。壊れた JSON·形の違う値は null(= 復元しない)に落とす */
 export function parseSnapshot(raw: string | null): QueueSnapshot | null {
   if (!raw) return null;
   try {
@@ -52,9 +52,9 @@ export function parseSnapshot(raw: string | null): QueueSnapshot | null {
 }
 
 /**
- * 復元直後のキュー。`rows` は保存した id 順に引き直した行(消えた動画は落ちている)。
+ * 復元直後の队列。`rows` は保存した id 順に引き直した行(消えた動画は落ちている)。
  * `dirty` は保存時の値を引き継ぐ —— 出所のリストから変えたまま終了していたなら、
- * 復元後も「変更あり」の ● と「上書き保存」が生きているべき
+ * 復元後も「有变更」の ● と「覆盖保存」が生きているべき
  */
 export function restoredQueue(snap: QueueSnapshot, rows: VideoRow[]): QueueState {
   return {

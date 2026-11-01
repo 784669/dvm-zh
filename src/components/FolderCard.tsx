@@ -4,15 +4,15 @@ import type { ColumnKey } from '../lib/listColumns';
 import type { FolderNode } from '../types';
 
 /**
- * メインビューの先頭に並べるフォルダ 1 件。
- * 「上のフォルダ」(up)と実在のサブフォルダを同じ形で扱う
+ * メインビューの先頭に並べる文件夹 1 件。
+ * 「上层文件夹」(up)と実在のサブ文件夹を同じ形で扱う
  */
 export interface FolderEntry {
   /** 開いたときに設定する dirPath */
   path: string;
   name: string;
   up: boolean;
-  /** 上のフォルダには件数を出さない */
+  /** 上层文件夹には件数を出さない */
   node: FolderNode | null;
 }
 
@@ -21,15 +21,15 @@ export function toEntry(node: FolderNode): FolderEntry {
 }
 
 export function upEntry(parent: string): FolderEntry {
-  return { path: parent, name: '上のフォルダ', up: true, node: null };
+  return { path: parent, name: '上层文件夹', up: true, node: null };
 }
 
 function tooltip(entry: FolderEntry): string {
-  if (entry.up) return `${entry.path}\nダブルクリックで上のフォルダへ`;
+  if (entry.up) return `${entry.path}\n双击进入上层文件夹`;
   const n = entry.node!;
-  return `${n.path}\nダブルクリックで開く(直下 ${n.directCount} 件${
-    n.totalCount !== n.directCount ? ` / 配下すべて ${n.totalCount} 件` : ''
-  })`;
+  return `${n.path}\n双击打开（直属 ${n.directCount} 个${
+    n.totalCount !== n.directCount ? ` / 其下全部 ${n.totalCount} 个` : ''
+  }）`;
 }
 
 /** 件数の表示。直下が 0 でも配下にあるなら「配下 N 件」を出す */
@@ -42,14 +42,14 @@ function subLabel(entry: FolderEntry): string {
     : `${n.directCount} 件`;
 }
 
-/** フォルダのカード / 行で共通の props */
+/** 文件夹のカード / 行で共通の props */
 interface FolderRowProps {
   entry: FolderEntry;
   onOpen: (path: string) => void;
   onContextMenu: (entry: FolderEntry, e: React.MouseEvent) => void;
 }
 
-/** グリッド表示のフォルダカード。動画カードと同じ高さに収まる */
+/** グリッド表示の文件夹カード。動画カードと同じ高さに収まる */
 export function FolderCard({ entry, onOpen, onContextMenu }: FolderRowProps) {
   return (
     <div
@@ -59,7 +59,7 @@ export function FolderCard({ entry, onOpen, onContextMenu }: FolderRowProps) {
       onContextMenu={(e) => onContextMenu(entry, e)}
     >
       <div className="folder-thumb">
-        {/* カードのサムネイル枠に合わせて大きく出すので、ここだけ size を明示する */}
+        {/* カードの缩略图枠に合わせて大きく出すので、ここだけ size を明示する */}
         <span className="folder-glyph">
           {entry.up ? <FolderUp size={34} /> : <Folder size={34} />}
         </span>
@@ -71,7 +71,7 @@ export function FolderCard({ entry, onOpen, onContextMenu }: FolderRowProps) {
 }
 
 /**
- * 詳細リスト表示のフォルダ行。動画行と同じ grid に乗せ、値の無いセルは空欄にする。
+ * 详细列表视图の文件夹行。動画行と同じ grid に乗せ、値の無いセルは空欄にする。
  * 件数は列ではなく名前セルの中に入れる — どの列構成でも必ず見えるようにするため
  */
 export function FolderListRow({

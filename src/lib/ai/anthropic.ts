@@ -97,11 +97,11 @@ function mapStopReason(raw: unknown): StopReason {
   }
 }
 
-/** ストリームの途中状態。テストから触れるよう明示的に持つ */
+/** 流の途中状態。テストから触れるよう明示的に持つ */
 export interface AnthropicState {
   /** 組み立て中の生ブロック(そのまま次のターンへ戻す) */
   blocks: Record<string, unknown>[];
-  /** tool_use の input は partial_json の断片で届くので、確定するまで貯める */
+  /** tool_use の input は partial_json の断片で届くので、确定まで貯める */
   partialJson: Map<number, string>;
   text: string;
   toolCalls: ToolCall[];
@@ -171,7 +171,7 @@ export function parseChunk(state: AnthropicState, json: Record<string, unknown>)
         // 引数なしのツールは空文字で終わる
         call.input = raw.trim() === '' ? {} : (JSON.parse(raw) as Record<string, unknown>);
       } catch (e) {
-        call.parseError = `引数の JSON が壊れています: ${e instanceof Error ? e.message : String(e)}`;
+        call.parseError = `参数的 JSON 已损坏: ${e instanceof Error ? e.message : String(e)}`;
       }
       block.input = call.input;
       state.toolCalls.push(call);
@@ -190,7 +190,7 @@ export function parseChunk(state: AnthropicState, json: Record<string, unknown>)
 
   if (type === 'error') {
     const err = json.error as Record<string, unknown> | undefined;
-    throw new AiError('api', `API エラー: ${(err?.message as string) ?? 'unknown'}`);
+    throw new AiError('api', `API 错误: ${(err?.message as string) ?? 'unknown'}`);
   }
 
   return out;

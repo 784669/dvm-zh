@@ -31,3 +31,18 @@ src-tauri/lib/
 *.njsproj
 *.sln
 *.sw?
+
+# 打包产物(安装包挂到 GitHub Releases，不入库)
+release/
+
+# 汉化工具链的临时产物(可由 tools/ 下的脚本重新生成)
+tools/dl-test/
+tools/parts/
+tools/batches/
+
+# 本地草稿与工作区状态
+.bak_src_before_dict4/
+.workbuddy/
+
+# Windows 上误生成的空文件
+nul

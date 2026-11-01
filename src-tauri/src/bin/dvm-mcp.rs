@@ -20,7 +20,18 @@ use dvm_lib::core::{dedupe, libraries, playlists, series, stats, tags, videos};
 
 fn data_dir() -> PathBuf {
     let appdata = std::env::var("APPDATA").expect("APPDATA is not set");
-    PathBuf::from(appdata).join("jp.demo2.dvm")
+    let root = PathBuf::from(appdata);
+    // 中文增强版用 jp.demo2.dvm.zh。迁移还没发生时库里还在旧目录，这里也认，
+    // 免得「先开 AI 客户端、后开 DVM」的时候 AI 看到一个空库
+    let current = root.join(dvm_lib::core::datadir::IDENTIFIER);
+    if current.join("app.db").exists() {
+        return current;
+    }
+    let legacy = root.join(dvm_lib::core::datadir::LEGACY_IDENTIFIER);
+    if legacy.join("app.db").exists() {
+        return legacy;
+    }
+    current
 }
 
 /// **アプリがいま開いているライブラリ**を見る(v1.27)。

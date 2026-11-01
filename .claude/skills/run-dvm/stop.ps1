@@ -25,7 +25,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$stateFile = Join-Path $env:APPDATA 'jp.demo2.dvm\.window-state.json'
+$stateFile = Join-Path $env:APPDATA 'jp.demo2.dvm.zh\.window-state.json'
 $before = if (Test-Path $stateFile) { (Get-Item $stateFile).LastWriteTime } else { $null }
 
 $dvm = @(Get-Process dvm -ErrorAction SilentlyContinue)

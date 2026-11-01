@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "DVM",
+  "productName": "DVM-zh",
   "version": "1.43.0",
-  "identifier": "jp.demo2.dvm",
+  "identifier": "jp.demo2.dvm.zh",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "DVM",
+        "title": "DVM 中文版",
         "width": 1600,
         "height": 950,
         "transparent": true,
@@ -30,13 +30,12 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "publisher": "demodemo",
-    "homepage": "https://github.com/demodemo0818/dvm",
-    "copyright": "Copyright (C) 2026 demodemo",
+    "publisher": "dvm-zh (unofficial)",
+    "copyright": "Copyright (C) 2026 demodemo; Simplified Chinese edition by dvm-zh contributors",
     "license": "GPL-3.0-or-later",
     "category": "Video",
-    "shortDescription": "動画をコピーせずに整理する Windows 向け動画管理ソフト",
-    "longDescription": "動画ファイルを元の場所に置いたまま、サムネイル・タグ・シリーズ・評価で整理します。外付け HDD や NAS の大量の動画をそのまま扱え、libmpv によるアプリ内再生と MCP / AI アシスタントからの操作に対応しています。",
+    "shortDescription": "不复制视频即可整理的视频管理软件（面向 Windows，简体中文增强版）",
+    "longDescription": "视频文件保留在原位置，通过缩略图・标签・系列・评分进行整理。外接 HDD 或 NAS 中的大量视频可直接管理，并支持通过 libmpv 在应用内播放，以及通过 MCP / AI 助手进行操作。本版本为社区维护的非官方简体中文增强版，接口与数据格式兼容官方 DVM。",
     "resources": [
       "binaries/ffmpeg.exe",
       "binaries/ffprobe.exe",
@@ -44,6 +43,15 @@
       "lib/**/*",
       "resources/*"
     ],
+    "windows": {
+      "nsis": {
+        "languages": ["SimpChinese"],
+        "displayLanguageSelector": false
+      },
+      "wix": {
+        "language": "zh-CN"
+      }
+    },
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

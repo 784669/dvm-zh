@@ -1,5 +1,10 @@
 # DVM 中文增强版（DVM-zh）
 
+[![CI](https://github.com/784669/dvm-zh/actions/workflows/ci.yml/badge.svg)](https://github.com/784669/dvm-zh/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/784669/dvm-zh?label=release)](https://github.com/784669/dvm-zh/releases/latest)
+[![License: GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11%20x64-lightgrey)](#下载与安装)
+
 > **这是非官方分支。** 本项目基于 [demodemo / DVM (Demodemo Video Manager)](https://github.com/demodemo0818/dvm)
 > v1.43.0 修改而来，原始著作权归原作者 **demodemo** 所有，继续遵循 **GPL-3.0-or-later**。
 > 本仓库与上游官方项目没有隶属关系，也不代表原作者的意见或背书。

@@ -1,24 +1,24 @@
-# タグを push すると、インストーラをビルドして Release の下書きを作る。
+# 推送标签后自动构建安装包，并生成 Release 草稿。
 #
-#   git tag v1.44.0
-#   git push origin v1.44.0
+#   git tag zh-v1.43.0
+#   git push origin zh-v1.43.0
 #
-# 下書きなので、できあがったものを確認してから GitHub 上で「Publish release」を押す。
-# 手順の全体は docs/RELEASE.md を見ること。
+# 生成的是草稿，确认产物无误后再到 GitHub 上点「Publish release」。
+# 用 zh-v 前缀是为了和上游的 v* 版本线区分开。
 name: Release
 
 on:
   push:
     tags:
-      - "v*"
-  # 手元から試したいとき用(タグを打たずに走らせる。Release は作られない)
+      - "zh-v*"
+  # 手动触发：不建 Release，只验证能否构建
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
     permissions:
-      # Release を作るために要る
+      # 创建 Release 需要
       contents: write
 
     steps:
@@ -31,77 +31,79 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
-      # Rust のビルドは 500 クレート超あるので、キャッシュが無いと毎回 20 分以上かかる
+      # Rust 这边有 500 多个 crate，没有缓存每次要 20 分钟以上
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
 
-      - name: 依存パッケージを入れる
+      - name: 安装依赖
         run: npm ci
 
-      # 同梱バイナリはリポジトリに入れていない(gitignore 対象)ので毎回取得する。
-      # 詳しくは README の「開発」節。
-      # gyan.dev は CI のようなデータセンター IP に 503 を返すことがあり、そのときは
-      # GitHub Releases から取り直す。API のレート制限に引っかからないようトークンを渡す
-      - name: FFmpeg / ffprobe を取得
+      # 同捆的二进制没有入库（在 .gitignore 里），每次都要重新取。
+      # gyan.dev 对数据中心 IP 可能返回 503，此时脚本会改从 GitHub Releases 取；
+      # 带上 token 避免撞 API 限流
+      - name: 获取 FFmpeg / ffprobe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: powershell -ExecutionPolicy Bypass -File scripts/fetch-ffmpeg.ps1
 
-      - name: libmpv の DLL を取得
+      - name: 获取 libmpv DLL
         run: npx tauri-plugin-libmpv-api setup-lib
 
-      # THIRD-PARTY-NOTICES.md では FFmpeg の版を固定していない(毎回最新を取るため)ので、
-      # 「このリリースに入っていたのはどれか」を後から追えるようログに残す。
-      # あわせて GPL ビルドのままであることも確認する(LGPL に変わったらライセンス方針の見直し)
-      - name: 同梱する FFmpeg の版を記録
+      # THIRD-PARTY-NOTICES.md 里没有固定 FFmpeg 版本（每次都取最新），
+      # 所以在日志里记下「这次发布装进去的是哪个版本」。
+      # 同时确认仍然是 GPL 构建，如果上游改成 LGPL 就需要重新审视许可证声明
+      - name: 记录同捆的 FFmpeg 版本
         shell: pwsh
         run: |
           $v = & ./src-tauri/binaries/ffmpeg.exe -version
           $v | Select-Object -First 1
           if ($v -join ' ' -notmatch '--enable-gpl') {
-            Write-Warning 'FFmpeg が GPL ビルドではありません。THIRD-PARTY-NOTICES.md と本体のライセンスを見直してください'
+            Write-Warning 'FFmpeg 不是 GPL 构建，请重新检查 THIRD-PARTY-NOTICES.md 与许可证声明'
           }
 
-      # cargo test も tauri.conf.json の bundle.resources の実在チェックを通るので、
-      # dvm-mcp.exe が無いと「resource path `binaries\dvm-mcp.exe` doesn't exist」で止まる。
-      # 配布ビルドでは beforeBuildCommand が作ってくれるが、テストはその前に走るのでここで用意する。
-      # debug で作るのは cargo test と同じプロファイルでコンパイル結果を使い回せるから。
-      - name: MCP サーバーをビルド(テスト用)
+      # cargo test 也会校验 tauri.conf.json 里 bundle.resources 的文件是否存在，
+      # 没有 dvm-mcp.exe 就会报 resource path doesn't exist。
+      # 发布构建由 beforeBuildCommand 负责生成，但测试跑在它之前，所以这里先备好。
+      # 用 debug 是为了跟 cargo test 复用同一份编译结果
+      - name: 构建 MCP 服务器（供测试使用）
         run: npm run build:mcp -- -Config debug
 
-      - name: テスト
+      - name: 测试
         run: |
           npm run test
           cd src-tauri
           cargo test
 
-      - name: ビルドして Release の下書きを作る
+      - name: 构建并生成 Release 草稿
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # workflow_dispatch(タグ以外)で走らせたときは、空にして Release を作らせない。
-          # ここを github.ref_name のままにすると "master" という Release ができてしまう
+          # 手动触发（非标签）时留空，避免生成一个名叫 master 的 Release。
+          # 直接写 github.ref_name 会踩这个坑
           tagName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
           releaseName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
           releaseDraft: true
           prerelease: false
           releaseBody: |
-            ## インストール
+            ## 安装
 
-            `DVM_x.y.z_x64-setup.exe` をダウンロードして実行してください。
+            下载 `DVM-zh_x.y.z_x64-setup.exe` 后运行即可，FFmpeg 与 MCP 服务器都已同捆。
 
-            > **「WindowsによってPCが保護されました」と出た場合**
-            > コード署名をしていないため SmartScreen が警告を出します。
-            > 「詳細情報」→「実行」で進めてください。
+            > **提示「Windows 已保护你的电脑」怎么办**
+            > 因为没有购买代码签名证书，SmartScreen 会拦截。
+            > 点「更多信息」→「仍要运行」继续。
 
-            変更内容は [CHANGELOG.md](https://github.com/demodemo0818/dvm/blob/master/CHANGELOG.md) を見てください。
+            先在旧版 DVM 上用过的话，第一次启动会自动迁移库索引，原目录保留不动，
+            详见 [README](https://github.com/${{ github.repository }}/blob/master/README.md#首次启动与旧数据迁移)。
 
-      # 署名を付けていないぶん、配布物がすり替わっていないかを利用者が確かめられるように
-      # ハッシュを本文へ足す(README でこの照合方法を案内している)。
-      # ここが失敗しても Release 自体は残したいので continue-on-error。
-      - name: SHA-256 を Release 本文に追記
+            改动记录见 [CHANGELOG-zh.md](https://github.com/${{ github.repository }}/blob/master/CHANGELOG-zh.md)。
+
+      # 没有签名，至少让用户能核对下载到的文件有没有被替换。
+      # README 里也写了这个校验方法。
+      # 这一步失败不影响 Release 本身，所以加 continue-on-error
+      - name: 把 SHA-256 追加到 Release 正文
         if: startsWith(github.ref, 'refs/tags/')
         continue-on-error: true
         shell: pwsh
@@ -110,19 +112,18 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
           $files = Get-ChildItem src-tauri/target/release/bundle/nsis/*.exe, src-tauri/target/release/bundle/msi/*.msi -ErrorAction SilentlyContinue
-          if (-not $files) { Write-Host 'インストーラが見つからないので飛ばします'; exit 0 }
+          if (-not $files) { Write-Host '没有找到安装包，跳过'; exit 0 }
           $nl = "`n"
           $rows = $files | ForEach-Object {
             $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
             '| `' + $_.Name + '` | `' + $hash + '` |'
           }
-          # gh の出力は PowerShell では行ごとの配列になる。そのまま --notes に渡すと
-          # 配列の各要素が別々の引数として展開され「accepts 1 arg(s), received 10」で落ちる
+          # gh 的输出在 PowerShell 里是逐行数组，直接塞给 --notes 会把每行当成独立参数，
+          # 报 accepts 1 arg(s), received N。所以整体写成文件再传
           $body = (gh release view $env:TAG --json body -q .body | Out-String).TrimEnd()
           $add = $nl + $nl + '## SHA-256' + $nl + $nl +
-                 '| ファイル | ハッシュ |' + $nl + '|---|---|' + $nl + ($rows -join $nl) + $nl + $nl +
-                 '`Get-FileHash <ダウンロードしたファイル>` の出力と見比べてください。'
-          # 日本語を含む長文なので、引数ではなくファイルで渡す
+                 '| 文件 | 哈希 |' + $nl + '|---|---|' + $nl + ($rows -join $nl) + $nl + $nl +
+                 '用 `Get-FileHash <下载的文件>` 的输出和上表对比。'
           $notesFile = Join-Path $env:RUNNER_TEMP 'release-notes.md'
           Set-Content -Path $notesFile -Value ($body + $add) -Encoding utf8NoBOM
           gh release edit $env:TAG --notes-file $notesFile

@@ -1,0 +1,55 @@
+# 每次推送与 PR 都跑一遍类型检查和测试，避免把编译不过的提交合进来。
+# 打标签时的完整打包在 release.yml 里，这里只做验证，省时间也省额度。
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: 安装依赖
+        run: npm ci
+
+      # cargo test 会校验 bundle.resources 里的文件是否存在，所以同捆二进制必须先备好
+      - name: 获取 FFmpeg / ffprobe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: powershell -ExecutionPolicy Bypass -File scripts/fetch-ffmpeg.ps1
+
+      - name: 获取 libmpv DLL
+        run: npx tauri-plugin-libmpv-api setup-lib
+
+      - name: 构建 MCP 服务器（供测试使用）
+        run: npm run build:mcp -- -Config debug
+
+      - name: 前端类型检查与测试
+        run: |
+          npx tsc --noEmit
+          npm run test
+
+      - name: 后端测试
+        run: |
+          cd src-tauri
+          cargo test

@@ -189,4 +189,47 @@ mod tests {
             PathBuf::from(r"C:\Users\x\AppData\Roaming\jp.demo2.dvm")
         );
     }
+
+    /// 迁移是真的搬数据：库文件到位、路径改写、原目录不动、重复调用不再搬
+    #[test]
+    fn migrates_files_and_rewrites_roots() {
+        let base = std::env::temp_dir().join(format!("dvm-migrate-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&base);
+        let legacy = base.join(LEGACY_IDENTIFIER);
+        let new_dir = base.join(IDENTIFIER);
+        let old_lib = legacy.join("libraries").join("我的库");
+        fs::create_dir_all(&old_lib).unwrap();
+        fs::write(old_lib.join("library.db"), b"x").unwrap();
+
+        {
+            let conn = Connection::open(legacy.join("app.db")).unwrap();
+            conn.execute_batch(
+                "CREATE TABLE libraries (id TEXT PRIMARY KEY, name TEXT NOT NULL, root TEXT NOT NULL);",
+            )
+            .unwrap();
+            conn.execute(
+                "INSERT INTO libraries (id, name, root) VALUES ('abc', '我的库', ?1)",
+                [old_lib.to_string_lossy().to_string()],
+            )
+            .unwrap();
+        }
+
+        assert!(migrate_from_legacy(&new_dir).unwrap());
+
+        // 库文件复制过来了
+        assert!(new_dir.join("libraries").join("我的库").join("library.db").is_file());
+        // 路径改到了新目录，而不是继续指着旧的
+        let conn = Connection::open(new_dir.join("app.db")).unwrap();
+        let root: String = conn
+            .query_row("SELECT root FROM libraries WHERE id = 'abc'", [], |r| r.get(0))
+            .unwrap();
+        assert_eq!(root, new_dir.join("libraries").join("我的库").to_string_lossy());
+        drop(conn);
+        // 原目录保持原样，官方版还能继续用
+        assert!(legacy.join("app.db").is_file());
+        // 第二次调用什么都不做
+        assert!(!migrate_from_legacy(&new_dir).unwrap());
+
+        let _ = fs::remove_dir_all(&base);
+    }
 }

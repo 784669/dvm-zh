@@ -1,5 +1,6 @@
 pub mod ai_http;
 pub mod backup;
+pub mod datadir;
 pub mod dedupe;
 pub mod display;
 pub mod excludes;
@@ -19,6 +20,7 @@ pub mod offline;
 pub mod playback;
 pub mod playlists;
 pub mod query;
+pub mod rotate;
 pub mod series;
 pub mod session;
 pub mod settings;

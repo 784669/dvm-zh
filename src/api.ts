@@ -8,11 +8,22 @@ import type {
   VideoLabels, VideoInfo, VideoQuery, VideoRow, ViewEntry, ViewStats, WatchedFolder,
 } from './types';
 import type { ViewRange } from './lib/viewHistory';
+import type { RotateTaskState } from './lib/rotateTasks';
+
+/** 后端 prepare_preview / preview_status 的返回 */
+export interface PreviewStatus {
+  /** 降码缓存文件路径 */
+  path: string;
+  /** 转码是否已完成（true 时 path 是完整可跳转的文件） */
+  ready: boolean;
+  /** 转码进度 0..1；ready 时为 1 */
+  progress: number;
+}
 
 /**
  * Tauri コマンド呼び出しの共通ラッパ。
  * 失敗を握り潰さず必ずトーストで見せてから再スローする
- * (ffmpeg 欠落・権限エラー・プレイヤー起動失敗などが「無反応」になるのを防ぐ)
+ * (ffmpeg 欠落·権限エラー·プレイヤー起動失敗などが「無反応」になるのを防ぐ)
  */
 async function call<T>(cmd: string, args?: Record<string, unknown>, silent = false): Promise<T> {
   try {
@@ -28,27 +39,27 @@ async function call<T>(cmd: string, args?: Record<string, unknown>, silent = fal
 
 export const api = {
   listWatchedFolders: () => call<WatchedFolder[]>('list_watched_folders'),
-  /** サイドバー「フォルダー」タブのツリー。DB のパスから組み立てるだけでディスクは触らない */
+  /** 侧边栏「文件夹」タブのツリー。DB のパスから組み立てるだけでディスクは触らない */
   listFolderTree: () => call<FolderNode[]>('list_folder_tree'),
-  /** メインビューに出すサブフォルダ(そのフォルダの中しか見ないのでツリーより軽い) */
+  /** メインビューに出すサブ文件夹(その文件夹の中しか見ないのでツリーより軽い) */
   listSubfolders: (dirPath: string) => call<SubfolderView>('list_subfolders', { dirPath }),
   addWatchedFolder: (path: string) => call<number>('add_watched_folder', { path }),
   removeWatchedFolder: (id: number, removeVideos: boolean) =>
     call<void>('remove_watched_folder', { id, removeVideos }),
   rescanAll: () => call<void>('rescan_all'),
-  /** 監視除外フォルダの一覧(フォルダのほか、ファイル 1 個の登録も混ざる) */
+  /** 监控排除文件夹の一覧(文件夹のほか、文件 1 個の登録も混ざる) */
   listExcludedPaths: () => call<ExcludedPath[]>('list_excluded_paths'),
   /**
-   * 監視除外に登録する(フォルダでもファイルでもよい)。removeVideos を立てると
-   * 該当する登録も外す(ファイルは消さない)。戻り値は外した件数
+   * 監視除外に登録する(文件夹でも文件でもよい)。removeVideos を立てると
+   * 該当する登録も外す(文件は消さない)。戻り値は外した件数
    */
   addExcludedPaths: (paths: string[], removeVideos: boolean) =>
     call<number>('add_excluded_paths', { paths, removeVideos }),
-  /** 監視除外を解除する。該当ファイルは次のスキャンで取り込まれる */
+  /** 取消监视排除する。該当文件は次のスキャンで取り込まれる */
   removeExcludedPath: (id: number) => call<void>('remove_excluded_path', { id }),
   countVideos: (query: VideoQuery) => call<number>('count_videos', { query }),
   /**
-   * 詳細検索の拡張子チップの候補(v1.35)。ライブラリに**実際にある**ものだけを件数付きで返す。
+   * 詳細検索の拡張子チップの候補(v1.35)。媒体库に**実際にある**ものだけを件数付きで返す。
    * 全件走査なので**詳細検索を開いたときだけ**呼ぶこと
    */
   listExtensions: () => call<ExtensionCount[]>('list_extensions'),
@@ -60,17 +71,17 @@ export const api = {
   queryVideos: (query: VideoQuery, limit: number, offset: number, silent = false) =>
     call<VideoRow[]>('query_videos', { query, limit, offset }, silent),
   /**
-   * 一覧に出すタグ・シリーズを表示中のページぶんまとめて引く(v1.23)。
+   * 一覧に出す标签·系列显示中のページぶんまとめて引く(v1.23)。
    * 要求した id ごとに必ず 1 エントリ返る(何も付いていなければ空配列)
    */
   videoLabels: (videoIds: number[]) => call<VideoLabels[]>('video_labels', { videoIds }),
   registerFiles: (paths: string[]) => call<number>('register_files', { paths }),
-  /** id 1 件を一覧と同じ形で引く(視聴履歴からの再生用) */
+  /** id 1 个一覧と同じ形で引く(視聴履歴からの再生用) */
   getVideo: (id: number) => call<VideoRow | null>('get_video', { id }),
   openVideo: (id: number) => call<void>('open_video', { id }),
-  /** 外部プレイヤー設定を無視して Windows の関連付けアプリで開く(右クリックメニュー用) */
+  /** 外部プレイヤー設定を無視して Windows の関連付けアプリで打开(右键菜单用) */
   openWithDefault: (id: number) => call<void>('open_with_default', { id }),
-  /** Windows の「プログラムから開く」ダイアログを出す */
+  /** Windows の「プログラムから打开」ダイアログを出す */
   openWithDialog: (id: number) => call<void>('open_with_dialog', { id }),
   markViewed: (id: number) => call<void>('mark_viewed', { id }),
   /**
@@ -78,30 +89,48 @@ export const api = {
    * 失敗しても再生には関係ないので silent(トーストを出さない)
    */
   markOpened: (id: number) => call<number>('mark_opened', { id }, true),
-  /** 閉じる / 終わるときに到達位置を書き戻す(v1.18)。こちらも silent */
+  /** 关闭 / 終わるときに到達位置を書き戻す(v1.18)。こちらも silent */
   finishView: (historyId: number, watchedMs: number) =>
     call<void>('finish_view', { historyId, watchedMs }, true),
   setResume: (id: number, resumeMs: number) => call<void>('set_resume', { id, resumeMs }),
   /**
    * 再生用変換(remux/transcode)。完了までブロックし、キャッシュ mp4 の絶対パスを返す。
    * 失敗は呼び出し側が transcode / 外部プレイヤーへフォールバックする正常経路であり、
-   * 準備中に閉じたときのキャンセルでも失敗するため、トーストは出さない(silent)
+   * 準備中に閉じたときの取消でも失敗するため、トーストは出さない(silent)
    */
   prepareVideo: (id: number, mode: 'remux' | 'transcode') =>
     call<string>('prepare_video', { id, mode }, true),
   cancelPrepare: () => call<void>('cancel_prepare', undefined, true),
+  /**
+   * 预览播放用的低码率 mp4。`ready=false` 时缓存还在后台生成，前端先用原文件播，
+   * 拿 `progress` 画缓存进度条，`ready` 变 true 后再切到 `path`
+   */
+  preparePreview: (id: number) => call<PreviewStatus>('prepare_preview', { id }, true),
+  /** 只问状态，不触发转码（预览期间的轮询） */
+  previewStatus: (id: number) => call<PreviewStatus>('preview_status', { id }, true),
+  /** 清空预览缓存（设置里的「清理预览缓存」按钮） */
+  purgePreviewCache: () => call<[number, number]>('purge_preview_cache', undefined, true),
+  /** 预览缓存当前用量（件数, 字节） */
+  previewCacheSize: () => call<[number, number]>('preview_cache_size', undefined, true),
+  /** 把源文件方向顺时针拧 90°（仅改写 MP4/MOV 的显示矩阵，不重编码）。失败时抛错，源文件不动 */
+  /** 启动「写入源文件」的旋转任务（立即返回，进度走 rotateStatus 轮询） */
+  rotateVideo: (id: number, dir: 'cw' | 'ccw') =>
+    call<void>('rotate_video', { id, dir }, true),
+  /** 旋转任务进度快照（运行中 + 最近完成的任务） */
+  rotateStatus: () =>
+    call<RotateTaskState[]>('rotate_status', undefined, true),
   listTags: () => call<Tag[]>('list_tags'),
   listTagGroups: () => call<TagGroup[]>('list_tag_groups'),
   tagVideos: (videoIds: number[], name: string, actor?: 'user' | 'ai') =>
     call<number>('tag_videos', { videoIds, name, actor }),
   untagVideos: (videoIds: number[], tagId: number, actor?: 'user' | 'ai') =>
     call<void>('untag_videos', { videoIds, tagId, actor }),
-  /** 動画に付けずにタグだけ作る。既にある名前はエラーになる */
+  /** 動画に付けずに标签だけ作る。既にある名前はエラーになる */
   createTag: (name: string, groupId: number | null) =>
     call<number>('create_tag', { name, groupId }),
   renameTag: (tagId: number, name: string) => call<void>('rename_tag', { tagId, name }),
   deleteTag: (tagId: number) => call<void>('delete_tag', { tagId }),
-  /** color に null を渡すと色なしに戻す */
+  /** color に null を渡すと无颜色に戻す */
   setTagColor: (tagId: number, color: string | null) =>
     call<void>('set_tag_color', { tagId, color }),
   /** groupId に null を渡すと未分類に戻す */
@@ -110,7 +139,7 @@ export const api = {
   createTagGroup: (name: string) => call<number>('create_tag_group', { name }),
   renameTagGroup: (groupId: number, name: string) =>
     call<void>('rename_tag_group', { groupId, name }),
-  /** グループだけ消える。中のタグは未分類に落ちるだけで動画のタグ付けは無傷 */
+  /** 群组だけ消える。中の标签は未分類に落ちるだけで動画の标签付けは無傷 */
   deleteTagGroup: (groupId: number) => call<void>('delete_tag_group', { groupId }),
   reorderTagGroups: (groupIds: number[]) => call<void>('reorder_tag_groups', { groupIds }),
   tagsForVideos: (videoIds: number[]) => call<Tag[]>('tags_for_videos', { videoIds }),
@@ -118,10 +147,10 @@ export const api = {
     call<TagCount[]>('tag_counts_for_videos', { videoIds }),
   setRating: (videoIds: number[], rating: number, actor?: 'user' | 'ai') =>
     call<void>('set_rating', { videoIds, rating, actor }),
-  /** 詳細パネルの編集フォーム用にタイトル・メモを引く(v1.34)。id が無ければ null */
+  /** 詳細パネルの編集フォーム用に标题·メモを引く(v1.34)。id が無ければ null */
   getVideoInfo: (id: number) => call<VideoInfo | null>('get_video_info', { id }),
   /**
-   * タイトル・メモを保存する(v1.34)。**省略した項目は触らない** —
+   * 标题·メモを保存する(v1.34)。**省略した項目は触らない** —
    * 変えた欄だけ渡すこと。空文字を渡すとその項目は未設定に戻る
    */
   setVideoInfo: (
@@ -136,7 +165,7 @@ export const api = {
     call<number>('add_to_series', { videoIds, name, actor }),
   removeFromSeries: (videoIds: number[], seriesId: number, actor?: 'user' | 'ai') =>
     call<void>('remove_from_series', { videoIds, seriesId, actor }),
-  /** 同名のシリーズがあると失敗する(series に UNIQUE が無いので Rust 側で弾いている) */
+  /** 同名の系列があると失敗する(series に UNIQUE が無いので Rust 側で弾いている) */
   renameSeries: (seriesId: number, name: string) =>
     call<void>('rename_series', { seriesId, name }),
   deleteSeries: (seriesId: number) => call<void>('delete_series', { seriesId }),
@@ -150,7 +179,7 @@ export const api = {
    * プリフライトに Access-Control-Allow-Origin を返さず、Authorization を付けた
    * POST が WebView から通らない(詳細は src-tauri/src/core/ai_http.rs)。
    *
-   * silent。失敗は AI パネル内のカードとして見せるので、トーストと二重に出さない
+   * silent。失敗は AI 面板内のカードとして見せるので、トーストと二重に出さない
    */
   aiStream: (
     requestId: number,
@@ -162,7 +191,7 @@ export const api = {
   /** 実行中の ai_stream を止める。終わった直後に押しても事故らないよう silent */
   aiCancel: (requestId: number) => call<void>('ai_cancel', { requestId }, true),
   /**
-   * 字幕設定のフォント候補(v1.24)。取れなくても手入力できるので silent。
+   * 字幕設定の字体候補(v1.24)。取れなくても手入力できるので silent。
    * 「候補が出ない」以上の意味を持たない失敗にトーストを出さない
    */
   listSystemFonts: () => call<string[]>('list_system_fonts', undefined, true),
@@ -184,13 +213,13 @@ export const api = {
   deleteSmartFolder: (id: number) => call<void>('delete_smart_folder', { id }),
   reorderSmartFolders: (ids: number[]) => call<void>('reorder_smart_folders', { ids }),
 
-  // --- 保存プレイリスト(v1.40)。キューは DB に無いのでここには出てこない ---
+  // --- 保存播放列表(v1.40)。队列は DB に無いのでここには出てこない ---
   listPlaylists: () => call<Playlist[]>('list_playlists'),
-  /** 保存した並びのまま一覧行で返す(キューへの読み込み) */
+  /** 保存した並びのまま一覧行で返す(队列への読み込み) */
   getPlaylistVideos: (id: number) => call<VideoRow[]>('get_playlist_videos', { id }),
   /**
    * id を指定してまとめて引く。**返る順は渡した順**で、消えた動画は落ちる。
-   * キューを `library:changed` で引き直すのに使う
+   * 队列を `library:changed` で引き直すのに使う
    */
   getVideosByIds: (ids: number[]) => call<VideoRow[]>('get_videos_by_ids', { ids }),
   /** 「上書きしますか?」を尋ねる前の下調べ。名前が空いていれば null */
@@ -198,7 +227,7 @@ export const api = {
     call<number | null>('find_playlist_by_name', { name }),
   createPlaylist: (name: string, videoIds: number[], actor?: 'user' | 'ai') =>
     call<number>('create_playlist', { name, videoIds, actor }),
-  /** 中身を丸ごと差し替える(上書き保存)。名前は変わらない */
+  /** 中身を丸ごと差し替える(覆盖保存)。名前は変わらない */
   replacePlaylist: (id: number, videoIds: number[], actor?: 'user' | 'ai') =>
     call<void>('replace_playlist', { id, videoIds, actor }),
   renamePlaylist: (id: number, name: string) => call<void>('rename_playlist', { id, name }),
@@ -206,15 +235,15 @@ export const api = {
   deletePlaylist: (id: number) => call<void>('delete_playlist', { id }),
   reorderPlaylists: (ids: number[]) => call<void>('reorder_playlists', { ids }),
   /**
-   * キューの自動保存(v1.41、C-2)。値は lib/queueStorage.ts が組む JSON。
+   * 队列の自動保存(v1.41、C-2)。値は lib/queueStorage.ts が組む JSON。
    * 保存は編集のたびに裏で走るので silent —— 失敗しても「次回復元されない」だけで、
    * 毎回トーストが出るほうが害が大きい
    */
   getQueueState: () => call<string | null>('get_queue_state', undefined, true),
   setQueueState: (value: string) => call<void>('set_queue_state', { value }, true),
-  /** プレイリストを UTF-8 の M3U8 に書き出す(v1.41、C-3)。返り値は書いた動画数 */
+  /** 播放列表を UTF-8 の M3U8 に書き出す(v1.41、C-3)。返り値は書いた動画数 */
   exportM3u8: (id: number, dest: string) => call<number>('export_m3u8', { id, dest }),
-  /** M3U8 を読み、ファイルを登録して同名のプレイリストを作る(v1.41、C-3) */
+  /** M3U8 を読み、文个登録して同名の播放列表を作る(v1.41、C-3) */
   importM3u8: (path: string) => call<M3u8Import>('import_m3u8', { path }),
   libraryStats: () => call<LibraryStats>('library_stats'),
   getAppInfo: () => call<AppInfo>('get_app_info'),
@@ -222,11 +251,11 @@ export const api = {
   listDbBackups: () => call<BackupInfo[]>('list_db_backups'),
   openBackupsDir: () => call<void>('open_backups_dir'),
   openDataDir: () => call<void>('open_data_dir'),
-  /** ライブラリのフォルダを開く。id を省くといま開いているもの(データフォルダとは別物) */
+  /** 媒体库の打开文件夹。id を省くといま開いているもの(データ文件夹とは別物) */
   openLibraryDir: (id?: string) => call<void>('open_library_dir', { id }),
   regenerateThumbnails: (onlyFailed: boolean) =>
     call<number>('regenerate_thumbnails', { onlyFailed }),
-  /** atMs を省略するとサムネイルのコマ選びを自動に戻す */
+  /** atMs を省略すると缩略图のコマ選びを自動に戻す */
   setThumbTime: (id: number, atMs?: number) => call<void>('set_thumb_time', { id, atMs }),
   /** 選択分をまとめて作り直す(1 件ずつ setThumbTime を呼ばない。IPC 1 回で済ませる) */
   rethumbVideos: (ids: number[]) => call<number>('rethumb_videos', { ids }),
@@ -235,11 +264,11 @@ export const api = {
    * `setThumbTime` と違い **DB は変わらない**(グリッドの再取得は不要)
    */
   saveFrame: (id: number, atMs: number) => call<string>('save_frame', { id, atMs }),
-  /** コマの保存先を開く。設定が空なら既定(ピクチャ\DVM)を Rust 側が解決する */
+  /** コマの打开保存位置。設定が空なら既定(ピクチャ\DVM)を Rust 側が解決する */
   openFrameDir: () => call<void>('open_frame_dir'),
   /**
-   * ffprobe をその場で起動してメディア情報を取る。
-   * **詳細ペインの「メディア情報」を展開したときだけ**呼ぶこと(元動画を読むため)。
+   * ffprobe をその場で起動して媒体信息を取る。
+   * **详情面板の「媒体信息」を展開したときだけ**呼ぶこと(元動画を読むため)。
    * 失敗はセクション内に文言で出すのでトーストは出さない(silent)
    */
   getMediaInfo: (id: number) => call<MediaInfo>('get_media_info', { id }, true),
@@ -248,21 +277,21 @@ export const api = {
   /** 変換キャッシュを上限まで削る(v1.38)。減った量は getAppInfo を取り直して見せる */
   purgeTranscodeCache: () => call<void>('purge_transcode_cache'),
   /**
-   * 重複解消の下見。scope にフォルダを渡すとその配下だけを対象にする。
+   * 重複解消の下見。scope に文件夹を渡すとそ 的下级だけを対象にする。
    * DB を読むだけなので、実行前に何度呼んでもよい
    */
   planDedupe: (scope?: string) => call<DedupePlan>('plan_dedupe', { scope }),
   /**
    * 重複解消の実行。呼ぶ前に必ず planDedupe の結果をユーザーに見せること。
-   * trashFiles を立てるとファイルをごみ箱へ送ってから登録を外す(完全削除ではない)。
-   * 既定(false)ならファイルには触らず、ライブラリの登録を外すだけ
+   * trashFiles を立てると将文件送入回收站送ってから登録を外す(完全削除ではない)。
+   * 既定(false)なら文个は触らず、媒体库の登録を外すだけ
    */
   applyDedupe: (scope: string | undefined, trashFiles: boolean) =>
     call<DedupeResult>('apply_dedupe', { scope, trashFiles }),
-  /** 復元の予約。実際の差し替えは次回起動時。戻り値は退避した現行 DB のファイル名 */
+  /** 復元の予約。実際の差し替えは次回起動時。戻り値は退避した現行 DB の文件名 */
   restoreBackup: (path: string) => call<string>('restore_backup', { path }),
 
-  // --- ファイル操作(plan_* は読むだけ。apply_* はユーザーが承認してから呼ぶ) ---
+  // --- 文件操作(plan_* は読むだけ。apply_* はユーザーが承認してから呼ぶ) ---
   planRelink: (fromPrefix: string, toPrefix: string) =>
     call<PlanItem[]>('plan_relink', { fromPrefix, toPrefix }),
   applyRelink: (items: PlanItem[], actor?: 'user' | 'ai') =>
@@ -276,7 +305,7 @@ export const api = {
   classifyPaths: (paths: string[]) =>
     call<{ dirs: string[]; files: string[] }>('classify_paths', { paths }),
   planTrash: (videoIds: number[]) => call<PlanItem[]>('plan_trash', { videoIds }),
-  /** ごみ箱へ送り、成功したものはライブラリ登録も消す(v1.14) */
+  /** 送入回收站送り、成功したものは媒体库登録も消す(v1.14) */
   applyTrash: (items: PlanItem[], actor?: 'user' | 'ai') =>
     call<OpResult[]>('apply_trash', { items, actor }),
 
@@ -286,27 +315,27 @@ export const api = {
   undoOperation: (opId: number) => call<string>('undo_operation', { opId }),
 
   // --- 視聴履歴(v1.18。期間指定と集計は v1.36)---
-  /** range の after / before は 'YYYY-MM-DD'(両端を含む)。空文字は指定なし */
+  /** range の after / before は 'YYYY-MM-DD'(両端を含む)。空文字は未指定 */
   listViewHistory: (range: ViewRange, limit: number, offset: number) =>
     call<ViewEntry[]>('list_view_history', { range, limit, offset }),
   /** 一覧と同じ期間で数えた集計。画面の数字と並ぶ行が食い違わないよう条件は Rust 側で共有 */
   viewStats: (range: ViewRange) => call<ViewStats>('view_stats', { range }),
 
-  // --- ライブラリの切り替え(v1.27)---
+  // --- 切换媒体库(v1.27)---
   listLibraries: () => call<LibraryEntry[]>('list_libraries'),
-  /** 起動時にライブラリを開けたか。ok 以外なら復旧画面を出す */
+  /** 起動時に媒体库を開けたか。ok 以外なら復旧画面を出す */
   getLibraryState: () => call<LibraryState>('get_library_state'),
-  /** 新規作成の既定の置き場(フォルダ選択ダイアログの初期位置) */
+  /** 新規作成の既定の置き場(文件夹選択ダイアログの初期位置) */
   defaultLibraryDir: () => call<string>('default_library_dir'),
   /** parentDir を省くと既定の置き場に作る */
   createLibrary: (name: string, parentDir?: string) =>
     call<LibraryEntry>('create_library', { name, parentDir }),
   addExistingLibrary: (root: string) => call<LibraryEntry>('add_existing_library', { root }),
   renameLibrary: (id: string, name: string) => call<void>('rename_library', { id, name }),
-  /** 一覧から外すだけ。フォルダとファイルは消さない */
+  /** 从列表移除だけ。文件夹と文件は消さない */
   forgetLibrary: (id: string) => call<void>('forget_library', { id }),
   /**
-   * ライブラリを切り替える。**成功するとアプリが再起動するのでこの Promise は解決しない**。
+   * 媒体库を切り替える。**成功するとアプリが再起動するのでこの Promise は解決しない**。
    * 失敗したときだけ reject が返る(= call() のトーストが出る)
    */
   switchLibrary: (id: string) => call<void>('switch_library', { id }),

@@ -4,12 +4,13 @@ use crate::AppState;
 use anyhow::{bail, Context, Result};
 use rusqlite::params;
 use serde::Serialize;
+use std::collections::HashMap;
 use std::ffi::OsString;
 use std::io::{BufRead, BufReader, Read};
 use std::path::{Path, PathBuf};
 use std::process::{Child, Stdio};
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::sync::{Arc, Mutex};
+use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
+use std::sync::{Arc, Mutex, OnceLock};
 use std::time::{Duration, Instant};
 use tauri::{AppHandle, Emitter, Manager};
 
@@ -79,11 +80,11 @@ pub fn prepare(app: &AppHandle, video_id: i64, mode: &str) -> Result<PathBuf> {
                 ))
             },
         )
-        .context("動画がライブラリにありません")?
+        .context("视频不在媒体库中")?
     };
     let src = PathBuf::from(src);
     if !src.exists() {
-        bail!("元ファイルが見つかりません: {}", src.display());
+        bail!("找不到原始文件：{}", src.display());
     }
 
     let cache = cache_path(&state.transcode_dir, video_id);
@@ -119,17 +120,17 @@ pub fn prepare(app: &AppHandle, video_id: i64, mode: &str) -> Result<PathBuf> {
 
     match outcome {
         RunOutcome::Done => {
-            std::fs::rename(&tmp, &cache).context("キャッシュファイルを配置できません")?;
+            std::fs::rename(&tmp, &cache).context("无法放置缓存文件")?;
             purge_cache(app, Some(&cache));
             Ok(cache)
         }
         RunOutcome::Cancelled => {
             let _ = std::fs::remove_file(&tmp);
-            bail!("変換をキャンセルしました");
+            bail!("已取消转换");
         }
         RunOutcome::Failed(err) => {
             let _ = std::fs::remove_file(&tmp);
-            bail!("変換に失敗しました: {err}");
+            bail!("转换失败：{err}");
         }
     }
 }
@@ -155,7 +156,7 @@ fn run_ffmpeg(
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
-        .context("ffmpeg を起動できません")?;
+        .context("无法启动 ffmpeg")?;
     let stdout = child.stdout.take().expect("stdout piped");
     let stderr = child.stderr.take().expect("stderr piped");
 
@@ -175,7 +176,7 @@ fn run_ffmpeg(
     });
 
     // stdout の -progress 出力(out_time_us=)から進捗を 500ms 間隔で通知
-    let message = if mode == "remux" { "コンテナを変換中…" } else { "動画を変換中…" };
+    let message = if mode == "remux" { "正在转换容器…" } else { "正在转换视频…" };
     let mut last_emit = Instant::now() - Duration::from_secs(1);
     for line in BufReader::new(stdout).lines().map_while(|l| l.ok()) {
         if let Some(us) = line.strip_prefix("out_time_us=") {
@@ -466,6 +467,382 @@ fn collect_cache_files(dir: &Path, out: &mut Vec<(PathBuf, u64, std::time::Syste
 pub fn remove_cache_for(transcode_dir: &Path, video_id: i64) {
     let _ = std::fs::remove_file(cache_path(transcode_dir, video_id));
     let _ = std::fs::remove_file(tmp_path(transcode_dir, video_id));
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// 低ビットレート・プレビュー(カードの再生ボタン用)
+//
+// 方針:
+// - 予め生成しない。実際にプレビュー再生が要求された動画だけを対象にする
+// - 一度作ったら `{preview_dir}/{画質}_{id}.mp4` に残し、次回以降はそのまま読む
+//   (再エンコードしない。ただし `preview_quality` 設定はファイル名に入るので、
+//   画質を変えると別名のファイルになり、古い画質が出ることはない)
+// - 自動消退(LRU)はしない。設定の「プレビューキャッシュを削除」を押したときだけ消える
+// ───────────────────────────────────────────────────────────────────────────
+
+/// プレビューのキャッシュファイル名(画質設定を含む)
+pub fn preview_cache_path(preview_dir: &Path, quality: &str, video_id: i64) -> PathBuf {
+    preview_dir.join(format!("{quality}_{video_id}.mp4"))
+}
+
+/// `preview_quality` 設定 → (高さ, crf)。未設定・未知は既定の 360p・CRF32
+fn preview_quality_params(conn: &rusqlite::Connection) -> (u32, u32) {
+    match settings::get(conn, "preview_quality").ok().flatten().as_deref() {
+        Some("480p") => (480, 30),
+        Some("720p") => (720, 28),
+        _ => (360, 32),
+    }
+}
+
+/// いま育てているプレビュー転码(key = "{video_id}:{quality}")。
+///
+/// - `child` は別の動画の再生が始まったときに kill するための受け皿
+///   (プレビューは**同時に 1 本だけ**)
+/// - `progress` は ffmpeg の `-progress pipe:1` から読んだ 0..1000 の千分率。
+///   フロントはこれで「キャッシュ進捗バー」を描く
+struct PreviewTask {
+    child: Mutex<Option<Child>>,
+    progress: AtomicU32,
+}
+type PreviewSlot = Arc<PreviewTask>;
+
+fn preview_tasks() -> &'static Mutex<HashMap<String, PreviewSlot>> {
+    static TASKS: OnceLock<Mutex<HashMap<String, PreviewSlot>>> = OnceLock::new();
+    TASKS.get_or_init(|| Mutex::new(HashMap::new()))
+}
+
+/// フロントへ返すプレビュー状態。
+///
+/// `ready` が false の間はキャッシュがまだ育っている途中(そもそも無いこともある)。
+/// その状態のファイルを <video> に渡すと、書けた分だけしか無いので読み込みに
+/// 失敗しやすい —— そこでフロントは**先に元ファイルで再生を始め**、progress を
+/// 進捗バーに出し、ready になった時点で `path` に切り替える
+#[derive(Serialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct PreviewStatus {
+    pub path: String,
+    pub ready: bool,
+    /// 0.0〜1.0(ready のときは 1.0)
+    pub progress: f64,
+}
+
+fn status_of(cache: &Path, ready: bool, progress: f64) -> PreviewStatus {
+    PreviewStatus {
+        path: cache.to_string_lossy().to_string(),
+        ready,
+        progress: if ready { 1.0 } else { progress },
+    }
+}
+
+/// その key の転码進捗(0.0〜1.0)。走っていなければ 0
+fn task_progress(key: &str) -> f64 {
+    preview_tasks()
+        .lock()
+        .unwrap()
+        .get(key)
+        .map(|t| t.progress.load(Ordering::Relaxed) as f64 / 1000.0)
+        .unwrap_or(0.0)
+}
+
+/// 転码完成の目印(空ファイル)。分片 mp4 は育ちながら再生されるため、
+/// 「ファイルがある=完成」ではない。ffmpeg が最後まで成功したときだけ置く
+fn ok_marker(cache: &Path) -> PathBuf {
+    let mut name = cache
+        .file_name()
+        .and_then(|n| n.to_str())
+        .unwrap_or_default()
+        .to_string();
+    name.push_str(".ok");
+    cache.with_file_name(name)
+}
+
+/// プレビュー再生用の低ビットレート mp4 を用意してパスを返す(**完了を待たない**)。
+///
+/// 転码はバックグラウンドで走り、分片 mp4(`+empty_moov+frag_keyframe`)として
+/// キャッシュへ直接書く。フロントは返ってきたパスをすぐ <video> に渡して
+/// 「書けた分から」再生できる。まだ無い部分は再生が追いつくまで待つだけで、
+/// 転码は再生の 10〜30 倍の速さで進むので実質詰まらない。
+///
+/// **同時に育てるのは 1 本だけ**。別の動画の再生要求が来たら、走っている
+/// 転码を kill して(部分的なキャッシュも捨てる)新しく始める
+pub fn prepare_preview(app: &AppHandle, video_id: i64) -> Result<PreviewStatus> {
+    let state = app.state::<AppState>();
+
+    let src: String = {
+        let conn = state.db.lock().unwrap();
+        conn.query_row(
+            "SELECT path FROM videos WHERE id = ?1",
+            params![video_id],
+            |r| r.get::<_, String>(0),
+        )
+        .context("视频不在媒体库中")?
+    };
+    let src = PathBuf::from(&src);
+    if !src.exists() {
+        bail!("找不到原始文件：{}", src.display());
+    }
+
+    let (height, crf) = {
+        let conn = state.app_db.lock().unwrap();
+        preview_quality_params(&conn)
+    };
+    let quality_key = format!("{height}p");
+    let cache = preview_cache_path(&state.preview_dir, &quality_key, video_id);
+    let ok = ok_marker(&cache);
+    let key = format!("{video_id}:{quality_key}");
+
+    // 完成品があればそれで終わり
+    if ok.exists() && is_cache_fresh(&cache, &src) {
+        return Ok(status_of(&cache, true, 1.0));
+    }
+
+    let slot = {
+        let mut tasks = preview_tasks().lock().unwrap();
+        if tasks.contains_key(&key) {
+            // 培養中:進捗だけ伝えて、あとはフロントが ready を待つ。
+            // (tasks のロックを持っているので task_progress() は呼ばない=二重ロック)
+            let p = tasks
+                .get(&key)
+                .map(|t| t.progress.load(Ordering::Relaxed) as f64 / 1000.0)
+                .unwrap_or(0.0);
+            return Ok(status_of(&cache, false, p));
+        }
+        // 同時 1 本:他の動画の転码はすべて止める。止まった側の中途半端な
+        // キャッシュは価値がない(続きから再開できない)のですぐ消す
+        let others: Vec<(String, PreviewSlot)> = tasks
+            .iter()
+            .filter(|(k, _)| !k.starts_with(&format!("{video_id}:")))
+            .map(|(k, v)| (k.clone(), v.clone()))
+            .collect();
+        for (k, s) in &others {
+            if let Some(c) = s.child.lock().unwrap().as_mut() {
+                let _ = c.kill();
+            }
+            tasks.remove(k);
+            if let Some((vid, q)) = k.split_once(':') {
+                if let Ok(vid) = vid.parse::<i64>() {
+                    let stale = preview_cache_path(&state.preview_dir, q, vid);
+                    let _ = std::fs::remove_file(&stale);
+                    let _ = std::fs::remove_file(ok_marker(&stale));
+                }
+            }
+        }
+        // 自分の前回の中途半端な残骸も捨ててやり直す
+        let _ = std::fs::remove_file(&cache);
+        let _ = std::fs::remove_file(&ok);
+        let slot: PreviewSlot = Arc::new(PreviewTask {
+            child: Mutex::new(None),
+            progress: AtomicU32::new(0),
+        });
+        tasks.insert(key.clone(), slot.clone());
+        slot
+    };
+
+    // 総尺は進捗計算に使う(不明なら進捗は 0 のまま = 不定スピナー)
+    let total_secs: f64 = {
+        let conn = state.db.lock().unwrap();
+        conn.query_row(
+            "SELECT duration_ms FROM videos WHERE id = ?1",
+            params![video_id],
+            |r| r.get::<_, Option<i64>>(0),
+        )
+        .ok()
+        .flatten()
+        .unwrap_or(0) as f64
+        / 1000.0
+    };
+
+    let app2 = app.clone();
+    let cache2 = cache.clone();
+    let ok2 = ok.clone();
+    let key2 = key.clone();
+    let slot2 = slot.clone();
+    tauri::async_runtime::spawn_blocking(move || {
+        let st = app2.state::<AppState>();
+        // 再生用変換と同じキュー(回転は rotate_lock の別キューなので並行可)。
+        // 先に走っている転码が終わるまで 2 本目はここで待つ
+        let _serial = st.prepare_lock.lock().unwrap();
+        if preview_tasks().lock().unwrap().contains_key(&key2) {
+            match spawn_preview_ffmpeg(&st.ffmpeg, &src, &cache2, height, crf) {
+                Ok(mut child) => {
+                    // `-progress pipe:1` を読み続けるスレッド。読まないと ffmpeg が
+                    // stdout のバッファ詰まりで止まってしまう
+                    if let Some(out) = child.stdout.take() {
+                        let s = slot2.clone();
+                        std::thread::spawn(move || {
+                            let reader = BufReader::new(out);
+                            for line in reader.lines().map_while(|l| l.ok()) {
+                                // 新しい ffmpeg は out_time_us、古いものは out_time_ms
+                                // (名前と裏腹に中身はマイクロ秒)を出す
+                                let v = line
+                                    .strip_prefix("out_time_us=")
+                                    .or_else(|| line.strip_prefix("out_time_ms="));
+                                let Some(v) = v else { continue };
+                                let Ok(us) = v.trim().parse::<f64>() else {
+                                    continue;
+                                };
+                                if total_secs <= 0.0 {
+                                    continue;
+                                }
+                                let pct = (us / 1_000_000.0 / total_secs * 1000.0)
+                                    .clamp(0.0, 1000.0)
+                                    as u32;
+                                s.progress.fetch_max(pct, Ordering::Relaxed);
+                            }
+                        });
+                    }
+                    *slot2.child.lock().unwrap() = Some(child);
+                    // 完了待ちは 100ms ポーリング。kill されたら try_wait が即返る。
+                    // ロックを持ちっぱなしにしない(kill 側と同じ Mutex を奪い合うため)
+                    let status = loop {
+                        {
+                            let mut g = slot2.child.lock().unwrap();
+                            if let Some(c) = g.as_mut() {
+                                if let Ok(Some(s)) = c.try_wait() {
+                                    break s;
+                                }
+                            }
+                        }
+                        std::thread::sleep(Duration::from_millis(100));
+                    };
+                    if status.success() && cache2.exists() {
+                        slot2.progress.store(1000, Ordering::Relaxed);
+                        let _ = std::fs::write(&ok2, b"");
+                    } else {
+                        // 失敗/kill で終わった → 中途半端な残骸は捨てる
+                        let _ = std::fs::remove_file(&cache2);
+                        let _ = std::fs::remove_file(&ok2);
+                    }
+                }
+                Err(_) => {
+                    let _ = std::fs::remove_file(&cache2);
+                    let _ = std::fs::remove_file(&ok2);
+                }
+            }
+        }
+        preview_tasks().lock().unwrap().remove(&key2);
+    });
+
+    Ok(status_of(&cache, false, 0.0))
+}
+
+/// プレビューの状態だけを問い合わせる(**転码は起こさない**)
+pub fn preview_status(app: &AppHandle, video_id: i64) -> Result<PreviewStatus> {
+    let state = app.state::<AppState>();
+    let src: String = {
+        let conn = state.db.lock().unwrap();
+        conn.query_row(
+            "SELECT path FROM videos WHERE id = ?1",
+            params![video_id],
+            |r| r.get::<_, String>(0),
+        )
+        .context("视频不在媒体库中")?
+    };
+    let (height, _) = {
+        let conn = state.app_db.lock().unwrap();
+        preview_quality_params(&conn)
+    };
+    let quality_key = format!("{height}p");
+    let cache = preview_cache_path(&state.preview_dir, &quality_key, video_id);
+    let ok = ok_marker(&cache);
+    let ready = ok.exists() && is_cache_fresh(&cache, &PathBuf::from(&src));
+    let key = format!("{video_id}:{quality_key}");
+    Ok(status_of(&cache, ready, task_progress(&key)))
+}
+
+/// プレビュー用の低ビットレート変換を起こす(音声なし・解像度縮小)。
+/// 分片 mp4 で書くので、再生側は最初のフラグメントが着いた時点で再生を始められる。
+/// 2 秒ごとにキーフレームを打つ(フラグメント境界=シーク粒度になるため)
+fn spawn_preview_ffmpeg(
+    ff: &FfmpegPaths,
+    src: &Path,
+    out: &Path,
+    height: u32,
+    crf: u32,
+) -> Result<Child> {
+    ffmpeg::command(&ff.ffmpeg)
+        .args(["-v", "error", "-nostdin", "-nostats"])
+        // 進捗は stdout に key=value で出る。stderr は潰したまま進捗だけ拾う
+        .args(["-progress", "pipe:1"])
+        .arg("-i")
+        .arg(src)
+        .args(["-map", "0:v:0?"])
+        .args(["-c:v", "libx264"])
+        .args(["-preset", "veryfast"])
+        .args(["-crf", &crf.to_string()])
+        .args(["-pix_fmt", "yuv420p"])
+        .args(["-vf", &format!("scale={height}:-2")])
+        .args(["-an"])
+        .args(["-movflags", "+empty_moov+frag_keyframe+default_base_moof"])
+        .args(["-force_key_frames", "expr:gte(t,n_forced*2)"])
+        .args(["-f", "mp4"])
+        .arg(out)
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::null())
+        .spawn()
+        .context("无法启动 ffmpeg")
+}
+
+/// 動画を削除したとき、その動画のプレビューキャッシュ(全画質)も消す
+pub fn remove_preview_for(preview_dir: &Path, video_id: i64) {
+    if let Ok(entries) = std::fs::read_dir(preview_dir) {
+        let suffix = format!("_{video_id}.mp4");
+        let tmp_suffix = format!("_{video_id}.tmp.mp4");
+        for e in entries.flatten() {
+            let name = e.file_name().to_string_lossy().to_string();
+            // 「.mp4」と「.mp4.ok(完成マーカー)」を両方消す
+            if name.ends_with(&suffix)
+                || name.ends_with(&format!("{suffix}.ok"))
+                || name.ends_with(&tmp_suffix)
+            {
+                let _ = std::fs::remove_file(e.path());
+            }
+        }
+    }
+}
+
+/// プレビーキャッシュを全削除する(設定の「削除」ボタン用)
+pub fn purge_preview_cache(preview_dir: &Path) -> (usize, u64) {
+    let mut removed = 0usize;
+    let mut freed = 0u64;
+    if let Ok(entries) = std::fs::read_dir(preview_dir) {
+        for e in entries.flatten() {
+            let p = e.path();
+            let is_mp4 = p.extension().and_then(|x| x.to_str()) == Some("mp4");
+            let is_marker = e.file_name().to_string_lossy().ends_with(".mp4.ok");
+            if !is_mp4 && !is_marker {
+                continue;
+            }
+            if is_mp4 {
+                if let Ok(meta) = e.metadata() {
+                    freed += meta.len();
+                }
+            }
+            if std::fs::remove_file(&p).is_ok() {
+                removed += 1;
+            }
+        }
+    }
+    (removed, freed)
+}
+
+/// プレビーキャッシュの現在量(件数, バイト)
+pub fn preview_cache_size(preview_dir: &Path) -> (usize, u64) {
+    let mut count = 0usize;
+    let mut total = 0u64;
+    if let Ok(entries) = std::fs::read_dir(preview_dir) {
+        for e in entries.flatten() {
+            let p = e.path();
+            if p.extension().and_then(|x| x.to_str()) == Some("mp4") {
+                if let Ok(meta) = e.metadata() {
+                    count += 1;
+                    total += meta.len();
+                }
+            }
+        }
+    }
+    (count, total)
 }
 
 #[cfg(test)]

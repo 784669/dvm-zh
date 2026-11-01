@@ -530,26 +530,190 @@ body {
   display: block;
 }
 
-/* ホバープレビューの再生位置バー(マウスに追従してシーンを送れる) */
-.thumb .preview-bar {
+/* カードのプレビュー再生ボタン(ホバー時にだけ浮き上がる) */
+.preview-toggle {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.55);
-}
-
-.thumb .preview-bar > div {
-  width: 0;
-  height: 100%;
-  background: #e8ebf2;
-}
-
-/* プレビュー中の「現在位置 / 尺」。位置バーのぶんだけ尺バッジより上に置く */
-.thumb .preview-time {
+  right: 8px;
   bottom: 8px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #e8ebf2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  z-index: 3;
+}
+.card:hover .preview-toggle {
+  opacity: 1;
+}
+.preview-toggle:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+.preview-toggle:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+/* 回転ボタンは再生ボタンの左隣(幅 34 + 間隔 8)。逆回りはさらにその左 */
+.preview-toggle.preview-rotate {
+  right: 50px;
+}
+.preview-toggle.preview-rotate-ccw {
+  right: 92px;
+}
+
+/*
+ * プレビュー中はカード下端に固定の進捗バーが出るので、3 つのボタンは
+ * 上端へ退避する(カード幅 140px でもバーと重ならない)
+ */
+.preview-toggle.on-top {
+  top: 8px;
+  bottom: auto;
+}
+
+/* 源文件回転書き込み中の円形プログレス。カード全面を薄暗くして中心に % を出す */
+.rotate-progress {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 2;
+  cursor: progress;
+}
+.rotate-progress-box {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rotate-progress .ring-bg {
+  fill: rgba(0, 0, 0, 0.45);
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 4;
+}
+.rotate-progress .ring-fg {
+  fill: none;
+  stroke: #4da3ff;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 0.3s linear;
+}
+.rotate-progress .pct {
+  position: absolute;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.preview-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #e8ebf2;
+  border-radius: 50%;
+  animation: preview-spin 0.7s linear infinite;
+}
+@keyframes preview-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*
+ * 固定进度条行(降码预览专用):
+ * 亮色=播放位置,浅色=已加载(=已转码),点击跳转,不支持拖动。右端是倍速按钮
+ */
+.thumb .hover-bar-row {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+.thumb .hover-bar {
+  position: relative;
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+  overflow: hidden;
+}
+.thumb .hover-bar-loaded {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.45);
+}
+.thumb .hover-bar-played {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: #4da3ff;
+}
+.thumb .hover-rate {
+  flex: none;
+  padding: 0 3px;
+  border: none;
+  background: none;
+  color: #e8ebf2;
+  font-size: 11px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.thumb .hover-rate:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.thumb .hover-time {
+  flex: none;
+  color: #e8ebf2;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 转码追帧/起播前的缓冲转圈(画面中央) */
+.thumb .hover-buffering {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 缓冲中/无法解码时的小字提示(转圈下方) */
+.thumb .hover-note {
+  color: #e8ebf2;
+  font-size: 11px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  white-space: nowrap;
 }
 
 /* 視聴進捗バー(レジューム位置) */

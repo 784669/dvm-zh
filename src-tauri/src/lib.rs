@@ -42,6 +42,9 @@ pub struct AppState {
     pub backups_dir: PathBuf,
     /// 再生用変換(remux/transcode)のキャッシュ置き場
     pub transcode_dir: PathBuf,
+    /// カードの再生ボタン押下で作る低ビットレート・プレビューのキャッシュ置き場。
+    /// 予め生成せず、実際にプレビュー要求があった動画だけを対象にする
+    pub preview_dir: PathBuf,
     /// コマの画像保存(v1.26)の**既定の**置き場所(ピクチャ\DVM)。
     /// 設定 `frame_save_dir` が空のときだけ使う。
     /// **他の 3 つと違い起動時に create_dir_all しない** —— 一度も撮っていない人の
@@ -56,6 +59,9 @@ pub struct AppState {
     /// prepare() 全体の直列化。同じ動画への同時変換(React StrictMode の
     /// 二重実行など)が同じ tmp ファイルに重ね書きして壊すのを防ぐ
     pub prepare_lock: Mutex<()>,
+    /// 回転(源ファイル書き換え)専用の直列化。**prepare_lock とは別** ——
+    /// 回転とプレビュー転码/再生変換は別キューで、互いに待ち合わせない
+    pub rotate_lock: Mutex<()>,
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -113,6 +119,13 @@ pub fn run() {
 
             let data_dir = app.path().app_data_dir()?;
             std::fs::create_dir_all(&data_dir)?;
+            // identifier 换成 jp.demo2.dvm.zh 之后，官方版的库在旧目录里。
+            // 第一次启动时搬过来并改写库路径；失败只记日志，不挡启动
+            match crate::core::datadir::migrate_from_legacy(&data_dir) {
+                Ok(true) => eprintln!("已从官方版数据目录迁移库: {}", data_dir.display()),
+                Ok(false) => {}
+                Err(e) => eprintln!("旧数据迁移失败（继续以空库启动）: {e:#}"),
+            }
             // ライブラリの一覧とアプリ全体設定。初回は v1.26 までのデータをここで引き継ぐ
             let app_db = libraries::open_app_db(&data_dir)?;
             let resolved = libraries::resolve_current(&app_db, &data_dir);
@@ -145,6 +158,10 @@ pub fn run() {
             };
             let transcode_dir = data_dir.join("transcode").join(cache_key);
             std::fs::create_dir_all(&transcode_dir)?;
+            // プレビューキャッシュはライブラリ横断で 1 つ(画質設定ごとにファイル名が変わる)。
+            // 自動消退はせず、設定の「削除」ボタンでのみ消える
+            let preview_dir = data_dir.join("preview");
+            std::fs::create_dir_all(&preview_dir)?;
             // ピクチャが取れなくても起動は続ける(データフォルダに逃がす)
             let frames_dir = crate::core::frames::default_dir(
                 app.path().picture_dir().ok().as_deref(),
@@ -171,6 +188,7 @@ pub fn run() {
                 thumbs_dir,
                 backups_dir,
                 transcode_dir,
+                preview_dir,
                 frames_dir,
                 ffmpeg: crate::core::ffmpeg::FfmpegPaths::resolve(),
                 scanning: AtomicBool::new(false),
@@ -178,6 +196,7 @@ pub fn run() {
                 watch_tx: Mutex::new(None),
                 transcode_job: Mutex::new(None),
                 prepare_lock: Mutex::new(()),
+                rotate_lock: Mutex::new(()),
             });
 
             // 外部プロセス(MCP 等)からの DB 変更を検知して UI に反映する。
@@ -332,6 +351,12 @@ pub fn run() {
             commands::history::undo_operation,
             commands::playback::prepare_video,
             commands::playback::cancel_prepare,
+            commands::playback::prepare_preview,
+            commands::playback::preview_status,
+            commands::playback::purge_preview_cache,
+            commands::playback::rotate_video,
+            commands::playback::rotate_status,
+            commands::playback::preview_cache_size,
             commands::libraries::list_libraries,
             commands::libraries::get_library_state,
             commands::libraries::default_library_dir,

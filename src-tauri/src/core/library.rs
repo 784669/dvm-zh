@@ -19,6 +19,14 @@ pub const VIDEO_EXTENSIONS: &[&str] = &[
 ];
 
 pub fn is_video_file(path: &Path) -> bool {
+    // 回転(源ファイル書き換え)の作業ファイルは絶対に媒体庫へ入れない。
+    // 走行中にスキャンが重なっても仮登録されず、終了後の掃除で「未找到」が出ない
+    if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+        let lower = name.to_ascii_lowercase();
+        if lower.ends_with(".dvmrot.mp4") || lower.ends_with(".dvm-bak") {
+            return false;
+        }
+    }
     path.extension()
         .and_then(|e| e.to_str())
         .map(|e| VIDEO_EXTENSIONS.contains(&e.to_ascii_lowercase().as_str()))
@@ -41,7 +49,7 @@ fn emit_changed(app: &AppHandle) {
 }
 
 /// 先頭 1MB + サイズから xxh3 ハッシュを計算する(移動・リネーム検出用)
-fn partial_hash(path: &Path, size: u64) -> Option<String> {
+pub(crate) fn partial_hash(path: &Path, size: u64) -> Option<String> {
     let mut file = std::fs::File::open(path).ok()?;
     let mut buf = vec![0u8; 1024 * 1024];
     let mut read_total = 0usize;
@@ -544,7 +552,7 @@ pub fn process_pending(app: &AppHandle, ids: Vec<i64>) {
                 let n = done_ref.fetch_add(1, Ordering::Relaxed) + 1;
                 if n % 10 == 0 || n == total {
                     // 進捗テキストはこまめに出してよい(ステータスバーの文字が変わるだけ)
-                    emit_state(app, n < total, format!("サムネイル生成中 {n}/{total}"));
+                    emit_state(app, n < total, format!("缩略图生成中 {n}/{total}"));
                     // library:changed は一覧の再取得を誘発するので 2 秒に 1 回までに抑える。
                     // 10 件ごとに投げると数千件の取り込み中ずっと再取得が走り続けてしまう
                     let should_emit = {
@@ -591,7 +599,7 @@ pub fn run_scan_all(app: &AppHandle) {
         return;
     }
     let _guard = ScanGuard { app };
-    emit_state(app, true, "スキャン中...");
+    emit_state(app, true, "扫描中...");
 
     // ドライブレター変動(E: → F: 等)を検出したら path を再マッピングしてからスキャンする
     let remapped = {
@@ -824,7 +832,7 @@ pub fn run_scan_folder(app: &AppHandle, folder_id: i64) {
         return;
     }
     let _guard = ScanGuard { app };
-    emit_state(app, true, "スキャン中...");
+    emit_state(app, true, "扫描中...");
     match scan_folder(app, folder_id) {
         Ok(pending) => process_pending(app, pending),
         Err(e) => eprintln!("scan_folder({folder_id}) failed: {e}"),
